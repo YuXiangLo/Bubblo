@@ -482,9 +482,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  jumpForce: 10
+  jumpForce: 30
   groundCheckThreshold: 0.5
-  playerSize: 1.5
+  playerSize: 0.5
 --- !u!61 &1063385183
 BoxCollider2D:
   m_ObjectHideFlags: 0

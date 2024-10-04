@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;   // Speed of horizontal movement
-    public float jumpForce = 10f;  // Force applied for jumping
+    public float jumpForce = 30f;  // Force applied for jumping
     public float groundCheckThreshold = 0.5f; // How strict we are with "bottom" ground check (adjust as necessary)
     public float playerSize = 0.5f;
     
