@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;       
 
 public class SceneTransition : MonoBehaviour
 {
@@ -16,7 +17,20 @@ public class SceneTransition : MonoBehaviour
     // Track if the player is in range
     private bool isPlayerInRange = false;
 
-    private void Start()
+    // Reference to the player Rigidbody2D for applying force
+    public Rigidbody2D playerRigidbody;
+
+    // Reference to the player's movement script (optional)
+    public MonoBehaviour playerMovementScript;
+    public MonoBehaviour CameraFollowScript;
+
+    // Blowing force to apply to the player
+    public Vector2 blowForce = new Vector2(900, 1500);
+    
+    // Time to wait before transitioning scenes
+    public float transitionDelay = 2f;
+
+    private void Start()    
     {
         // Hide the interaction message at the start if it exists
         if (interactionMessage != null)
@@ -27,11 +41,44 @@ public class SceneTransition : MonoBehaviour
 
     private void Update()
     {
-        // If the player is in range and presses the interaction key, load the next scene
+        // If the player is in range and presses the interaction key, trigger the blow away effect
         if (isPlayerInRange && Input.GetKeyDown(interactionKey))
         {
-            SceneManager.LoadScene(sceneToLoad);
+            BlowAwayPlayer();
         }
+    }
+
+    private void BlowAwayPlayer()
+    {
+        // Disable player movement (optional)
+        if (playerMovementScript != null)
+        {
+            playerMovementScript.enabled = false;
+        }
+
+        if (CameraFollowScript) {
+            CameraFollowScript.enabled = false;
+        }
+
+        // Apply a force to "blow away" the player
+        if (playerRigidbody != null)
+        {
+            playerRigidbody.gravityScale = 0;           
+            playerRigidbody.velocity = new Vector2(0, 0);
+            playerRigidbody.AddForce(blowForce);
+        }
+
+        // Start the coroutine to transition the scene after a delay
+        StartCoroutine(TransitionAfterDelay());
+    }
+
+    private IEnumerator TransitionAfterDelay()
+    {
+        // Wait for the specified delay time
+        yield return new WaitForSeconds(transitionDelay);
+
+        // Load the next scene
+        SceneManager.LoadScene(sceneToLoad);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -65,4 +112,3 @@ public class SceneTransition : MonoBehaviour
         }
     }
 }
-

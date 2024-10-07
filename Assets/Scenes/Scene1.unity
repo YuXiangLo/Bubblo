@@ -402,6 +402,11 @@ MonoBehaviour:
   sceneToLoad: Scene2
   interactionKey: 101
   interactionMessage: {fileID: 0}
+  playerRigidbody: {fileID: 1063385181}
+  playerMovementScript: {fileID: 1063385182}
+  CameraFollowScript: {fileID: 519420033}
+  blowForce: {x: 500, y: 300}
+  transitionDelay: 2
 --- !u!212 &874233077
 SpriteRenderer:
   m_ObjectHideFlags: 0
