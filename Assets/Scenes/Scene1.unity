@@ -143,6 +143,10 @@ PrefabInstance:
       value: OneWayPlatform (3)
       objectReference: {fileID: 0}
     - target: {fileID: 4538065729167376111, guid: 48c602c7fca15552cb5d8275e9b60272, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4538065729167376111, guid: 48c602c7fca15552cb5d8275e9b60272, type: 3}
       propertyPath: m_TagString
       value: Ground
       objectReference: {fileID: 0}
@@ -210,6 +214,10 @@ PrefabInstance:
     - target: {fileID: 4538065729167376111, guid: 48c602c7fca15552cb5d8275e9b60272, type: 3}
       propertyPath: m_Name
       value: OneWayPlatform (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4538065729167376111, guid: 48c602c7fca15552cb5d8275e9b60272, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4538065729167376111, guid: 48c602c7fca15552cb5d8275e9b60272, type: 3}
       propertyPath: m_TagString
@@ -540,6 +548,10 @@ PrefabInstance:
       value: OneWayPlatform (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4538065729167376111, guid: 48c602c7fca15552cb5d8275e9b60272, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4538065729167376111, guid: 48c602c7fca15552cb5d8275e9b60272, type: 3}
       propertyPath: m_TagString
       value: Ground
       objectReference: {fileID: 0}
@@ -634,8 +646,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   jumpForce: 30
-  groundCheckThreshold: 0.5
+  groundCheckRadius: 0.5
+  groundCheckPosition: {fileID: 1063385186}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
   playerSize: 0.5
+  rb: {fileID: 0}
+  isGrounded: 0
+  mainCamera: {fileID: 0}
 --- !u!61 &1063385183
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -705,6 +724,10 @@ PrefabInstance:
     - target: {fileID: 4538065729167376111, guid: 48c602c7fca15552cb5d8275e9b60272, type: 3}
       propertyPath: m_Name
       value: OneWayPlatform
+      objectReference: {fileID: 0}
+    - target: {fileID: 4538065729167376111, guid: 48c602c7fca15552cb5d8275e9b60272, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4538065729167376111, guid: 48c602c7fca15552cb5d8275e9b60272, type: 3}
       propertyPath: m_TagString
@@ -777,7 +800,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1773790836770761327, guid: bbcdca8cb0b2e9bde89f839077838bc5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.25
+      value: -0.71
       objectReference: {fileID: 0}
     - target: {fileID: 1773790836770761327, guid: bbcdca8cb0b2e9bde89f839077838bc5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -858,6 +881,10 @@ PrefabInstance:
       value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 3310008450868735879, guid: c07854ade8d6b967ca9292c0d83015c8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310008450868735879, guid: c07854ade8d6b967ca9292c0d83015c8, type: 3}
       propertyPath: m_TagString
       value: Ground
       objectReference: {fileID: 0}
@@ -912,6 +939,14 @@ PrefabInstance:
     - target: {fileID: 6171659810727971836, guid: c07854ade8d6b967ca9292c0d83015c8, type: 3}
       propertyPath: m_SortingLayerID
       value: -131259123
+      objectReference: {fileID: 0}
+    - target: {fileID: 7115501320080389109, guid: c07854ade8d6b967ca9292c0d83015c8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8914715803637038383, guid: c07854ade8d6b967ca9292c0d83015c8, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8932723957896708744, guid: c07854ade8d6b967ca9292c0d83015c8, type: 3}
       propertyPath: m_Size.x

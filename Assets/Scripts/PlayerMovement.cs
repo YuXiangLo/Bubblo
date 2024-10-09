@@ -4,16 +4,18 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;   // Speed of horizontal movement
     public float jumpForce = 30f;  // Force applied for jumping
-    public float groundCheckThreshold = 0.5f; // How strict we are with "bottom" ground check (adjust as necessary)
+    public float groundCheckRadius = 0.5f;  // Radius of the ground check
+    public Transform groundCheckPosition;   // Position from where we will check for ground
+    public LayerMask groundLayer;           // Layer assigned to the ground
     public float playerSize = 0.5f;
-    
-    private Rigidbody2D rb;
-    private bool isGrounded;
-    private Camera mainCamera;
+
+    public Rigidbody2D rb;
+    public bool isGrounded;
+    public Camera mainCamera;
 
     void Start()
     {
-        // Get the Rigidbody2D component attached to the player
+        // Get the Rigidbody2D component    attached to the player
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
 
@@ -28,6 +30,9 @@ public class PlayerMovement : MonoBehaviour
 
         // Calculate player's new horizontal velocity
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+
+        // Check if the player is grounded by performing a circle overlap check
+        isGrounded = Physics2D.OverlapCircle(groundCheckPosition.position, groundCheckRadius, groundLayer);
 
         // If the player presses the jump button (space) and is grounded, apply a jump force
         if (Input.GetButtonDown("Jump") && isGrounded)
@@ -56,24 +61,13 @@ public class PlayerMovement : MonoBehaviour
         transform.position = playerPosition;
     }
 
-    // This is called when the player collides with another object (like the ground)
-    void OnCollisionEnter2D(Collision2D collision)
+    // To visualize the ground check area in the Unity Editor
+    void OnDrawGizmos()
     {
-        // Loop through all contact points to check if any are considered "ground"
-        foreach (ContactPoint2D contact in collision.contacts)
+        if (groundCheckPosition != null)
         {
-            // Check if the collision normal is pointing upwards (indicating ground contact)
-            if (contact.normal.y > groundCheckThreshold)
-            {
-                isGrounded = true;  // Player is grounded
-            }
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(groundCheckPosition.position, groundCheckRadius);
         }
-    }
-
-    // This is called when the player stops colliding with another object
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        // If the player stops colliding with the ground, set isGrounded to false   
-        isGrounded = false;  // Player is no longer grounded
     }
 }
