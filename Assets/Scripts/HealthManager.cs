@@ -1,29 +1,23 @@
-        using UnityEngine;
-    using UnityEngine.UI;
+using UnityEngine;
+using UnityEngine.UI;
 
-    public class HealthManager : MonoBehaviour
+public class HealthManager : MonoBehaviour
+{
+    public Image healthBar;  // Reference to the UI health bar image
+    public PlayerHealth playerHealth;  // Reference to the PlayerHealth component
+
+    private void Update()
     {
-        public Image healthBar;
-        public float healthAmount = 100f;
-        public const float maxHealthAmount = 100f;
-
-        void Update() {
-            if (Input.GetKeyDown(KeyCode.Return))
-                TakeDamage(20);
-            if (Input.GetKeyDown(KeyCode.Space))
-                Heal(5);    
-        }
-
-        public void TakeDamage(float damage) {
-            healthAmount -= damage;
-            healthBar.fillAmount = healthAmount / maxHealthAmount;
-        }
-
-        public void Heal(float heal) {
-            healthAmount += heal;
-            healthAmount = Mathf.Clamp(healthAmount, 0, maxHealthAmount);
-
-            healthBar.fillAmount = healthAmount / maxHealthAmount;
-
-        }
+        // Update the health bar to reflect the current health
+        UpdateHealthBar();
     }
+
+    // Method to update the health bar fill amount
+    private void UpdateHealthBar()
+    {
+        // Get the current health percentage from PlayerHealth
+        float healthPercentage = playerHealth.GetCurrentHealthPercentage();
+        healthBar.fillAmount = healthPercentage;
+    }
+}
+

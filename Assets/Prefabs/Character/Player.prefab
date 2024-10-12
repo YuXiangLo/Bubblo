@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 4983091141869878551}
   - component: {fileID: 7105853192328150088}
   - component: {fileID: 316718149377873124}
-  - component: {fileID: 1837199189108788406}
   - component: {fileID: 1554920718440097541}
+  - component: {fileID: 1837199189108788406}
+  - component: {fileID: 2975997888866370563}
+  - component: {fileID: 659515783135043062}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -136,30 +138,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &1837199189108788406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7355135152502087577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f2e9d10fef0f6519ba4581b3c55dbac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MoveSpeed: 10
-  Gravity: -45
-  FloatingYSpeed: -2
-  JumpForce: 20
-  PlayerSize: 1
-  FloatingRatio: 0.9995
-  TriggerDistance: 0.001
-  _isGrounded: 0
-  _isFloating: 0
-  _canFloat: 0
-  FloatingXSpeed: 10
-  _velocity: {x: 0, y: 0}
 --- !u!61 &1554920718440097541
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -205,3 +183,52 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.32}
   m_EdgeRadius: 0
+--- !u!114 &1837199189108788406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7355135152502087577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f2e9d10fef0f6519ba4581b3c55dbac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2975997888866370563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7355135152502087577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc4d5c529fbfd581f895daef4b4f41c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveSpeed: 10
+  Gravity: -45
+  FloatingYSpeed: -2
+  JumpForce: 20
+  PlayerSize: 1
+  FloatingRatio: 0.9995
+  TriggerDistance: 0.001
+  _isGrounded: 0
+  _isFloating: 0
+  _canFloat: 0
+  FloatingXSpeed: 10
+  _velocity: {x: 0, y: 0}
+--- !u!114 &659515783135043062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7355135152502087577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0843e973d42eeeb958d6c401fc725aab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100

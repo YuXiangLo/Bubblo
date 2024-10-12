@@ -21,7 +21,7 @@ public class SceneTransition : MonoBehaviour
     public Rigidbody2D playerRigidbody;
 
     // Reference to the player's movement script (optional)
-    public MonoBehaviour playerMovementScript;
+    public PlayerMovement playerMovementScript;
     public MonoBehaviour CameraFollowScript;
 
     // Blowing force to apply to the player
