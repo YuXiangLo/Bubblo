@@ -1,83 +1,56 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
-    public float MoveSpeed = 10f;
-    public float Gravity = -45f;
-    public float FloatingYSpeed = -2f;
-    public float JumpForce = 20f;
-    public float PlayerSize = 1f; 
-	public float FloatingRatio = 0.9995f;
-	public float TriggerDistance = 0.001f;
+public class Player : MonoBehaviour
+{
+    private PlayerMovement _playerMovement;
+    private PlayerHealth _playerHealth;
 
-    public bool _isGrounded = false;
-    public bool _isFloating = false;
-	public bool _canFloat = false;
-	public float FloatingXSpeed = 10f;
-    public Vector2 _velocity = Vector2.zero;
-    private Camera _mainCamera;
-    private Rigidbody2D _rigidbody2D;
-    
-    private void Awake() {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-		_rigidbody2D.freezeRotation = true;
-        _mainCamera = Camera.main;
+    private void Awake()
+    {
+        // Find the PlayerMovement and PlayerHealth components attached to the player
+        _playerMovement = GetComponent<PlayerMovement>();
+        _playerHealth = GetComponent<PlayerHealth>();
     }
 
-    private void Update() {
-        _isGrounded = _rigidbody2D.Raycast(Vector2.down, new Vector2(PlayerSize, PlayerSize), TriggerDistance);
-		FloatingMovementDetect();
-        HorizontalMovementDetect();
-        if (_isGrounded) 
-            JumpMovementDetect();
-        ApplyGravity();
-        RestrictPlayerWithinCamera();
+    private void Update()
+    {
+        // Delegate the movement handling to PlayerMovement
+		if (_playerMovement.enabled)
+			_playerMovement.HandleMovement();
+
+        // Test functionality to increase/decrease health with key presses
+        TestHealthModification();
     }
 
-    private void FixedUpdate() {
-        _rigidbody2D.MovePosition(_rigidbody2D.position + _velocity * Time.fixedDeltaTime);
-		FloatingXSpeed = _isGrounded ? MoveSpeed : FloatingXSpeed;
+    // Additional methods that might serve as a coordinator between health/movement
+    public void TakeDamage(float damage)
+    {
+        // Delegates damage handling to PlayerHealth
+        _playerHealth.TakeDamage(damage);
     }
 
-	private void FloatingMovementDetect() {
-		if (_velocity.y < 0f && Input.GetButtonDown("Jump"))
-			_canFloat = true;
-		_isFloating = Input.GetButton("Jump")  && _canFloat;
-	}
-
-    private void HorizontalMovementDetect() {
-        var horizontalInput = Input.GetAxis("Horizontal");
-        float multiplier = _isFloating ? FloatingRatio : 1f;
-		FloatingXSpeed *= multiplier;
-        _velocity.x = horizontalInput * FloatingXSpeed;
+    public void Heal(float amount)
+    {
+        // Delegates healing to PlayerHealth
+        _playerHealth.Heal(amount);
     }
 
-    private void JumpMovementDetect() {
-        _velocity.y = Mathf.Max(_velocity.y, 0f);
-        if (Input.GetButtonDown("Jump")) {
-            _velocity.y = JumpForce;
-			_canFloat = false;
+    // Test function to modify health
+    private void TestHealthModification()
+    {
+        // Press "Q" to reduce health (simulate damage)
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            TakeDamage(10f);  // Reduces health by 10
+            Debug.Log("Player took 10 damage");
+        }
+
+        // Press "E" to increase health (simulate healing)
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Heal(10f);  // Increases health by 10
+            Debug.Log("Player healed 10 health");
         }
     }
-
-    private void ApplyGravity() {
-        if (_isFloating && _velocity.y < FloatingYSpeed)
-            _velocity.y = FloatingYSpeed;
-        else 
-            _velocity.y += Gravity * Time.deltaTime;
-    }
-
-    private void RestrictPlayerWithinCamera() {
-        float cameraHalfWidth = _mainCamera.orthographicSize * _mainCamera.aspect;
-        float cameraLeftEdge = _mainCamera.transform.position.x - cameraHalfWidth;
-        float cameraRightEdge = _mainCamera.transform.position.x + cameraHalfWidth;
-
-        Vector2 playerPosition = transform.position;
-        playerPosition.x = Mathf.Clamp(playerPosition.x, cameraLeftEdge + PlayerSize, cameraRightEdge - PlayerSize);
-        transform.position = playerPosition;
-    }
 }
+
