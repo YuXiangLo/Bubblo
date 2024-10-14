@@ -7,13 +7,13 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth;
 
     // Event to notify other systems (like the UI) about health changes
-    public event Action<float> OnHealthChanged;
+    public event Action<float> OnHealthChanged = delegate { };
 
     private void Start()
     {
         // Initialize health at the beginning of the game
         currentHealth = maxHealth;
-        OnHealthChanged?.Invoke(currentHealth / maxHealth);  // Notify UI at start
+        OnHealthChanged.Invoke(currentHealth / maxHealth);  // Notify UI at start
     }
 
 	public float GetCurrentHealthPercentage() {
