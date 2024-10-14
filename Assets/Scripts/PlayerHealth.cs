@@ -1,33 +1,33 @@
 using UnityEngine;
-using System;
+using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float maxHealth = 100f;
-    public float currentHealth;
+    public float MaxHealth = 100f;
+    public float CurrentHealth;
 
     // Event to notify other systems (like the UI) about health changes
-    public event Action<float> OnHealthChanged = delegate { };
+    public UnityEvent<float> OnHealthChanged;
 
     private void Start()
     {
         // Initialize health at the beginning of the game
-        currentHealth = maxHealth;
-        OnHealthChanged.Invoke(currentHealth / maxHealth);  // Notify UI at start
+        CurrentHealth = MaxHealth;
+        OnHealthChanged.Invoke(CurrentHealth / MaxHealth);  // Notify UI at start
     }
 
 	public float GetCurrentHealthPercentage() {
-		return currentHealth / maxHealth;
+		return CurrentHealth / MaxHealth;
 	}
 
     public void TakeDamage(float damage)
     {
         // Decrease the player's health
-        currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        OnHealthChanged?.Invoke(currentHealth / maxHealth);  // Notify about the health change
+        CurrentHealth -= damage;
+        CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
+        OnHealthChanged?.Invoke(CurrentHealth / MaxHealth);  // Notify about the health change
 
-        if (currentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
             Die();  // Trigger death if health is zero
         }
@@ -36,9 +36,9 @@ public class PlayerHealth : MonoBehaviour
     public void Heal(float amount)
     {
         // Increase the player's health
-        currentHealth += amount;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        OnHealthChanged?.Invoke(currentHealth / maxHealth);  // Notify about the health change
+        CurrentHealth += amount;
+        CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
+        OnHealthChanged.Invoke(CurrentHealth / MaxHealth);  // Notify about the health change
     }
 
     private void Die()
