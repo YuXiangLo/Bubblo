@@ -6,43 +6,43 @@ using System.Collections;
 public class SceneTransition : MonoBehaviour
 {
     // Name of the scene to load
-    public string sceneToLoad;
+    public string SceneToLoad;
     
     // Key to press for interaction
-    public KeyCode interactionKey = KeyCode.E;
+    public KeyCode InteractionKey = KeyCode.E;
     
     // Reference to a UI Text component for the interaction message
-    public Text interactionMessage;
+    public Text InteractionMessage;
     
     // Track if the player is in range
-    private bool isPlayerInRange = false;
+    private bool IsPlayerInRange = false;
 
     // Reference to the player Rigidbody2D for applying force
-    public Rigidbody2D playerRigidbody;
+    public Rigidbody2D PlayerRigidbody;
 
     // Reference to the player's movement script (optional)
-    public PlayerMovement playerMovementScript;
+    public PlayerMovement PlayerMovementScript;
     public MonoBehaviour CameraFollowScript;
 
     // Blowing force to apply to the player
-    public Vector2 blowForce = new Vector2(900, 1500);
+    public Vector2 BlowForce = new Vector2(900, 1500);
     
     // Time to wait before transitioning scenes
-    public float transitionDelay = 2f;
+    public float TransitionDelay = 2f;
 
     private void Start()    
     {
         // Hide the interaction message at the start if it exists
-        if (interactionMessage != null)
+        if (InteractionMessage != null)
         {
-            interactionMessage.gameObject.SetActive(false);
+            InteractionMessage.gameObject.SetActive(false);
         }
     }
 
     private void Update()
     {
         // If the player is in range and presses the interaction key, trigger the blow away effect
-        if (isPlayerInRange && Input.GetKeyDown(interactionKey))
+        if (IsPlayerInRange && Input.GetKeyDown(InteractionKey))
         {
             BlowAwayPlayer();
         }
@@ -51,9 +51,9 @@ public class SceneTransition : MonoBehaviour
     private void BlowAwayPlayer()
     {
         // Disable player movement (optional)
-        if (playerMovementScript != null)
+        if (PlayerMovementScript != null)
         {
-            playerMovementScript.enabled = false;
+            PlayerMovementScript.enabled = false;
         }
 
         if (CameraFollowScript) {
@@ -61,11 +61,11 @@ public class SceneTransition : MonoBehaviour
         }
 
         // Apply a force to "blow away" the player
-        if (playerRigidbody != null)
+        if (PlayerRigidbody != null)
         {
-            playerRigidbody.gravityScale = 0;           
-            playerRigidbody.velocity = new Vector2(0, 0);
-            playerRigidbody.AddForce(blowForce);
+            PlayerRigidbody.gravityScale = 0;           
+            PlayerRigidbody.velocity = new Vector2(0, 0);
+            PlayerRigidbody.AddForce(BlowForce);
         }
 
         // Start the coroutine to transition the scene after a delay
@@ -75,10 +75,10 @@ public class SceneTransition : MonoBehaviour
     private IEnumerator TransitionAfterDelay()
     {
         // Wait for the specified delay time
-        yield return new WaitForSeconds(transitionDelay);
+        yield return new WaitForSeconds(TransitionDelay);
 
         // Load the next scene
-        SceneManager.LoadScene(sceneToLoad);
+        SceneManager.LoadScene(SceneToLoad);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -86,13 +86,13 @@ public class SceneTransition : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // Player is in range to interact
-            isPlayerInRange = true;
+            IsPlayerInRange = true;
 
             // Display the interaction message if it exists
-            if (interactionMessage != null)
+            if (InteractionMessage != null)
             {
-                interactionMessage.gameObject.SetActive(true);
-                interactionMessage.text = $"Press '{interactionKey}' to enter";
+                InteractionMessage.gameObject.SetActive(true);
+                InteractionMessage.text = $"Press '{InteractionKey}' to enter";
             }
         }
     }
@@ -102,12 +102,12 @@ public class SceneTransition : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // Player is out of range
-            isPlayerInRange = false;
+            IsPlayerInRange = false;
 
             // Hide the interaction message if it exists
-            if (interactionMessage != null)
+            if (InteractionMessage != null)
             {
-                interactionMessage.gameObject.SetActive(false);
+                InteractionMessage.gameObject.SetActive(false);
             }
         }
     }
