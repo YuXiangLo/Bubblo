@@ -2,21 +2,21 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private PlayerMovement _playerMovement;
-    private PlayerHealth _playerHealth;
+    private PlayerMovement PlayerMovement;
+    private PlayerHealth PlayerHealth;
 
     private void Awake()
     {
         // Find the PlayerMovement and PlayerHealth components attached to the player
-        _playerMovement = GetComponent<PlayerMovement>();
-        _playerHealth = GetComponent<PlayerHealth>();
+        PlayerMovement = GetComponent<PlayerMovement>();
+        PlayerHealth = GetComponent<PlayerHealth>();
     }
 
     private void Update()
     {
         // Delegate the movement handling to PlayerMovement
-		if (_playerMovement.enabled)
-			_playerMovement.HandleMovement();
+		if (PlayerMovement.enabled)
+			PlayerMovement.HandleMovement();
 
         // Test functionality to increase/decrease health with key presses
         TestHealthModification();
@@ -26,13 +26,13 @@ public class Player : MonoBehaviour
     public void TakeDamage(float damage)
     {
         // Delegates damage handling to PlayerHealth
-        _playerHealth.TakeDamage(damage);
+        PlayerHealth.TakeDamage(damage);
     }
 
     public void Heal(float amount)
     {
         // Delegates healing to PlayerHealth
-        _playerHealth.Heal(amount);
+        PlayerHealth.Heal(amount);
     }
 
     // Test function to modify health

@@ -1,11 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
+    private Camera MainCamera;
+    private Rigidbody2D Rigidbody2D;
+
     public float MoveSpeed = 10f;
     public float Gravity = -45f;
     public float FloatingYSpeed = -2f;
@@ -14,68 +12,66 @@ public class PlayerMovement : MonoBehaviour {
 	public float FloatingRatio = 0.9995f;
 	public float TriggerDistance = 0.001f;
 
-    public bool _isGrounded = false;
-    public bool _isFloating = false;
-	public bool _canFloat = false;
+    public bool IsGrounded = false;
+    public bool IsFloating = false;
+	public bool CanFloat = false;
 	public float FloatingXSpeed = 10f;
-    public Vector2 _velocity = Vector2.zero;
-    private Camera _mainCamera;
-    private Rigidbody2D _rigidbody2D;
+    public Vector2 Velocity = Vector2.zero;
     
     private void Awake() {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-		_rigidbody2D.freezeRotation = true;
-        _mainCamera = Camera.main;
+        Rigidbody2D = GetComponent<Rigidbody2D>();
+		Rigidbody2D.freezeRotation = true;
+        MainCamera = Camera.main;
     }
 
     // private void Update() { NOTE: Since I modularize the PlayerMovement, this script therefore would not call the Update() itself but by Player.cs
 	public void HandleMovement() {
-		_isGrounded = _rigidbody2D.Raycast(Vector2.down, new Vector2(PlayerSize, PlayerSize), TriggerDistance);
+		IsGrounded = Rigidbody2D.Raycast(Vector2.down, new Vector2(PlayerSize, PlayerSize), TriggerDistance);
 		FloatingMovementDetect();
 		HorizontalMovementDetect();
-		if (_isGrounded) 
+		if (IsGrounded) 
 			JumpMovementDetect();
 		ApplyGravity();
 		RestrictPlayerWithinCamera();
 	}
 
 	private void FixedUpdate() {
-		_rigidbody2D.MovePosition(_rigidbody2D.position + _velocity * Time.fixedDeltaTime);
-		FloatingXSpeed = _isGrounded ? MoveSpeed : FloatingXSpeed;
+		Rigidbody2D.MovePosition(Rigidbody2D.position + Velocity * Time.fixedDeltaTime);
+		FloatingXSpeed = IsGrounded ? MoveSpeed : FloatingXSpeed;
 	}
 
 	private void FloatingMovementDetect() {
-		if (_velocity.y < 0f && Input.GetButtonDown("Jump"))
-			_canFloat = true;
-		_isFloating = Input.GetButton("Jump")  && _canFloat;
+		if (Velocity.y < 0f && Input.GetButtonDown("Jump"))
+			CanFloat = true;
+		IsFloating = Input.GetButton("Jump")  && CanFloat;
 	}
 
     private void HorizontalMovementDetect() {
         var horizontalInput = Input.GetAxis("Horizontal");
-        float multiplier = _isFloating ? FloatingRatio : 1f;
+        float multiplier = IsFloating ? FloatingRatio : 1f;
 		FloatingXSpeed *= multiplier;
-        _velocity.x = horizontalInput * FloatingXSpeed;
+        Velocity.x = horizontalInput * FloatingXSpeed;
     }
 
     private void JumpMovementDetect() {
-        _velocity.y = Mathf.Max(_velocity.y, 0f);
+        Velocity.y = Mathf.Max(Velocity.y, 0f);
         if (Input.GetButtonDown("Jump")) {
-            _velocity.y = JumpForce;
-			_canFloat = false;
+            Velocity.y = JumpForce;
+			CanFloat = false;
         }
     }
 
     private void ApplyGravity() {
-        if (_isFloating && _velocity.y < FloatingYSpeed)
-            _velocity.y = FloatingYSpeed;
+        if (IsFloating && Velocity.y < FloatingYSpeed)
+            Velocity.y = FloatingYSpeed;
         else 
-            _velocity.y += Gravity * Time.deltaTime;
+            Velocity.y += Gravity * Time.deltaTime;
     }
 
     private void RestrictPlayerWithinCamera() {
-        float cameraHalfWidth = _mainCamera.orthographicSize * _mainCamera.aspect;
-        float cameraLeftEdge = _mainCamera.transform.position.x - cameraHalfWidth;
-        float cameraRightEdge = _mainCamera.transform.position.x + cameraHalfWidth;
+        float cameraHalfWidth = MainCamera.orthographicSize * MainCamera.aspect;
+        float cameraLeftEdge = MainCamera.transform.position.x - cameraHalfWidth;
+        float cameraRightEdge = MainCamera.transform.position.x + cameraHalfWidth;
 
         Vector2 playerPosition = transform.position;
         playerPosition.x = Mathf.Clamp(playerPosition.x, cameraLeftEdge + PlayerSize / 2, cameraRightEdge - PlayerSize / 2);

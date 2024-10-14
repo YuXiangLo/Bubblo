@@ -341,9 +341,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23774f4e898815c648ecf77671e3e1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 3227322621682519767}
-  offset: {x: 0, y: 0, z: 0}
-  smoothSpeed: 0.125
+  Player: {fileID: 3227322621682519767}
+  Offset: {x: 0, y: 0, z: 0}
+  SmoothSpeed: 0.125
 --- !u!50 &1063385181 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 316718149377873124, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
@@ -611,9 +611,17 @@ PrefabInstance:
       value: Door
       objectReference: {fileID: 0}
     - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
+      propertyPath: SceneToLoad
+      value: Scene1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
       propertyPath: sceneToLoad
       value: Scene1
       objectReference: {fileID: 0}
+    - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
+      propertyPath: PlayerRigidbody
+      value: 
+      objectReference: {fileID: 1063385181}
     - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
       propertyPath: playerRigidbody
       value: 
@@ -622,6 +630,10 @@ PrefabInstance:
       propertyPath: CameraFollowScript
       value: 
       objectReference: {fileID: 519420033}
+    - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
+      propertyPath: PlayerMovementScript
+      value: 
+      objectReference: {fileID: 3227322621682519777}
     - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
       propertyPath: playerMovementScript
       value: 
@@ -737,9 +749,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 351773790169934582, guid: bc5ffed1c37267e01a76672eded53669, type: 3}
+      propertyPath: HealthBar
+      value: 
+      objectReference: {fileID: 1807976588}
+    - target: {fileID: 351773790169934582, guid: bc5ffed1c37267e01a76672eded53669, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1807976588}
+    - target: {fileID: 351773790169934582, guid: bc5ffed1c37267e01a76672eded53669, type: 3}
+      propertyPath: PlayerHealth
+      value: 
+      objectReference: {fileID: 3227322621682519776}
     - target: {fileID: 351773790169934582, guid: bc5ffed1c37267e01a76672eded53669, type: 3}
       propertyPath: playerHealth
       value: 

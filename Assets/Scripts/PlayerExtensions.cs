@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public static class PlayerExtensions {
-    public static LayerMask _layerMask = LayerMask.GetMask("Ground");
+    public static LayerMask LayerMask = LayerMask.GetMask("Ground");
 	public static bool Raycast(this Rigidbody2D rigidbody, Vector2 direction, Vector2 size, float distance) {
 		if (rigidbody.isKinematic)
 			return false;
@@ -10,7 +10,7 @@ public static class PlayerExtensions {
 		Vector2 boxSize = new Vector2(size.x, 0.1f); // width: size.x, height: 0.1f
 
 		// Perform the BoxCast
-		RaycastHit2D hit = Physics2D.BoxCast(castOrigin, boxSize, 0f, direction, distance, _layerMask);
+		RaycastHit2D hit = Physics2D.BoxCast(castOrigin, boxSize, 0f, direction, distance, LayerMask);
 
 		// Visualize the box using Debug.DrawLine
 		Vector2 topLeft = castOrigin + new Vector2(-boxSize.x * 0.5f, boxSize.y * 0.5f);
