@@ -611,6 +611,14 @@ PrefabInstance:
       value: Door
       objectReference: {fileID: 0}
     - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
+      propertyPath: BlowForce.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
+      propertyPath: BlowForce.y
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
       propertyPath: SceneToLoad
       value: Scene1
       objectReference: {fileID: 0}
@@ -622,6 +630,10 @@ PrefabInstance:
       propertyPath: PlayerRigidbody
       value: 
       objectReference: {fileID: 1063385181}
+    - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
+      propertyPath: TransitionDelay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
       propertyPath: playerRigidbody
       value: 
