@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour {
     private Rigidbody2D Rigidbody2D;
 
     public float MoveSpeed = 10f;
-    public float Gravity = -45f;
+    public float Gravity = -60f;
     public float FloatingYSpeed = -2f;
     public float JumpForce = 20f;
     public float PlayerSize = 1f; 
@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
     private void HorizontalMovementDetect() {
-        var horizontalInput = Input.GetAxis("Horizontal");
+        var horizontalInput = Input.GetAxisRaw("Horizontal");
         float multiplier = IsFloating ? FloatingRatio : 1f;
 		FloatingXSpeed *= multiplier;
         Velocity.x = horizontalInput * FloatingXSpeed;
