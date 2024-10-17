@@ -1,9 +1,23 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IHealthPercentage, IModifyHealth
 {
     private PlayerMovement PlayerMovement;
     private PlayerHealth PlayerHealth;
+
+    public float HealthPercentage { get => PlayerHealth.HealthPercentage; }
+
+    public void TakeDamage(float amount)
+    {
+        // Delegates damage handling to PlayerHealth
+        PlayerHealth.TakeDamage(amount);
+    }
+
+    public void Heal(float amount)
+    {
+        // Delegates healing to PlayerHealth
+        PlayerHealth.Heal(amount);
+    }
 
     private void Awake()
     {
@@ -22,20 +36,9 @@ public class Player : MonoBehaviour
         TestHealthModification();
     }
 
-    // Additional methods that might serve as a coordinator between health/movement
-    public void TakeDamage(float damage)
-    {
-        // Delegates damage handling to PlayerHealth
-        PlayerHealth.TakeDamage(damage);
-    }
-
-    public void Heal(float amount)
-    {
-        // Delegates healing to PlayerHealth
-        PlayerHealth.Heal(amount);
-    }
-
-    // Test function to modify health
+    /// <summary>
+    /// Test method to simulate health modification
+    /// </summary>
     private void TestHealthModification()
     {
         // Press "Q" to reduce health (simulate damage)
