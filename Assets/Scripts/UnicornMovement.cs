@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+public class UnicornMovement : MonoBehaviour
 {
     private Transform pointA, pointB;
     private Vector3 target;
