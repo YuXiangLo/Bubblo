@@ -6,6 +6,8 @@ public class PlayerHealth : MonoBehaviour
     public float MaxHealth = 100f;
     public float CurrentHealth;
 
+    public float HealthPercentage { get => CurrentHealth / MaxHealth; }
+
     // Event to notify other systems (like the UI) about health changes
     public UnityEvent<float> OnHealthChanged;
 
@@ -15,10 +17,6 @@ public class PlayerHealth : MonoBehaviour
         CurrentHealth = MaxHealth;
         OnHealthChanged.Invoke(CurrentHealth / MaxHealth);  // Notify UI at start
     }
-
-	public float GetCurrentHealthPercentage() {
-		return CurrentHealth / MaxHealth;
-	}
 
     public void TakeDamage(float damage)
     {
