@@ -25,10 +25,10 @@ public class SceneTransition : MonoBehaviour
     public MonoBehaviour CameraFollowScript;
 
     // Blowing force to apply to the player
-    public Vector2 BlowForce = new Vector2(900, 1500);
+    public Vector2 BlowForce = new Vector2(500, 300);
     
     // Time to wait before transitioning scenes
-    public float TransitionDelay = 2f;
+    public float TransitionDelay = 1f;
 
     private void Start()    
     {
