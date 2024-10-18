@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class UnicornMovement : MonoBehaviour
 {
-    private Transform pointA, pointB;
+    private Transform LeftPoint, RightPoint;
     private Vector3 target;
     private bool facingRight = true;
 
     public float speed = 2f;
     void Start()
     {
-        pointA = transform.parent.Find("PointA");
-        pointB = transform.parent.Find("PointB");
-        target = pointB.position;
+        LeftPoint = transform.parent.Find("LeftPoint");
+        RightPoint = transform.parent.Find("RightPoint");
+        target = LeftPoint.position;
     }
 
     void Update()
@@ -28,10 +28,10 @@ public class UnicornMovement : MonoBehaviour
         // Switch target when reaching the point
         if (Vector2.Distance(transform.position, target) < 0.1f)
         {
-            if (target == pointA.position)
-                target = pointB.position;
+            if (target == LeftPoint.position)
+                target = RightPoint.position;
             else
-                target = pointA.position;
+                target = LeftPoint.position;
         }
     }
 
