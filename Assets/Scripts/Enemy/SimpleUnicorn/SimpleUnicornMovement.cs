@@ -1,26 +1,26 @@
 using UnityEngine;
 
-public class UnicornMovement : MonoBehaviour
+public class SimpleUnicornMovement : MonoBehaviour
 {
     private Transform LeftPoint, RightPoint;
     private Vector3 target;
     private bool facingRight = true;
 
     public float speed = 2f;
-    void Start()
+    private void Start()
     {
         LeftPoint = transform.parent.Find("LeftPoint");
         RightPoint = transform.parent.Find("RightPoint");
         target = LeftPoint.position;
     }
 
-    void Update()
+    public void HandleMovement()
     {
         Move();
         RotateToMovementDirection();
     }
 
-    void Move()
+    private void Move()
     {
         // Move enemy towards the target
         transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
@@ -35,7 +35,7 @@ public class UnicornMovement : MonoBehaviour
         }
     }
 
-    void RotateToMovementDirection()
+    private void RotateToMovementDirection()
     {
         // Calculate the movement direction
         Vector3 movementDirection = target - transform.position;
@@ -52,7 +52,7 @@ public class UnicornMovement : MonoBehaviour
         }
     }
 
-    void Flip()
+    private void Flip()
     {
         // Toggle the facing direction
         facingRight = !facingRight;
