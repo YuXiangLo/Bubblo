@@ -4,8 +4,10 @@ public class Player : MonoBehaviour, IHealthPercentage, IModifyHealth
 {
     private PlayerMovement PlayerMovement;
     private PlayerHealth PlayerHealth;
+	private PlayerAttack PlayerAttack;
 
     public float HealthPercentage { get => PlayerHealth.HealthPercentage; }
+	public bool IsFacingRight {get => PlayerMovement.IsFacingRight; }
 
     public void TakeDamage(float amount)
     {
@@ -24,14 +26,16 @@ public class Player : MonoBehaviour, IHealthPercentage, IModifyHealth
         // Find the PlayerMovement and PlayerHealth components attached to the player
         PlayerMovement = GetComponent<PlayerMovement>();
         PlayerHealth = GetComponent<PlayerHealth>();
+		PlayerAttack = GetComponent<PlayerAttack>();
     }
 
     private void Update()
     {
         // Delegate the movement handling to PlayerMovement
-		if (PlayerMovement.enabled)
+		if (PlayerMovement.enabled) {
 			PlayerMovement.HandleMovement();
-
+			PlayerAttack.HandleAttack();
+		}
         // Test functionality to increase/decrease health with key presses
         TestHealthModification();
     }

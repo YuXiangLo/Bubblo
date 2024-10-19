@@ -5,37 +5,28 @@ public class PlayerMovement : MonoBehaviour {
     private Rigidbody2D Rigidbody2D;
 
     public float MoveSpeed = 10f;
+	public float FloatingXSpeed = 10f;
     public float Gravity = -60f;
     public float FloatingYSpeed = -2f;
     public float JumpForce = 20f;
     public float PlayerSize = 1f; 
 	public float FloatingRatio = 0.9995f;
 	public float TriggerDistance = 0.001f;
+	public bool IsFacingRight = true;
 
-    public bool IsGrounded = false;
-    public bool IsFloating = false;
-	public bool CanFloat = false;
-	public float FloatingXSpeed = 10f;
-    public Vector2 Velocity = Vector2.zero;
-
-    // Reference to PlayerAttack component
-    private PlayerAttack playerAttack;
+	[SerializeField]
+    private bool IsGrounded = false;
+	[SerializeField]
+    private bool IsFloating = false;
+	[SerializeField]
+	private bool CanFloat = false;
+	[SerializeField]
+    private Vector2 Velocity = Vector2.zero;
 
     private void Awake() {
         Rigidbody2D = GetComponent<Rigidbody2D>();
 		Rigidbody2D.freezeRotation = true;
         MainCamera = Camera.main;
-
-        // Get the PlayerAttack component
-        playerAttack = GetComponent<PlayerAttack>();
-    }
-
-    // Call the attack logic
-    private void AttackDetect() {
-        if (playerAttack != null)
-        {
-            playerAttack.AttackDetect();
-        }
     }
 
     // Movement logic
@@ -43,11 +34,12 @@ public class PlayerMovement : MonoBehaviour {
 		IsGrounded = Rigidbody2D.Raycast(Vector2.down, new Vector2(PlayerSize, PlayerSize), TriggerDistance);
 		FloatingMovementDetect();
 		HorizontalMovementDetect();
-        AttackDetect();  // Keep the attack logic here
 		if (IsGrounded) 
 			JumpMovementDetect();
+		FaceSideDetect();
 		ApplyGravity();
 		RestrictPlayerWithinCamera();
+
 	}
 
     private void FixedUpdate() {
@@ -75,6 +67,15 @@ public class PlayerMovement : MonoBehaviour {
 			CanFloat = false;
         }
     }
+
+	private void FaceSideDetect() {
+		if (Velocity.x > 0 && !IsFacingRight || Velocity.x < 0 && IsFacingRight) {
+			IsFacingRight = !IsFacingRight;
+			Vector3 currentScale = transform.localScale;
+			currentScale.x *= -1;
+			transform.localScale = currentScale;
+		}
+	}
 
     private void ApplyGravity() {
         if (IsFloating && Velocity.y < FloatingYSpeed)
