@@ -164,8 +164,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxBubbleSize: 3
   MinBubbleSize: 0.3
-  MinBubbleSpeed: 4
-  MaxBubbleSpeed: 10
+  MinBubbleSpeed: 3
+  MaxBubbleSpeed: 15
   LifeTime: 5
   MinDamage: 3
   MaxDamage: 30
