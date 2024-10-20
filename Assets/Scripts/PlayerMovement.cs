@@ -93,4 +93,8 @@ public class PlayerMovement : MonoBehaviour {
         playerPosition.x = Mathf.Clamp(playerPosition.x, cameraLeftEdge + PlayerSize / 2, cameraRightEdge - PlayerSize / 2);
         transform.position = playerPosition;
     }
+
+    public void BubbleJump() {
+        Velocity.y = JumpForce;
+    }
 }

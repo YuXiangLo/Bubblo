@@ -49,6 +49,11 @@ public class Bubble : MonoBehaviour {
 			other.gameObject.GetComponent<IModifyHealth>().TakeDamage(10f);
 			Destroy(gameObject);
 		}
+        if(other.tag == "Player")
+        {
+            Debug.Log("Collision detected with " + other.gameObject.name + " on tag " + other.tag);
+            other.gameObject.GetComponent<PlayerMovement>().BubbleJump();
+        }
 	}
 }
 
