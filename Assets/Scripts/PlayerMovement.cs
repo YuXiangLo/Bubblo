@@ -1,19 +1,21 @@
+using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
-    private Camera MainCamera;
-    private Rigidbody2D Rigidbody2D;
-
     public float MoveSpeed = 10f;
 	public float FloatingXSpeed = 10f;
     public float Gravity = -60f;
     public float FloatingYSpeed = -2f;
+    public float MaxFallingSpeed = -20f;
     public float JumpForce = 20f;
     public float PlayerSize = 1f; 
 	public float FloatingRatio = 0.9995f;
 	public float TriggerDistance = 0.001f;
 	public bool IsFacingRight = true;
     public bool IsGrounded = false;
+
+    private Camera MainCamera;
+    private Rigidbody2D Rigidbody2D;
 
 	[SerializeField]
     private bool IsFloating = false;
@@ -81,6 +83,9 @@ public class PlayerMovement : MonoBehaviour {
             Velocity.y = FloatingYSpeed;
         else 
             Velocity.y += Gravity * Time.deltaTime;
+        
+        // Limit Falling Speed
+        Velocity.y = Mathf.Max(Velocity.y, MaxFallingSpeed);
     }
 
     private void RestrictPlayerWithinCamera() {
