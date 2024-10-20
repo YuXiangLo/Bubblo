@@ -77,7 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1532617547
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6ca1108973336bb249394f0cca0e2035, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -208,17 +208,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 10
-  Gravity: -45
+  Gravity: -100
+  FloatingXSpeed: 10
   FloatingYSpeed: -2
+  FloatingRatio: 0.9995
   JumpForce: 20
   PlayerSize: 1
-  FloatingRatio: 0.9995
   TriggerDistance: 0.001
-  _isGrounded: 0
-  _isFloating: 0
-  _canFloat: 0
-  FloatingXSpeed: 10
-  _velocity: {x: 0, y: 0}
+  SlowFallRate: 0.7
 --- !u!114 &659515783135043062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,4 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0843e973d42eeeb958d6c401fc725aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  MaxHealth: 100
+  CurrentHealth: 0
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
