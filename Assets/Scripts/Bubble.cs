@@ -14,7 +14,8 @@ public class Bubble : MonoBehaviour
         if(other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             Debug.Log("Collision detected with " + other.gameObject.name + " on layer " + other.gameObject.layer);
-            Destroy(gameObject);
+            other.gameObject.GetComponent<IModifyHealth>().TakeDamage(10f);
         }
+        Destroy(gameObject);
     }
 }

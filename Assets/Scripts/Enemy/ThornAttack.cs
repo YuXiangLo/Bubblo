@@ -6,7 +6,6 @@ public class ThornAttack : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collision detected with " + collision.gameObject.name);
         var colliderObject = collision.gameObject;
         if (colliderObject.CompareTag("Player"))
         {
