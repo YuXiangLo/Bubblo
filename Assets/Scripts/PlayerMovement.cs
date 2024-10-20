@@ -2,26 +2,30 @@ using UnityEngine;
 using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
-    private Camera MainCamera;
-    private Rigidbody2D Rigidbody2D;
-
-    public float MoveSpeed = 10f;
+    public float MoveSpeed = 8f;
 	public float FloatingXSpeed = 10f;
-    public float Gravity = -60f;
     public float FloatingYSpeed = -2f;
-    public float JumpForce = 20f;
+    public float Gravity = -90f;
+    public float MaxFallingSpeed = -20f;
+    public float JumpForce = 18f;
     public float PlayerSize = 1f; 
 	public float FloatingRatio = 0.9995f;
 	public float TriggerDistance = 0.001f;
 	public bool IsFacingRight = true;
     public bool IsGrounded = false;
+    public float DefaultGravityScale = 1f;
+    public float LowGravityScale = 0.5f;
+
+    private float GravityScale;
+    private Camera MainCamera;
+    private Rigidbody2D Rigidbody2D;
 
 	[SerializeField] private float KnockbackForce = 6f;
 	[SerializeField] private bool IsFloating = false;
 	[SerializeField] private bool CanFloat = false;
 	[SerializeField] private bool DisableHorizontalMovement = false;
 	[SerializeField] private Vector2 Velocity = Vector2.zero;
-	[SerializeField] private flaot KnockbackTangent = 2f;
+	[SerializeField] private float KnockbackTangent = 2f;
 
     private void Awake() {
         Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -52,6 +56,7 @@ public class PlayerMovement : MonoBehaviour {
 		if (Velocity.y < 0f && Input.GetButtonDown("Jump"))
 			CanFloat = true;
 		IsFloating = Input.GetButton("Jump")  && CanFloat;
+        GravityScale =  Input.GetButton("Jump") ? LowGravityScale : DefaultGravityScale;
 	}
 
     private void HorizontalMovementDetect() {
@@ -82,7 +87,10 @@ public class PlayerMovement : MonoBehaviour {
         if (IsFloating && Velocity.y < FloatingYSpeed)
             Velocity.y = FloatingYSpeed;
         else 
-            Velocity.y += Gravity * Time.deltaTime;
+            Velocity.y += Gravity * GravityScale * Time.deltaTime;
+        
+        // Limit Falling Speed
+        Velocity.y = Mathf.Max(Velocity.y, MaxFallingSpeed);
     }
 
     private void RestrictPlayerWithinCamera() {
