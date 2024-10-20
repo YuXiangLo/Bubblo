@@ -1,12 +1,16 @@
 using UnityEngine;
 
 public class Bubble : MonoBehaviour {
-    public float MinBubbleSpeed = 3f;
-    public float MaxBubbleSpeed = 10f;
     public float MaxBubbleSize = 3f;
     public float MinBubbleSize = 0.3f;
-    public float LifeTime = 5f;
 
+    [SerializeField] private float MinBubbleSpeed = 3f;
+    [SerializeField] private float MaxBubbleSpeed = 10f;
+    [SerializeField] private float LifeTime = 5f;
+    [SerializeField] private float MinDamage = 3f;
+    [SerializeField] private float MaxDamage = 30f;
+
+	private float CurrentBubbleSize;
     private Rigidbody2D rb;
     private bool isFacingRight;
 
@@ -20,8 +24,8 @@ public class Bubble : MonoBehaviour {
     }
 
     public void UpdateBubbleSize(float holdTime, float maxHoldTime) {
-        float sizeFactor = Mathf.Lerp(MinBubbleSize, MaxBubbleSize, holdTime / maxHoldTime);
-        transform.localScale = Vector3.one * sizeFactor;
+        CurrentBubbleSize = Mathf.Lerp(MinBubbleSize, MaxBubbleSize, holdTime / maxHoldTime);
+        transform.localScale = Vector3.one * CurrentBubbleSize;
     }
 
     public void ReleaseAndShoot(float holdTime, bool playerFacingRight) {
@@ -33,7 +37,10 @@ public class Bubble : MonoBehaviour {
 	private void OnTriggerEnter2D(Collider2D other) {
 		if(other.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
 			Debug.Log("Collision detected with " + other.gameObject.name + " on layer " + other.gameObject.layer);
-			other.gameObject.GetComponent<IModifyHealth>().TakeDamage(10f);
+			float damage = Mathf.Lerp(MinDamage, MaxDamage, CurrentBubbleSize / MaxBubbleSize);
+			other.gameObject.GetComponent<IModifyHealth>().TakeDamage(damage);
+		}
+		if(other.gameObject.layer != LayerMask.NameToLayer("Player")) {
 			Destroy(gameObject);
 		}
         if(other.tag == "Player")
