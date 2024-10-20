@@ -38,7 +38,7 @@ public class PlayerAttack : MonoBehaviour {
 
     private Vector2 CalculateBubblePosition(float bubbleRadius) {
         float xOffset = (PlayerSize / 2f + bubbleRadius) * (Player.IsFacingRight ? 1 : -1);
-        float yOffset = Mathf.Max(0f, bubbleRadius - PlayerSize / 2f);
+        float yOffset = Mathf.Max(0f, bubbleRadius - PlayerSize / 2f + 0.05f);
         return new Vector2(PlayerRigidbody.position.x + xOffset, PlayerRigidbody.position.y + yOffset);
     }
 
