@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour, IHealthPercentage, IModifyHealth
 {
     [SerializeField] private float maxHealth = 100f;
-    private float health;
+    [SerializeField] private float health;
     public float HealthPercentage { get => health / 100f; }
 
     private void Start()
