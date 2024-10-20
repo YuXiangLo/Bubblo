@@ -62,18 +62,4 @@ public class SimpleUnicornMovement : MonoBehaviour
         localScale.x *= -1;  // Flip the X scale
         transform.localScale = localScale;
     }
-
-    private void Hit()
-    {
-        Destroy(gameObject);
-    }  
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log(collision.gameObject.layer);
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Attack"))
-        {
-            Hit();
-        }
-    }
 }
