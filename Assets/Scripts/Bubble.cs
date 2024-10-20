@@ -43,7 +43,7 @@ public class Bubble : MonoBehaviour {
 			float damage = Mathf.Lerp(MinDamage, MaxDamage, CurrentBubbleSize / MaxBubbleSize);
 			other.gameObject.GetComponent<IModifyHealth>().TakeDamage(damage);
 		}
-		if(other.gameObject.layer != LayerMask.NameToLayer("Player")) {
+		if(!other.gameObject.CompareTag("Player") && !other.gameObject.CompareTag("Bubble")) {
 			Destroy(gameObject);
 		}
 
