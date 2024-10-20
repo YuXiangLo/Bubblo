@@ -1,11 +1,12 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour, IHealthPercentage, IModifyHealth {
+public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModifyHealth {
     private PlayerMovement PlayerMovement;
     private PlayerHealth PlayerHealth;
 	private PlayerAttack PlayerAttack;
 
     public float HealthPercentage { get => PlayerHealth.HealthPercentage; }
+    public float MagicPercentage { get => PlayerAttack.MagicPercentage; }
 	public bool IsFacingRight { get => PlayerMovement.IsFacingRight; }
 	public bool IsGrounded { get => PlayerMovement.IsGrounded; }
 
