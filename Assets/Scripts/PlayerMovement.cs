@@ -13,9 +13,8 @@ public class PlayerMovement : MonoBehaviour {
 	public float FloatingRatio = 0.9995f;
 	public float TriggerDistance = 0.001f;
 	public bool IsFacingRight = true;
+    public bool IsGrounded = false;
 
-	[SerializeField]
-    private bool IsGrounded = false;
 	[SerializeField]
     private bool IsFloating = false;
 	[SerializeField]

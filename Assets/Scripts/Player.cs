@@ -1,42 +1,37 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour, IHealthPercentage, IModifyHealth
-{
+public class Player : MonoBehaviour, IHealthPercentage, IModifyHealth {
     private PlayerMovement PlayerMovement;
     private PlayerHealth PlayerHealth;
 	private PlayerAttack PlayerAttack;
 
     public float HealthPercentage { get => PlayerHealth.HealthPercentage; }
-	public bool IsFacingRight {get => PlayerMovement.IsFacingRight; }
+	public bool IsFacingRight { get => PlayerMovement.IsFacingRight; }
+	public bool IsGrounded { get => PlayerMovement.IsGrounded; }
 
-    public void TakeDamage(float amount)
-    {
-        // Delegates damage handling to PlayerHealth
+    public void TakeDamage(float amount) {
         PlayerHealth.TakeDamage(amount);
     }
 
-    public void Heal(float amount)
-    {
-        // Delegates healing to PlayerHealth
+    public void Heal(float amount) {
         PlayerHealth.Heal(amount);
     }
 
-    private void Awake()
-    {
-        // Find the PlayerMovement and PlayerHealth components attached to the player
+	public void BubbleJump() {
+		PlayerMovement.BubbleJump();
+	}
+
+    private void Awake() {
         PlayerMovement = GetComponent<PlayerMovement>();
         PlayerHealth = GetComponent<PlayerHealth>();
 		PlayerAttack = GetComponent<PlayerAttack>();
     }
 
-    private void Update()
-    {
-        // Delegate the movement handling to PlayerMovement
+    private void Update() {
 		if (PlayerMovement.enabled) {
 			PlayerMovement.HandleMovement();
 			PlayerAttack.HandleAttack();
 		}
-        // Test functionality to increase/decrease health with key presses
         TestHealthModification();
     }
 

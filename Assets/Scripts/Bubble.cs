@@ -4,12 +4,13 @@ public class Bubble : MonoBehaviour {
     public float MaxBubbleSize = 3f;
     public float MinBubbleSize = 0.3f;
 
-    [SerializeField] private float MinBubbleSpeed = 3f;
+    [SerializeField] private float MinBubbleSpeed = 4f;
     [SerializeField] private float MaxBubbleSpeed = 10f;
     [SerializeField] private float LifeTime = 5f;
     [SerializeField] private float MinDamage = 3f;
     [SerializeField] private float MaxDamage = 30f;
 
+	private bool IsRelease;
 	private float CurrentBubbleSize;
     private Rigidbody2D rb;
     private bool isFacingRight;
@@ -21,6 +22,7 @@ public class Bubble : MonoBehaviour {
     public void InitializeGrowing() {
         transform.localScale = Vector3.one * MinBubbleSize;
         rb.velocity = Vector2.zero;
+		IsRelease = false;
     }
 
     public void UpdateBubbleSize(float holdTime, float maxHoldTime) {
@@ -32,6 +34,7 @@ public class Bubble : MonoBehaviour {
         float bubbleSpeed = Mathf.Lerp(MaxBubbleSpeed, MinBubbleSpeed, holdTime / 2f);
         rb.velocity = new(bubbleSpeed * (playerFacingRight ? 1 : -1), 0);
         Destroy(gameObject, LifeTime);
+		IsRelease = true;
     }
 
 	private void OnTriggerEnter2D(Collider2D other) {
@@ -43,11 +46,14 @@ public class Bubble : MonoBehaviour {
 		if(other.gameObject.layer != LayerMask.NameToLayer("Player")) {
 			Destroy(gameObject);
 		}
-        if(other.tag == "Player")
-        {
-            Debug.Log("Collision detected with " + other.gameObject.name + " on tag " + other.tag);
-            other.gameObject.GetComponent<PlayerMovement>().BubbleJump();
-        }
+
+		if(other.tag == "Player") {
+			Debug.Log("Collision detected with " + other.gameObject.name + " on tag " + other.tag);
+			if (IsRelease) {
+				other.gameObject.GetComponent<Player>().BubbleJump();
+				Destroy(gameObject);
+			}
+		}
 	}
 }
 

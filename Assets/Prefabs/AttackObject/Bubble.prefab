@@ -162,11 +162,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f50eb5900c4c9c64cb7e61c8590db708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinBubbleSpeed: 3
-  MaxBubbleSpeed: 10
   MaxBubbleSize: 3
   MinBubbleSize: 0.3
+  MinBubbleSpeed: 4
+  MaxBubbleSpeed: 10
   LifeTime: 5
+  MinDamage: 3
+  MaxDamage: 30
 --- !u!1 &8488345246738170082
 GameObject:
   m_ObjectHideFlags: 0
