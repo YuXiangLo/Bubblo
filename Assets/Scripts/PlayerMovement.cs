@@ -4,51 +4,53 @@ public class PlayerMovement : MonoBehaviour {
     private Camera MainCamera;
     private Rigidbody2D Rigidbody2D;
 
-    public float MoveSpeed = 8f;
-    public float Gravity = -90f;
+    public float MoveSpeed = 10f;
 	public float FloatingXSpeed = 10f;
+    public float Gravity = -60f;
     public float FloatingYSpeed = -2f;
-    public float JumpForce = 18f;
-    public float PlayerSize = 1f;
+    public float JumpForce = 20f;
+    public float PlayerSize = 1f; 
 	public float FloatingRatio = 0.9995f;
 	public float TriggerDistance = 0.001f;
-    public float DefaultGravityScale = 1f;
-    public float LowGravityScale = 0.5f;
+	public bool IsFacingRight = true;
 
-    private float GravityScale;
+	[SerializeField]
     private bool IsGrounded = false;
+	[SerializeField]
     private bool IsFloating = false;
+	[SerializeField]
 	private bool CanFloat = false;
-    public Vector2 Velocity = Vector2.zero;
-    
+	[SerializeField]
+    private Vector2 Velocity = Vector2.zero;
+
     private void Awake() {
         Rigidbody2D = GetComponent<Rigidbody2D>();
 		Rigidbody2D.freezeRotation = true;
         MainCamera = Camera.main;
     }
 
-    // private void Update() { NOTE: Since I modularize the PlayerMovement, this script therefore would not call the Update() itself but by Player.cs
-	public void HandleMovement() {
+    // Movement logic
+    public void HandleMovement() {
 		IsGrounded = Rigidbody2D.Raycast(Vector2.down, new Vector2(PlayerSize, PlayerSize), TriggerDistance);
 		FloatingMovementDetect();
 		HorizontalMovementDetect();
 		if (IsGrounded) 
 			JumpMovementDetect();
+		FaceSideDetect();
 		ApplyGravity();
 		RestrictPlayerWithinCamera();
+
 	}
 
-	private void FixedUpdate() {
+    private void FixedUpdate() {
 		Rigidbody2D.MovePosition(Rigidbody2D.position + Velocity * Time.fixedDeltaTime);
 		FloatingXSpeed = IsGrounded ? MoveSpeed : FloatingXSpeed;
 	}
 
-	private void FloatingMovementDetect() {
+    private void FloatingMovementDetect() {
 		if (Velocity.y < 0f && Input.GetButtonDown("Jump"))
 			CanFloat = true;
-		IsFloating = Input.GetButton("Jump") && CanFloat;
-
-        GravityScale =  Input.GetButton("Jump") ? LowGravityScale : DefaultGravityScale;
+		IsFloating = Input.GetButton("Jump")  && CanFloat;
 	}
 
     private void HorizontalMovementDetect() {
@@ -66,11 +68,20 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
+	private void FaceSideDetect() {
+		if (Velocity.x > 0 && !IsFacingRight || Velocity.x < 0 && IsFacingRight) {
+			IsFacingRight = !IsFacingRight;
+			Vector3 currentScale = transform.localScale;
+			currentScale.x *= -1;
+			transform.localScale = currentScale;
+		}
+	}
+
     private void ApplyGravity() {
         if (IsFloating && Velocity.y < FloatingYSpeed)
             Velocity.y = FloatingYSpeed;
         else 
-            Velocity.y += Gravity * GravityScale * Time.deltaTime;
+            Velocity.y += Gravity * Time.deltaTime;
     }
 
     private void RestrictPlayerWithinCamera() {
@@ -81,5 +92,9 @@ public class PlayerMovement : MonoBehaviour {
         Vector2 playerPosition = transform.position;
         playerPosition.x = Mathf.Clamp(playerPosition.x, cameraLeftEdge + PlayerSize / 2, cameraRightEdge - PlayerSize / 2);
         transform.position = playerPosition;
+    }
+
+    public void BubbleJump() {
+        Velocity.y = JumpForce;
     }
 }
