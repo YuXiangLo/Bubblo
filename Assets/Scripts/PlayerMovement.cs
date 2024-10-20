@@ -4,18 +4,21 @@ public class PlayerMovement : MonoBehaviour {
     private Camera MainCamera;
     private Rigidbody2D Rigidbody2D;
 
-    public float MoveSpeed = 10f;
-    public float Gravity = -60f;
+    public float MoveSpeed = 8f;
+    public float Gravity = -90f;
+	public float FloatingXSpeed = 10f;
     public float FloatingYSpeed = -2f;
-    public float JumpForce = 20f;
-    public float PlayerSize = 1f; 
+    public float JumpForce = 18f;
+    public float PlayerSize = 1f;
 	public float FloatingRatio = 0.9995f;
 	public float TriggerDistance = 0.001f;
+    public float DefaultGravityScale = 1f;
+    public float LowGravityScale = 0.5f;
 
-    public bool IsGrounded = false;
-    public bool IsFloating = false;
-	public bool CanFloat = false;
-	public float FloatingXSpeed = 10f;
+    private float GravityScale;
+    private bool IsGrounded = false;
+    private bool IsFloating = false;
+	private bool CanFloat = false;
     public Vector2 Velocity = Vector2.zero;
     
     private void Awake() {
@@ -43,7 +46,9 @@ public class PlayerMovement : MonoBehaviour {
 	private void FloatingMovementDetect() {
 		if (Velocity.y < 0f && Input.GetButtonDown("Jump"))
 			CanFloat = true;
-		IsFloating = Input.GetButton("Jump")  && CanFloat;
+		IsFloating = Input.GetButton("Jump") && CanFloat;
+
+        GravityScale =  Input.GetButton("Jump") ? LowGravityScale : DefaultGravityScale;
 	}
 
     private void HorizontalMovementDetect() {
@@ -65,7 +70,7 @@ public class PlayerMovement : MonoBehaviour {
         if (IsFloating && Velocity.y < FloatingYSpeed)
             Velocity.y = FloatingYSpeed;
         else 
-            Velocity.y += Gravity * Time.deltaTime;
+            Velocity.y += Gravity * GravityScale * Time.deltaTime;
     }
 
     private void RestrictPlayerWithinCamera() {
