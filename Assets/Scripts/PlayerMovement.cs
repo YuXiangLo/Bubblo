@@ -1,19 +1,21 @@
-using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
-    public float MoveSpeed = 10f;
+    public float MoveSpeed = 8f;
 	public float FloatingXSpeed = 10f;
-    public float Gravity = -60f;
     public float FloatingYSpeed = -2f;
+    public float Gravity = -90f;
     public float MaxFallingSpeed = -20f;
-    public float JumpForce = 20f;
+    public float JumpForce = 18f;
     public float PlayerSize = 1f; 
 	public float FloatingRatio = 0.9995f;
 	public float TriggerDistance = 0.001f;
 	public bool IsFacingRight = true;
     public bool IsGrounded = false;
+    public float DefaultGravityScale = 1f;
+    public float LowGravityScale = 0.5f;
 
+    private float GravityScale;
     private Camera MainCamera;
     private Rigidbody2D Rigidbody2D;
 
@@ -52,6 +54,7 @@ public class PlayerMovement : MonoBehaviour {
 		if (Velocity.y < 0f && Input.GetButtonDown("Jump"))
 			CanFloat = true;
 		IsFloating = Input.GetButton("Jump")  && CanFloat;
+        GravityScale =  Input.GetButton("Jump") ? LowGravityScale : DefaultGravityScale;
 	}
 
     private void HorizontalMovementDetect() {
@@ -82,7 +85,7 @@ public class PlayerMovement : MonoBehaviour {
         if (IsFloating && Velocity.y < FloatingYSpeed)
             Velocity.y = FloatingYSpeed;
         else 
-            Velocity.y += Gravity * Time.deltaTime;
+            Velocity.y += Gravity * GravityScale * Time.deltaTime;
         
         // Limit Falling Speed
         Velocity.y = Mathf.Max(Velocity.y, MaxFallingSpeed);
