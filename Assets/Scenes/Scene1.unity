@@ -762,6 +762,18 @@ PrefabInstance:
       propertyPath: OnHealthChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2975997888866370563, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
+      propertyPath: Gravity
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2975997888866370563, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
+      propertyPath: JumpForce
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2975997888866370563, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
+      propertyPath: MoveSpeed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5956104239326810478, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.1
