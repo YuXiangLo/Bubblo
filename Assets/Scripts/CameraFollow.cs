@@ -9,9 +9,13 @@ public class CameraFollow : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 desiredPosition = new(Mathf.Max(LevelData.MinXAxisPosition, Player.position.x) + Offset.x, transform.position.y, transform.position.z);
+        Vector3 desiredPosition = new(
+            Mathf.Max(LevelData.MinXAxisPosition, Player.position.x) + Offset.x,
+            Mathf.Max(LevelData.MinYAxisPosition, Player.position.y) + Offset.y,
+            transform.position.z);
 
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, SmoothSpeed);
+        Vector3 smoothedPosition = Vector3.Lerp(
+            transform.position, desiredPosition, SmoothSpeed);
 
         transform.position = smoothedPosition;
     }
