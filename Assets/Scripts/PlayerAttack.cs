@@ -1,14 +1,13 @@
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour {
-    public GameObject BubblePrefab; // Single prefab for all bubble sizes
-
-    public float MinBubbleSpeed = 3f;
-    public float MaxBubbleSpeed = 10f;
-    public float MaxBubbleSize = 3f;
-    public float MinBubbleSize = 0.3f;
-    public float BubbleLifetime = 2f;
-    public float PlayerSize = 1f;
+    [SerializeField] private GameObject BubblePrefab;
+    [SerializeField] private float MinBubbleSpeed = 3f;
+    [SerializeField] private float MaxBubbleSpeed = 10f;
+    [SerializeField] private float MaxBubbleSize = 3f;
+    [SerializeField] private float MinBubbleSize = 0.3f;
+    [SerializeField] private float BubbleLifetime = 2f;
+    [SerializeField] private float PlayerSize = 1f;
 
     private const float MaxHoldTime = 2f; // Maximum time that affects bubble size and speed
 

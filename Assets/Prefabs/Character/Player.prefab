@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1837199189108788406}
   - component: {fileID: 2975997888866370563}
   - component: {fileID: 659515783135043062}
+  - component: {fileID: 2212849781057335246}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -208,17 +209,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 10
+  FloatingXSpeed: 10
   Gravity: -45
   FloatingYSpeed: -2
   JumpForce: 20
   PlayerSize: 1
   FloatingRatio: 0.9995
   TriggerDistance: 0.001
-  _isGrounded: 0
-  _isFloating: 0
-  _canFloat: 0
-  FloatingXSpeed: 10
-  _velocity: {x: 0, y: 0}
+  IsFacingRight: 1
+  IsGrounded: 0
+  IsFloating: 0
+  CanFloat: 0
+  Velocity: {x: 0, y: 0}
 --- !u!114 &659515783135043062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,4 +233,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0843e973d42eeeb958d6c401fc725aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  MaxHealth: 100
+  CurrentHealth: 0
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &2212849781057335246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7355135152502087577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abd3b8b3ddfe8c5418224b4c29d54d82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BubblePrefab: {fileID: 4980627567242347800, guid: 3654957f8f0b1ce4c8724e8373053977, type: 3}
+  MinBubbleSpeed: 3
+  MaxBubbleSpeed: 10
+  MaxBubbleSize: 3
+  MinBubbleSize: 0.3
+  BubbleLifetime: 2
+  PlayerSize: 1

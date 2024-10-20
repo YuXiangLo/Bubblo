@@ -3,15 +3,15 @@ using UnityEngine;
 public class SimpleUnicornMovement : MonoBehaviour
 {
     private Transform LeftPoint, RightPoint;
-    private Vector3 target;
-    private bool facingRight = true;
+    private Vector3 Target;
+    private bool FacingLeft = true;
 
-    public float speed = 2f;
+    public float Speed = 2f;
     private void Start()
     {
         LeftPoint = transform.parent.Find("LeftPoint");
         RightPoint = transform.parent.Find("RightPoint");
-        target = LeftPoint.position;
+        Target = LeftPoint.position;
     }
 
     public void HandleMovement()
@@ -23,30 +23,30 @@ public class SimpleUnicornMovement : MonoBehaviour
     private void Move()
     {
         // Move enemy towards the target
-        transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, Target, Speed * Time.deltaTime);
 
         // Switch target when reaching the point
-        if (Vector2.Distance(transform.position, target) < 0.1f)
+        if (Vector2.Distance(transform.position, Target) < 0.1f)
         {
-            if (target == LeftPoint.position)
-                target = RightPoint.position;
+            if (Target == LeftPoint.position)
+                Target = RightPoint.position;
             else
-                target = LeftPoint.position;
+                Target = LeftPoint.position;
         }
     }
 
     private void RotateToMovementDirection()
     {
         // Calculate the movement direction
-        Vector3 movementDirection = target - transform.position;
+        Vector3 movementDirection = Target - transform.position;
 
         // Check if moving to the right
-        if (movementDirection.x > 0 && !facingRight)
+        if (movementDirection.x > 0 && !FacingLeft)
         {
             Flip();
         }
         // Check if moving to the left
-        else if (movementDirection.x < 0 && facingRight)
+        else if (movementDirection.x < 0 && FacingLeft)
         {
             Flip();
         }
@@ -55,7 +55,7 @@ public class SimpleUnicornMovement : MonoBehaviour
     private void Flip()
     {
         // Toggle the facing direction
-        facingRight = !facingRight;
+        FacingLeft = !FacingLeft;
 
         // Flip the enemy's sprite by scaling in the X axis
         Vector3 localScale = transform.localScale;

@@ -3,7 +3,7 @@ using UnityEngine;
 public class SimpleUnicorn : MonoBehaviour, IModifyHealth
 {
     private SimpleUnicornMovement SimpleUnicornMovement;
-    private SimpleUnicornHealth SimpleUnicornHealth;
+    private EnemyHealth SimpleUnicornHealth;
 
     public void TakeDamage(float amount)
     {
@@ -18,7 +18,7 @@ public class SimpleUnicorn : MonoBehaviour, IModifyHealth
     private void Awake()
     {
         SimpleUnicornMovement = GetComponent<SimpleUnicornMovement>();
-        SimpleUnicornHealth = GetComponent<SimpleUnicornHealth>();
+        SimpleUnicornHealth = GetComponent<EnemyHealth>();
     }
 
     private void Update()

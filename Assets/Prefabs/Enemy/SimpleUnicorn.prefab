@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 5550986005216411488}
   - component: {fileID: 8302127994563282631}
   - component: {fileID: 1452368293699659156}
-  - component: {fileID: 6270736265180569183}
+  - component: {fileID: 5876611879287269624}
   m_Layer: 3
   m_Name: Unicorn
   m_TagString: Untagged
@@ -375,7 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac5aaab045a31504da916336692de359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6270736265180569183
+--- !u!114 &5876611879287269624
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -384,10 +384,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7560009801886193698}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4cc05d23d9782047af4515727221b47, type: 3}
+  m_Script: {fileID: 11500000, guid: 551bea9541a753942a2621d66e07ab73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  maxHealth: 100
 --- !u!1 &8870990994026689457
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +398,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3917010694890677901}
   m_Layer: 0
-  m_Name: HorizontalUnicornSimple
+  m_Name: SimpleUnicorn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
