@@ -144,7 +144,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -162,7 +162,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f50eb5900c4c9c64cb7e61c8590db708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BubbleLifetime: 2
+  MinBubbleSpeed: 3
+  MaxBubbleSpeed: 10
+  MaxBubbleSize: 3
+  MinBubbleSize: 0.3
+  LifeTime: 5
 --- !u!1 &8488345246738170082
 GameObject:
   m_ObjectHideFlags: 0
