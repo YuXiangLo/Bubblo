@@ -376,41 +376,6 @@ MonoBehaviour:
   Player: {fileID: 3227322621682519767}
   Offset: {x: 0, y: 0, z: 0}
   SmoothSpeed: 0.125
---- !u!1 &945978027 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2828118116067363691, guid: b8ee3385787a6cb4f8d65ff3f71891ab, type: 3}
-  m_PrefabInstance: {fileID: 1574157139}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &945978031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 945978027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ad003804daf435d42b5a146fc3e34631, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!50 &1063385181 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 316718149377873124, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
@@ -657,22 +622,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 7967194936573390556, guid: b8ee3385787a6cb4f8d65ff3f71891ab, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7967194936573390556, guid: b8ee3385787a6cb4f8d65ff3f71891ab, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 2
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7975683680681299233, guid: b8ee3385787a6cb4f8d65ff3f71891ab, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2828118116067363691, guid: b8ee3385787a6cb4f8d65ff3f71891ab, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 945978031}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8ee3385787a6cb4f8d65ff3f71891ab, type: 3}
 --- !u!1001 &2177933047911740150
 PrefabInstance:
@@ -921,6 +874,10 @@ PrefabInstance:
     - target: {fileID: 7355135152502087577, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7355135152502087577, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
