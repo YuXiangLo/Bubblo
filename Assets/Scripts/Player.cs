@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModifyHealth {
+public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModifyHealth, IKnockback {
     private PlayerMovement PlayerMovement;
     private PlayerHealth PlayerHealth;
 	private PlayerAttack PlayerAttack;
@@ -13,6 +13,10 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     public void TakeDamage(float amount) {
         PlayerHealth.TakeDamage(amount);
     }
+
+	public void Knockback(Vector2 knockbackDirection, float toSleep) {
+		PlayerMovement.Knockback(knockbackDirection, toSleep);
+	}
 
     public void Heal(float amount) {
         PlayerHealth.Heal(amount);

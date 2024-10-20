@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
     public float MoveSpeed = 8f;
@@ -19,12 +20,12 @@ public class PlayerMovement : MonoBehaviour {
     private Camera MainCamera;
     private Rigidbody2D Rigidbody2D;
 
-	[SerializeField]
-    private bool IsFloating = false;
-	[SerializeField]
-	private bool CanFloat = false;
-	[SerializeField]
-    private Vector2 Velocity = Vector2.zero;
+	[SerializeField] private float KnockbackForce = 6f;
+	[SerializeField] private bool IsFloating = false;
+	[SerializeField] private bool CanFloat = false;
+	[SerializeField] private bool DisableHorizontalMovement = false;
+	[SerializeField] private Vector2 Velocity = Vector2.zero;
+	[SerializeField] private float KnockbackTangent = 2f;
 
     private void Awake() {
         Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -36,7 +37,8 @@ public class PlayerMovement : MonoBehaviour {
     public void HandleMovement() {
 		IsGrounded = Rigidbody2D.Raycast(Vector2.down, new Vector2(PlayerSize, PlayerSize), TriggerDistance);
 		FloatingMovementDetect();
-		HorizontalMovementDetect();
+		if (!DisableHorizontalMovement)
+			HorizontalMovementDetect();
 		if (IsGrounded) 
 			JumpMovementDetect();
 		FaceSideDetect();
@@ -104,4 +106,19 @@ public class PlayerMovement : MonoBehaviour {
     public void BubbleJump() {
         Velocity.y = JumpForce;
     }
+
+	public void Knockback(Vector2 knockbackDirection, float toSleep) {
+		StartCoroutine(KnockbackCoroutine(knockbackDirection, toSleep));
+	}
+
+	private IEnumerator KnockbackCoroutine(Vector2 knockbackDirection, float toSleep) {
+		DisableHorizontalMovement = true;
+		Velocity.x = (knockbackDirection.x > 0) ? -KnockbackForce : KnockbackForce;
+		Velocity.y = KnockbackTangent * KnockbackForce;
+
+		Debug.Log("Disable Movement");
+		yield return new WaitForSeconds(toSleep);
+		DisableHorizontalMovement = false;
+		Debug.Log("Enable Movement");
+	}
 }
