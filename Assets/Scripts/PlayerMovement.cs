@@ -5,42 +5,49 @@ public class PlayerMovement : MonoBehaviour {
     private Rigidbody2D Rigidbody2D;
 
     public float MoveSpeed = 10f;
+	public float FloatingXSpeed = 10f;
     public float Gravity = -60f;
     public float FloatingYSpeed = -2f;
     public float JumpForce = 20f;
     public float PlayerSize = 1f; 
 	public float FloatingRatio = 0.9995f;
 	public float TriggerDistance = 0.001f;
+	public bool IsFacingRight = true;
 
-    public bool IsGrounded = false;
-    public bool IsFloating = false;
-	public bool CanFloat = false;
-	public float FloatingXSpeed = 10f;
-    public Vector2 Velocity = Vector2.zero;
-    
+	[SerializeField]
+    private bool IsGrounded = false;
+	[SerializeField]
+    private bool IsFloating = false;
+	[SerializeField]
+	private bool CanFloat = false;
+	[SerializeField]
+    private Vector2 Velocity = Vector2.zero;
+
     private void Awake() {
         Rigidbody2D = GetComponent<Rigidbody2D>();
 		Rigidbody2D.freezeRotation = true;
         MainCamera = Camera.main;
     }
 
-    // private void Update() { NOTE: Since I modularize the PlayerMovement, this script therefore would not call the Update() itself but by Player.cs
-	public void HandleMovement() {
+    // Movement logic
+    public void HandleMovement() {
 		IsGrounded = Rigidbody2D.Raycast(Vector2.down, new Vector2(PlayerSize, PlayerSize), TriggerDistance);
 		FloatingMovementDetect();
 		HorizontalMovementDetect();
 		if (IsGrounded) 
 			JumpMovementDetect();
+		FaceSideDetect();
 		ApplyGravity();
 		RestrictPlayerWithinCamera();
+
 	}
 
-	private void FixedUpdate() {
+    private void FixedUpdate() {
 		Rigidbody2D.MovePosition(Rigidbody2D.position + Velocity * Time.fixedDeltaTime);
 		FloatingXSpeed = IsGrounded ? MoveSpeed : FloatingXSpeed;
 	}
 
-	private void FloatingMovementDetect() {
+    private void FloatingMovementDetect() {
 		if (Velocity.y < 0f && Input.GetButtonDown("Jump"))
 			CanFloat = true;
 		IsFloating = Input.GetButton("Jump")  && CanFloat;
@@ -60,6 +67,15 @@ public class PlayerMovement : MonoBehaviour {
 			CanFloat = false;
         }
     }
+
+	private void FaceSideDetect() {
+		if (Velocity.x > 0 && !IsFacingRight || Velocity.x < 0 && IsFacingRight) {
+			IsFacingRight = !IsFacingRight;
+			Vector3 currentScale = transform.localScale;
+			currentScale.x *= -1;
+			transform.localScale = currentScale;
+		}
+	}
 
     private void ApplyGravity() {
         if (IsFloating && Velocity.y < FloatingYSpeed)

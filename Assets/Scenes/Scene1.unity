@@ -344,6 +344,11 @@ MonoBehaviour:
   Player: {fileID: 3227322621682519767}
   Offset: {x: 0, y: 0, z: 0}
   SmoothSpeed: 0.125
+--- !u!1 &746333881 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7355135152502087577, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
+  m_PrefabInstance: {fileID: 6980765975552827267}
+  m_PrefabAsset: {fileID: 0}
 --- !u!50 &1063385181 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 316718149377873124, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
@@ -578,7 +583,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 659515783135043062, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
   m_PrefabInstance: {fileID: 6980765975552827267}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 746333881}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0843e973d42eeeb958d6c401fc725aab, type: 3}
@@ -589,7 +594,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2975997888866370563, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
   m_PrefabInstance: {fileID: 6980765975552827267}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 746333881}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc4d5c529fbfd581f895daef4b4f41c1, type: 3}
@@ -600,12 +605,29 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1837199189108788406, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
   m_PrefabInstance: {fileID: 6980765975552827267}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 746333881}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f2e9d10fef0f6519ba4581b3c55dbac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3227322621682519782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746333881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abd3b8b3ddfe8c5418224b4c29d54d82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BubblePrefab: {fileID: 4980627567242347800, guid: 3654957f8f0b1ce4c8724e8373053977, type: 3}
+  LightBubbleSpeed: 10
+  MediumBubbleSpeed: 7
+  HeavyBubbleSpeed: 3
+  BubbleLifetime: 2
 --- !u!1001 &4917478968576407985
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -628,7 +650,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
       propertyPath: SceneToLoad
-      value: Scene2
+      value: Scene1
       objectReference: {fileID: 0}
     - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
       propertyPath: PlayerRigidbody
@@ -709,7 +731,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 659515783135043062, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
       propertyPath: OnHealthChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 659515783135043062, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
       propertyPath: OnHealthChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -762,7 +784,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7355135152502087577, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3227322621682519782}
   m_SourcePrefab: {fileID: 100100000, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
 --- !u!1001 &7612379777034588662
 PrefabInstance:
