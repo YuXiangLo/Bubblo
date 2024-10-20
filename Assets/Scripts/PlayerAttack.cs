@@ -6,7 +6,6 @@ public class PlayerAttack : MonoBehaviour {
     [SerializeField] private float MaxBubbleSpeed = 10f;
     [SerializeField] private float MaxBubbleSize = 3f;
     [SerializeField] private float MinBubbleSize = 0.3f;
-    [SerializeField] private float BubbleLifetime = 2f;
     [SerializeField] private float PlayerSize = 1f;
 
     private const float MaxHoldTime = 2f; // Maximum time that affects bubble size and speed
@@ -38,8 +37,6 @@ public class PlayerAttack : MonoBehaviour {
         // Set the bubble's velocity based on facing direction
         Rigidbody2D rb = bubble.GetComponent<Rigidbody2D>();
         rb.velocity = new Vector2(bubbleSpeed * (Player.IsFacingRight ? 1 : -1), 0);
-
-        Destroy(bubble, BubbleLifetime);
     }
 
     // Method to be called when the button is released to throw a bubble
