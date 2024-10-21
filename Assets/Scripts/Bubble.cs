@@ -1,8 +1,9 @@
 using UnityEngine;
 
-public class Bubble : MonoBehaviour {
-    public float MaxSize = 3f;
-    public float MinSize = 0.3f;
+public class Bubble : MonoBehaviour
+{
+    [SerializeField] private float MaxSize = 3f;
+    [SerializeField] private float MinSize = 0.3f;
 
     [SerializeField] private float MinSpeed = 4f;
     [SerializeField] private float MaxSpeed = 10f;
@@ -22,7 +23,8 @@ public class Bubble : MonoBehaviour {
     private float ReleaseSpeed => Mathf.Lerp(MinSpeed, MaxSpeed, ChargingTime / MaxChargingTime);
     private Rigidbody2D rb;
 
-    private void Awake() {
+    private void Awake()
+    {
         Player = FindObjectOfType<Player>();
         rb = GetComponent<Rigidbody2D>();
         transform.localScale = Vector3.one * MinSize;
@@ -30,18 +32,20 @@ public class Bubble : MonoBehaviour {
         UpdatePosition();
     }
 
-    private void Update() {
-        if (!IsRelease) {
-            if (IsCharging) {
-                ChargingTime += Time.deltaTime;
-                Debug.Log(ChargingTime);
-                UpdateSize();
-            }
-            UpdatePosition();
+    private void Update()
+    {
+        if (IsRelease) {
+            return;
         }
+        if (IsCharging) {
+            ChargingTime += Time.deltaTime;
+            UpdateSize();
+        }
+        UpdatePosition();
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
 		if(other.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
 			float damage = Mathf.Lerp(MinDamage, MaxDamage, CurrentSize / MaxSize);
 			other.gameObject.GetComponent<IModifyHealth>().TakeDamage(damage);
@@ -58,24 +62,29 @@ public class Bubble : MonoBehaviour {
 		}
 	}
 
-    public void StopCharging() {
+    public void StopCharging()
+    {
         IsCharging = false;
     }
 
-    public void Release() {
+    public void Release()
+    {
         IsRelease = true;
         rb.velocity = new(ReleaseSpeed * (PlayerFacingRight ? 1 : -1), 0);
         Destroy(gameObject, LifeTime);
     }
 
-    private void UpdateSize() {
+    private void UpdateSize()
+    {
         transform.localScale = Vector3.one * CurrentSize;
     }
-    private void UpdatePosition() {
+    private void UpdatePosition()
+    {
         transform.position = Player.transform.position + CalculateBubblePosition();
     }
 
-	private Vector3 CalculateBubblePosition() {
+	private Vector3 CalculateBubblePosition()
+    {
         float bubbleRadius = CurrentSize / 2f;
         float xOffset = (PlayerSize / 2f + bubbleRadius) * (Player.IsFacingRight ? 1 : -1);
         float yOffset = Mathf.Max(0f, bubbleRadius - PlayerSize / 2f + 0.05f);
