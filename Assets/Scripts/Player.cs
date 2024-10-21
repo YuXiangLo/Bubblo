@@ -4,11 +4,13 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     private PlayerMovement PlayerMovement;
     private PlayerHealth PlayerHealth;
 	private PlayerAttack PlayerAttack;
+    public Animator animator;
 
     public float HealthPercentage { get => PlayerHealth.HealthPercentage; }
     public float MagicPercentage { get => PlayerAttack.MagicPercentage; }
 	public bool IsFacingRight { get => PlayerMovement.IsFacingRight; }
 	public bool IsGrounded { get => PlayerMovement.IsGrounded; }
+    public bool IsBubbleHeld { get => PlayerAttack.IsButtonHeld; }
 
     public void TakeDamage(float amount) {
         PlayerHealth.TakeDamage(amount);
@@ -38,6 +40,9 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 			PlayerAttack.HandleAttack();
 		}
         TestHealthModification();
+        animator.SetFloat("speed", PlayerMovement.Speed);
+        animator.SetBool("isFloating", !IsGrounded);
+        animator.SetBool("isHoldingBubble", IsBubbleHeld);
     }
 
     /// <summary>

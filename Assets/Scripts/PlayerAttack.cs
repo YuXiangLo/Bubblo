@@ -6,7 +6,7 @@ public class PlayerAttack : MonoBehaviour {
     [SerializeField] private float MaxMagicPoint = 10f;
 
     private float CurrentMagicPoint;
-    private bool IsButtonHeld = false;
+    public bool IsButtonHeld = false;
     private float ButtonHoldTime = 0f;
     private float MaxBubbleSize;
     private float MinBubbleSize;
