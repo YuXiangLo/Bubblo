@@ -13,7 +13,6 @@ public class Bubble : MonoBehaviour {
 	private bool IsRelease;
 	private float CurrentBubbleSize;
     private Rigidbody2D rb;
-    private bool isFacingRight;
 
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
