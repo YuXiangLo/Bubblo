@@ -53,7 +53,9 @@ public class SimpleBeeMovement : MonoBehaviour
     
     private void AttackMovement()
     {
-        transform.position = Vector2.MoveTowards(transform.position, Target, ApproachSpeed * Time.deltaTime);
+        NextPosition = Vector2.MoveTowards(transform.position, Target, ApproachSpeed * Time.deltaTime);
+        RotateToMovementDirection();
+        transform.position = NextPosition;
         if (Vector2.Distance(transform.position, Target) < 0.1f)
         {
             Target = RestoredPosition;
@@ -70,6 +72,8 @@ public class SimpleBeeMovement : MonoBehaviour
     {
         // Move enemy towards the target
         NextPosition = Vector2.MoveTowards(transform.position, DefaultTarget, Speed * Time.deltaTime);
+        RotateToMovementDirection();
+        transform.position = NextPosition;
 
         // Switch target when reaching the point
         if (Vector2.Distance(transform.position, DefaultTarget) < 0.1f)
@@ -81,9 +85,8 @@ public class SimpleBeeMovement : MonoBehaviour
         }
     }
     
-    private void Move()
+    private void RotateToMovementDirection()
     {
-        transform.position = NextPosition;
         Vector3 movementDirection = NextPosition - transform.position;
         if (movementDirection.x > 0 && !FacingLeft)
         {

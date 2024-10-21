@@ -350,6 +350,71 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 316718149377873124, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
   m_PrefabInstance: {fileID: 6980765975552827267}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1069859135
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2615968626528997417, guid: 727bba5c4fb3c5841b161b234524c56f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2615968626528997417, guid: 727bba5c4fb3c5841b161b234524c56f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2615968626528997417, guid: 727bba5c4fb3c5841b161b234524c56f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2615968626528997417, guid: 727bba5c4fb3c5841b161b234524c56f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2615968626528997417, guid: 727bba5c4fb3c5841b161b234524c56f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2615968626528997417, guid: 727bba5c4fb3c5841b161b234524c56f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2615968626528997417, guid: 727bba5c4fb3c5841b161b234524c56f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2615968626528997417, guid: 727bba5c4fb3c5841b161b234524c56f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2615968626528997417, guid: 727bba5c4fb3c5841b161b234524c56f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2615968626528997417, guid: 727bba5c4fb3c5841b161b234524c56f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5210219446283909443, guid: 727bba5c4fb3c5841b161b234524c56f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5210219446283909443, guid: 727bba5c4fb3c5841b161b234524c56f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590428170139456609, guid: 727bba5c4fb3c5841b161b234524c56f, type: 3}
+      propertyPath: m_Name
+      value: SimpleBee
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 727bba5c4fb3c5841b161b234524c56f, type: 3}
 --- !u!1001 &1084120587
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1019,3 +1084,4 @@ SceneRoots:
   - {fileID: 1481137800}
   - {fileID: 2447762004939951370}
   - {fileID: 1262031554}
+  - {fileID: 1069859135}
