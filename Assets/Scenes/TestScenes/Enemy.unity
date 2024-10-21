@@ -376,6 +376,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7560009801886193698, guid: 7e5f3805e4db87546b2dd1eaf8efcada, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7560009801886193698, guid: 7e5f3805e4db87546b2dd1eaf8efcada, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 8870990994026689457, guid: 7e5f3805e4db87546b2dd1eaf8efcada, type: 3}
       propertyPath: m_Name
       value: SimpleUnicorn
@@ -837,6 +845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23774f4e898815c648ecf77671e3e1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelData: {fileID: 0}
   Player: {fileID: 193148729}
   Offset: {x: 0, y: 0, z: 0}
   SmoothSpeed: 0.125
