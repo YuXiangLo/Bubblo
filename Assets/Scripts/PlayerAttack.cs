@@ -43,7 +43,11 @@ public class PlayerAttack : MonoBehaviour {
             else {
                 StopChargingBubble();
             }
-        }
+        } else {
+			IsButtonHeld = false;
+			IsAttack = false;
+		}
+
         
         if (Input.GetButtonUp("Fire1")) {
             if (CurrentBubble != null) {
