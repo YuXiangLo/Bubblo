@@ -20,7 +20,7 @@ public class Bubble : MonoBehaviour
     private float ChargingTime = 0f;
     private const float MaxChargingTime = 2f;
 	private float CurrentSize => Mathf.Lerp(MinSize, MaxSize, ChargingTime / MaxChargingTime);
-    private float ReleaseSpeed => Mathf.Lerp(MinSpeed, MaxSpeed, ChargingTime / MaxChargingTime);
+    private float ReleaseSpeed => Mathf.Lerp(MaxSpeed, MinSpeed, ChargingTime / MaxChargingTime);
     private Rigidbody2D rb;
 
     private void Awake()
