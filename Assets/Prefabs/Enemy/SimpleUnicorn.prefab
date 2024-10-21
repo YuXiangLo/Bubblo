@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7657923587547132557}
   - component: {fileID: 5711570723307525920}
   m_Layer: 10
-  m_Name: Thorny
-  m_TagString: Enemy
+  m_Name: Thorn
+  m_TagString: Thorn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
