@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
+    public Animator animator;
     public float MoveSpeed = 8f;
 	public float FloatingXSpeed = 10f;
     public float FloatingYSpeed = -2f;
@@ -50,6 +51,7 @@ public class PlayerMovement : MonoBehaviour {
     private void FixedUpdate() {
 		Rigidbody2D.MovePosition(Rigidbody2D.position + Velocity * Time.fixedDeltaTime);
 		FloatingXSpeed = IsGrounded ? MoveSpeed : FloatingXSpeed;
+        animator.SetFloat("speed", Mathf.Abs(Velocity.x));
 	}
 
     private void FloatingMovementDetect() {

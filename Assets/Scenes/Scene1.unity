@@ -813,6 +813,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f2e9d10fef0f6519ba4581b3c55dbac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &3227322621682519781 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7105853192328150088, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
+  m_PrefabInstance: {fileID: 6980765975552827267}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4917478968576407985
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -926,6 +931,10 @@ PrefabInstance:
       propertyPath: Gravity
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 2975997888866370563, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 3227322621682519781}
     - target: {fileID: 2975997888866370563, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
       propertyPath: JumpForce
       value: 18
