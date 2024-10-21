@@ -47,7 +47,7 @@ public class Bubble : MonoBehaviour {
 			Destroy(gameObject);
 		}
 
-		if(other.tag == "Player") {
+		if(other.gameObject.layer == LayerMask.NameToLayer("Player")) {
 			Debug.Log("Collision detected with " + other.gameObject.name + " on tag " + other.tag);
 			if (IsRelease) {
 				other.gameObject.GetComponent<Player>().BubbleJump();
