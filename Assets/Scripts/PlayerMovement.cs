@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour {
 	[SerializeField] private Vector2 Velocity = Vector2.zero;
 	[SerializeField] private float KnockbackTangent = 2f;
 
+    public float Speed {get => Mathf.Abs(Velocity.x);}
+
     private void Awake() {
         Rigidbody2D = GetComponent<Rigidbody2D>();
 		Rigidbody2D.freezeRotation = true;
@@ -50,6 +52,7 @@ public class PlayerMovement : MonoBehaviour {
     private void FixedUpdate() {
 		Rigidbody2D.MovePosition(Rigidbody2D.position + Velocity * Time.fixedDeltaTime);
 		FloatingXSpeed = IsGrounded ? MoveSpeed : FloatingXSpeed;
+
 	}
 
     private void FloatingMovementDetect() {
