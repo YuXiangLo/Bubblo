@@ -442,6 +442,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d0b4603a06f14477b10db425610beb7, type: 3}
+--- !u!1 &1424046355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1424046356}
+  m_Layer: 0
+  m_Name: BossUnicorn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1424046356
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424046355}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 53.147285, y: -1.4679587, z: -0.000800062}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1442547749
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -837,6 +868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23774f4e898815c648ecf77671e3e1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelData: {fileID: 0}
   Player: {fileID: 193148729}
   Offset: {x: 0, y: 0, z: 0}
   SmoothSpeed: 0.125
@@ -928,3 +960,4 @@ SceneRoots:
   - {fileID: 311845192}
   - {fileID: 1038678326}
   - {fileID: 1264695399}
+  - {fileID: 1424046356}
