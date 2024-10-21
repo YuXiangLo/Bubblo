@@ -4,11 +4,13 @@ public class BossUnicorn : MonoBehaviour
 {
     private EnemyHealth Health;
     private BossUnicornMovement Movement;
+    private Animator animator;
 
     private void Start()
     {
         Health = GetComponent<EnemyHealth>();
         Movement = GetComponent<BossUnicornMovement>();
+        animator = GetComponent<Animator>();
     }
 
     public void TakeDamage(float amount)
@@ -25,5 +27,7 @@ public class BossUnicorn : MonoBehaviour
     {
         if (Movement.enabled)
             Movement.HandleMovement();
+        animator.SetBool("IsSprinting", Movement.IsSprinting);
+        animator.SetBool("IsAttacking", Movement.IsAttacking);
     }
 }

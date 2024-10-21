@@ -170,6 +170,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8453083106027523457, guid: 726f49505242ad246a0c9ffd4e681dcf, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: cfe28ce17e1e3134a8fefc8ab0bd03fe, type: 2}
     - target: {fileID: 8463662642730438739, guid: 726f49505242ad246a0c9ffd4e681dcf, type: 3}
       propertyPath: m_Name
       value: BossUnicorn

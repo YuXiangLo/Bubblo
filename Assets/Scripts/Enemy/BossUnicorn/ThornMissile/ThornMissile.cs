@@ -3,7 +3,7 @@ using UnityEngine;
 public class ThornMissile : MonoBehaviour
 {
     [SerializeField] private float Damage = 15f;
-    [SerializeField] private float ToSleep = 0.3f;
+    [SerializeField] private float ToSleep = 0.1f;
     private ThornMissileMovement ThornMissileMovement;
 
     private void Awake()
