@@ -78,7 +78,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1532617547
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6ca1108973336bb249394f0cca0e2035, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -196,6 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f2e9d10fef0f6519ba4581b3c55dbac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!114 &2975997888866370563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,19 +209,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc4d5c529fbfd581f895daef4b4f41c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 10
+  MoveSpeed: 8
   FloatingXSpeed: 10
-  Gravity: -45
   FloatingYSpeed: -2
-  JumpForce: 20
+  Gravity: -90
+  MaxFallingSpeed: -20
+  JumpForce: 18
   PlayerSize: 1
   FloatingRatio: 0.9995
   TriggerDistance: 0.001
   IsFacingRight: 1
   IsGrounded: 0
+  DefaultGravityScale: 1
+  LowGravityScale: 0.5
+  KnockbackForce: 6
   IsFloating: 0
   CanFloat: 0
+  DisableHorizontalMovement: 0
   Velocity: {x: 0, y: 0}
+  KnockbackTangent: 2
 --- !u!114 &659515783135043062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,9 +258,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BubblePrefab: {fileID: 4980627567242347800, guid: 3654957f8f0b1ce4c8724e8373053977, type: 3}
-  MinBubbleSpeed: 3
-  MaxBubbleSpeed: 10
-  MaxBubbleSize: 3
-  MinBubbleSize: 0.3
-  BubbleLifetime: 2
-  PlayerSize: 1
+  MaxMagicPoint: 10
+  IsButtonHeld: 0
+  IsAttack: 0
