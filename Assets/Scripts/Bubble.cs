@@ -43,7 +43,6 @@ public class Bubble : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
 		if(other.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
-			Debug.Log("Collision detected with " + other.gameObject.name + " on layer " + other.gameObject.layer);
 			float damage = Mathf.Lerp(MinDamage, MaxDamage, CurrentSize / MaxSize);
 			other.gameObject.GetComponent<IModifyHealth>().TakeDamage(damage);
 		}
@@ -52,7 +51,6 @@ public class Bubble : MonoBehaviour {
 		}
 
 		if(other.gameObject.layer == LayerMask.NameToLayer("Player")) {
-			Debug.Log("Collision detected with " + other.gameObject.name + " on tag " + other.tag);
 			if (IsRelease) {
 				other.gameObject.GetComponent<Player>().BubbleJump();
 				Destroy(gameObject);
