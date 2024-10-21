@@ -393,6 +393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MinXAxisPosition: 0
   MinYAxisPosition: 0
+  StopFollowingXAxisYOffset: -60
 --- !u!4 &316138753
 Transform:
   m_ObjectHideFlags: 0
@@ -2647,9 +2648,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 3393518520139551263}
+  - {fileID: 316138753}
   - {fileID: 1264317368}
   - {fileID: 1192122574}
-  - {fileID: 316138753}
   - {fileID: 2020022090}
   - {fileID: 509270214}
   - {fileID: 1308639226}
