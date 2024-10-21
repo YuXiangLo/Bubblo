@@ -8,6 +8,8 @@ public class PlayerAttack : MonoBehaviour {
     private Bubble CurrentBubble;
     private float HoldTime = 0f;
     private const float MaxHoldTime = 2f;
+	public bool IsButtonHeld = false;
+	public bool IsAttack = false;
 
     public float MagicPercentage => CurrentMagicPoint / MaxMagicPoint;
 
@@ -23,6 +25,7 @@ public class PlayerAttack : MonoBehaviour {
         if (Input.GetButtonDown("Fire1"))
         {
             Debug.Log("MagicPercentage" + MagicPercentage);
+			IsAttack = false;
             InitialBubble();
             if (MagicPercentage <= 0) {
                 StopChargingBubble();
@@ -35,6 +38,7 @@ public class PlayerAttack : MonoBehaviour {
             if (CurrentMagicPoint > 0 && HoldTime < MaxHoldTime) {
                 CurrentMagicPoint -= Time.deltaTime;
                 HoldTime += Time.deltaTime;
+				IsButtonHeld = true;
             }
             else {
                 StopChargingBubble();
@@ -44,6 +48,8 @@ public class PlayerAttack : MonoBehaviour {
         if (Input.GetButtonUp("Fire1")) {
             if (CurrentBubble != null) {
                 ReleaseBubble();
+				IsButtonHeld = false;
+				IsAttack = true;
             }
         }
     }
