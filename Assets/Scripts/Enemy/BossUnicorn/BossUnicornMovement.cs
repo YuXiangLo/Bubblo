@@ -65,10 +65,10 @@ public class BossUnicornMovement : MonoBehaviour
 
     private void AttackMovement()
     {
-        Vector3 movementDirection = Player.transform.position - transform.position;
-        RotateToMovementDirection(movementDirection);
         if (CurrentAttackCD <= 0)
         {
+            Vector3 movementDirection = Player.transform.position - transform.position;
+            RotateToMovementDirection(movementDirection);
             Attack();
             CurrentAttackCD = AttackCD;
         }
