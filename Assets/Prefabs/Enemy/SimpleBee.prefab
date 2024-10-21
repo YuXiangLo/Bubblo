@@ -44,9 +44,10 @@ GameObject:
   - component: {fileID: 5998175808526363035}
   - component: {fileID: 7788685683886947281}
   - component: {fileID: 4767073513739921205}
-  m_Layer: 0
+  - component: {fileID: 6139444164466998588}
+  m_Layer: 8
   m_Name: Bee
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -209,9 +210,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackCD: 3
-  DetectionDistance: 7
+  DetectionDistance: 4
   Speed: 2
   ApproachSpeed: 10
+  RestoreSpeed: 2
+--- !u!114 &6139444164466998588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5343885828274092577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 551bea9541a753942a2621d66e07ab73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 20
+  health: 0
 --- !u!1 &6317418766653824306
 GameObject:
   m_ObjectHideFlags: 0

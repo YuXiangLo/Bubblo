@@ -17,6 +17,7 @@ public class SimpleBeeMovement : MonoBehaviour
 
     [SerializeField] private float Speed = 2f;
     [SerializeField] private float ApproachSpeed = 10f;
+    [SerializeField] private float RestoreSpeed = 3f;
 
     private void Start()
     {
@@ -53,7 +54,8 @@ public class SimpleBeeMovement : MonoBehaviour
     
     private void AttackMovement()
     {
-        NextPosition = Vector2.MoveTowards(transform.position, Target, ApproachSpeed * Time.deltaTime);
+        float speed = IsApproaching ? ApproachSpeed : RestoreSpeed;
+        NextPosition = Vector2.MoveTowards(transform.position, Target, speed * Time.deltaTime);
         RotateToMovementDirection();
         transform.position = NextPosition;
         if (Vector2.Distance(transform.position, Target) < 0.1f)
