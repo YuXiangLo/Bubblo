@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2185424014257446282}
   - component: {fileID: 7657923587547132557}
   - component: {fileID: 5711570723307525920}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Thorny
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 10
+  ToSleep: 0.3
 --- !u!60 &5711570723307525920
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -176,9 +177,9 @@ GameObject:
   - component: {fileID: 8302127994563282631}
   - component: {fileID: 1452368293699659156}
   - component: {fileID: 5876611879287269624}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Unicorn
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -388,6 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  health: 0
 --- !u!1 &8870990994026689457
 GameObject:
   m_ObjectHideFlags: 0
