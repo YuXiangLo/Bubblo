@@ -8,10 +8,13 @@ public class BossUnicornMovement : MonoBehaviour
 
     private Player Player;
 
-
-    [SerializeField] private float DetectionRange = 5f;
+    [SerializeField] private GameObject ThornMissilePrefab;
+    [SerializeField] private float SprintRange = 7f;
+    [SerializeField] private float AttackRange = 4f;
     [SerializeField] private float Speed = 2f;
     [SerializeField] private float SprintSpeed = 4f;
+    [SerializeField] private float AttackCD = 2f;
+    [SerializeField] private float CurrentAttackCD = 0f;
     
 
     private void Start()
@@ -24,10 +27,13 @@ public class BossUnicornMovement : MonoBehaviour
 
     public void HandleMovement()
     {
-        Debug.Log("DetectPlayer: " + DetectPlayer());
-        if (DetectPlayer())
+        if (DetectPlayer(AttackRange))
         {
             AttackMovement();
+        }
+        else if (DetectPlayer(SprintRange))
+        {
+            SprintMovement();
         }
         else
         {
@@ -50,16 +56,31 @@ public class BossUnicornMovement : MonoBehaviour
         }
     }
 
+    private void SprintMovement()
+    {
+        Vector3 movementDirection = new(Player.transform.position.x - transform.position.x, 0, 0);
+        RotateToMovementDirection(movementDirection);
+        transform.position = Vector2.MoveTowards(transform.position, transform.position + movementDirection, SprintSpeed * Time.deltaTime);
+    }
+
     private void AttackMovement()
     {
         Vector3 movementDirection = Player.transform.position - transform.position;
         RotateToMovementDirection(movementDirection);
-        transform.position = Vector2.MoveTowards(transform.position, Target, SprintSpeed * Time.deltaTime);
+        if (CurrentAttackCD <= 0)
+        {
+            Attack();
+            CurrentAttackCD = AttackCD;
+        }
+        else
+        {
+            CurrentAttackCD -= Time.deltaTime;
+        }
     }
 
-    private bool DetectPlayer()
+    private bool DetectPlayer(float detectionRange)
     {
-        return Vector2.Distance(transform.position, Player.transform.position) < DetectionRange;
+        return Vector2.Distance(transform.position, Player.transform.position) < detectionRange;
     }
 
     private void RotateToMovementDirection(Vector3 movementDirection)
@@ -81,5 +102,11 @@ public class BossUnicornMovement : MonoBehaviour
         Vector3 localScale = transform.localScale;
         localScale.x *= -1;
         transform.localScale = localScale;
+    }
+
+    private void Attack()
+    {
+        GameObject thornMissile = Instantiate(ThornMissilePrefab, transform.position, Quaternion.identity);
+        thornMissile.GetComponent<ThornMissileMovement>().SetDirection(Player.transform.position - transform.position);
     }
 }
