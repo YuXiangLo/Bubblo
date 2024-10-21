@@ -12,9 +12,14 @@ public class BossUnicornMovement : MonoBehaviour
     [SerializeField] private float SprintRange = 7f;
     [SerializeField] private float AttackRange = 4f;
     [SerializeField] private float Speed = 2f;
+    
     [SerializeField] private float SprintSpeed = 4f;
+
     [SerializeField] private float AttackCD = 2f;
     [SerializeField] private float CurrentAttackCD = 0f;
+
+    public bool IsSprinting => DetectPlayer(SprintRange) && !DetectPlayer(AttackRange);
+    public bool IsAttacking => DetectPlayer(AttackRange);
     
 
     private void Start()
