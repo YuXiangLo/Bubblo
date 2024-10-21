@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 15
-  ToSleep: 1
+  ToSleep: 0.3
 --- !u!114 &5512896462632219332
 MonoBehaviour:
   m_ObjectHideFlags: 0
