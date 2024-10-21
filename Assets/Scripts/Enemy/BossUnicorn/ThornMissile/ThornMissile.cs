@@ -3,6 +3,7 @@ using UnityEngine;
 public class ThornMissile : MonoBehaviour
 {
     [SerializeField] private float Damage = 15f;
+    [SerializeField] private float ToSleep = 0.3f;
     private ThornMissileMovement ThornMissileMovement;
 
     private void Awake()
@@ -16,12 +17,21 @@ public class ThornMissile : MonoBehaviour
         ThornMissileMovement.HandleMovement();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.CompareTag("Player"))
+        var colliderObject = other.gameObject;
+        if (colliderObject.CompareTag("Player"))
         {
-            other.GetComponent<IModifyHealth>().TakeDamage(Damage);
-            Destroy(gameObject);
+            if (colliderObject.TryGetComponent<IModifyHealth>(out var playerHealth))
+            {
+                playerHealth.TakeDamage(Damage);
+            }
+            if (colliderObject.TryGetComponent<IKnockback>(out var playerKnockback))
+			{
+				Vector2 knockbackDirection = other.GetContact(0).normal;
+				playerKnockback.Knockback(knockbackDirection, ToSleep);
+			}
         }
+        Destroy(gameObject);
     }
 }
