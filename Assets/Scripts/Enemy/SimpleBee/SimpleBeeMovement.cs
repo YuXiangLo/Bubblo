@@ -2,50 +2,82 @@ using UnityEngine;
 
 public class SimpleBeeMovement : MonoBehaviour
 {
-    private Transform PlayerTransform;
+    private Player Player;
     private Transform LeftPoint, RightPoint;
-    private Vector3 Target;
+    private Vector3 DefaultTarget;
     private Vector3 NextPosition;
-    private bool DefaultMovement = true;
-    private bool FacingRight = true;
-    [SerializeField] private float DetectionDistance = 5f;
+    private bool FacingLeft = true;
+    private float CurrentAttackCD = 0f;
+    private bool IsAttacking = false;
+    private bool IsApproaching = true;
+    private Vector3 Target;
+    private Vector3 RestoredPosition;
+    [SerializeField] private float AttackCD = 3f;
+    [SerializeField] private float DetectionDistance = 7f;
 
-    public float speed = 2f;
+    [SerializeField] private float Speed = 2f;
+    [SerializeField] private float ApproachSpeed = 10f;
+
     private void Start()
     {
-        PlayerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         LeftPoint = transform.parent.Find("LeftPoint");
         RightPoint = transform.parent.Find("RightPoint");
-        Target = LeftPoint.position;
+        DefaultTarget = LeftPoint.position;
     }
 
     public void HandleMovement()
     {
-        if (DetectPlayer())
-            ApproachPlayer();
-        if (DefaultMovement)
-            DefaultMove();
-        Move();
+        if (DetectPlayer() && CurrentAttackCD <= 0f)
+        {
+            IsApproaching = true;
+            IsAttacking = true;
+            Target = Player.transform.position;
+            RestoredPosition = transform.position;
+            CurrentAttackCD = AttackCD;
+        }
+        if (CurrentAttackCD > 0f)
+        {
+            CurrentAttackCD -= Time.deltaTime;
+        }
+
+        if (IsAttacking)
+        {
+            AttackMovement();
+        }
+        else
+        {
+            DefaultMovement();
+        }
     }
     
-    private void ApproachPlayer()
+    private void AttackMovement()
     {
-        DefaultMovement = false;
-        NextPosition = Vector2.MoveTowards(transform.position, PlayerTransform.position, speed * Time.deltaTime);
-    }
-
-    private void DefaultMove()
-    {
-        // Move enemy towards the target
-        NextPosition = Vector2.MoveTowards(transform.position, Target, speed * Time.deltaTime);
-
-        // Switch target when reaching the point
+        transform.position = Vector2.MoveTowards(transform.position, Target, ApproachSpeed * Time.deltaTime);
         if (Vector2.Distance(transform.position, Target) < 0.1f)
         {
-            if (Target == LeftPoint.position)
-                Target = RightPoint.position;
+            Target = RestoredPosition;
+            IsApproaching = false;
+        }
+        if (!IsApproaching && Vector2.Distance(transform.position, RestoredPosition) < 0.1f)
+        {
+            IsAttacking = false;
+            transform.position = RestoredPosition;
+        }
+    }
+
+    private void DefaultMovement()
+    {
+        // Move enemy towards the target
+        NextPosition = Vector2.MoveTowards(transform.position, DefaultTarget, Speed * Time.deltaTime);
+
+        // Switch target when reaching the point
+        if (Vector2.Distance(transform.position, DefaultTarget) < 0.1f)
+        {
+            if (DefaultTarget == LeftPoint.position)
+                DefaultTarget = RightPoint.position;
             else
-                Target = LeftPoint.position;
+                DefaultTarget = LeftPoint.position;
         }
     }
     
@@ -53,11 +85,11 @@ public class SimpleBeeMovement : MonoBehaviour
     {
         transform.position = NextPosition;
         Vector3 movementDirection = NextPosition - transform.position;
-        if (movementDirection.x > 0 && !FacingRight)
+        if (movementDirection.x > 0 && !FacingLeft)
         {
             Flip();
         }
-        else if (movementDirection.x < 0 && FacingRight)
+        else if (movementDirection.x < 0 && FacingLeft)
         {
             Flip();
         }
@@ -66,7 +98,7 @@ public class SimpleBeeMovement : MonoBehaviour
     private void Flip()
     {
         // Toggle the facing direction
-        FacingRight = !FacingRight;
+        FacingLeft = !FacingLeft;
 
         // Flip the enemy's sprite by scaling in the X axis
         Vector3 localScale = transform.localScale;
@@ -76,7 +108,6 @@ public class SimpleBeeMovement : MonoBehaviour
 
     private bool DetectPlayer()
     {
-        float distance = Vector2.Distance(transform.position, PlayerTransform.position);
-        return distance < DetectionDistance;
+        return Vector2.Distance(transform.position, Player.transform.position) < DetectionDistance;
     }
 }
