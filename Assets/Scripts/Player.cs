@@ -40,13 +40,16 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 			PlayerMovement.HandleMovement();
 			PlayerAttack.HandleAttack();
 		}
+# if UNITY_EDITOR
         TestHealthModification();
+# endif
         animator.SetFloat("Speed", PlayerMovement.Speed);
         animator.SetBool("IsFloating", !IsGrounded);
         animator.SetBool("IsHoldingBubble", IsBubbleHeld);
 		animator.SetBool("IsAttack", IsAttack);
     }
 
+# if UNITY_EDITOR
     /// <summary>
     /// Test method to simulate health modification
     /// </summary>
@@ -66,5 +69,6 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
             Debug.Log("Player healed 10 health");
         }
     }
+# endif
 }
 
