@@ -119,9 +119,7 @@ public class PlayerMovement : MonoBehaviour {
 		Velocity.x = (knockbackDirection.x > 0) ? -KnockbackForce : KnockbackForce;
 		Velocity.y = KnockbackTangent * KnockbackForce;
 
-		Debug.Log("Disable Movement");
 		yield return new WaitForSeconds(toSleep);
 		DisableHorizontalMovement = false;
-		Debug.Log("Enable Movement");
 	}
 }

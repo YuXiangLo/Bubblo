@@ -6,7 +6,8 @@ public class SimpleUnicornMovement : MonoBehaviour
     private Vector3 Target;
     private bool FacingLeft = true;
 
-    public float Speed = 2f;
+    [SerializeField] private float Speed = 2f;
+
     private void Start()
     {
         LeftPoint = transform.parent.Find("LeftPoint");
@@ -63,3 +64,5 @@ public class SimpleUnicornMovement : MonoBehaviour
         transform.localScale = localScale;
     }
 }
+
+
