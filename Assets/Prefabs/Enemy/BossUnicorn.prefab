@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6225692117154526234}
   - component: {fileID: 7969056583273579593}
   - component: {fileID: 9209253751955701177}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Thorny
-  m_TagString: Untagged
+  m_TagString: Thorn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,9 +115,9 @@ GameObject:
   - component: {fileID: 3421848287207616558}
   - component: {fileID: 4366988785758189438}
   - component: {fileID: 1750025013907168733}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Unicorn
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
