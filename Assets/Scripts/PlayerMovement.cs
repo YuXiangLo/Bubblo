@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour {
     public bool IsGrounded = false;
     public float DefaultGravityScale = 1f;
     public float LowGravityScale = 0.5f;
+	public Vector2 Velocity = Vector2.zero;
 
     private float GravityScale;
     private Camera MainCamera;
@@ -24,7 +25,6 @@ public class PlayerMovement : MonoBehaviour {
 	[SerializeField] private bool IsFloating = false;
 	[SerializeField] private bool CanFloat = false;
 	[SerializeField] private bool DisableHorizontalMovement = false;
-	[SerializeField] private Vector2 Velocity = Vector2.zero;
 	[SerializeField] private float KnockbackTangent = 2f;
 
     public float Speed {get => Mathf.Abs(Velocity.x);}

@@ -44,7 +44,8 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         TestHealthModification();
 # endif
         animator.SetFloat("Speed", PlayerMovement.Speed);
-        animator.SetBool("IsFloating", !IsGrounded);
+        animator.SetBool("IsFall", !IsGrounded && PlayerMovement.Velocity.y < 0);
+		animator.SetBool("IsJump", !IsGrounded && PlayerMovement.Velocity.y >= 0);
         animator.SetBool("IsHoldingBubble", IsBubbleHeld);
 		animator.SetBool("IsAttack", IsAttack);
     }
