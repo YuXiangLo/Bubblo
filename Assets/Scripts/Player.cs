@@ -66,5 +66,11 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
             Debug.Log("Player healed 10 health");
         }
     }
+
+    public void Die()
+    {
+        Debug.Log("Player has died!");
+        GameManager.Instance.GameOver();
+    }
 }
 

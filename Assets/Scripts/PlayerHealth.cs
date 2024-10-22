@@ -27,7 +27,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (CurrentHealth <= 0)
         {
-            Die();  // Trigger death if health is zero
+            GetComponent<Player>().Die();
         }
     }
 
@@ -37,12 +37,6 @@ public class PlayerHealth : MonoBehaviour
         CurrentHealth += amount;
         CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
         OnHealthChanged.Invoke(CurrentHealth / MaxHealth);  // Notify about the health change
-    }
-
-    private void Die()
-    {
-        // Handle player death (e.g., disable movement, show game over screen, etc.)
-        Debug.Log("Player has died!");
     }
 }
 
