@@ -18,6 +18,8 @@ public class CameraFollow : MonoBehaviour
                 Mathf.Max(LevelData.MinXAxisPosition, Player.position.x) + Offset.x,
                 Mathf.Max(LevelData.MinYAxisPosition, Player.position.y) + Offset.y,
                 transform.position.z);
+
+			desiredPosition.x = Mathf.Min(desiredPosition.x, LevelData.MaxXAxisPosition);
                 
             Vector3 smoothedPosition = Vector3.Lerp(
                 transform.position, desiredPosition, SmoothSpeed);
