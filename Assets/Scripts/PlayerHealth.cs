@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -42,6 +43,7 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         // Handle player death (e.g., disable movement, show game over screen, etc.)
+        SceneManager.LoadScene("Start");
         Debug.Log("Player has died!");
     }
 }
