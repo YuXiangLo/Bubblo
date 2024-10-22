@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Bubble : MonoBehaviour
@@ -22,6 +23,7 @@ public class Bubble : MonoBehaviour
 	private float CurrentSize => Mathf.Lerp(MinSize, MaxSize, ChargingTime / MaxChargingTime);
     private float ReleaseSpeed => Mathf.Lerp(MaxSpeed, MinSpeed, ChargingTime / MaxChargingTime);
     private Rigidbody2D rb;
+	private List<string> IgnoreTags = new List<string> {"Player", "Bubble", "Door"};
 
     private void Awake()
     {
@@ -50,7 +52,16 @@ public class Bubble : MonoBehaviour
 			float damage = Mathf.Lerp(MinDamage, MaxDamage, CurrentSize / MaxSize);
 			other.gameObject.GetComponent<IModifyHealth>().TakeDamage(damage);
 		}
-		if(!other.gameObject.CompareTag("Player") && !other.gameObject.CompareTag("Bubble")) {
+
+		bool shouldDestroy = true;
+		foreach (string tag in IgnoreTags) {
+			if (other.gameObject.CompareTag(tag)) {
+				shouldDestroy = false;
+				break;
+			}
+		}	
+
+		if (shouldDestroy) {
 			Destroy(gameObject);
 		}
 
