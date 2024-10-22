@@ -1,31 +1,29 @@
 using UnityEngine;
 
-public class SimpleBee : MonoBehaviour, IModifyHealth, IHealthPercentage
+public class SimpleBee : MonoBehaviour, IModifyHealth
 {
-    private SimpleBeeMovement SimpleBeeMovement;
-    private EnemyHealth SimpleBeeHealth;
-
-    public float HealthPercentage { get => SimpleBeeHealth.HealthPercentage; }
+    private SimpleBeeMovement Movement;
+    private EnemyHealth Health;
 
     private void Awake()
     {
-        SimpleBeeMovement = GetComponent<SimpleBeeMovement>();
-        SimpleBeeHealth = GetComponent<EnemyHealth>();
+        Movement = GetComponent<SimpleBeeMovement>();
+        Health = GetComponent<EnemyHealth>();
     }
 
     private void Update()
     {
-        if (SimpleBeeMovement.enabled)
-            SimpleBeeMovement.HandleMovement();
+        if (Movement.enabled)
+            Movement.HandleMovement();
     }
 
     public void Heal(float amount)
     {
-        SimpleBeeHealth.Heal(amount);
+        Health.Heal(amount);
     }
 
     public void TakeDamage(float amount)
     {
-        SimpleBeeHealth.TakeDamage(amount);
+        Health.TakeDamage(amount);
     }
 }

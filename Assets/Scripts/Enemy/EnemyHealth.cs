@@ -13,6 +13,7 @@ public class EnemyHealth : MonoBehaviour, IHealthPercentage, IModifyHealth
 
     public void TakeDamage(float amount)
     {
+        Debug.Log("Enemy took " + amount + " damage");
         health -= amount;
         if (health <= 0)
         {
