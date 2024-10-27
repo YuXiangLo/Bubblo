@@ -33,6 +33,15 @@ public class PlayerMovement : MonoBehaviour {
         Rigidbody2D = GetComponent<Rigidbody2D>();
 		Rigidbody2D.freezeRotation = true;
         MainCamera = Camera.main;
+
+        PhysicsMaterial2D noFrictionMaterial = new PhysicsMaterial2D("NoFriction");
+        noFrictionMaterial.friction = 0f;
+        noFrictionMaterial.bounciness = 0f;
+
+        Collider2D collider = GetComponent<Collider2D>();
+        if (collider != null) {
+            collider.sharedMaterial = noFrictionMaterial;
+        }   
     }
 
     // Movement logic
