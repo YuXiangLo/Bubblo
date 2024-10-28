@@ -52,7 +52,6 @@ public class PlayerMovement : MonoBehaviour {
     private void FixedUpdate() {
 		Rigidbody2D.MovePosition(Rigidbody2D.position + Velocity * Time.fixedDeltaTime);
 		FloatingXSpeed = IsGrounded ? MoveSpeed : FloatingXSpeed;
-
 	}
 
     private void FloatingMovementDetect() {
