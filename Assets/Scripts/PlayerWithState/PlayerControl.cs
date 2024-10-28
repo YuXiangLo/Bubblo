@@ -17,6 +17,12 @@ public class PlayerControl : MonoBehaviour
     private PlayerHealth PlayerHealth;
     private Camera MainCamera;
 
+    public void ChangePlayerMovementState(IPlayerMovementState newPlayerMovementState)
+    {
+        PlayerMovementState = newPlayerMovementState;
+        PlayerMovementState.HandleMovement();
+    }
+
     public void Heal(float amount) {
         PlayerHealth.Heal(amount);
     }
@@ -31,8 +37,7 @@ public class PlayerControl : MonoBehaviour
     }
 
     public void Knockback(Vector2 knockbackDirection, float toSleep) {
-        PlayerMovementState = new PlayerMovementKnockBackState(this, PlayerData, knockbackDirection, toSleep);
-		PlayerMovementState.HandleMovement();
+        ChangePlayerMovementState(new PlayerMovementKnockBackState(this, PlayerData, knockbackDirection, toSleep));
 	}
 
     private void Start()

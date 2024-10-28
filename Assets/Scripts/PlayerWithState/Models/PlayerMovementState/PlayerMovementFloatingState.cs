@@ -18,8 +18,7 @@ public class PlayerMovementFloatingState : IPlayerMovementState
     {
         if (Input.GetButtonUp("Jump"))
         {
-            PlayerControl.PlayerMovementState = new PlayerMovementFallingState(PlayerControl, PlayerData);
-            PlayerControl.PlayerMovementState.HandleMovement();
+            PlayerControl.ChangePlayerMovementState(new PlayerMovementFallingState(PlayerControl, PlayerData));
         }
         else if (Input.GetButton("Jump"))
         {

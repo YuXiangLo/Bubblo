@@ -21,8 +21,7 @@ public class PlayerMovementJumpingState: IPlayerMovementState
         }
         else
         {
-            PlayerControl.PlayerMovementState = new PlayerMovementFallingState(PlayerControl, PlayerData);
-            PlayerControl.PlayerMovementState.HandleMovement();
+            PlayerControl.ChangePlayerMovementState(new PlayerMovementFallingState(PlayerControl, PlayerData));
         }
     }
 

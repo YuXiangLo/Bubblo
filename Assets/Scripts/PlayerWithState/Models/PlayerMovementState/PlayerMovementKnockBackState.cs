@@ -32,8 +32,7 @@ public class PlayerMovementKnockBackState : IPlayerMovementState
 		PlayerControl.Velocity.y = PlayerData.KnockbackTangent * PlayerData.KnockbackForce;
 
 		yield return new WaitForSeconds(toSleep);
-        PlayerControl.PlayerMovementState = new PlayerMovementInitialState(PlayerControl, PlayerData);
-        PlayerControl.PlayerMovementState.HandleMovement();
+        PlayerControl.ChangePlayerMovementState(new PlayerMovementInitialState(PlayerControl, PlayerData));
     }
     
 }

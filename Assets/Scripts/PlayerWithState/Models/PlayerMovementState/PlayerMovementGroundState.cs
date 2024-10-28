@@ -23,13 +23,11 @@ public class PlayerMovementGroundState : IPlayerMovementState
         }
         else if (PlayerControl.Velocity.y > 0)
         {
-            PlayerControl.PlayerMovementState = new PlayerMovementJumpingState(PlayerControl, PlayerData);
-            PlayerControl.PlayerMovementState.HandleMovement();
+            PlayerControl.ChangePlayerMovementState(new PlayerMovementJumpingState(PlayerControl, PlayerData));
         }
         else
         {
-            PlayerControl.PlayerMovementState = new PlayerMovementFallingState(PlayerControl, PlayerData);
-            PlayerControl.PlayerMovementState.HandleMovement();
+            PlayerControl.ChangePlayerMovementState(new PlayerMovementFallingState(PlayerControl, PlayerData));
         }
     }
 

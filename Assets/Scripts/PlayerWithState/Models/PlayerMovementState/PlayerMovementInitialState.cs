@@ -13,13 +13,11 @@ public class PlayerMovementInitialState: IPlayerMovementState
     {
         if (PlayerControl.IsGrounded)
         {
-            PlayerControl.PlayerMovementState = new PlayerMovementGroundState(PlayerControl, PlayerData);
-            PlayerControl.PlayerMovementState.HandleMovement();
+            PlayerControl.ChangePlayerMovementState(new PlayerMovementGroundState(PlayerControl, PlayerData));
         }
         else 
         {
-            PlayerControl.PlayerMovementState = new PlayerMovementFallingState(PlayerControl, PlayerData);
-            PlayerControl.PlayerMovementState.HandleMovement();
+            PlayerControl.ChangePlayerMovementState(new PlayerMovementFallingState(PlayerControl, PlayerData));
         }
     }
 

@@ -17,18 +17,15 @@ public class PlayerMovementFallingState: IPlayerMovementState
     {
         if (PlayerControl.IsGrounded)
         {
-            PlayerControl.PlayerMovementState = new PlayerMovementGroundState(PlayerControl, PlayerData);
-            PlayerControl.PlayerMovementState.HandleMovement();
+            PlayerControl.ChangePlayerMovementState(new PlayerMovementGroundState(PlayerControl, PlayerData));
         }
         else if (PlayerControl.Velocity.y > 0f)
         {
-            PlayerControl.PlayerMovementState = new PlayerMovementJumpingState(PlayerControl, PlayerData);
-            PlayerControl.PlayerMovementState.HandleMovement();
+            PlayerControl.ChangePlayerMovementState(new PlayerMovementJumpingState(PlayerControl, PlayerData));
         }
         else if (Input.GetButtonDown("Jump"))
         {
-            PlayerControl.PlayerMovementState = new PlayerMovementFloatingState(PlayerControl, PlayerData);
-            PlayerControl.PlayerMovementState.HandleMovement();
+            PlayerControl.ChangePlayerMovementState(new PlayerMovementFloatingState(PlayerControl, PlayerData));
         }
         else 
         {
@@ -51,7 +48,7 @@ public class PlayerMovementFallingState: IPlayerMovementState
         // Limit Falling Speed
         PlayerControl.Velocity.y = Mathf.Max(PlayerControl.Velocity.y, PlayerData.MaxFallingSpeed);
     }
-    
+
 }
 
 
