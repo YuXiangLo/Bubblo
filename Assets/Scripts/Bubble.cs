@@ -12,7 +12,6 @@ public class Bubble : MonoBehaviour
     [SerializeField] private float MinDamage = 3f;
     [SerializeField] private float MaxDamage = 30f;
 
-    private Player Player;
     private PlayerMovement PlayerMovement;
     private float PlayerSize = 1f;
 
@@ -27,8 +26,7 @@ public class Bubble : MonoBehaviour
 
     private void Awake()
     {
-        Player = FindObjectOfType<Player>();
-        PlayerMovement = Player.GetComponent<PlayerMovement>();
+        PlayerMovement = FindObjectOfType<PlayerMovement>();
         rb = GetComponent<Rigidbody2D>();
         transform.localScale = Vector3.one * MinSize;
         rb.velocity = Vector2.zero;
@@ -92,7 +90,7 @@ public class Bubble : MonoBehaviour
     }
     private void UpdatePosition()
     {
-        transform.position = Player.transform.position + CalculateBubblePosition();
+        transform.position = PlayerMovement.transform.position + CalculateBubblePosition();
     }
 
 	private Vector3 CalculateBubblePosition()
