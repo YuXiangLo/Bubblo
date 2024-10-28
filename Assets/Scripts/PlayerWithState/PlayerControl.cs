@@ -6,7 +6,7 @@ public class PlayerControl : MonoBehaviour
 {
     // Player Movement
     public bool IsGrounded = false;
-    public bool IsFacingRight = true;
+    public bool IsFacingRight => Velocity.x > 0f;
     public Vector2 Velocity = Vector2.zero;
     public float Speed {get => Mathf.Abs(Velocity.x);}
     public IPlayerMovementState PlayerMovementState;
@@ -69,13 +69,18 @@ public class PlayerControl : MonoBehaviour
     }
 
     private void DetectFaceSide() {
-		if (Velocity.x > 0 && !IsFacingRight 
-                || Velocity.x < 0 && IsFacingRight) {
-			IsFacingRight = !IsFacingRight;
-			Vector3 currentScale = transform.localScale;
-			currentScale.x *= -1;
-			transform.localScale = currentScale;
-		}
+        Vector3 currentScale = transform.localScale;
+        var scale = Mathf.Abs(currentScale.x);
+        currentScale.x = (IsFacingRight ? 1 : -1) * scale;
+        transform.localScale = currentScale;
+        
+		// if (Velocity.x > 0 && !IsFacingRight 
+        //         || Velocity.x < 0 && IsFacingRight) {
+		// 	IsFacingRight = !IsFacingRight;
+		// 	Vector3 currentScale = transform.localScale;
+		// 	currentScale.x *= -1;
+		// 	transform.localScale = currentScale;
+		// }
 	}
 
     private void RestrictPlayerWithinCamera() {
