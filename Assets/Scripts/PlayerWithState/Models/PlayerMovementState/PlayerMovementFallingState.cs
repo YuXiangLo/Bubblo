@@ -37,13 +37,13 @@ public class PlayerMovementFallingState: IPlayerMovementState
         }
     }
 
-    public void DetectHorizontalMovement()
+    private void DetectHorizontalMovement()
     {
         var horizontalInput = Input.GetAxisRaw("Horizontal");
         PlayerControl.Velocity.x = horizontalInput * PlayerData.MoveSpeed;
     }
 
-    public void ApplyGravity()
+    private void ApplyGravity()
     {
         var gravityScale = Input.GetButton("Jump") ? PlayerData.LowGravityScale : PlayerData.DefaultGravityScale;
         PlayerControl.Velocity.y += PlayerData.Gravity * gravityScale * Time.deltaTime;
@@ -51,21 +51,7 @@ public class PlayerMovementFallingState: IPlayerMovementState
         // Limit Falling Speed
         PlayerControl.Velocity.y = Mathf.Max(PlayerControl.Velocity.y, PlayerData.MaxFallingSpeed);
     }
-
-    public void Knockback(Vector2 knockbackDirection, float toSleep)
-    {
-        
-    }
-
-    public IEnumerator KnockbackCoroutine(Vector2 knockbackDirection, float toSleep)
-    {
-        yield return new Exception();
-    }
-
-    public void BubbleJump()
-    {
-        PlayerControl.Velocity.y = PlayerData.JumpForce;
-    }
+    
 }
 
 

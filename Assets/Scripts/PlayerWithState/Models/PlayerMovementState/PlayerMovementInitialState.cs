@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using UnityEngine;
-
 public class PlayerMovementInitialState: IPlayerMovementState
 {
     public PlayerControl PlayerControl { get; }
@@ -27,35 +23,6 @@ public class PlayerMovementInitialState: IPlayerMovementState
         }
     }
 
-    public void DetectHorizontalMovement()
-    {
-        // Should not be called
-        return;
-    }
-
-    public void ApplyGravity()
-    {
-        // Should not be called
-        return;
-    }
-
-    public void Knockback(Vector2 knockbackDirection, float toSleep)
-    {
-        // Should not be called
-        return;
-    }
-
-    public IEnumerator KnockbackCoroutine(Vector2 knockbackDirection, float toSleep)
-    {
-        // Should not be called
-        yield return null;
-    }
-
-    public void BubbleJump()
-    {
-        // Should not be called
-        return;
-    }
 }
 
 

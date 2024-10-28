@@ -28,31 +28,17 @@ public class PlayerMovementFloatingState : IPlayerMovementState
         }
     }
 
-    public void DetectHorizontalMovement()
+    private void DetectHorizontalMovement()
     {
         PlayerControl.Velocity.x *= PlayerData.FloatingRatio;
     }
 
-    public void ApplyGravity()
+    private void ApplyGravity()
     {
         PlayerControl.Velocity.y = Mathf.Max(
             PlayerControl.Velocity.y + PlayerData.Gravity * PlayerData.LowGravityScale * Time.deltaTime,
             PlayerData.FloatingYSpeed);
     }
-
-    public void Knockback(Vector2 knockbackDirection, float toSleep)
-    {
-
-    }
-
-    public IEnumerator KnockbackCoroutine(Vector2 knockbackDirection, float toSleep)
-    {
-        yield return new Exception();
-    }
-
-    public void BubbleJump()
-    {
-
-    }
+    
 }
 

@@ -33,38 +33,24 @@ public class PlayerMovementGroundState : IPlayerMovementState
         }
     }
 
-    public void DetectJumpMovement()
+    private void DetectJumpMovement()
     {
-        if (Input.GetButtonDown("Jump")) {
+        if (Input.GetButtonDown("Jump"))
+        {
             PlayerControl.Velocity.y = PlayerData.JumpForce;
-			PlayerControl.CanFloat = false;
         }
     }
 
-    public void DetectHorizontalMovement()
+    private void DetectHorizontalMovement()
     {
         var horizontalInput = Input.GetAxisRaw("Horizontal");
         PlayerControl.Velocity.x = horizontalInput * PlayerData.MoveSpeed;
     }
 
-    public void ApplyGravity()
+    private void ApplyGravity()
     {
         PlayerControl.Velocity.y = Mathf.Max(PlayerControl.Velocity.y, 0f);
     }
 
-    public void Knockback(Vector2 knockbackDirection, float toSleep)
-    {
-        return;
-    }
-
-    public IEnumerator KnockbackCoroutine(Vector2 knockbackDirection, float toSleep)
-    {
-        return null;
-    }
-
-    public void BubbleJump()
-    {
-        PlayerControl.Velocity.y = PlayerData.JumpForce;
-    }
 }
 
