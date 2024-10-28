@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerData
+public class PlayerData : MonoBehaviour
 {
     public float MoveSpeed = 8f;
 	public float FloatingXSpeed = 12f;
