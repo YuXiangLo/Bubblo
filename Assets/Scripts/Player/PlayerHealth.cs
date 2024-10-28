@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour, IHealthPercentage
 {
     public float MaxHealth = 100f;
     public float CurrentHealth;
 
-    public float HealthPercentage { get => CurrentHealth / MaxHealth; }
+    public float HealthPercentage => CurrentHealth / MaxHealth; 
 
     private void Start()
     {

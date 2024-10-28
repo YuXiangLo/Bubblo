@@ -8,18 +8,19 @@ public class PlayerMovement : MonoBehaviour {
     public float Gravity = -90f;
     public float MaxFallingSpeed = -20f;
     public float JumpForce = 18f;
-    public float PlayerSize = 1f; 
+    public float PlayerSize = 1f;
 	public float FloatingRatio = 0.9995f;
 	public float TriggerDistance = 0.001f;
-	public bool IsFacingRight = true;
-    public bool IsGrounded = false;
     public float DefaultGravityScale = 1f;
     public float LowGravityScale = 0.5f;
+	public bool IsFacingRight = true;
+    public bool IsGrounded = false;
 	public Vector2 Velocity = Vector2.zero;
 
-    private float GravityScale;
+    private IPlayerMovementState State;
     private Camera MainCamera;
     private Rigidbody2D Rigidbody2D;
+    private float GravityScale;
 
 	[SerializeField] private float KnockbackForce = 6f;
 	[SerializeField] private bool IsFloating = false;
@@ -35,10 +36,16 @@ public class PlayerMovement : MonoBehaviour {
         MainCamera = Camera.main;
     }
 
+    private void FixedUpdate() {
+		Rigidbody2D.MovePosition(Rigidbody2D.position + Velocity * Time.fixedDeltaTime);
+		FloatingXSpeed = IsGrounded ? MoveSpeed : FloatingXSpeed;
+	}
+
     // Movement logic
     public void HandleMovement() {
 		IsGrounded = Rigidbody2D.Raycast(Vector2.down, new Vector2(PlayerSize, PlayerSize), TriggerDistance);
-		FloatingMovementDetect();
+		GravityScale =  Input.GetButton("Jump") ? LowGravityScale : DefaultGravityScale;
+        FloatingMovementDetect();
 		if (!DisableHorizontalMovement)
 			HorizontalMovementDetect();
 		if (IsGrounded) 
@@ -46,20 +53,12 @@ public class PlayerMovement : MonoBehaviour {
 		FaceSideDetect();
 		ApplyGravity();
 		RestrictPlayerWithinCamera();
-
-	}
-
-    private void FixedUpdate() {
-		Rigidbody2D.MovePosition(Rigidbody2D.position + Velocity * Time.fixedDeltaTime);
-		FloatingXSpeed = IsGrounded ? MoveSpeed : FloatingXSpeed;
-
 	}
 
     private void FloatingMovementDetect() {
 		if (Velocity.y < 0f && Input.GetButtonDown("Jump"))
 			CanFloat = true;
 		IsFloating = Input.GetButton("Jump")  && CanFloat;
-        GravityScale =  Input.GetButton("Jump") ? LowGravityScale : DefaultGravityScale;
 	}
 
     private void HorizontalMovementDetect() {

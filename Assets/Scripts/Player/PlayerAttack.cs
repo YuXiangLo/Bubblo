@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour {
+public class PlayerAttack : MonoBehaviour, IMagicPercentage 
+{
     [SerializeField] private GameObject BubblePrefab;
     [SerializeField] private float MaxMagicPoint = 10f;
 

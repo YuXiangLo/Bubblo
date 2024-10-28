@@ -13,7 +13,7 @@ public class Bubble : MonoBehaviour
     [SerializeField] private float MaxDamage = 30f;
 
     private Player Player;
-    private bool PlayerFacingRight => Player.IsFacingRight;
+    private PlayerMovement PlayerMovement;
     private float PlayerSize = 1f;
 
     private bool IsCharging = true;
@@ -28,6 +28,7 @@ public class Bubble : MonoBehaviour
     private void Awake()
     {
         Player = FindObjectOfType<Player>();
+        PlayerMovement = Player.GetComponent<PlayerMovement>();
         rb = GetComponent<Rigidbody2D>();
         transform.localScale = Vector3.one * MinSize;
         rb.velocity = Vector2.zero;
@@ -81,7 +82,7 @@ public class Bubble : MonoBehaviour
     public void Release()
     {
         IsRelease = true;
-        rb.velocity = new(ReleaseSpeed * (PlayerFacingRight ? 1 : -1), 0);
+        rb.velocity = new(ReleaseSpeed * (PlayerMovement.IsFacingRight ? 1 : -1), 0);
         Destroy(gameObject, LifeTime);
     }
 
@@ -97,7 +98,7 @@ public class Bubble : MonoBehaviour
 	private Vector3 CalculateBubblePosition()
     {
         float bubbleRadius = CurrentSize / 2f;
-        float xOffset = (PlayerSize / 2f + bubbleRadius) * (Player.IsFacingRight ? 1 : -1);
+        float xOffset = (PlayerSize / 2f + bubbleRadius) * (PlayerMovement.IsFacingRight ? 1 : -1);
         float yOffset = Mathf.Max(0f, bubbleRadius - PlayerSize / 2f + 0.05f);
         return new Vector3(xOffset, yOffset, 0);
     }
