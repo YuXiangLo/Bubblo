@@ -42,12 +42,12 @@ public class SimpleUnicornMovement : MonoBehaviour
         Vector3 movementDirection = Target - transform.position;
 
         // Check if moving to the right
-        if (movementDirection.x > 0 && !FacingLeft)
+        if (movementDirection.x > 0 && FacingLeft)
         {
             Flip();
         }
         // Check if moving to the left
-        else if (movementDirection.x < 0 && FacingLeft)
+        else if (movementDirection.x < 0 && !FacingLeft)
         {
             Flip();
         }
