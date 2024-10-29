@@ -4,30 +4,30 @@ using System.Collections;
 
 public class PlayerMovementGroundState : IPlayerMovementState
 {
-    public PlayerControl PlayerControl { get; }
+    public Player Player { get; }
     public PlayerData PlayerData { get; }
 
-    public PlayerMovementGroundState(PlayerControl playerControl, PlayerData playerData)
+    public PlayerMovementGroundState(Player player, PlayerData playerData)
     {
-        PlayerControl = playerControl;
+        Player = player;
         PlayerData = playerData;
     }
     
     public void HandleMovement()
     {
-        if (PlayerControl.IsGrounded)
+        if (Player.IsGrounded)
         {
             DetectJumpMovement();
             DetectHorizontalMovement();
             ApplyGravity();
         }
-        else if (PlayerControl.Velocity.y > 0)
+        else if (Player.Velocity.y > 0)
         {
-            PlayerControl.ChangePlayerMovementState(new PlayerMovementJumpingState(PlayerControl, PlayerData));
+            Player.ChangePlayerMovementState(new PlayerMovementJumpingState(Player, PlayerData));
         }
         else
         {
-            PlayerControl.ChangePlayerMovementState(new PlayerMovementFallingState(PlayerControl, PlayerData));
+            Player.ChangePlayerMovementState(new PlayerMovementFallingState(Player, PlayerData));
         }
     }
 
@@ -35,19 +35,19 @@ public class PlayerMovementGroundState : IPlayerMovementState
     {
         if (Input.GetButtonDown("Jump"))
         {
-            PlayerControl.Velocity.y = PlayerData.JumpForce;
+            Player.Velocity.y = PlayerData.JumpForce;
         }
     }
 
     private void DetectHorizontalMovement()
     {
         var horizontalInput = Input.GetAxisRaw("Horizontal");
-        PlayerControl.Velocity.x = horizontalInput * PlayerData.MoveSpeed;
+        Player.Velocity.x = horizontalInput * PlayerData.MoveSpeed;
     }
 
     private void ApplyGravity()
     {
-        PlayerControl.Velocity.y = Mathf.Max(PlayerControl.Velocity.y, 0f);
+        Player.Velocity.y = Mathf.Max(Player.Velocity.y, 0f);
     }
 
 }

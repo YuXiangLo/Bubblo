@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class PlayerControl : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModifyHealth, IKnockback
+public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModifyHealth, IKnockback
 {
     public IPlayerMovementState PlayerMovementState;
     public IPlayerAttackState PlayerAttackState;
     
     // Player Movement
     public bool IsGrounded = false;
-    public bool IsFacingRight => Velocity.x > 0f;
+    public bool IsFacingRight => transform.localScale.x > 0f;
     public Vector2 Velocity = Vector2.zero;
 
     // PlayerAttack
@@ -116,7 +116,7 @@ public class PlayerControl : MonoBehaviour, IHealthPercentage, IMagicPercentage,
         Vector3 currentScale = transform.localScale;
         if (Velocity.x != 0f)
         {
-            currentScale.x = (IsFacingRight ? 1 : -1) * Mathf.Abs(currentScale.x);
+            currentScale.x = (Velocity.x > 0f ? 1 : -1) * Mathf.Abs(currentScale.x);
         }
         transform.localScale = currentScale;
 	}

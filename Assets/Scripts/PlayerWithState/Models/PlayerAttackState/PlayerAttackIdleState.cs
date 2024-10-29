@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class PlayerAttackIdleState : IPlayerAttackState
 {
-    public PlayerControl PlayerControl { get; }
+    public Player Player { get; }
     public PlayerData PlayerData { get; }
     
-    public PlayerAttackIdleState(PlayerControl playerControl, PlayerData playerData)
+    public PlayerAttackIdleState(Player player, PlayerData playerData)
     {
-        PlayerControl = playerControl;
+        Player = player;
         PlayerData = playerData;
     }
 
@@ -15,8 +15,8 @@ public class PlayerAttackIdleState : IPlayerAttackState
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            PlayerControl.ChangePlayerAttackState(new PlayerAttackChargingState(PlayerControl, PlayerData, PlayerControl.InitialBubble()));
-            PlayerControl.IsHoldingBubble = true;
+            Player.ChangePlayerAttackState(new PlayerAttackChargingState(Player, PlayerData, Player.InitialBubble()));
+            Player.IsHoldingBubble = true;
         }
     } 
 }

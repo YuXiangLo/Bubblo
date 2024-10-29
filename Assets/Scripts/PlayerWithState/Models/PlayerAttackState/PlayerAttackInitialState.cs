@@ -1,18 +1,18 @@
 public class PlayerAttackInitialState : IPlayerAttackState
 {
-    public PlayerControl PlayerControl { get; }
+    public Player Player { get; }
     public PlayerData PlayerData { get; }
     
-    public PlayerAttackInitialState(PlayerControl playerControl, PlayerData playerData)
+    public PlayerAttackInitialState(Player player, PlayerData playerData)
     {
-        PlayerControl = playerControl;
+        Player = player;
         PlayerData = playerData;
 
-        PlayerControl.CurrentMagicPoint = PlayerData.MaxMagicPoint;
+        Player.CurrentMagicPoint = PlayerData.MaxMagicPoint;
     }
 
     public void HandleAttack()
     {
-        PlayerControl.ChangePlayerAttackState(new PlayerAttackIdleState(PlayerControl, PlayerData));
+        Player.ChangePlayerAttackState(new PlayerAttackIdleState(Player, PlayerData));
     }
 }

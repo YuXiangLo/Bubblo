@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class PlayerAttackChargingState : IPlayerAttackState
 {
-    public PlayerControl PlayerControl { get; }
+    public Player Player { get; }
     public PlayerData PlayerData { get; }
     private Bubble CurrentBubble;
     private float HoldTime;
     private bool MaxCharged;
     private const float MaxHoldTime = 2f;
     
-    public PlayerAttackChargingState(PlayerControl playerControl, PlayerData playerData, Bubble currentBubble)
+    public PlayerAttackChargingState(Player player, PlayerData playerData, Bubble currentBubble)
     {
-        PlayerControl = playerControl;
+        Player = player;
         PlayerData = playerData;
         CurrentBubble = currentBubble;
         HoldTime = 0f;
@@ -22,9 +22,9 @@ public class PlayerAttackChargingState : IPlayerAttackState
     {
         if (CurrentBubble == null)
         {
-            PlayerControl.ChangePlayerAttackState(new PlayerAttackIdleState(PlayerControl, PlayerData));
-            PlayerControl.IsAttacking = false;
-            PlayerControl.IsHoldingBubble = false;
+            Player.ChangePlayerAttackState(new PlayerAttackIdleState(Player, PlayerData));
+            Player.IsAttacking = false;
+            Player.IsHoldingBubble = false;
             return;
         }
 
@@ -43,9 +43,9 @@ public class PlayerAttackChargingState : IPlayerAttackState
 
     private void ChargeBubble()
     {
-        if (PlayerControl.CurrentMagicPoint > 0 && HoldTime < MaxHoldTime) 
+        if (Player.CurrentMagicPoint > 0 && HoldTime < MaxHoldTime) 
         {
-            PlayerControl.CurrentMagicPoint -= Time.deltaTime;
+            Player.CurrentMagicPoint -= Time.deltaTime;
             HoldTime += Time.deltaTime;
         }
         else
@@ -63,6 +63,6 @@ public class PlayerAttackChargingState : IPlayerAttackState
     {
         CurrentBubble.Release();
         CurrentBubble = null;
-        PlayerControl.IsAttacking = true;
+        Player.IsAttacking = true;
     }
 }

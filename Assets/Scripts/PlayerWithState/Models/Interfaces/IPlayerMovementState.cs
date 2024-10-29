@@ -3,7 +3,7 @@ using System.Collections;
 
 public interface IPlayerMovementState
 {
-    PlayerControl PlayerControl { get; }
+    Player Player { get; }
     PlayerData PlayerData { get; }
 
     public void HandleMovement();

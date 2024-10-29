@@ -1,23 +1,23 @@
 public class PlayerMovementInitialState: IPlayerMovementState
 {
-    public PlayerControl PlayerControl { get; }
+    public Player Player { get; }
     public PlayerData PlayerData { get; }
 
-    public PlayerMovementInitialState(PlayerControl playerControl, PlayerData playerData)
+    public PlayerMovementInitialState(Player player, PlayerData playerData)
     {
-        PlayerControl = playerControl;
+        Player = player;
         PlayerData = playerData;
     }
 
     public void HandleMovement()
     {
-        if (PlayerControl.IsGrounded)
+        if (Player.IsGrounded)
         {
-            PlayerControl.ChangePlayerMovementState(new PlayerMovementGroundState(PlayerControl, PlayerData));
+            Player.ChangePlayerMovementState(new PlayerMovementGroundState(Player, PlayerData));
         }
         else 
         {
-            PlayerControl.ChangePlayerMovementState(new PlayerMovementFallingState(PlayerControl, PlayerData));
+            Player.ChangePlayerMovementState(new PlayerMovementFallingState(Player, PlayerData));
         }
     }
 

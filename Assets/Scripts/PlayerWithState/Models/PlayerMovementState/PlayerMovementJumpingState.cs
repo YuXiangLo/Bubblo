@@ -3,38 +3,38 @@ using UnityEngine;
 
 public class PlayerMovementJumpingState: IPlayerMovementState
 {
-    public PlayerControl PlayerControl { get; }
+    public Player Player { get; }
     public PlayerData PlayerData { get; }
 
-    public PlayerMovementJumpingState(PlayerControl playerControl, PlayerData playerData)
+    public PlayerMovementJumpingState(Player player, PlayerData playerData)
     {
-        PlayerControl = playerControl;
+        Player = player;
         PlayerData = playerData;
     }
 
     public void HandleMovement()
     {
-        if (PlayerControl.Velocity.y > 0f)
+        if (Player.Velocity.y > 0f)
         {
             DetectHorizontalMovement();
             ApplyGravity();
         }
         else
         {
-            PlayerControl.ChangePlayerMovementState(new PlayerMovementFallingState(PlayerControl, PlayerData));
+            Player.ChangePlayerMovementState(new PlayerMovementFallingState(Player, PlayerData));
         }
     }
 
     private void DetectHorizontalMovement()
     {
         var horizontalInput = Input.GetAxisRaw("Horizontal");
-        PlayerControl.Velocity.x = horizontalInput * PlayerData.MoveSpeed;
+        Player.Velocity.x = horizontalInput * PlayerData.MoveSpeed;
     }
 
     private void ApplyGravity()
     {
         var gravityScale = Input.GetButton("Jump") ? PlayerData.LowGravityScale : PlayerData.DefaultGravityScale;
-        PlayerControl.Velocity.y += PlayerData.Gravity * gravityScale * Time.deltaTime;
+        Player.Velocity.y += PlayerData.Gravity * gravityScale * Time.deltaTime;
     }
     
 }

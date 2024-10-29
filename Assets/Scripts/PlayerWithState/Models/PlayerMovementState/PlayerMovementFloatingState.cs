@@ -4,21 +4,24 @@ using System.Collections;
 
 public class PlayerMovementFloatingState : IPlayerMovementState
 {
-    public PlayerControl PlayerControl { get; }
+    public Player Player { get; }
     public PlayerData PlayerData { get; }
 
-    public PlayerMovementFloatingState(PlayerControl playerControl, PlayerData playerData)
+    private float HorizontalMoveSpeed;
+
+    public PlayerMovementFloatingState(Player player, PlayerData playerData)
     {
-        PlayerControl = playerControl;
+        Player = player;
         PlayerData = playerData;
-        PlayerControl.Velocity.x = PlayerData.FloatingXSpeed;
+        Player.Velocity.x = PlayerData.FloatingXSpeed;
+        HorizontalMoveSpeed = PlayerData.MoveSpeed;
     }
 
     public void HandleMovement()
     {
         if (Input.GetButtonUp("Jump"))
         {
-            PlayerControl.ChangePlayerMovementState(new PlayerMovementFallingState(PlayerControl, PlayerData));
+            Player.ChangePlayerMovementState(new PlayerMovementFallingState(Player, PlayerData));
         }
         else if (Input.GetButton("Jump"))
         {
@@ -29,13 +32,15 @@ public class PlayerMovementFloatingState : IPlayerMovementState
 
     private void DetectHorizontalMovement()
     {
-        PlayerControl.Velocity.x *= PlayerData.FloatingRatio;
+        HorizontalMoveSpeed *= PlayerData.FloatingRatio;
+        var horizontalInput = Input.GetAxisRaw("Horizontal");
+        Player.Velocity.x = horizontalInput * HorizontalMoveSpeed;
     }
 
     private void ApplyGravity()
     {
-        PlayerControl.Velocity.y = Mathf.Max(
-            PlayerControl.Velocity.y + PlayerData.Gravity * PlayerData.LowGravityScale * Time.deltaTime,
+        Player.Velocity.y = Mathf.Max(
+            Player.Velocity.y + PlayerData.Gravity * PlayerData.LowGravityScale * Time.deltaTime,
             PlayerData.FloatingYSpeed);
     }
     
