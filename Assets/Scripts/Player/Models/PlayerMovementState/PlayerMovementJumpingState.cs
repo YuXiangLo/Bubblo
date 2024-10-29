@@ -6,6 +6,11 @@ public class PlayerMovementJumpingState: IPlayerMovementState
     public Player Player { get; }
     public PlayerData PlayerData { get; }
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="player">Player</param>
+    /// <param name="playerData">PlayerData</param>
     public PlayerMovementJumpingState(Player player, PlayerData playerData)
     {
         Player = player;

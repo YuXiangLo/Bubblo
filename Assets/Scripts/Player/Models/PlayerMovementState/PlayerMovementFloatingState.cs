@@ -9,6 +9,11 @@ public class PlayerMovementFloatingState : IPlayerMovementState
 
     private float HorizontalMoveSpeed;
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="player">Player</param>
+    /// <param name="playerData">PlayerData</param>
     public PlayerMovementFloatingState(Player player, PlayerData playerData)
     {
         Player = player;
