@@ -26,38 +26,66 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     private Camera MainCamera;
     private Animator Animator;
 
+    /// <summary>
+    /// Change Player Movement State
+    /// </summary>
+    /// <param name="newPlayerMovementState"></param>
     public void ChangePlayerMovementState(IPlayerMovementState newPlayerMovementState)
     {
         PlayerMovementState = newPlayerMovementState;
         PlayerMovementState.HandleMovement();
     }
 
+    /// <summary>
+    /// Change Player Attack State
+    /// </summary>
+    /// <param name="newPlayerAttackState"></param>
     public void ChangePlayerAttackState(IPlayerAttackState newPlayerAttackState)
     {
         PlayerAttackState = newPlayerAttackState;
         PlayerAttackState.HandleAttack();
     }
 
+    /// <summary>
+    /// Initialize a New Bubble
+    /// </summary>
+    /// <returns>New Bubble</returns>
     public Bubble InitialBubble()
     {
         return Instantiate(PlayerData.BubblePrefab).GetComponent<Bubble>();
     }
-
+    
+    /// <summary>
+    /// Heal Player Health
+    /// </summary>
+    /// <param name="amount">Heal Amount</param>
     public void Heal(float amount) 
     {
         PlayerHealth.Heal(amount);
     }
 
+    /// <summary>
+    /// Player Takes Damages
+    /// </summary>
+    /// <param name="amount">Damage Amount</param>
     public void TakeDamage(float amount) 
     {
         PlayerHealth.TakeDamage(amount);
     }
 
+    /// <summary>
+    /// Player Touchs a Bubble
+    /// </summary>
     public void BubbleJump()
     {
         Velocity.y = PlayerData.JumpForce;
     }
 
+    /// <summary>
+    /// Player Knocked Back
+    /// </summary>
+    /// <param name="knockbackDirection">KnockBack Direction</param>
+    /// <param name="toSleep">To Sleep Time</param>
     public void Knockback(Vector2 knockbackDirection, float toSleep)
     {
         ChangePlayerMovementState(new PlayerMovementKnockBackState(this, PlayerData, knockbackDirection, toSleep));

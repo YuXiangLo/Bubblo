@@ -8,7 +8,14 @@ public class PlayerMovementKnockBackState : IPlayerMovementState
 
     private readonly Vector2 KnockbackDirection;
     private readonly float ToSleep;
-
+    
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="player">Player</param>
+    /// <param name="playerData">PlayerData</param>
+    /// <param name="knockbackDirection">KnockBack Direction</param>
+    /// <param name="toSleep">To Sleep Time</param>
     public PlayerMovementKnockBackState(Player player, PlayerData playerData, Vector2 knockbackDirection, float toSleep) 
     {
         Player = player;

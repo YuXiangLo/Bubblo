@@ -10,6 +10,12 @@ public class PlayerAttackChargingState : IPlayerAttackState
     private bool MaxCharged;
     private const float MaxHoldTime = 2f;
     
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="player">Player</param>
+    /// <param name="playerData">PlayerData</param>
+    /// <param name="currentBubble">Bubble Player's Holding</param>
     public PlayerAttackChargingState(Player player, PlayerData playerData, Bubble currentBubble)
     {
         Player = player;

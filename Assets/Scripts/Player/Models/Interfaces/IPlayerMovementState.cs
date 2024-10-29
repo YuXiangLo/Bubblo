@@ -1,10 +1,13 @@
-using UnityEngine;
-using System.Collections;
-
+/// <summary>
+/// Player's Movement State
+/// </summary>
 public interface IPlayerMovementState
 {
     Player Player { get; }
     PlayerData PlayerData { get; }
 
+    /// <summary>
+    /// Handle Player's Movement;
+    /// </summary>
     public void HandleMovement();
 }

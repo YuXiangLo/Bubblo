@@ -7,6 +7,11 @@ public class PlayerMovementGroundState : IPlayerMovementState
     public Player Player { get; }
     public PlayerData PlayerData { get; }
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="player">Player</param>
+    /// <param name="playerData">PlayerData</param>
     public PlayerMovementGroundState(Player player, PlayerData playerData)
     {
         Player = player;
