@@ -6,6 +6,7 @@ public class PlayerAttackChargingState : IPlayerAttackState
     public PlayerData PlayerData { get; }
     private Bubble CurrentBubble;
     private float HoldTime;
+    private readonly bool IsExhaustedAtInit;
     private bool MaxCharged;
     private const float MaxHoldTime = 2f;
     
@@ -15,6 +16,7 @@ public class PlayerAttackChargingState : IPlayerAttackState
         PlayerData = playerData;
         CurrentBubble = currentBubble;
         HoldTime = 0f;
+        IsExhaustedAtInit = Player.CurrentMagicPoint <= 0f;
         MaxCharged = false;
     }
 
@@ -28,7 +30,7 @@ public class PlayerAttackChargingState : IPlayerAttackState
             return;
         }
 
-        if (Input.GetButtonUp("Fire1"))
+        if (IsExhaustedAtInit || Input.GetButtonUp("Fire1"))
         {
             ReleaseBubble();
         }
