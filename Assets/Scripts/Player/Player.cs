@@ -1,75 +1,137 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModifyHealth, IKnockback {
-    private PlayerMovement PlayerMovement;
+public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModifyHealth, IKnockback
+{
+    public IPlayerMovementState PlayerMovementState;
+    public IPlayerAttackState PlayerAttackState;
+    
+    // Player Movement
+    public bool IsGrounded = false;
+    public bool IsFacingRight => transform.localScale.x > 0f;
+    public Vector2 Velocity = Vector2.zero;
+
+    // PlayerAttack
+    public float CurrentMagicPoint;
+    public bool IsHoldingBubble = false;
+	public bool IsAttacking = false;
+    public float MagicPercentage => CurrentMagicPoint / PlayerData.MaxMagicPoint;
+    
+    // Player Health
+    public float CurrentHealth;
+    public float HealthPercentage => CurrentHealth / PlayerHealth.MaxHealth;
+
+    private PlayerData PlayerData;
+    private Rigidbody2D Rigidbody2D;
     private PlayerHealth PlayerHealth;
-	private PlayerAttack PlayerAttack;
-    public Animator animator;
+    private Camera MainCamera;
+    private Animator Animator;
 
-    public float HealthPercentage { get => PlayerHealth.HealthPercentage; }
-    public float MagicPercentage { get => PlayerAttack.MagicPercentage; }
-	public bool IsFacingRight { get => PlayerMovement.IsFacingRight; }
-	public bool IsGrounded { get => PlayerMovement.IsGrounded; }
-    public bool IsBubbleHeld { get => PlayerAttack.IsButtonHeld; }
-	public bool IsAttack { get => PlayerAttack.IsAttack; }
-
-    public void TakeDamage(float amount) {
-        PlayerHealth.TakeDamage(amount);
+    public void ChangePlayerMovementState(IPlayerMovementState newPlayerMovementState)
+    {
+        PlayerMovementState = newPlayerMovementState;
+        PlayerMovementState.HandleMovement();
     }
 
-	public void Knockback(Vector2 knockbackDirection, float toSleep) {
-		PlayerMovement.Knockback(knockbackDirection, toSleep);
-	}
+    public void ChangePlayerAttackState(IPlayerAttackState newPlayerAttackState)
+    {
+        PlayerAttackState = newPlayerAttackState;
+        PlayerAttackState.HandleAttack();
+    }
 
-    public void Heal(float amount) {
+    public Bubble InitialBubble()
+    {
+        return Instantiate(PlayerData.BubblePrefab).GetComponent<Bubble>();
+    }
+
+    public void Heal(float amount) 
+    {
         PlayerHealth.Heal(amount);
     }
 
-	public void BubbleJump() {
-		PlayerMovement.BubbleJump();
+    public void TakeDamage(float amount) 
+    {
+        PlayerHealth.TakeDamage(amount);
+    }
+
+    public void BubbleJump()
+    {
+        Velocity.y = PlayerData.JumpForce;
+    }
+
+    public void Knockback(Vector2 knockbackDirection, float toSleep)
+    {
+        ChangePlayerMovementState(new PlayerMovementKnockBackState(this, PlayerData, knockbackDirection, toSleep));
 	}
 
-    private void Awake() {
-        PlayerMovement = GetComponent<PlayerMovement>();
-        PlayerHealth = GetComponent<PlayerHealth>();
-		PlayerAttack = GetComponent<PlayerAttack>();
-    }
-
-    private void Update() {
-		if (PlayerMovement.enabled) {
-			PlayerMovement.HandleMovement();
-			PlayerAttack.HandleAttack();
-		}
-# if UNITY_EDITOR
-        TestHealthModification();
-# endif
-        animator.SetFloat("Speed", PlayerMovement.Speed);
-        animator.SetBool("IsFall", !IsGrounded && PlayerMovement.Velocity.y < 0);
-		animator.SetBool("IsJump", !IsGrounded && PlayerMovement.Velocity.y >= 0);
-        animator.SetBool("IsHoldingBubble", IsBubbleHeld);
-		animator.SetBool("IsAttack", IsAttack);
-    }
-
-# if UNITY_EDITOR
-    /// <summary>
-    /// Test method to simulate health modification
-    /// </summary>
-    private void TestHealthModification()
+    private void Awake()
     {
-        // Press "Q" to reduce health (simulate damage)
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            TakeDamage(10f);  // Reduces health by 10
-            Debug.Log("Player took 10 damage");
-        }
-
-        // Press "E" to increase health (simulate healing)
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Heal(10f);  // Increases health by 10
-            Debug.Log("Player healed 10 health");
-        }
+        PlayerData = GetComponent<PlayerData>();
+        PlayerHealth = GetComponent<PlayerHealth>();
+        Animator = GetComponent<Animator>();
+        Rigidbody2D = GetComponent<Rigidbody2D>();
+		Rigidbody2D.freezeRotation = true;
+        PlayerMovementState = new PlayerMovementInitialState(this, PlayerData);
+        PlayerAttackState = new PlayerAttackInitialState(this, PlayerData);
+        MainCamera = Camera.main;
     }
-# endif
-}
 
+    private void Update()
+    {
+        DetectPlayerStatus();
+        HandleMovement();
+        HandleAttack();
+        HandleAnimator();
+        DetectFaceSide();
+        RestrictPlayerWithinCamera();
+    }
+
+    private void FixedUpdate()
+    {
+        Rigidbody2D.MovePosition(Rigidbody2D.position + Velocity * Time.fixedDeltaTime);
+    }
+
+    private void DetectPlayerStatus()
+    {
+        IsGrounded = Rigidbody2D.Raycast(Vector2.down, new Vector2(PlayerData.PlayerSize, PlayerData.PlayerSize), PlayerData.TriggerDistance);
+    }
+
+    private void HandleMovement()
+    {
+        PlayerMovementState.HandleMovement();
+    }
+
+    private void HandleAttack()
+    {
+        PlayerAttackState.HandleAttack();
+    }
+
+    private void HandleAnimator()
+    {
+        Animator.SetFloat("Speed", Mathf.Abs(Velocity.x));
+        Animator.SetBool("IsFall", !IsGrounded && Velocity.y < 0);
+		Animator.SetBool("IsJump", !IsGrounded && Velocity.y >= 0);
+        Animator.SetBool("IsHoldingBubble", IsHoldingBubble);
+		Animator.SetBool("IsAttack", IsAttacking);
+    }
+
+    private void DetectFaceSide() 
+    {
+        Vector3 currentScale = transform.localScale;
+        if (Velocity.x != 0f)
+        {
+            currentScale.x = (Velocity.x > 0f ? 1 : -1) * Mathf.Abs(currentScale.x);
+        }
+        transform.localScale = currentScale;
+	}
+
+    private void RestrictPlayerWithinCamera() 
+    {
+        float cameraHalfWidth = MainCamera.orthographicSize * MainCamera.aspect;
+        float cameraLeftEdge = MainCamera.transform.position.x - cameraHalfWidth;
+        float cameraRightEdge = MainCamera.transform.position.x + cameraHalfWidth;
+
+        Vector2 playerPosition = transform.position;
+        playerPosition.x = Mathf.Clamp(playerPosition.x, cameraLeftEdge + PlayerData.PlayerSize / 2, cameraRightEdge - PlayerData.PlayerSize / 2);
+        transform.position = playerPosition;
+    }
+}
