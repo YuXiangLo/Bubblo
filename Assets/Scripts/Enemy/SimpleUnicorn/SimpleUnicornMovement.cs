@@ -1,67 +1,54 @@
 using UnityEngine;
 
-public class SimpleUnicornMovement : MonoBehaviour
-{
-    private Transform LeftPoint, RightPoint;
-    private Vector3 Target;
-    private bool FacingLeft = true;
+namespace SimpleUnicorn {
 
-    [SerializeField] private float Speed = 2f;
-
-    private void Start()
+    public class SimpleUnicornMovement : MonoBehaviour
     {
-        LeftPoint = transform.parent.Find("LeftPoint");
-        RightPoint = transform.parent.Find("RightPoint");
-        Target = LeftPoint.position;
-    }
+        [SerializeField] private Vector2 LeftPoint, RightPoint;
+        [SerializeField] private float Speed = 2f;
+        private Vector2 Target;
+        private bool FacingLeft = true;
 
-    public void HandleMovement()
-    {
-        Move();
-        RotateToMovementDirection();
-    }
-
-    private void Move()
-    {
-        // Move enemy towards the target
-        transform.position = Vector2.MoveTowards(transform.position, Target, Speed * Time.deltaTime);
-
-        // Switch target when reaching the point
-        if (Vector2.Distance(transform.position, Target) < 0.1f)
+        private void Start()
         {
-            if (Target == LeftPoint.position)
-                Target = RightPoint.position;
-            else
-                Target = LeftPoint.position;
+            Target = (Vector2)transform.position + LeftPoint;
         }
-    }
 
-    private void RotateToMovementDirection()
-    {
-        // Calculate the movement direction
-        Vector3 movementDirection = Target - transform.position;
-
-        // Check if moving to the right
-        if (movementDirection.x > 0 && FacingLeft)
+        public void HandleMovement()
         {
-            Flip();
+            Vector2 currentPosition = transform.position;
+            // Move enemy towards the target
+            transform.position = Vector2.MoveTowards(currentPosition, Target, Speed * Time.deltaTime);
+
+            // Switch target when reaching the point
+            if ((Vector2)transform.position == Target)
+            {
+                GetNewTarget();
+            }
         }
-        // Check if moving to the left
-        else if (movementDirection.x < 0 && !FacingLeft)
+
+        private void GetNewTarget()
         {
-            Flip();
+            if (FacingLeft) {
+                Flip();
+                Target = (Vector2)transform.position + RightPoint;
+            }
+            else {
+                Flip();
+                Target = (Vector2)transform.position + LeftPoint;
+            }
         }
-    }
 
-    private void Flip()
-    {
-        // Toggle the facing direction
-        FacingLeft = !FacingLeft;
+        private void Flip()
+        {
+            // Toggle the facing direction
+            FacingLeft = !FacingLeft;
 
-        // Flip the enemy's sprite by scaling in the X axis
-        Vector3 localScale = transform.localScale;
-        localScale.x *= -1;  // Flip the X scale
-        transform.localScale = localScale;
+            // Flip the enemy's sprite by scaling in the X axis
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1;  // Flip the X scale
+            transform.localScale = localScale;
+        }
     }
 }
 

@@ -1,29 +1,31 @@
 using UnityEngine;
 
-public class SimpleUnicorn : MonoBehaviour, IModifyHealth
+namespace SimpleUnicorn
 {
-    private SimpleUnicornMovement SimpleUnicornMovement;
-    private EnemyHealth SimpleUnicornHealth;
-
-    public void TakeDamage(float amount)
+    public class SimpleUnicorn : MonoBehaviour, IModifyHealth
     {
-        SimpleUnicornHealth.TakeDamage(amount);
-    }
+        private SimpleUnicornMovement SimpleUnicornMovement;
+        private EnemyHealth SimpleUnicornHealth;
 
-    public void Heal(float amount)
-    {
-        SimpleUnicornHealth.Heal(amount);
-    }
+        public void TakeDamage(float amount)
+        {
+            SimpleUnicornHealth.TakeDamage(amount);
+        }
 
-    private void Awake()
-    {
-        SimpleUnicornMovement = GetComponent<SimpleUnicornMovement>();
-        SimpleUnicornHealth = GetComponent<EnemyHealth>();
-    }
+        public void Heal(float amount)
+        {
+            SimpleUnicornHealth.Heal(amount);
+        }
 
-    private void Update()
-    {
-        if (SimpleUnicornMovement.enabled)
+        private void Awake()
+        {
+            SimpleUnicornMovement = GetComponent<SimpleUnicornMovement>();
+            SimpleUnicornHealth = GetComponent<EnemyHealth>();
+        }
+
+        private void Update()
+        {
             SimpleUnicornMovement.HandleMovement();
+        }
     }
 }
