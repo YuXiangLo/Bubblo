@@ -21,7 +21,7 @@ public class SceneTransition : MonoBehaviour
     public Rigidbody2D PlayerRigidbody;
 
     // Reference to the player's movement script (optional)
-    public PlayerMovement PlayerMovementScript;
+    public Player PlayerScript;
     public MonoBehaviour CameraFollowScript;
 
     // Blowing force to apply to the player
@@ -51,9 +51,9 @@ public class SceneTransition : MonoBehaviour
     private void BlowAwayPlayer()
     {
         // Disable player movement (optional)
-        if (PlayerMovementScript != null)
+        if (PlayerScript != null)
         {
-            PlayerMovementScript.enabled = false;
+            PlayerScript.enabled = false;
         }
 
         if (CameraFollowScript) {
