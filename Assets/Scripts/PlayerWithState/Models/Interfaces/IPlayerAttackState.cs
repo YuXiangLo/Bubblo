@@ -1,4 +1,7 @@
 public interface IPlayerAttackState
 {
-    PlayerControl PlayerControl { get; set;}
+    PlayerControl PlayerControl { get; }
+    PlayerData PlayerData { get; }
+
+    public void HandleAttack();
 }

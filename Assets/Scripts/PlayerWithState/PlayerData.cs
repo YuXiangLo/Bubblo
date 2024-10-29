@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerData : MonoBehaviour
 {
+    // Player Movement
     public float MoveSpeed = 8f;
 	public float FloatingXSpeed = 12f;
     public float FloatingYSpeed = -2f;
@@ -15,4 +16,8 @@ public class PlayerData : MonoBehaviour
     public float LowGravityScale = 0.5f;
     public float KnockbackForce = 6f;
     public float KnockbackTangent = 2f;
+
+    // Player Attack
+    public GameObject BubblePrefab;
+    public float MaxMagicPoint = 10f;
 }
