@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerControl : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModifyHealth, IKnockback
 {
     public IPlayerMovementState PlayerMovementState;
     public IPlayerAttackState PlayerAttackState;
@@ -116,7 +114,10 @@ public class PlayerControl : MonoBehaviour
     private void DetectFaceSide() 
     {
         Vector3 currentScale = transform.localScale;
-        currentScale.x = (IsFacingRight ? 1 : -1) * Mathf.Abs(currentScale.x);
+        if (Velocity.x != 0f)
+        {
+            currentScale.x = (IsFacingRight ? 1 : -1) * Mathf.Abs(currentScale.x);
+        }
         transform.localScale = currentScale;
 	}
 
