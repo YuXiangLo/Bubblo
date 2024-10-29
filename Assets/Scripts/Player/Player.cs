@@ -15,7 +15,10 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     public bool IsHoldingBubble = false;
 	public bool IsAttacking = false;
     public float MagicPercentage => CurrentMagicPoint / PlayerData.MaxMagicPoint;
-    public float HealthPercentage => PlayerHealth.HealthPercentage; 
+    
+    // Player Health
+    public float CurrentHealth;
+    public float HealthPercentage => CurrentHealth / PlayerHealth.MaxHealth;
 
     private PlayerData PlayerData;
     private Rigidbody2D Rigidbody2D;
