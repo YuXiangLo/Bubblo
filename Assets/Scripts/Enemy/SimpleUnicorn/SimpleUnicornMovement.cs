@@ -21,7 +21,7 @@ namespace SimpleUnicorn {
             transform.position = Vector2.MoveTowards(currentPosition, Target, Speed * Time.deltaTime);
 
             // Switch target when reaching the point
-            if ((Vector2)transform.position == Target)
+            if (Vector2.Distance(currentPosition, Target) < 0.1f)
             {
                 GetNewTarget();
             }
