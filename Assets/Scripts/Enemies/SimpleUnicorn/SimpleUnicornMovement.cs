@@ -1,6 +1,7 @@
 using UnityEngine;
 
-namespace SimpleUnicorn {
+namespace Enemies.SimpleUnicorn
+{
 
     public class SimpleUnicornMovement : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SimpleUnicorn
+namespace Enemies.SimpleUnicorn
 {
     public class SimpleUnicorn : MonoBehaviour, IModifyHealth
     {
