@@ -25,6 +25,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     private PlayerHealth PlayerHealth;
     private Camera MainCamera;
     private Animator Animator;
+	private PhysicsMaterial2D noFrictionMaterial;
 
     /// <summary>
     /// Change Player Movement State
@@ -101,6 +102,9 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         PlayerMovementState = new PlayerMovementInitialState(this, PlayerData);
         PlayerAttackState = new PlayerAttackInitialState(this, PlayerData);
         MainCamera = Camera.main;
+
+		// NOTE: I don't know this code should put in this script or others, feel free to decide it for me
+		RemoveFriction();
     }
 
     private void Update()
@@ -162,4 +166,21 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         playerPosition.x = Mathf.Clamp(playerPosition.x, cameraLeftEdge + PlayerData.PlayerSize / 2, cameraRightEdge - PlayerData.PlayerSize / 2);
         transform.position = playerPosition;
     }
+
+	private void RemoveFriction()
+	{
+		noFrictionMaterial = new PhysicsMaterial2D("NoFriction");
+        noFrictionMaterial.friction = 0f;
+        noFrictionMaterial.bounciness = 0f;
+
+        Collider2D collider = GetComponent<BoxCollider2D>();
+        if (collider != null)
+        {
+            collider.sharedMaterial = noFrictionMaterial;
+        }
+        else
+        {
+            Debug.LogError("Collider2D component is missing.");
+        }
+	}
 }
