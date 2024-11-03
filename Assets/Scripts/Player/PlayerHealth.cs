@@ -1,9 +1,15 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Collections;       
 
 public class PlayerHealth : MonoBehaviour
 {
     public float MaxHealth = 100f;
-    public Player Player;
+
+	[SerializeField] private string DeadScene = "Start";
+	[SerializeField] private float TransitionDelay = 1f;
+
+    private Player Player;
 
     private void Start()
     {
@@ -33,7 +39,36 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Player has died!");
+		// 1. Disable PlayerMovement
+		Player.enabled = false;
+		Time.timeScale = 0f;
+		// 2. Play a die animation and load the scene
+        StartCoroutine(DelayLoadScene());
     }
+
+	private IEnumerator DelayLoadScene()
+	{
+		// TODO Add the animation on it, the below code is a placeholder
+        yield return new WaitForSecondsRealtime(TransitionDelay);
+        SceneManager.LoadScene(DeadScene);
+	}
+
+#if UNITY_EDITOR
+    private void Update()
+    {
+        // Debug code to increase and decrease health with key presses
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            TakeDamage(10f); // Decrease health by 10 when 'H' is pressed
+            Debug.Log("Health decreased by 10. Current Health: " + Player.CurrentHealth);
+        }
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            Heal(10f); // Increase health by 10 when 'J' is pressed
+            Debug.Log("Health increased by 10. Current Health: " + Player.CurrentHealth);
+        }
+    }
+#endif
 }
 

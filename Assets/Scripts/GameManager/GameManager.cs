@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     private Player Player;
     private float CurrentHealthTemp;
     private float CurrentMagicPointTemp;
-    private Vector3 PlayerSpawnPoint = new(0, 0, 0);    
     [SerializeField] private float TransitionDelay = 1f;
 
     void Awake()
