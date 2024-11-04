@@ -1,7 +1,7 @@
 <!-- This template is the placeholder of our project -->
 # 🎮 **Bubblo: A 2D Pixel-Perfect Platform Adventure!** 🌟
 
-**Bubblo** is an enchanting 2D platformer developed by six passionate students from **National Taiwan University**. Inspired by the timeless classics like *Mario* and *Kirby*, this game invites players to dive into a captivating world filled with vibrant pixel art, exciting gameplay, and challenging boss battles.
+**Bubblo** is an enchanting 2D platformer developed by five passionate students from **National Taiwan University**. Inspired by the timeless classics like *Mario* and *Kirby*, this game invites players to dive into a captivating world filled with vibrant pixel art, exciting gameplay, and challenging boss battles.
 
 ---
 
