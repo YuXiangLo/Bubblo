@@ -7,6 +7,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     
     // Player Movement
     public bool IsGrounded = false;
+	public bool IsHittingCeiling = false;
     public bool IsFacingRight => transform.localScale.x > 0f;
     public Vector2 Velocity = Vector2.zero;
 
@@ -121,6 +122,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     private void DetectPlayerStatus()
     {
         IsGrounded = Rigidbody2D.Raycast(Vector2.down, new Vector2(PlayerData.PlayerSize, PlayerData.PlayerSize), PlayerData.TriggerDistance);
+		IsHittingCeiling = Rigidbody2D.Raycast(Vector2.up, new Vector2(PlayerData.PlayerSize, PlayerData.PlayerSize), PlayerData.TriggerDistance);
     }
 
     private void HandleMovement()

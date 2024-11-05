@@ -19,6 +19,9 @@ public class PlayerMovementJumpingState: IPlayerMovementState
 
     public void HandleMovement()
     {
+		if (Player.IsHittingCeiling)
+			Player.Velocity.y = 0f;
+
         if (Player.Velocity.y > 0f)
         {
             DetectHorizontalMovement();

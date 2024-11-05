@@ -6,7 +6,7 @@ public static class PlayerExtensions {
 		if (rigidbody.isKinematic)
 			return false;
 
-		Vector2 castOrigin = rigidbody.position + new Vector2(0, -size.y * 0.5f);
+		Vector2 castOrigin = rigidbody.position + 0.5f * size * direction;
 		Vector2 boxSize = new(0.95f * size.x, 0.1f); // width: size.x, height: 0.1f
 		VisualizeBoxCast(castOrigin, boxSize, direction, distance);
 
