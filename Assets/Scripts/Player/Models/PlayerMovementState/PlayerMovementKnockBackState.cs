@@ -47,4 +47,9 @@ public class PlayerMovementKnockBackState : IPlayerMovementState
 		yield return new WaitForSeconds(toSleep);
         Player.ChangePlayerMovementState(new PlayerMovementInitialState(Player, PlayerData));
     }
+
+	public void HandleAnimation()
+	{
+		Player.Animator.SetInteger("PlayerState", (int)PlayerState.PlayerStateType.Fall);
+	}
 }

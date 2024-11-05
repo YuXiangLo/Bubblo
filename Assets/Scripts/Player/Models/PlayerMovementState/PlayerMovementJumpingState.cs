@@ -15,7 +15,6 @@ public class PlayerMovementJumpingState: IPlayerMovementState
     {
         Player = player;
         PlayerData = playerData;
-		Player.Animator.SetBool("IsJump", true);
     }
 
     public void HandleMovement()
@@ -27,7 +26,6 @@ public class PlayerMovementJumpingState: IPlayerMovementState
         }
         else
         {
-			Player.Animator.SetBool("IsJump", false);
             Player.ChangePlayerMovementState(new PlayerMovementFallingState(Player, PlayerData));
         }
     }
@@ -43,7 +41,10 @@ public class PlayerMovementJumpingState: IPlayerMovementState
         var gravityScale = Input.GetButton("Jump") ? PlayerData.LowGravityScale : PlayerData.DefaultGravityScale;
         Player.Velocity.y += PlayerData.Gravity * gravityScale * Time.deltaTime;
     }
-    
+
+	public void HandleAnimation(){
+		Player.Animator.SetInteger("PlayerState", (int)PlayerState.PlayerStateType.Jump);
+	}
 }
 
 

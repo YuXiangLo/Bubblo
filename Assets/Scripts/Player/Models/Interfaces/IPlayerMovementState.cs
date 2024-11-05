@@ -10,4 +10,5 @@ public interface IPlayerMovementState
     /// Handle Player's Movement;
     /// </summary>
     public void HandleMovement();
+	public void HandleAnimation();
 }

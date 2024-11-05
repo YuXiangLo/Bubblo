@@ -10,4 +10,5 @@ public interface IPlayerAttackState
     /// Handle Player's Attack
     /// </summary>
     public void HandleAttack();
+	public void HandleAnimation();
 }

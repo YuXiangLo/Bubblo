@@ -14,6 +14,7 @@ public class PlayerAttackIdleState : IPlayerAttackState
     {
         Player = player;
         PlayerData = playerData;
+		Player.Animator.SetInteger("PlayerState", (int)PlayerState.PlayerStateType.Attack);
     }
 
     public void HandleAttack()
@@ -21,7 +22,12 @@ public class PlayerAttackIdleState : IPlayerAttackState
         if (Input.GetButtonDown("Fire1"))
         {
             Player.ChangePlayerAttackState(new PlayerAttackChargingState(Player, PlayerData, Player.InitialBubble()));
-			Player.Animator.SetBool("IsHoldingBubble", true);
         }
     } 
+
+	public void HandleAnimation()
+	{
+		return;
+		Player.Animator.SetInteger("PlayerState", (int)PlayerState.PlayerStateType.Attack);
+	}
 }

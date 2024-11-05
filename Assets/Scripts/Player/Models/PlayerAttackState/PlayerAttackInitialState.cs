@@ -20,4 +20,9 @@ public class PlayerAttackInitialState : IPlayerAttackState
     {
         Player.ChangePlayerAttackState(new PlayerAttackIdleState(Player, PlayerData));
     }
+
+	public void HandleAnimation()
+	{
+		return;
+	}
 }

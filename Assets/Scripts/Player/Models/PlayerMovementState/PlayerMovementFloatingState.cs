@@ -49,5 +49,9 @@ public class PlayerMovementFloatingState : IPlayerMovementState
             PlayerData.FloatingYSpeed);
     }
     
+	public void HandleAnimation()
+	{
+		Player.Animator.SetInteger("PlayerState", (int)PlayerState.PlayerStateType.Fall);
+	}
 }
 

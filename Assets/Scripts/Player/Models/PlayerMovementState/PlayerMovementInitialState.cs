@@ -26,6 +26,11 @@ public class PlayerMovementInitialState: IPlayerMovementState
         }
     }
 
+	public void HandleAnimation()
+	{
+		return;
+	}
+
 }
 
 

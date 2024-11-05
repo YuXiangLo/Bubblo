@@ -108,6 +108,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         DetectPlayerStatus();
         HandleMovement();
         HandleAttack();
+		HandleAnimation();
         DetectFaceSide();
         RestrictPlayerWithinCamera();
     }
@@ -131,6 +132,12 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     {
         PlayerAttackState.HandleAttack();
     }
+
+	private void HandleAnimation()
+	{
+		PlayerMovementState.HandleAnimation();
+		PlayerAttackState.HandleAnimation();
+	}
 
     private void DetectFaceSide() 
     {
