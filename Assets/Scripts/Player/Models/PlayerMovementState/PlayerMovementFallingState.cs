@@ -16,20 +16,24 @@ public class PlayerMovementFallingState: IPlayerMovementState
     {
         Player = player;
         PlayerData = playerData;
+        Player.Animator.SetBool("IsFall", true);
     }
 
     public void HandleMovement()
     {
         if (Player.IsGrounded)
         {
+			Player.Animator.SetBool("IsFall", false);
             Player.ChangePlayerMovementState(new PlayerMovementGroundState(Player, PlayerData));
         }
         else if (Player.Velocity.y > 0f)
         {
+			Player.Animator.SetBool("IsFall", false);
             Player.ChangePlayerMovementState(new PlayerMovementJumpingState(Player, PlayerData));
         }
         else if (Input.GetButtonDown("Jump"))
         {
+			Player.Animator.SetBool("IsFall", false);
             Player.ChangePlayerMovementState(new PlayerMovementFloatingState(Player, PlayerData));
         }
         else 

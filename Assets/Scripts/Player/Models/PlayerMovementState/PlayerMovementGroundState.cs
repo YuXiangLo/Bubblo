@@ -48,6 +48,7 @@ public class PlayerMovementGroundState : IPlayerMovementState
     {
         var horizontalInput = Input.GetAxisRaw("Horizontal");
         Player.Velocity.x = horizontalInput * PlayerData.MoveSpeed;
+        Player.Animator.SetFloat("Speed", Mathf.Abs(Player.Velocity.x));
     }
 
     private void ApplyGravity()

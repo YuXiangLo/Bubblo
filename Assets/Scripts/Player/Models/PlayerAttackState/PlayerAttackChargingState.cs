@@ -31,8 +31,8 @@ public class PlayerAttackChargingState : IPlayerAttackState
         if (CurrentBubble == null)
         {
             Player.ChangePlayerAttackState(new PlayerAttackIdleState(Player, PlayerData));
-            Player.IsAttacking = false;
-            Player.IsHoldingBubble = false;
+			Player.Animator.SetBool("IsAttack", false);
+			Player.Animator.SetBool("IsHoldingBubble", false);
             return;
         }
 
@@ -71,6 +71,7 @@ public class PlayerAttackChargingState : IPlayerAttackState
     {
         CurrentBubble.Release();
         CurrentBubble = null;
-        Player.IsAttacking = true;
+		Player.Animator.SetBool("IsAttack", true);
+		Player.Animator.SetBool("IsHoldingBubble", false);
     }
 }

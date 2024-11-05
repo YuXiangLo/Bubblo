@@ -21,7 +21,7 @@ public class PlayerAttackIdleState : IPlayerAttackState
         if (Input.GetButtonDown("Fire1"))
         {
             Player.ChangePlayerAttackState(new PlayerAttackChargingState(Player, PlayerData, Player.InitialBubble()));
-            Player.IsHoldingBubble = true;
+			Player.Animator.SetBool("IsHoldingBubble", true);
         }
     } 
 }
