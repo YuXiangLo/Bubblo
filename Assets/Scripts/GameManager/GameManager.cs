@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 
         // Load Scene1 and register callback for when it has loaded
         SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.LoadScene(SceneList.Scene[1]);
+        SceneManager.LoadScene(SceneList.Scene[0]);
     }
 
     private void StoreCurrentStates()
@@ -57,10 +57,17 @@ public class GameManager : MonoBehaviour
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
         int index = Array.IndexOf(SceneList.Scene, currentSceneName);
-        StoreCurrentStates();
-        string nextSceneName = SceneList.Scene[index + 1];
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.LoadScene(nextSceneName);
+        if (index == SceneList.Scene.Length - 1)
+        {
+            SceneManager.LoadScene("Start");
+            return;
+        }
+        else{
+            StoreCurrentStates();
+            string nextSceneName = SceneList.Scene[index + 1];
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.LoadScene(nextSceneName);
+        }
     }
 
     // private IEnumerator TransitionAfterDelay(string sceneToLoad)
