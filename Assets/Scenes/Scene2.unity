@@ -1285,22 +1285,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
---- !u!114 &1264317369 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2975997888866370563, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
-  m_PrefabInstance: {fileID: 1264317368}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc4d5c529fbfd581f895daef4b4f41c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!50 &1264317370 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 316718149377873124, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
-  m_PrefabInstance: {fileID: 1264317368}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1308639226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2161,21 +2145,9 @@ PrefabInstance:
       value: Door
       objectReference: {fileID: 0}
     - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
-      propertyPath: SceneToLoad
-      value: Start
-      objectReference: {fileID: 0}
-    - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
-      propertyPath: PlayerRigidbody
-      value: 
-      objectReference: {fileID: 1264317370}
-    - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
       propertyPath: CameraFollowScript
       value: 
       objectReference: {fileID: 3393518520139551264}
-    - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
-      propertyPath: PlayerMovementScript
-      value: 
-      objectReference: {fileID: 1264317369}
     - target: {fileID: 5667891049614619252, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 42

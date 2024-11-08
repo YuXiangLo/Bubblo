@@ -3,12 +3,11 @@ using UnityEngine.UI;
 
 public class SceneTransition : MonoBehaviour
 {
-    public string SceneToLoad;
     public KeyCode InteractionKey = KeyCode.E;
     public Text InteractionMessage;
     private bool IsPlayerInRange = false;
-    public Rigidbody2D PlayerRigidbody;
-    public Player PlayerScript;
+    private Rigidbody2D PlayerRigidbody;
+    private Player PlayerScript;
     public MonoBehaviour CameraFollowScript;
     public Vector2 BlowForce = new Vector2(500, 300);
     public float TransitionDelay = 1f;
@@ -52,14 +51,7 @@ public class SceneTransition : MonoBehaviour
         }
 
         GameManager.Instance.SceneLevelup();
-        // StartCoroutine(TransitionAfterDelay());
     }
-
-    // private IEnumerator TransitionAfterDelay()
-    // {
-    //     yield return new WaitForSeconds(TransitionDelay);
-    //     SceneManager.LoadScene(SceneToLoad);
-    // }
 
     private void OnTriggerEnter2D(Collider2D other)
     {

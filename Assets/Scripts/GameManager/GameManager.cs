@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     private Player Player;
     private float CurrentHealthTemp;
     private float CurrentMagicPointTemp;
-    [SerializeField] private float TransitionDelay = 1f;
+    [SerializeField] private SceneList SceneList;
+    public PlayerHealth PlayerHealth;
 
     void Awake()
     {
@@ -40,80 +41,58 @@ public class GameManager : MonoBehaviour
 
         // Load Scene1 and register callback for when it has loaded
         SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.LoadScene("Scene1");
+        SceneManager.LoadScene(SceneList.Scene[1]);
     }
 
+    private void StoreCurrentStates()
+    {
+        CurrentHealthTemp = Player.CurrentHealth;
+        CurrentMagicPointTemp = Player.CurrentMagicPoint;
+    }
+
+    /// <summary>
+    /// Transition to the next scene
+    /// </summary>
     public void SceneLevelup()
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
-        if (currentSceneName.StartsWith("Scene"))
-        {
-            if (int.TryParse(currentSceneName.Substring(5), out int currentLevel))
-            {
-                string nextSceneName = $"Scene{currentLevel + 1}";
-                Debug.Log($"Next scene: {nextSceneName}");
-
-                // Save the player's health and magic points
-                CurrentHealthTemp = Player.CurrentHealth;
-                CurrentMagicPointTemp = Player.CurrentMagicPoint;
-                Debug.Log($"CurrentHealthTemp: {CurrentHealthTemp}");
-                Debug.Log($"CurrentMagicPointTemp: {CurrentMagicPointTemp}");
-
-                // Load the next scene and register callback for when it has loaded
-                SceneManager.sceneLoaded += OnSceneLoaded;
-                StartCoroutine(TransitionAfterDelay(nextSceneName));
-            }
-        }
+        int index = Array.IndexOf(SceneList.Scene, currentSceneName);
+        StoreCurrentStates();
+        string nextSceneName = SceneList.Scene[index + 1];
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.LoadScene(nextSceneName);
     }
 
-    private IEnumerator TransitionAfterDelay(string sceneToLoad)
-    {
-        yield return new WaitForSeconds(TransitionDelay);
-        SceneManager.LoadScene(sceneToLoad);
-    }
+    // private IEnumerator TransitionAfterDelay(string sceneToLoad)
+    // {
+    //     yield return new WaitForSeconds(TransitionDelay);
+    //     SceneManager.LoadScene(sceneToLoad);
+    // }
 
+    /// <summary>
+    /// Callback for when a scene has loaded    
+    /// </summary>
+    /// <param name="scene"></param>
+    /// <param name="mode"></param>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log($"Scene loaded: {scene.name}");
-
         if (scene.name == "Scene1")
         {
             Player = GameObject.FindWithTag("Player").GetComponent<Player>();
+            Player.CurrentHealth = PlayerHealth.MaxHealth;
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
-        else if (scene.name.StartsWith("Scene"))
+        else
         {
-            StartCoroutine(FindAndSetupPlayerInNewScene());
-            SceneManager.sceneLoaded -= OnSceneLoaded;
-        }
-    }
-
-    private IEnumerator FindAndSetupPlayerInNewScene()
-    {
-        yield return null; // Wait for one frame to ensure all objects are loaded
-
-        // Find the existing player in the new scene
-        GameObject playerObj = GameObject.FindWithTag("Player");
-        if (playerObj != null)
-        {
+            GameObject playerObj = GameObject.FindWithTag("Player");
             Player = playerObj.GetComponent<Player>();
-
             // Restore health and magic points
             if (Player != null)
             {
                 Player.CurrentHealth = CurrentHealthTemp;
                 Player.CurrentMagicPoint = CurrentMagicPointTemp;
-                Debug.Log($"Player Health Restored: {Player.CurrentHealth}");
-                Debug.Log($"Player Magic Restored: {Player.CurrentMagicPoint}");
             }
-            else
-            {
-                Debug.LogError("Player component not found on the existing Player object.");
-            }
-        }
-        else
-        {
-            Debug.LogError("No player object with tag 'Player' found in the new scene.");
+            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
 }

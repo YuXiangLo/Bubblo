@@ -629,7 +629,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelData: {fileID: 2447762004939951371}
-  Player: {fileID: 0}
   Offset: {x: 0, y: 0, z: 0}
   SmoothSpeed: 0.125
 --- !u!1 &579448937
@@ -1547,50 +1546,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door
       objectReference: {fileID: 0}
-    - target: {fileID: 3309046639582871596, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
-      propertyPath: m_TagString
-      value: Door
-      objectReference: {fileID: 0}
-    - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
-      propertyPath: BlowForce.x
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
-      propertyPath: BlowForce.y
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
-      propertyPath: SceneToLoad
-      value: Scene3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
-      propertyPath: PlayerScript
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
-      propertyPath: PlayerRigidbody
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
-      propertyPath: TransitionDelay
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
-      propertyPath: playerRigidbody
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
       propertyPath: CameraFollowScript
       value: 
       objectReference: {fileID: 519420033}
-    - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
-      propertyPath: PlayerMovementScript
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5240095690223936181, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
-      propertyPath: playerMovementScript
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5667891049614619252, guid: c7349d105a6325eceb75f965fe2d78f2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
