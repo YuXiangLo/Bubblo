@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Enemies.BossUnicorn
 {
-    public class BossUnicorn : MonoBehaviour
+    public class BossUnicorn : MonoBehaviour, IEnemyModifyHealth
     {
         private EnemyHealth Health;
         private BossUnicornMovement Movement;

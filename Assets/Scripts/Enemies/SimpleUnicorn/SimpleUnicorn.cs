@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Enemies.SimpleUnicorn
 {
-    public class SimpleUnicorn : MonoBehaviour, IModifyHealth
+    public class SimpleUnicorn : MonoBehaviour, IEnemyModifyHealth
     {
         private SimpleUnicornMovement SimpleUnicornMovement;
         private EnemyHealth SimpleUnicornHealth;

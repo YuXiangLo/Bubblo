@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Enemyies.SimpleBee 
+namespace Enemies.SimpleBee 
 {
-    public class SimpleBee : MonoBehaviour, IModifyHealth
+    public class SimpleBee : MonoBehaviour, IEnemyModifyHealth
     {
         private SimpleBeeMovement Movement;
         private EnemyHealth Health;

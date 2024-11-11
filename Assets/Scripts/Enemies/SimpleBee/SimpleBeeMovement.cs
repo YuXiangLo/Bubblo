@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Enemyies.SimpleBee 
+namespace Enemies.SimpleBee 
 {
     public class SimpleBeeMovement : MonoBehaviour
     {

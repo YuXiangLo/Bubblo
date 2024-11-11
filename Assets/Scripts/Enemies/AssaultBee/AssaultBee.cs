@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Enemies.AssaultBee
 {
-    public class AssaultBee : MonoBehaviour, IModifyHealth
+    public class AssaultBee : MonoBehaviour, IEnemyModifyHealth
     {
         private AssaultBeeMovement Movement;
         private EnemyHealth Health;

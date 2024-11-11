@@ -50,7 +50,7 @@ public class Bubble : MonoBehaviour
     {
 		if(other.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
 			float damage = Mathf.Lerp(MinDamage, MaxDamage, CurrentSize / MaxSize);
-			other.gameObject.GetComponent<IModifyHealth>().TakeDamage(damage);
+			other.gameObject.GetComponent<IEnemyModifyHealth>().TakeDamage(damage);
 		}
 
 		bool shouldDestroy = true;
