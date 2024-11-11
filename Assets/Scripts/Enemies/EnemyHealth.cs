@@ -15,7 +15,6 @@ namespace Enemies
 
         public void TakeDamage(float amount)
         {
-            Debug.Log("Enemy took " + amount + " damage");
             health -= amount;
             if (health <= 0)
             {
@@ -30,7 +29,6 @@ namespace Enemies
 
         private void Die()
         {
-            Debug.Log("Simple Unicorn has died!");
             Destroy(gameObject);
         }
     }
