@@ -4,13 +4,13 @@ public class PlayerAttackChargingState : IPlayerAttackState
 {
     public Player Player { get; }
     public PlayerData PlayerData { get; }
-    private Bubble CurrentBubble;
-    private float HoldTime;
+    public bool ShouldShowAnimation { get; } = true;
+
+    private readonly Bubble CurrentBubble;
     private readonly bool IsExhaustedAtInit;
+    private float HoldTime;
     private bool MaxCharged;
     private const float MaxHoldTime = 2f;
-	private bool IsAttack = false;
-	private bool IsHoldingBubble = false;
     
     /// <summary>
     /// Constructor
@@ -26,23 +26,17 @@ public class PlayerAttackChargingState : IPlayerAttackState
         HoldTime = 0f;
         IsExhaustedAtInit = Player.CurrentMagicPoint <= 0f;
         MaxCharged = false;
+        Player.Animator.SetInteger("PlayerState", (int)PlayerState.PlayerStateType.GenerateBubble);
     }
 
     public void HandleAttack()
     {
-        if (CurrentBubble == null)
-        {
-            Player.ChangePlayerAttackState(new PlayerAttackIdleState(Player, PlayerData));
-            return;
-        }
-
         if (IsExhaustedAtInit || Input.GetButtonUp("Fire1"))
         {
             ReleaseBubble();
         }
         else if (Input.GetButton("Fire1"))
         {
-			IsHoldingBubble = true;
             if (!MaxCharged)
             {
                 ChargeBubble();
@@ -71,13 +65,6 @@ public class PlayerAttackChargingState : IPlayerAttackState
     private void ReleaseBubble() 
     {
         CurrentBubble.Release();
-        CurrentBubble = null;
-		IsAttack = true;
-		IsHoldingBubble = false;
+        Player.ChangePlayerAttackState(new PlayerAttackAttackingState(Player, PlayerData));
     }
-
-	public void HandleAnimation()
-	{
-		Player.Animator.SetInteger("PlayerState", (int)PlayerState.PlayerStateType.GenerateBubble);
-	}
 }

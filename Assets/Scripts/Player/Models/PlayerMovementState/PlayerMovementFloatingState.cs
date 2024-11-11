@@ -20,6 +20,7 @@ public class PlayerMovementFloatingState : IPlayerMovementState
         PlayerData = playerData;
         Player.Velocity.x = PlayerData.FloatingXSpeed;
         HorizontalMoveSpeed = PlayerData.MoveSpeed;
+        HandleAnimation();
     }
 
     public void HandleMovement()

@@ -43,6 +43,8 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     public void ChangePlayerAttackState(IPlayerAttackState newPlayerAttackState)
     {
         PlayerAttackState = newPlayerAttackState;
+        if (!PlayerAttackState.ShouldShowAnimation)
+            PlayerMovementState.HandleAnimation();
         PlayerAttackState.HandleAttack();
     }
 
@@ -91,6 +93,11 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         ChangePlayerMovementState(new PlayerMovementKnockBackState(this, PlayerData, knockbackDirection, toSleep));
 	}
 
+    public void EndOfAttackingAnimation()
+    {
+
+    }
+
     private void Awake()
     {
         PlayerData = GetComponent<PlayerData>();
@@ -108,7 +115,6 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         DetectPlayerStatus();
         HandleMovement();
         HandleAttack();
-		HandleAnimation();
         DetectFaceSide();
         RestrictPlayerWithinCamera();
     }
@@ -132,12 +138,6 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     {
         PlayerAttackState.HandleAttack();
     }
-
-	private void HandleAnimation()
-	{
-		PlayerMovementState.HandleAnimation();
-		PlayerAttackState.HandleAnimation();
-	}
 
     private void DetectFaceSide() 
     {

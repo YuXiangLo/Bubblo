@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-public class PlayerMovementGroundState : IPlayerMovementState
+public class PlayerMovementIdleState : IPlayerMovementState
 {
     public Player Player { get; }
     public PlayerData PlayerData { get; }
@@ -12,7 +12,7 @@ public class PlayerMovementGroundState : IPlayerMovementState
     /// </summary>
     /// <param name="player">Player</param>
     /// <param name="playerData">PlayerData</param>
-    public PlayerMovementGroundState(Player player, PlayerData playerData)
+    public PlayerMovementIdleState(Player player, PlayerData playerData)
     {
         Player = player;
         PlayerData = playerData;
@@ -23,9 +23,16 @@ public class PlayerMovementGroundState : IPlayerMovementState
     {
         if (Player.IsGrounded)
         {
-            DetectJumpMovement();
-            DetectHorizontalMovement();
-            ApplyGravity();
+            if (Mathf.Abs(Player.Velocity.x) > 0.01f) 
+            {
+                Player.ChangePlayerMovementState(new PlayerMovementRunningState(Player, PlayerData));
+            }
+            else 
+            {
+                DetectJumpMovement();
+                DetectHorizontalMovement();
+                ApplyGravity();
+            }
         }
         else if (Player.Velocity.y > 0)
         {
@@ -56,13 +63,10 @@ public class PlayerMovementGroundState : IPlayerMovementState
         Player.Velocity.y = Mathf.Max(Player.Velocity.y, 0f);
     }
 
-	private void HandleAnimation()
+	public void HandleAnimation()
 	{
-		if (Player.Velocity.x == 0)
+		if (!Player.PlayerAttackState.ShouldShowAnimation)
 			Player.Animator.SetInteger("PlayerState", (int)PlayerState.PlayerStateType.Idle);
-		else
-			Player.Animator.SetInteger("PlayerState", (int)PlayerState.PlayerStateType.Run);
 	}
-
 }
 

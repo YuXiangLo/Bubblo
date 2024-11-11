@@ -16,13 +16,14 @@ public class PlayerMovementFallingState: IPlayerMovementState
     {
         Player = player;
         PlayerData = playerData;
+        HandleAnimation();
     }
 
     public void HandleMovement()
     {
         if (Player.IsGrounded)
         {
-            Player.ChangePlayerMovementState(new PlayerMovementGroundState(Player, PlayerData));
+            Player.ChangePlayerMovementState(new PlayerMovementIdleState(Player, PlayerData));
         }
         else if (Player.Velocity.y > 0f)
         {
