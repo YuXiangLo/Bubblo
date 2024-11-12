@@ -31,7 +31,6 @@ public class PlayerMovementIdleState : IPlayerMovementState
             {
                 DetectJumpMovement();
                 DetectHorizontalMovement();
-                ApplyGravity();
             }
         }
         else if (Player.Velocity.y > 0)
@@ -56,11 +55,6 @@ public class PlayerMovementIdleState : IPlayerMovementState
     {
         var horizontalInput = Input.GetAxisRaw("Horizontal");
         Player.Velocity.x = horizontalInput * PlayerData.MoveSpeed;
-    }
-
-    private void ApplyGravity()
-    {
-        Player.Velocity.y = Mathf.Max(Player.Velocity.y, 0f);
     }
 
 	public void HandleAnimation()

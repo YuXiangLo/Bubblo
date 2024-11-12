@@ -21,7 +21,6 @@ public class PlayerAttackChargingState : IPlayerAttackState
     /// <param name="currentBubble">Bubble Player's Holding</param>
     public PlayerAttackChargingState(Player player, PlayerData playerData, Bubble currentBubble)
     {
-        Debug.Log("Inside Charging State");
         Player = player;
         PlayerData = playerData;
         CurrentBubble = currentBubble;

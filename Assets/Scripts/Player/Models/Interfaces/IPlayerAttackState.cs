@@ -6,6 +6,9 @@ public interface IPlayerAttackState
     Player Player { get; }
     PlayerData PlayerData { get; }
 
+    /// <summary>
+    /// If the Attack State Has Set Animation
+    /// </summary>
     bool ShouldShowAnimation { get; }
 
     /// <summary>

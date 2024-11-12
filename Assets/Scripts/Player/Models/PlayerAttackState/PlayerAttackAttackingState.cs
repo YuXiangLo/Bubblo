@@ -7,10 +7,14 @@ public class PlayerAttackAttackingState : IPlayerAttackState
     public Player Player { get; }
     public PlayerData PlayerData { get; }
     public bool ShouldShowAnimation { get; } = true;
-
+    
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="player">Player</param>
+    /// <param name="playerData">PlayerData</param>
     public PlayerAttackAttackingState(Player player, PlayerData playerData)
     {
-        Debug.Log("Inside Attacking State");
         Player = player;
         PlayerData = playerData;
         Player.SetAnimation(PlayerStateType.Attack);
@@ -21,7 +25,6 @@ public class PlayerAttackAttackingState : IPlayerAttackState
         var stateInfo = Player.Animator.GetCurrentAnimatorStateInfo(0);
         if (stateInfo.IsName("PlayerAttack") && stateInfo.normalizedTime >= 1.0f)
         {
-            Debug.Log("Leave Attacking State");
             Player.ChangePlayerAttackState(new PlayerAttackIdleState(Player, PlayerData));
         }
     }

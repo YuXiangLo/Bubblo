@@ -13,7 +13,6 @@ public class PlayerAttackIdleState : IPlayerAttackState
     /// <param name="playerData">PlayerData</param>
     public PlayerAttackIdleState(Player player, PlayerData playerData)
     {
-        Debug.Log("Inside Idle State");
         Player = player;
         PlayerData = playerData;
     }
