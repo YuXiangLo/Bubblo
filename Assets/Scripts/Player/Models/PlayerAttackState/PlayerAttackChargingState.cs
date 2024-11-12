@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerAttackChargingState : IPlayerAttackState
@@ -6,7 +7,7 @@ public class PlayerAttackChargingState : IPlayerAttackState
     public PlayerData PlayerData { get; }
     public bool ShouldShowAnimation { get; } = true;
 
-    private readonly Bubble CurrentBubble;
+    private Bubble CurrentBubble;
     private readonly bool IsExhaustedAtInit;
     private float HoldTime;
     private bool MaxCharged;
@@ -20,6 +21,7 @@ public class PlayerAttackChargingState : IPlayerAttackState
     /// <param name="currentBubble">Bubble Player's Holding</param>
     public PlayerAttackChargingState(Player player, PlayerData playerData, Bubble currentBubble)
     {
+        Debug.Log("Inside Charging State");
         Player = player;
         PlayerData = playerData;
         CurrentBubble = currentBubble;
@@ -31,6 +33,11 @@ public class PlayerAttackChargingState : IPlayerAttackState
 
     public void HandleAttack()
     {
+        if (CurrentBubble == null)
+        {
+            Player.ChangePlayerAttackState(new PlayerAttackAttackingState(Player, PlayerData));
+        }
+
         if (IsExhaustedAtInit || Input.GetButtonUp("Fire1"))
         {
             ReleaseBubble();
@@ -42,6 +49,16 @@ public class PlayerAttackChargingState : IPlayerAttackState
                 ChargeBubble();
             }
         }
+    }
+
+    public void HandleKnockedBack() 
+    {
+        if (CurrentBubble != null)
+        {
+            CurrentBubble.Release();
+        }
+
+        Player.ChangePlayerAttackState(new PlayerAttackIdleState(Player, PlayerData));
     }
 
     private void ChargeBubble()
@@ -62,9 +79,9 @@ public class PlayerAttackChargingState : IPlayerAttackState
     {
         CurrentBubble.StopCharging();
     }
-    private void ReleaseBubble() 
+    private void ReleaseBubble()
     {
         CurrentBubble.Release();
-        Player.ChangePlayerAttackState(new PlayerAttackAttackingState(Player, PlayerData));
+        CurrentBubble = null;
     }
 }

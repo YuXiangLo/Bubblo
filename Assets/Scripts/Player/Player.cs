@@ -90,12 +90,16 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     /// <param name="toSleep">To Sleep Time</param>
     public void Knockback(Vector2 knockbackDirection, float toSleep)
     {
+        PlayerAttackState.HandleKnockedBack();
         ChangePlayerMovementState(new PlayerMovementKnockBackState(this, PlayerData, knockbackDirection, toSleep));
 	}
 
-    public void EndOfAttackingAnimation()
+    /// <summary>
+    /// Bubble is Destroyed
+    /// </summary>
+    public void BubbleDestroyed()
     {
-
+        ChangePlayerAttackState(new PlayerAttackIdleState(this, PlayerData));
     }
 
     private void Awake()

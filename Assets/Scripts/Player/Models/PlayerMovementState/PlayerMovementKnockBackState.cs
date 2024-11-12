@@ -22,8 +22,8 @@ public class PlayerMovementKnockBackState : IPlayerMovementState
         PlayerData = playerData;
         KnockbackDirection = knockbackDirection;
         ToSleep = toSleep;
-        Knockback(KnockbackDirection, ToSleep);
         HandleAnimation();
+        Knockback(KnockbackDirection, ToSleep);
     }
 
     public void HandleMovement()

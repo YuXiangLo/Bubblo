@@ -12,4 +12,9 @@ public interface IPlayerAttackState
     /// Handle Player's Attack
     /// </summary>
     public void HandleAttack();
+
+    /// <summary>
+    /// Handle Player Being Knocked Back
+    /// </summary>
+    public void HandleKnockedBack();
 }

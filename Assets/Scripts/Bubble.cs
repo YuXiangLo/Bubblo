@@ -59,10 +59,13 @@ public class Bubble : MonoBehaviour
 				shouldDestroy = false;
 				break;
 			}
-		}	
+		}
 
 		if (shouldDestroy) {
 			Destroy(gameObject);
+            if (!IsRelease) {
+                Player.BubbleDestroyed();
+            }
 		}
 
 		if(other.gameObject.layer == LayerMask.NameToLayer("Player")) {

@@ -13,9 +13,9 @@ public class PlayerAttackIdleState : IPlayerAttackState
     /// <param name="playerData">PlayerData</param>
     public PlayerAttackIdleState(Player player, PlayerData playerData)
     {
+        Debug.Log("Inside Idle State");
         Player = player;
         PlayerData = playerData;
-		Player.Animator.SetInteger("PlayerState", (int)PlayerState.PlayerStateType.Attack);
     }
 
     public void HandleAttack()
@@ -25,4 +25,9 @@ public class PlayerAttackIdleState : IPlayerAttackState
             Player.ChangePlayerAttackState(new PlayerAttackChargingState(Player, PlayerData, Player.InitialBubble()));
         }
     } 
+
+    public void HandleKnockedBack() 
+    {
+        return;
+    }
 }
