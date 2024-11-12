@@ -28,7 +28,7 @@ public class PlayerAttackChargingState : IPlayerAttackState
         HoldTime = 0f;
         IsExhaustedAtInit = Player.CurrentMagicPoint <= 0f;
         MaxCharged = false;
-        Player.Animator.SetInteger("PlayerState", (int)PlayerState.PlayerStateType.GenerateBubble);
+        Player.SetAnimation(PlayerStateType.GenerateBubble);
     }
 
     public void HandleAttack()
@@ -56,6 +56,7 @@ public class PlayerAttackChargingState : IPlayerAttackState
         if (CurrentBubble != null)
         {
             CurrentBubble.Remove();
+            CurrentBubble = null;
         }
 
         Player.ChangePlayerAttackState(new PlayerAttackIdleState(Player, PlayerData));

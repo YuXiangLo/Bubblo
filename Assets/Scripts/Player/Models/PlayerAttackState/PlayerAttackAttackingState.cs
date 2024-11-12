@@ -13,7 +13,7 @@ public class PlayerAttackAttackingState : IPlayerAttackState
         Debug.Log("Inside Attacking State");
         Player = player;
         PlayerData = playerData;
-        Player.Animator.SetInteger("PlayerState", (int)PlayerState.PlayerStateType.Attack);
+        Player.SetAnimation(PlayerStateType.Attack);
     }
 
     public void HandleAttack()

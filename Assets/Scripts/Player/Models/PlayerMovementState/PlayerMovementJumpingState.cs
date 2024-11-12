@@ -45,8 +45,7 @@ public class PlayerMovementJumpingState: IPlayerMovementState
 
 	public void HandleAnimation()
     {
-        if (!Player.PlayerAttackState.ShouldShowAnimation)
-		    Player.Animator.SetInteger("PlayerState", (int)PlayerState.PlayerStateType.Jump);
+        Player.SetAnimation(PlayerStateType.Jump);
 	}
 }
 

@@ -49,6 +49,20 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     }
 
     /// <summary>
+    /// Set Player's Animation
+    /// </summary>
+    /// <param name="playerStateType"></param>
+    public void SetAnimation(PlayerStateType playerStateType)
+    {
+        bool isAttackAnimation = (playerStateType == PlayerStateType.Attack || playerStateType == PlayerStateType.GenerateBubble);
+                
+        if (isAttackAnimation || !PlayerAttackState.ShouldShowAnimation)
+        {
+            Animator.SetInteger("PlayerState", (int)playerStateType);
+        }
+    }
+
+    /// <summary>
     /// Initialize a New Bubble
     /// </summary>
     /// <returns>New Bubble</returns>

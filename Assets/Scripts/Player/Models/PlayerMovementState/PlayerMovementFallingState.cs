@@ -57,8 +57,7 @@ public class PlayerMovementFallingState: IPlayerMovementState
 
 	public void HandleAnimation()
 	{
-        if (!Player.PlayerAttackState.ShouldShowAnimation)
-		    Player.Animator.SetInteger("PlayerState", (int)PlayerState.PlayerStateType.Fall);
+        Player.SetAnimation(PlayerStateType.Fall);
 	}
 }
 

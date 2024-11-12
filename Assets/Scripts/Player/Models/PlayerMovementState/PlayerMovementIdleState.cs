@@ -65,8 +65,7 @@ public class PlayerMovementIdleState : IPlayerMovementState
 
 	public void HandleAnimation()
 	{
-		if (!Player.PlayerAttackState.ShouldShowAnimation)
-			Player.Animator.SetInteger("PlayerState", (int)PlayerState.PlayerStateType.Idle);
+        Player.SetAnimation(PlayerStateType.Idle);
 	}
 }
 

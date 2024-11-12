@@ -64,7 +64,6 @@ public class PlayerMovementRunningState : IPlayerMovementState
 
 	public void HandleAnimation()
 	{
-		if (!Player.PlayerAttackState.ShouldShowAnimation)
-			Player.Animator.SetInteger("PlayerState", (int)PlayerState.PlayerStateType.Run);
+        Player.SetAnimation(PlayerStateType.Run);
 	}
 }
