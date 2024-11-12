@@ -88,6 +88,11 @@ public class Bubble : MonoBehaviour
         Destroy(gameObject, LifeTime);
     }
 
+    public void Remove()
+    {
+        Destroy(gameObject);
+    }
+
     private void UpdateSize()
     {
         transform.localScale = Vector3.one * CurrentSize;

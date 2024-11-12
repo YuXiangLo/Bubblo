@@ -55,7 +55,7 @@ public class PlayerAttackChargingState : IPlayerAttackState
     {
         if (CurrentBubble != null)
         {
-            CurrentBubble.Release();
+            CurrentBubble.Remove();
         }
 
         Player.ChangePlayerAttackState(new PlayerAttackIdleState(Player, PlayerData));
