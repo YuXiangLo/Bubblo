@@ -15,6 +15,7 @@ public class PlayerMovementIdleState : IPlayerMovementState
     public PlayerMovementIdleState(Player player, PlayerData playerData)
     {
         Player = player;
+        Player.Velocity.y = 0f;
         PlayerData = playerData;
         HandleAnimation();
     }

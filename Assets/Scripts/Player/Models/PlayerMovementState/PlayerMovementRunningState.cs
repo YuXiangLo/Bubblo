@@ -15,6 +15,7 @@ public class PlayerMovementRunningState : IPlayerMovementState
     public PlayerMovementRunningState(Player player, PlayerData playerData)
     {
         Player = player;
+        Player.Velocity.y = 0f;
         PlayerData = playerData;
         HandleAnimation();
     }
