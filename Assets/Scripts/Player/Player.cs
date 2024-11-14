@@ -5,6 +5,9 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     public IPlayerMovementState PlayerMovementState;
     public IPlayerAttackState PlayerAttackState;
     
+	// Player Animator
+    public Animator Animator;
+
     // Player Movement
     public bool IsGrounded = false;
     public bool IsFacingRight => transform.localScale.x > 0f;
@@ -12,8 +15,6 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
     // PlayerAttack
     public float CurrentMagicPoint;
-    public bool IsHoldingBubble = false;
-	public bool IsAttacking = false;
     public float MagicPercentage => CurrentMagicPoint / PlayerData.MaxMagicPoint;
     
     // Player Health
@@ -24,7 +25,6 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     private Rigidbody2D Rigidbody2D;
     private PlayerHealth PlayerHealth;
     private Camera MainCamera;
-    private Animator Animator;
 
     /// <summary>
     /// Change Player Movement State
@@ -43,7 +43,23 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     public void ChangePlayerAttackState(IPlayerAttackState newPlayerAttackState)
     {
         PlayerAttackState = newPlayerAttackState;
+        if (!PlayerAttackState.ShouldShowAnimation)
+            PlayerMovementState.HandleAnimation();
         PlayerAttackState.HandleAttack();
+    }
+
+    /// <summary>
+    /// Set Player's Animation
+    /// </summary>
+    /// <param name="playerStateType"></param>
+    public void SetAnimation(PlayerStateType playerStateType)
+    {
+        bool isAttackAnimation = (playerStateType == PlayerStateType.Attack || playerStateType == PlayerStateType.GenerateBubble);
+                
+        if (isAttackAnimation || !PlayerAttackState.ShouldShowAnimation)
+        {
+            Animator.SetInteger("PlayerState", (int)playerStateType);
+        }
     }
 
     /// <summary>
@@ -88,8 +104,17 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     /// <param name="toSleep">To Sleep Time</param>
     public void Knockback(Vector2 knockbackDirection, float toSleep)
     {
+        PlayerAttackState.HandleKnockedBack();
         ChangePlayerMovementState(new PlayerMovementKnockBackState(this, PlayerData, knockbackDirection, toSleep));
 	}
+
+    /// <summary>
+    /// Bubble is Destroyed
+    /// </summary>
+    public void BubbleDestroyed()
+    {
+        ChangePlayerAttackState(new PlayerAttackIdleState(this, PlayerData));
+    }
 
     private void Awake()
     {
@@ -108,7 +133,6 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         DetectPlayerStatus();
         HandleMovement();
         HandleAttack();
-        HandleAnimator();
         DetectFaceSide();
         RestrictPlayerWithinCamera();
     }
@@ -131,15 +155,6 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     private void HandleAttack()
     {
         PlayerAttackState.HandleAttack();
-    }
-
-    private void HandleAnimator()
-    {
-        Animator.SetFloat("Speed", Mathf.Abs(Velocity.x));
-        Animator.SetBool("IsFall", !IsGrounded && Velocity.y < 0);
-		Animator.SetBool("IsJump", !IsGrounded && Velocity.y >= 0);
-        Animator.SetBool("IsHoldingBubble", IsHoldingBubble);
-		Animator.SetBool("IsAttack", IsAttacking);
     }
 
     private void DetectFaceSide() 

@@ -4,6 +4,7 @@ public class PlayerAttackIdleState : IPlayerAttackState
 {
     public Player Player { get; }
     public PlayerData PlayerData { get; }
+    public bool ShouldShowAnimation { get; } = false;
     
     /// <summary>
     /// Constructor
@@ -21,7 +22,11 @@ public class PlayerAttackIdleState : IPlayerAttackState
         if (Input.GetButtonDown("Fire1"))
         {
             Player.ChangePlayerAttackState(new PlayerAttackChargingState(Player, PlayerData, Player.InitialBubble()));
-            Player.IsHoldingBubble = true;
         }
     } 
+
+    public void HandleKnockedBack() 
+    {
+        return;
+    }
 }

@@ -22,6 +22,7 @@ public class PlayerMovementKnockBackState : IPlayerMovementState
         PlayerData = playerData;
         KnockbackDirection = knockbackDirection;
         ToSleep = toSleep;
+        HandleAnimation();
         Knockback(KnockbackDirection, ToSleep);
     }
 
@@ -47,4 +48,9 @@ public class PlayerMovementKnockBackState : IPlayerMovementState
 		yield return new WaitForSeconds(toSleep);
         Player.ChangePlayerMovementState(new PlayerMovementInitialState(Player, PlayerData));
     }
+
+	public void HandleAnimation()
+	{
+        Player.SetAnimation(PlayerStateType.Fall);
+	}
 }

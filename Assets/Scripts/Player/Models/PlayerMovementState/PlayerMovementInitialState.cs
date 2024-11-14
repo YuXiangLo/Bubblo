@@ -1,3 +1,5 @@
+using System;
+
 public class PlayerMovementInitialState: IPlayerMovementState
 {
     public Player Player { get; }
@@ -18,7 +20,7 @@ public class PlayerMovementInitialState: IPlayerMovementState
     {
         if (Player.IsGrounded)
         {
-            Player.ChangePlayerMovementState(new PlayerMovementGroundState(Player, PlayerData));
+            Player.ChangePlayerMovementState(new PlayerMovementIdleState(Player, PlayerData));
         }
         else 
         {
@@ -26,6 +28,10 @@ public class PlayerMovementInitialState: IPlayerMovementState
         }
     }
 
+    public void HandleAnimation()
+    {
+        
+    }
 }
 
 
