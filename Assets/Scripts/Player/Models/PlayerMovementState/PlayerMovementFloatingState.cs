@@ -25,7 +25,11 @@ public class PlayerMovementFloatingState : IPlayerMovementState
 
     public void HandleMovement()
     {
-        if (Input.GetButtonUp("Jump"))
+        if (Player.IsGrounded)
+        {
+            Player.ChangePlayerMovementState(new PlayerMovementIdleState(Player, PlayerData));
+        } 
+		else if (Input.GetButtonUp("Jump"))
         {
             Player.ChangePlayerMovementState(new PlayerMovementFallingState(Player, PlayerData));
         }
