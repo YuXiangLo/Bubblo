@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class SceneTransition : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class SceneTransition : MonoBehaviour
     public Text InteractionMessage;
     private bool IsPlayerInRange = false;
     private Rigidbody2D PlayerRigidbody;
+	private BoxCollider2D PlayerCollider;
     private Player PlayerScript;
     public MonoBehaviour CameraFollowScript;
     public Vector2 BlowForce = new Vector2(500, 300);
@@ -20,7 +22,10 @@ public class SceneTransition : MonoBehaviour
         }
 
         GameObject playerObj = GameObject.FindWithTag("Player");
+		GameObject camera = GameObject.FindWithTag("MainCamera");
         PlayerScript = playerObj.GetComponent<Player>();
+		PlayerCollider = playerObj.GetComponent<BoxCollider2D>();
+		CameraFollowScript = camera.GetComponent<CameraFollow>();
         PlayerRigidbody = playerObj.GetComponent<Rigidbody2D>();
     }
     private void Update()
@@ -31,27 +36,37 @@ public class SceneTransition : MonoBehaviour
         }
     }
 
-    private void BlowAwayPlayer()
-    {
-        if (PlayerScript != null)
-        {
-            PlayerScript.enabled = false;
-        }
+	private void BlowAwayPlayer()
+	{
+		if (PlayerScript != null)
+		{
+			PlayerScript.enabled = false;
+		}
 
-        if (CameraFollowScript)
-        {
-            CameraFollowScript.enabled = false;
-        }
+		if (CameraFollowScript)
+		{
+			CameraFollowScript.enabled = false;
+		}
+		if (PlayerCollider)
+		{
+			PlayerCollider.enabled = false;
+		}
 
-        if (PlayerRigidbody != null)
-        {
-            PlayerRigidbody.gravityScale = 0;
-            PlayerRigidbody.velocity = Vector2.zero;
-            PlayerRigidbody.AddForce(BlowForce);
-        }
+		if (PlayerRigidbody != null)
+		{
+			PlayerRigidbody.gravityScale = 0;
+			PlayerRigidbody.velocity = new Vector2(5, 3); // Corrected vector syntax
+			PlayerRigidbody.AddForce(BlowForce);
+		}
 
-        GameManager.Instance.SceneLevelup();
-    }
+		StartCoroutine(LevelUpAfterDelay());
+	}
+
+	private IEnumerator LevelUpAfterDelay()
+	{
+		yield return new WaitForSeconds(1f); // Wait for 1 second
+		GameManager.Instance.SceneLevelup();
+	}
 
     private void OnTriggerEnter2D(Collider2D other)
     {
