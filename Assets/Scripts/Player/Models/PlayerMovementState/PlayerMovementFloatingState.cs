@@ -20,6 +20,7 @@ public class PlayerMovementFloatingState : IPlayerMovementState
         PlayerData = playerData;
         Player.Velocity.x = PlayerData.FloatingXSpeed;
         HorizontalMoveSpeed = PlayerData.MoveSpeed;
+        HandleAnimation();
     }
 
     public void HandleMovement()
@@ -49,5 +50,9 @@ public class PlayerMovementFloatingState : IPlayerMovementState
             PlayerData.FloatingYSpeed);
     }
     
+	public void HandleAnimation()
+	{
+        Player.SetAnimation(PlayerStateType.Fall);
+    }
 }
 

@@ -15,7 +15,6 @@ public class PlayerHealth : MonoBehaviour
     {
         Player = GetComponent<Player>();
         // Initialize health at the beginning of the game
-        Player.CurrentHealth = MaxHealth;
     }
 
     public void TakeDamage(float damage)
