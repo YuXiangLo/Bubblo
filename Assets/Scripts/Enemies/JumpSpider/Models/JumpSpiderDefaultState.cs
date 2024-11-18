@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Enemies.JumpSpider
 {
-    public class JumpSpiderDefaultState : IJumpSpiderState
+    public class JumpSpiderDefaultState : IState
     {
         private JumpSpider JumpSpider;
         private JumpSpiderData Data;
@@ -40,7 +40,7 @@ namespace Enemies.JumpSpider
             Vector2 distanceToPlayer = Player.transform.position - JumpSpider.transform.position;
             if (Mathf.Abs(distanceToPlayer.x) < Data.ToApproachDistance && Mathf.Abs(distanceToPlayer.y) < Data.YDetectRange)
             {
-                JumpSpider.ChangeJumpSpiderState(new JumpSpiderApproachState(JumpSpider, Data, Player));
+                JumpSpider.SetState(new JumpSpiderApproachState(JumpSpider, Data, Player));
             }
         }
 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Enemies.JumpSpider
 {
-    public class JumpSpiderFallingState : IJumpSpiderState
+    public class JumpSpiderFallingState : IState
     {
         private JumpSpider JumpSpider;
         private JumpSpiderData Data;
@@ -45,7 +45,7 @@ namespace Enemies.JumpSpider
             {
                 JumpSpider.Velocity.y = 0;
                 JumpSpider.transform.position = new Vector2(JumpSpider.transform.position.x, OriginalYPosition);
-                JumpSpider.ChangeJumpSpiderState(new JumpSpiderApproachState(JumpSpider, Data, Player));
+                JumpSpider.SetState(new JumpSpiderApproachState(JumpSpider, Data, Player));
             }
         }
     }

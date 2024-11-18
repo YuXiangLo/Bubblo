@@ -4,16 +4,16 @@ namespace Enemies.JumpSpider
 {
     public class JumpSpider : MonoBehaviour, IEnemyModifyHealth
     {
-        private EnemyHealth SimpleSpiderHealth;
+        private EnemyHealth Health;
         private JumpSpiderData Data;
-        private IJumpSpiderState CurrentState;
+        private IState CurrentState;
         private Player Player;
 
         public Vector2 Velocity = Vector2.zero;
 
         private void Awake()
         {
-            SimpleSpiderHealth = GetComponent<EnemyHealth>();
+            Health = GetComponent<EnemyHealth>();
             Data = GetComponent<JumpSpiderData>();
             Player = GameObject.FindWithTag("Player").GetComponent<Player>();
             Data.LeftPoint = (Vector2)transform.position + Data.LeftPoint;
@@ -21,7 +21,7 @@ namespace Enemies.JumpSpider
             CurrentState = new JumpSpiderDefaultState(this, Data, Player);
         }
 
-        public void ChangeJumpSpiderState(IJumpSpiderState newState)
+        public void SetState(IState newState)
         {
             CurrentState.Exit();
             CurrentState = newState;
@@ -41,12 +41,12 @@ namespace Enemies.JumpSpider
 
         public void Heal(float amount)
         {
-            SimpleSpiderHealth.Heal(amount);
+            Health.Heal(amount);
         }
 
         public void TakeDamage(float amount)
         {
-            SimpleSpiderHealth.TakeDamage(amount);
+            Health.TakeDamage(amount);
         }
 
         private void HandleFaceDirection()

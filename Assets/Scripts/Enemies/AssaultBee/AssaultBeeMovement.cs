@@ -1,41 +1,104 @@
 using UnityEngine;
 
-namespace Enemies.AssaultBee 
+namespace Enemies.AssaultBee
 {
-    public class AssaultBeeMovement : MonoBehaviour
+        public class AssaultBeeMovement : MonoBehaviour
     {
-        [SerializeField] private Vector2 LeftPoint, RightPoint;
-        [SerializeField] private float Speed = 2f;
-        private Vector2 Target;
+        private Player Player;
+        private Transform LeftPoint, RightPoint;
+        private Vector3 DefaultTarget;
+        private Vector3 NextPosition;
         private bool FacingLeft = true;
+        private float CurrentAttackCD = 0f;
+        private bool IsAttacking = false;
+        private bool IsApproaching = true;
+        private Vector3 Target;
+        private Vector3 RestoredPosition;
+        [SerializeField] private float AttackCD = 3f;
+        [SerializeField] private float DetectionDistance = 7f;
+
+        [SerializeField] private float Speed = 2f;
+        [SerializeField] private float ApproachSpeed = 10f;
+        [SerializeField] private float RestoreSpeed = 3f;
 
         private void Start()
         {
-            Target = (Vector2)transform.position + LeftPoint;
+            Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            LeftPoint = transform.parent.Find("LeftPoint");
+            RightPoint = transform.parent.Find("RightPoint");
+            DefaultTarget = LeftPoint.position;
         }
 
         public void HandleMovement()
         {
-            Vector2 currentPosition = transform.position;
-            // Move enemy towards the target
-            transform.position = Vector2.MoveTowards(currentPosition, Target, Speed * Time.deltaTime);
-
-            // Switch target when reaching the point
-            if (Vector2.Distance(currentPosition, Target) < 0.1f)
+            if (DetectPlayer() && CurrentAttackCD <= 0f)
             {
-                GetNewTarget();
+                IsApproaching = true;
+                IsAttacking = true;
+                Target = Player.transform.position;
+                RestoredPosition = transform.position;
+                CurrentAttackCD = AttackCD;
+            }
+            if (CurrentAttackCD > 0f)
+            {
+                CurrentAttackCD -= Time.deltaTime;
+            }
+
+            if (IsAttacking)
+            {
+                AttackMovement();
+            }
+            else
+            {
+                DefaultMovement();
+            }
+        }
+        
+        private void AttackMovement()
+        {
+            float speed = IsApproaching ? ApproachSpeed : RestoreSpeed;
+            NextPosition = Vector2.MoveTowards(transform.position, Target, speed * Time.deltaTime);
+            RotateToMovementDirection();
+            transform.position = NextPosition;
+            if (Vector2.Distance(transform.position, Target) < 0.1f)
+            {
+                Target = RestoredPosition;
+                IsApproaching = false;
+            }
+            if (!IsApproaching && Vector2.Distance(transform.position, RestoredPosition) < 0.1f)
+            {
+                IsAttacking = false;
+                transform.position = RestoredPosition;
             }
         }
 
-        private void GetNewTarget()
+        private void DefaultMovement()
         {
-            if (FacingLeft) {
-                Flip();
-                Target = (Vector2)transform.position + RightPoint;
+            // Move enemy towards the target
+            NextPosition = Vector2.MoveTowards(transform.position, DefaultTarget, Speed * Time.deltaTime);
+            RotateToMovementDirection();
+            transform.position = NextPosition;
+
+            // Switch target when reaching the point
+            if (Vector2.Distance(transform.position, DefaultTarget) < 0.1f)
+            {
+                if (DefaultTarget == LeftPoint.position)
+                    DefaultTarget = RightPoint.position;
+                else
+                    DefaultTarget = LeftPoint.position;
             }
-            else {
+        }
+        
+        private void RotateToMovementDirection()
+        {
+            Vector3 movementDirection = NextPosition - transform.position;
+            if (movementDirection.x > 0 && !FacingLeft)
+            {
                 Flip();
-                Target = (Vector2)transform.position + LeftPoint;
+            }
+            else if (movementDirection.x < 0 && FacingLeft)
+            {
+                Flip();
             }
         }
 
@@ -48,6 +111,11 @@ namespace Enemies.AssaultBee
             Vector3 localScale = transform.localScale;
             localScale.x *= -1;  // Flip the X scale
             transform.localScale = localScale;
+        }
+
+        private bool DetectPlayer()
+        {
+            return Vector2.Distance(transform.position, Player.transform.position) < DetectionDistance;
         }
     }
 }
