@@ -9,6 +9,8 @@ namespace Enemies.JumpSpider
         private IState CurrentState;
         private Player Player;
 
+        public Animator Animator;
+
         public Vector2 Velocity = Vector2.zero;
 
         private void Awake()
@@ -16,6 +18,7 @@ namespace Enemies.JumpSpider
             Health = GetComponent<EnemyHealth>();
             Data = GetComponent<JumpSpiderData>();
             Player = GameObject.FindWithTag("Player").GetComponent<Player>();
+            Animator = GetComponent<Animator>();
             Data.LeftPoint = (Vector2)transform.position + Data.LeftPoint;
             Data.RightPoint = (Vector2)transform.position + Data.RightPoint;
             CurrentState = new JumpSpiderDefaultState(this, Data, Player);
@@ -23,6 +26,7 @@ namespace Enemies.JumpSpider
 
         public void SetState(IState newState)
         {
+            Debug.Log($"SetState from {CurrentState} to {newState}");
             CurrentState.Exit();
             CurrentState = newState;
             CurrentState.Enter();

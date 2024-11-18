@@ -19,6 +19,7 @@ namespace Enemies.JumpSpider
 
         public void Enter()
         {
+            JumpSpider.Animator.SetInteger("StateType", (int)JumpSpiderStateType.Falling);
             JumpSpider.Velocity.y = 0;
         }
 

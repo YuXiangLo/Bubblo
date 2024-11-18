@@ -20,7 +20,7 @@ namespace Enemies.JumpSpider
 
         public void Enter()
         {
-            // Do nothing
+            JumpSpider.Animator.SetInteger("StateType", (int)JumpSpiderStateType.Default);
         }
 
         public void Update()
