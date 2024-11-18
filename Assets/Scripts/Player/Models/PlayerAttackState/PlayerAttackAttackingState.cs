@@ -23,7 +23,7 @@ public class PlayerAttackAttackingState : IPlayerAttackState
     public void HandleAttack()
     {
         var stateInfo = Player.Animator.GetCurrentAnimatorStateInfo(0);
-        if (stateInfo.IsName("PlayerAttack") && stateInfo.normalizedTime >= 0.5f)
+        if (stateInfo.IsName("PlayerAttack") && stateInfo.normalizedTime >= 1f)
         {
             Player.ChangePlayerAttackState(new PlayerAttackIdleState(Player, PlayerData));
         }
