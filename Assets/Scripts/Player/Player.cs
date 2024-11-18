@@ -10,6 +10,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
     // Player Movement
     public bool IsGrounded = false;
+	public bool IsHittingCeiling = false;
     public bool IsFacingRight => transform.localScale.x > 0f;
     public Vector2 Velocity = Vector2.zero;
 
@@ -89,12 +90,17 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         PlayerHealth.TakeDamage(amount);
     }
 
+    public void RestoreMP()
+    {
+        CurrentMagicPoint = PlayerData.MaxMagicPoint;
+    }
+
     /// <summary>
     /// Player Touchs a Bubble
     /// </summary>
     public void BubbleJump()
     {
-        Velocity.y = PlayerData.JumpForce;
+        Velocity.y = PlayerData.BubbleJumpForce;
     }
 
     /// <summary>
@@ -145,6 +151,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     private void DetectPlayerStatus()
     {
         IsGrounded = Rigidbody2D.Raycast(Vector2.down, new Vector2(PlayerData.PlayerSize, PlayerData.PlayerSize), PlayerData.TriggerDistance);
+		IsHittingCeiling = Rigidbody2D.Raycast(Vector2.up, new Vector2(PlayerData.PlayerSize, PlayerData.PlayerSize), PlayerData.TriggerDistance);
     }
 
     private void HandleMovement()

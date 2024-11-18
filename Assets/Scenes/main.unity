@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ce7bd010faf9347bc83f367234b578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGameOver: 0
+  IsGameOver: 0
   SceneList: {fileID: 706924289}
   PlayerHealth: {fileID: 706924287}
 --- !u!4 &706924285
@@ -227,6 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Scene:
+  - Official Scene 1
   - Scene1
   - Scene2
   - Scene3

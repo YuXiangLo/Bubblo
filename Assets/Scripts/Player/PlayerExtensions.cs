@@ -1,12 +1,12 @@
 using UnityEngine;
 
 public static class PlayerExtensions {
-    public static LayerMask[] HitLayerMasks = { LayerMask.GetMask("Ground"), LayerMask.GetMask("Enemy") };
+    public static LayerMask[] HitLayerMasks = { LayerMask.GetMask("Ground"), LayerMask.GetMask("Enemy"), LayerMask.GetMask("Platform") };
 	public static bool Raycast(this Rigidbody2D rigidbody, Vector2 direction, Vector2 size, float distance) {
 		if (rigidbody.isKinematic)
 			return false;
 
-		Vector2 castOrigin = rigidbody.position + new Vector2(0, -size.y * 0.5f);
+		Vector2 castOrigin = rigidbody.position + 0.5f * size * direction;
 		Vector2 boxSize = new(0.95f * size.x, 0.1f); // width: size.x, height: 0.1f
 		VisualizeBoxCast(castOrigin, boxSize, direction, distance);
 
@@ -17,6 +17,15 @@ public static class PlayerExtensions {
 			
 			if (hit.collider != null && hit.rigidbody != rigidbody)
 			{
+				if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Platform"))
+                {
+                    // Check if the ray is moving upward against the platform
+                    if (Vector2.Dot(direction, Vector2.up) > 0)
+                    {
+                        // Ignore one-way platforms when casting upward
+                        continue;
+                    }
+                }
 				return true;
 			}
 		}
