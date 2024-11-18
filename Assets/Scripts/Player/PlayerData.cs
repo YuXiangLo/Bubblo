@@ -9,6 +9,7 @@ public class PlayerData : MonoBehaviour
     public float FloatingRatio = 0.9995f;
     public float Gravity = -90f;
     public float MaxFallingSpeed = -20f;
+	public float MinBlowingSpeed = 20f;
     public float JumpForce = 18f;
     public float BubbleJumpForce = 24f;
     public float PlayerSize = 1f; 

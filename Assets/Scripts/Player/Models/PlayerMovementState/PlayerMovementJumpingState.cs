@@ -44,6 +44,7 @@ public class PlayerMovementJumpingState: IPlayerMovementState
     {
         var gravityScale = Input.GetKey(KeyCode.W) ? PlayerData.LowGravityScale : PlayerData.DefaultGravityScale;
         Player.Velocity.y += PlayerData.Gravity * gravityScale * Time.deltaTime;
+		Player.Velocity.y = Mathf.Min(Player.Velocity.y, PlayerData.MinBlowingSpeed);
     }
 
 	public void HandleAnimation()
