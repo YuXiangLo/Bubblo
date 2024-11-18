@@ -2,6 +2,10 @@
 using UnityEngine;
 
 public class TimeController : MonoBehaviour {
+	public void GotoHomePage() {
+		GameManager.Instance.GotoHomePage();
+	}
+
 	public void StopTime() {
 		Time.timeScale = 0f;
 	}

@@ -73,11 +73,6 @@ public class SceneTransition : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             IsPlayerInRange = true;
-            if (InteractionMessage != null)
-            {
-                InteractionMessage.gameObject.SetActive(true);
-                InteractionMessage.text = $"Press '{InteractionKey}' to enter";
-            }
         }
     }
 
@@ -86,10 +81,6 @@ public class SceneTransition : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             IsPlayerInRange = false;
-            if (InteractionMessage != null)
-            {
-                InteractionMessage.gameObject.SetActive(false);
-            }
         }
     }
 }

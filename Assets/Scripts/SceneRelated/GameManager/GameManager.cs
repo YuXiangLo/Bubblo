@@ -4,7 +4,7 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
-    public bool isGameOver = false;
+    public bool IsGameOver = false;
     public static GameManager Instance;
     private Player Player;
     private float CurrentHealthTemp;
@@ -27,14 +27,6 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Start");
     }
 
-    private void Update()
-    {
-        if (isGameOver)
-        {
-            SceneManager.LoadScene("GameOver");
-        }       
-    }
-
     public void StartGame()
     {
         Debug.Log("Game Started");
@@ -44,10 +36,14 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneList.Scene[0]);
     }
 
-    private void StoreCurrentStates()
+	public void GameOver()
+	{
+		SceneManager.LoadScene("Start");
+	}
+
+    public void GotoHomePage()
     {
-        CurrentHealthTemp = Player.CurrentHealth;
-        CurrentMagicPointTemp = Player.CurrentMagicPoint;
+        SceneManager.LoadScene("Start");
     }
 
     /// <summary>
@@ -70,11 +66,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // private IEnumerator TransitionAfterDelay(string sceneToLoad)
-    // {
-    //     yield return new WaitForSeconds(TransitionDelay);
-    //     SceneManager.LoadScene(sceneToLoad);
-    // }
+    private void StoreCurrentStates()
+    {
+        CurrentHealthTemp = Player.CurrentHealth;
+        CurrentMagicPointTemp = Player.CurrentMagicPoint;
+    }
 
     /// <summary>
     /// Callback for when a scene has loaded    

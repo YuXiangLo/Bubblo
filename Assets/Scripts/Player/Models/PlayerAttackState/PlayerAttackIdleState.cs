@@ -19,7 +19,7 @@ public class PlayerAttackIdleState : IPlayerAttackState
 
     public void HandleAttack()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Player.ChangePlayerAttackState(new PlayerAttackChargingState(Player, PlayerData, Player.InitialBubble()));
         }

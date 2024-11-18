@@ -49,7 +49,7 @@ public class PlayerHealth : MonoBehaviour
 	{
 		// TODO Add the animation on it, the below code is a placeholder
         yield return new WaitForSecondsRealtime(TransitionDelay);
-        SceneManager.LoadScene(DeadScene);
+		GameManager.Instance.GameOver();
 	}
 
 #if UNITY_EDITOR
