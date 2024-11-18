@@ -59,10 +59,13 @@ public class Bubble : MonoBehaviour
 				shouldDestroy = false;
 				break;
 			}
-		}	
+		}
 
 		if (shouldDestroy) {
 			Destroy(gameObject);
+            if (!IsRelease) {
+                Player.BubbleDestroyed();
+            }
 		}
 
 		if(other.gameObject.layer == LayerMask.NameToLayer("Player")) {
@@ -83,6 +86,11 @@ public class Bubble : MonoBehaviour
         IsRelease = true;
         rb.velocity = new(ReleaseSpeed * (PlayerFacingRight ? 1 : -1), 0);
         Destroy(gameObject, LifeTime);
+    }
+
+    public void Remove()
+    {
+        Destroy(gameObject);
     }
 
     private void UpdateSize()

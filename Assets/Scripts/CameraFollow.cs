@@ -3,11 +3,16 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public LevelData LevelData; // LevelData
-    public Transform Player;  // Reference to the player's transform
+    private Transform Player;  // Reference to the player's transform
     public Vector3 Offset;    // Offset between the camera and the player (x and y offset)
     public float SmoothSpeed = 0.125f;  // How smoothly the camera follows the player
     
     private bool ShouldStopFollowing = false;
+
+    void Start()
+    {
+        Player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
 
     void FixedUpdate()
     {

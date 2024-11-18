@@ -7,7 +7,12 @@ public interface IPlayerMovementState
     PlayerData PlayerData { get; }
 
     /// <summary>
-    /// Handle Player's Movement;
+    /// Handle Player's Movement
     /// </summary>
     public void HandleMovement();
+
+    /// <summary>
+    /// Handle Player's Animation
+    /// </summary>
+    public void HandleAnimation();
 }

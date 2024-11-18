@@ -15,6 +15,7 @@ public class PlayerMovementJumpingState: IPlayerMovementState
     {
         Player = player;
         PlayerData = playerData;
+        HandleAnimation();
     }
 
     public void HandleMovement()
@@ -41,7 +42,11 @@ public class PlayerMovementJumpingState: IPlayerMovementState
         var gravityScale = Input.GetButton("Jump") ? PlayerData.LowGravityScale : PlayerData.DefaultGravityScale;
         Player.Velocity.y += PlayerData.Gravity * gravityScale * Time.deltaTime;
     }
-    
+
+	public void HandleAnimation()
+    {
+        Player.SetAnimation(PlayerStateType.Jump);
+	}
 }
 
 

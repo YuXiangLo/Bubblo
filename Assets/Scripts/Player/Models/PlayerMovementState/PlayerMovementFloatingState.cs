@@ -20,11 +20,16 @@ public class PlayerMovementFloatingState : IPlayerMovementState
         PlayerData = playerData;
         Player.Velocity.x = PlayerData.FloatingXSpeed;
         HorizontalMoveSpeed = PlayerData.MoveSpeed;
+        HandleAnimation();
     }
 
     public void HandleMovement()
     {
-        if (Input.GetButtonUp("Jump"))
+        if (Player.IsGrounded)
+        {
+            Player.ChangePlayerMovementState(new PlayerMovementIdleState(Player, PlayerData));
+        } 
+		else if (Input.GetButtonUp("Jump"))
         {
             Player.ChangePlayerMovementState(new PlayerMovementFallingState(Player, PlayerData));
         }
@@ -49,5 +54,9 @@ public class PlayerMovementFloatingState : IPlayerMovementState
             PlayerData.FloatingYSpeed);
     }
     
+	public void HandleAnimation()
+	{
+        Player.SetAnimation(PlayerStateType.Fall);
+    }
 }
 

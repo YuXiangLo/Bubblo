@@ -2,6 +2,7 @@ public class PlayerAttackInitialState : IPlayerAttackState
 {
     public Player Player { get; }
     public PlayerData PlayerData { get; }
+    public bool ShouldShowAnimation { get; } = false;
     
     /// <summary>
     /// Constructor
@@ -19,5 +20,10 @@ public class PlayerAttackInitialState : IPlayerAttackState
     public void HandleAttack()
     {
         Player.ChangePlayerAttackState(new PlayerAttackIdleState(Player, PlayerData));
+    }
+
+    public void HandleKnockedBack() 
+    {
+        return;    
     }
 }
