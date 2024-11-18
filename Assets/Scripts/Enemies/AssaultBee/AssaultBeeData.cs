@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Enemies.AssaultBee
 {
-    public class AssaultBeeData
+    public class AssaultBeeData : MonoBehaviour
     {
         #region Movement Fields
             public bool IsFacingLeft = true;

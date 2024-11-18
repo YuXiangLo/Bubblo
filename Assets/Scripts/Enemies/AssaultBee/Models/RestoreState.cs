@@ -15,12 +15,11 @@ namespace Enemies.AssaultBee
             Data = data;
             Player = player;
             Target = target;
-            AssaultBee.Velocity = (Target - (Vector2)AssaultBee.transform.position).normalized * Data.Speed;
         }
 
         public void Enter()
         {
-            // Do nothing
+            AssaultBee.Velocity = (Target - (Vector2)AssaultBee.transform.position).normalized * Data.Speed;
         }
 
         public void Exit()

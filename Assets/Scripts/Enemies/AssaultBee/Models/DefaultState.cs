@@ -31,6 +31,7 @@ namespace Enemies.AssaultBee
         public void Update()
         {
             HandleMovement();
+            TargetDetection();
             DetectDistance();
         }
 
@@ -46,6 +47,18 @@ namespace Enemies.AssaultBee
             if (distanceToPlayer.magnitude < Data.DetectionDistance)
             {  
                 AssaultBee.SetState(new ApproachState(AssaultBee, Data, Player));
+            }
+        }
+
+        private void TargetDetection()
+        {
+            if (AssaultBee.transform.position.x < Data.LeftPoint.x + 0.1f)
+            {
+                Target = Data.RightPoint;
+            }
+            else if (AssaultBee.transform.position.x > Data.RightPoint.x - 0.1f)
+            {
+                Target = Data.LeftPoint;
             }
         }
     }
