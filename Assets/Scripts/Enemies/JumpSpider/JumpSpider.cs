@@ -26,6 +26,7 @@ namespace Enemies.JumpSpider
 
         public void SetState(IState newState)
         {
+            Debug.Log($"SetState from {CurrentState} to {newState}");
             CurrentState.Exit();
             CurrentState = newState;
             CurrentState.Enter();

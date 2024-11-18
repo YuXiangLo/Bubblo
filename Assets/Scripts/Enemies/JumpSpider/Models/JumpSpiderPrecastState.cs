@@ -7,7 +7,6 @@ namespace Enemies.JumpSpider
         private JumpSpider JumpSpider;
         private JumpSpiderData Data;
         private Player Player;
-        private bool ShouldShowAnimation = true;
 
         public JumpSpiderPrecastState(JumpSpider jumpSpider, JumpSpiderData data, Player player)
         {
@@ -19,6 +18,7 @@ namespace Enemies.JumpSpider
         public void Enter()
         {
             JumpSpider.Animator.SetInteger("StateType", (int)JumpSpiderStateType.Precast);
+            JumpSpider.Velocity = Vector2.zero;
         }
 
         public void Exit()
@@ -29,7 +29,7 @@ namespace Enemies.JumpSpider
         public void Update()
         {
             var stateInfo = JumpSpider.Animator.GetCurrentAnimatorStateInfo(0);
-            if (stateInfo.IsName("JumpSpiderPrecast") && stateInfo.normalizedTime >= 1f)
+            if (stateInfo.IsName("Precast") && stateInfo.normalizedTime >= 1f)
             {
                 JumpSpider.SetState(new JumpSpiderJumpState(JumpSpider, Data, Player));
             }
