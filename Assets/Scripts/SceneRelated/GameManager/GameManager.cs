@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
     /// <param name="mode"></param>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "Scene1")
+        if (scene.name == SceneList.Scene[0])
         {
             Player = GameObject.FindWithTag("Player").GetComponent<Player>();
             Player.CurrentHealth = PlayerHealth.MaxHealth;

@@ -3,14 +3,16 @@ using UnityEngine;
 
 public class Bubble : MonoBehaviour
 {
-    [SerializeField] private float MaxSize = 3f;
-    [SerializeField] private float MinSize = 0.3f;
+    [SerializeField] private float MaxSize = 1f;
+    [SerializeField] private float MinSize = 0.2f;
 
-    [SerializeField] private float MinSpeed = 4f;
-    [SerializeField] private float MaxSpeed = 10f;
-    [SerializeField] private float LifeTime = 5f;
+    [SerializeField] private float MinSpeed = 8f;
+    [SerializeField] private float MaxSpeed = 11f;
+    [SerializeField] private float LifeTime = 1.4f;
     [SerializeField] private float MinDamage = 3f;
     [SerializeField] private float MaxDamage = 30f;
+    [SerializeField] private float DiscountRatio = 0.97f;
+    [SerializeField] private float MinimumTolerateSpeed = 0.2f;
 
     private Player Player;
     private bool PlayerFacingRight => Player.IsFacingRight;
@@ -19,7 +21,7 @@ public class Bubble : MonoBehaviour
     private bool IsCharging = true;
 	private bool IsRelease = false;
     private float ChargingTime = 0f;
-    private const float MaxChargingTime = 2f;
+    private const float MaxChargingTime = 1f;
 	private float CurrentSize => Mathf.Lerp(MinSize, MaxSize, ChargingTime / MaxChargingTime);
     private float ReleaseSpeed => Mathf.Lerp(MaxSpeed, MinSpeed, ChargingTime / MaxChargingTime);
     private Rigidbody2D rb;
@@ -37,6 +39,10 @@ public class Bubble : MonoBehaviour
     private void Update()
     {
         if (IsRelease) {
+            if (ChargingTime > 0.6f)
+                rb.velocity = new (rb.velocity.x * DiscountRatio, 0);
+            if (Mathf.Abs(rb.velocity.x) < MinimumTolerateSpeed)
+                Destroy(gameObject);
             return;
         }
         if (IsCharging) {
