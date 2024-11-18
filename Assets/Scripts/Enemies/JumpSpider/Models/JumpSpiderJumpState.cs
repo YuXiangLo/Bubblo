@@ -35,7 +35,7 @@ namespace Enemies.JumpSpider
 
         private void Jump()
         {
-            JumpSpider.Velocity.y = CalculateVerticalVelocity();
+            JumpSpider.Velocity.y = Data.JumpForce;
             float xDistanceToPlayer = Player.transform.position.x - JumpSpider.transform.position.x;
             
             // Decide if the boarder or the player is jump target
@@ -52,18 +52,11 @@ namespace Enemies.JumpSpider
             float xDistance = xTarget - JumpSpider.transform.position.x;
             float timeToPeakAndFall = CalculateTimeToPeakAndFall();
             JumpSpider.Velocity.x = xDistance / timeToPeakAndFall;
-            Debug.Log($"Jump => OriginalY: {OriginalYPosition}, Velocity.x: {JumpSpider.Velocity.x}, Velocity.y: {JumpSpider.Velocity.y}");
-        }
-
-        private float CalculateVerticalVelocity()
-        {
-            // v = sqrt(2 * g * h)
-            return Mathf.Sqrt(2 * Data.Gravity * Data.JumpHeight);
         }
 
         private float CalculateTimeToPeakAndFall()
         {
-            float timeToPeak = CalculateVerticalVelocity() / Data.Gravity;
+            float timeToPeak = Data.JumpForce / Data.Gravity;
             return 2 * timeToPeak;
         }
 

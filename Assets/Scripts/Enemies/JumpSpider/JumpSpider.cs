@@ -23,7 +23,6 @@ namespace Enemies.JumpSpider
 
         public void ChangeJumpSpiderState(IJumpSpiderState newState)
         {
-            Debug.Log($"State changed from {CurrentState.GetType().Name} to {newState.GetType().Name}");
             CurrentState.Exit();
             CurrentState = newState;
             CurrentState.Enter();
@@ -37,7 +36,7 @@ namespace Enemies.JumpSpider
 
         private void FixedUpdate()
         {
-            transform.position = Vector2.MoveTowards(transform.position, (Vector2)transform.position + Velocity, Data.Speed * Time.fixedDeltaTime);
+            transform.position = (Vector2)transform.position + Velocity * Time.deltaTime;
         }
 
         public void Heal(float amount)

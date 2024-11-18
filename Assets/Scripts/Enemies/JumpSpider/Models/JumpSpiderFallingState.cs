@@ -36,6 +36,7 @@ namespace Enemies.JumpSpider
         private void ApplyGravity()
         {
             JumpSpider.Velocity.y -= Data.FallingMultiplier * Data.Gravity * Time.deltaTime;
+
         }
 
         private void DetectGround()

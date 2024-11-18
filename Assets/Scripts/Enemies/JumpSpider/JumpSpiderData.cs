@@ -13,7 +13,7 @@ public class JumpSpiderData : MonoBehaviour
     #endregion
 
     #region Jump Movement Fields
-        public float JumpHeight = 1f;
+        public float JumpForce = 1f;
         public float Gravity = 1f;
         public float FallingMultiplier = 2f;
     #endregion
