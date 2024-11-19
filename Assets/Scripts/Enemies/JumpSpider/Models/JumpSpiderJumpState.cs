@@ -18,6 +18,7 @@ namespace Enemies.JumpSpider
 
         public void Enter()
         {
+            JumpSpider.Animator.SetInteger("StateType", (int)JumpSpiderStateType.Jump);
             OriginalYPosition = JumpSpider.transform.position.y;
             Jump();
         }

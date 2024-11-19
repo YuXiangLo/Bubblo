@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2847698835874447098}
   - component: {fileID: 9170379086902747118}
   - component: {fileID: 708494045749191047}
+  - component: {fileID: 9036580682177606943}
   m_Layer: 8
   m_Name: JumpSpider
   m_TagString: Enemy
@@ -123,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 118bd3ccb19af434bb06611bc394a67c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Animator: {fileID: 0}
   Velocity: {x: 0, y: 0}
 --- !u!60 &9170379086902747118
 PolygonCollider2D:
@@ -188,6 +190,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 20
   health: 0
+--- !u!95 &9036580682177606943
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3382082551727471215}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e94a70a8856ccc544b2a6747af325b2f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4091025753182694759
 GameObject:
   m_ObjectHideFlags: 0
