@@ -2557,11 +2557,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2455318005397495379, guid: 1dee187fa74ba417a9fb9fd6b6aa0b5a, type: 3}
       propertyPath: m_Size.x
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2455318005397495379, guid: 1dee187fa74ba417a9fb9fd6b6aa0b5a, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8204932737533025075, guid: 1dee187fa74ba417a9fb9fd6b6aa0b5a, type: 3}
       propertyPath: m_Name
@@ -2569,7 +2569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8426108923214657601, guid: 1dee187fa74ba417a9fb9fd6b6aa0b5a, type: 3}
       propertyPath: m_Size.x
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
