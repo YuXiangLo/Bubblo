@@ -6,7 +6,6 @@ public class PlayerHealth : MonoBehaviour
 {
     public float MaxHealth = 100f;
 
-	[SerializeField] private string DeadScene = "Start";
 	[SerializeField] private float TransitionDelay = 1f;
 
     private Player Player;

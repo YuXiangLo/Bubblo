@@ -62,7 +62,7 @@ public class SceneTransition : MonoBehaviour
 
 	private IEnumerator LoadNextLevel(string nextLevel)
 	{
-		yield return new WaitForSeconds(1f); // Wait for 1 second
+		yield return new WaitForSeconds(TransitionDelay);
         if (nextLevel == "")
             GameManager.Instance.SceneLevelup();
         else
