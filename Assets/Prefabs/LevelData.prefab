@@ -45,4 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinXAxisPosition: 0
+  MaxXAxisPosition: 38
   MinYAxisPosition: 0
+  MinInspectXAxisPosition: 8
+  MaxInspectXAxisPosition: 30
+  MinInspectYAxisPosition: 5
+  StopFollowingXAxisYOffset: -60
