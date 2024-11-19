@@ -8,11 +8,10 @@ public class Bubble : MonoBehaviour
 
     [SerializeField] private float MinSpeed = 8f;
     [SerializeField] private float MaxSpeed = 11f;
-    [SerializeField] private float LifeTime = 1.4f;
+    [SerializeField] private float LifeTime = 2f;
     [SerializeField] private float MinDamage = 3f;
     [SerializeField] private float MaxDamage = 30f;
     [SerializeField] private float DiscountRatio = 0.97f;
-    [SerializeField] private float MinimumTolerateSpeed = 0.2f;
 
     private Player Player;
     private bool PlayerFacingRight => Player.IsFacingRight;
@@ -25,7 +24,7 @@ public class Bubble : MonoBehaviour
 	private float CurrentSize => Mathf.Lerp(MinSize, MaxSize, ChargingTime / MaxChargingTime);
     private float ReleaseSpeed => Mathf.Lerp(MaxSpeed, MinSpeed, ChargingTime / MaxChargingTime);
     private Rigidbody2D rb;
-	private List<string> IgnoreTags = new List<string> {"Player", "Bubble", "Door"};
+	private List<string> IgnoreTags = new List<string> {"Player", "Bubble", "Door", "Tools"};
 
     private void Awake()
     {
@@ -39,10 +38,8 @@ public class Bubble : MonoBehaviour
     private void Update()
     {
         if (IsRelease) {
-            if (ChargingTime > 0.6f)
+            if (ChargingTime > 0.7f)
                 rb.velocity = new (rb.velocity.x * DiscountRatio, 0);
-            if (Mathf.Abs(rb.velocity.x) < MinimumTolerateSpeed)
-                Destroy(gameObject);
             return;
         }
         if (IsCharging) {

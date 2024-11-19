@@ -4,23 +4,21 @@ using System.Collections;
 
 public class SceneTransition : MonoBehaviour
 {
-    public KeyCode InteractionKey = KeyCode.E;
-    public Text InteractionMessage;
+    [SerializeField] private string NextLevel = ""; // If empty, we run level up, else we go to this level
+
     private bool IsPlayerInRange = false;
-    private Rigidbody2D PlayerRigidbody;
-	private BoxCollider2D PlayerCollider;
+    private float TransitionDelay = 1f;
+    private KeyCode InteractionKey = KeyCode.F;
+
+    // Auto Get
     private Player PlayerScript;
-    public MonoBehaviour CameraFollowScript;
-    public Vector2 BlowForce = new Vector2(500, 300);
-    public float TransitionDelay = 1f;
+	private BoxCollider2D PlayerCollider;
+    private MonoBehaviour CameraFollowScript;
+    private Rigidbody2D PlayerRigidbody;
+    private Vector2 BlowVelocity = new Vector2(15, 9);
 
     private void Start()
     {
-        if (InteractionMessage != null)
-        {
-            InteractionMessage.gameObject.SetActive(false);
-        }
-
         GameObject playerObj = GameObject.FindWithTag("Player");
 		GameObject camera = GameObject.FindWithTag("MainCamera");
         PlayerScript = playerObj.GetComponent<Player>();
@@ -55,17 +53,20 @@ public class SceneTransition : MonoBehaviour
 		if (PlayerRigidbody != null)
 		{
 			PlayerRigidbody.gravityScale = 0;
-			PlayerRigidbody.velocity = new Vector2(5, 3); // Corrected vector syntax
-			PlayerRigidbody.AddForce(BlowForce);
+			PlayerRigidbody.velocity = BlowVelocity;
 		}
 
-		StartCoroutine(LevelUpAfterDelay());
+     
+        StartCoroutine(LoadNextLevel(NextLevel));
 	}
 
-	private IEnumerator LevelUpAfterDelay()
+	private IEnumerator LoadNextLevel(string nextLevel)
 	{
 		yield return new WaitForSeconds(1f); // Wait for 1 second
-		GameManager.Instance.SceneLevelup();
+        if (nextLevel == "")
+            GameManager.Instance.SceneLevelup();
+        else
+            GameManager.Instance.LoadSpecificLevel(nextLevel);
 	}
 
     private void OnTriggerEnter2D(Collider2D other)
