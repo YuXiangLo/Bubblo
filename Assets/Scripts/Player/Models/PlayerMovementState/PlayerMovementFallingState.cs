@@ -29,7 +29,7 @@ public class PlayerMovementFallingState: IPlayerMovementState
         {
             Player.ChangePlayerMovementState(new PlayerMovementJumpingState(Player, PlayerData));
         }
-        else if (Input.GetKeyDown(KeyCode.W))
+        else if (Input.GetKey(KeyCode.W))
         {
             Player.ChangePlayerMovementState(new PlayerMovementFloatingState(Player, PlayerData));
         }

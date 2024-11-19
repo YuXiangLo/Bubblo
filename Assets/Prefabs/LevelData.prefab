@@ -47,7 +47,7 @@ MonoBehaviour:
   MinXAxisPosition: 0
   MaxXAxisPosition: 38
   MinYAxisPosition: 0
-  MinInspectXAxisPosition: 8
-  MaxInspectXAxisPosition: 30
-  MinInspectYAxisPosition: 5
+  MinInspectXAxisPosition: 5
+  MaxInspectXAxisPosition: 33
+  MinInspectYAxisPosition: 3.2
   StopFollowingXAxisYOffset: -60

@@ -41,7 +41,7 @@ public class CameraFollow : MonoBehaviour
     public LevelData LevelData; // LevelData
     private Transform Player;  // Reference to the player's transform
     public Vector3 Offset;    // Offset between the camera and the player (x and y offset)
-    public float SmoothSpeed = 0.125f;  // How smoothly the camera follows the player
+    public float SmoothSpeed = 1f; // How smoothly the camera follows the player
     
     private bool ShouldStopFollowing = false;
     private bool IsInspecting = false; // Flag to check if the inspect mode is active
@@ -83,7 +83,7 @@ public class CameraFollow : MonoBehaviour
             desiredPosition.x = Mathf.Min(desiredPosition.x, LevelData.MaxXAxisPosition);
 
             Vector3 smoothedPosition = Vector3.Lerp(
-                transform.position, desiredPosition, 1f);//, SmoothSpeed);
+                transform.position, desiredPosition, SmoothSpeed);
 
             transform.position = smoothedPosition;
         }
