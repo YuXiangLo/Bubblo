@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91ff2d1afcb8145c394a30ec047fbb22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractionKey: 101
+  InteractionKey: 102
   InteractionMessage: {fileID: 0}
   CameraFollowScript: {fileID: 0}
   BlowForce: {x: 500, y: 300}

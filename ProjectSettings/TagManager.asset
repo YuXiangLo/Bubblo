@@ -9,6 +9,7 @@ TagManager:
   - Bubble
   - Thorn
   - Door
+  - Tools
   layers:
   - Default
   - TransparentFX

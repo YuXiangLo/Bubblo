@@ -66,6 +66,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void LoadSpecificLevel(string levelName)
+    {
+        // Check if the level exists in the SceneList array
+        if (Array.Exists(SceneList.Scene, scene => scene == levelName))
+        {
+            // Level exists, store current states and load the specified scene
+            StoreCurrentStates();
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.LoadScene(levelName);
+        }
+        else
+        {
+            // Level doesn't exist, go back to the "Start" scene
+            SceneManager.LoadScene("Start");
+        }
+    }
+
+
     private void StoreCurrentStates()
     {
         CurrentHealthTemp = Player.CurrentHealth;
