@@ -162,14 +162,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f50eb5900c4c9c64cb7e61c8590db708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxSize: 1
+  MaxSize: 1.1
   MinSize: 0.2
   MinSpeed: 8
   MaxSpeed: 11
-  LifeTime: 2
+  LifeTime: 2.1
   MinDamage: 3
   MaxDamage: 30
-  DiscountRatio: 0.97
+  DiscountRatio: 0.95
 --- !u!1 &8488345246738170082
 GameObject:
   m_ObjectHideFlags: 0

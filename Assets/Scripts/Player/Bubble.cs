@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Bubble : MonoBehaviour
 {
-    [SerializeField] private float MaxSize = 1f;
+    [SerializeField] private float MaxSize = 1.3f;
     [SerializeField] private float MinSize = 0.2f;
 
     [SerializeField] private float MinSpeed = 8f;
@@ -11,7 +11,7 @@ public class Bubble : MonoBehaviour
     [SerializeField] private float LifeTime = 2f;
     [SerializeField] private float MinDamage = 3f;
     [SerializeField] private float MaxDamage = 30f;
-    [SerializeField] private float DiscountRatio = 0.97f;
+    [SerializeField] private float DiscountRatio = 0.98f; // 0.98f for macbook unity, 0.97f for linux unity
 
     private Player Player;
     private bool PlayerFacingRight => Player.IsFacingRight;
@@ -35,13 +35,21 @@ public class Bubble : MonoBehaviour
         UpdatePosition();
     }
 
-    private void Update()
-    {
+	private void FixedUpdate()
+	{
         if (IsRelease) {
-            if (ChargingTime > 0.7f)
+			Debug.Log(CurrentSize);
+			Debug.Log(PlayerSize);
+            if (CurrentSize >= PlayerSize)
                 rb.velocity = new (rb.velocity.x * DiscountRatio, 0);
             return;
         }
+	}
+
+    private void Update()
+    {
+		if (IsRelease)
+			return;
         if (IsCharging) {
             ChargingTime += Time.deltaTime;
             UpdateSize();
