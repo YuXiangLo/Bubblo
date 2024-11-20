@@ -8,6 +8,8 @@ namespace Enemies.JumpSpider
         private JumpSpiderData Data;
         private Player Player;
 
+        private float precastTimer;
+
         public JumpSpiderPrecastState(JumpSpider jumpSpider, JumpSpiderData data, Player player)
         {
             JumpSpider = jumpSpider;
@@ -17,19 +19,22 @@ namespace Enemies.JumpSpider
 
         public void Enter()
         {
-            JumpSpider.Animator.SetInteger("StateType", (int)JumpSpiderStateType.Precast);
+            precastTimer = 0f;
+            JumpSpider.Animator.Play("Precast");
             JumpSpider.Velocity = Vector2.zero;
         }
 
         public void Exit()
         {
-            // Do nothing
+            // No additional cleanup required
         }
 
         public void Update()
         {
+            precastTimer += Time.deltaTime;
+
             var stateInfo = JumpSpider.Animator.GetCurrentAnimatorStateInfo(0);
-            if (stateInfo.IsName("Precast") && stateInfo.normalizedTime >= 1f)
+            if (precastTimer >= stateInfo.length)
             {
                 JumpSpider.SetState(new JumpSpiderJumpState(JumpSpider, Data, Player));
             }
