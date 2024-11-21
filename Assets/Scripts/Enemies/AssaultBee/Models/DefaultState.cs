@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace Enemies.AssaultBee
@@ -20,7 +21,7 @@ namespace Enemies.AssaultBee
 
         public void Enter()
         {
-            // Do nothing
+            AssaultBee.Animator.SetInteger("State", (int)StateType.Default);
         }
 
         public void Exit()
@@ -46,7 +47,7 @@ namespace Enemies.AssaultBee
             Vector2 distanceToPlayer = Player.transform.position - AssaultBee.transform.position;
             if (distanceToPlayer.magnitude < Data.DetectionDistance)
             {  
-                AssaultBee.SetState(new ApproachState(AssaultBee, Data, Player));
+                AssaultBee.SetState(new PrecastSate(AssaultBee, Data, Player));
             }
         }
 

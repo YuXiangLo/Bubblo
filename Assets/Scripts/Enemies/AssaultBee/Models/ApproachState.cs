@@ -11,20 +11,20 @@ namespace Enemies.AssaultBee
         private Vector2 Source;
         private Vector2 InitialDirection;
 
-        public ApproachState(AssaultBee assaultBee, AssaultBeeData data, Player player)
+        public ApproachState(AssaultBee assaultBee, AssaultBeeData data, Player player, Vector2 source)
         {
             AssaultBee = assaultBee;
             Data = data;
             Player = player;
             Target = Player.transform.position;
-            AssaultBee.Velocity = (Target - (Vector2)AssaultBee.transform.position).normalized * Data.AttackSpeedMultiplier * Data.Speed;
-            Source = AssaultBee.transform.position;
+            Source = source;
             InitialDirection = (Target - Source).normalized;
         }
 
         public void Enter()
         {
-            // Do nothing
+            AssaultBee.Velocity = (Target - (Vector2)AssaultBee.transform.position).normalized * Data.AttackSpeedMultiplier * Data.Speed;
+            AssaultBee.Animator.SetInteger("State", (int)StateType.Approach);
         }
 
         public void Exit()

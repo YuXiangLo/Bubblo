@@ -10,7 +10,6 @@ namespace Enemies.JumpSpider
         private Player Player;
 
         public Animator Animator;
-
         public Vector2 Velocity = Vector2.zero;
 
         private void Awake()
