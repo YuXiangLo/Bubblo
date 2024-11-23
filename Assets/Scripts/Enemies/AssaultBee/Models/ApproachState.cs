@@ -9,6 +9,7 @@ namespace Enemies.AssaultBee
         private Player Player;
         private Vector2 Target;
         private Vector2 Source;
+        private Vector2 InitialDirection;
 
         public ApproachState(AssaultBee assaultBee, AssaultBeeData data, Player player)
         {
@@ -18,6 +19,7 @@ namespace Enemies.AssaultBee
             Target = Player.transform.position;
             AssaultBee.Velocity = (Target - (Vector2)AssaultBee.transform.position).normalized * Data.AttackSpeedMultiplier * Data.Speed;
             Source = AssaultBee.transform.position;
+            InitialDirection = (Target - Source).normalized;
         }
 
         public void Enter()
@@ -32,12 +34,16 @@ namespace Enemies.AssaultBee
 
         public void Update()
         {
-            DetectReach();
+            DetectReachOrPass();
         }
 
-        private void DetectReach()
+        private void DetectReachOrPass()
         {
-            if (Vector2.Distance((Vector2)AssaultBee.transform.position, Target) < 0.1f)
+            Vector2 currentPosition = (Vector2)AssaultBee.transform.position;
+            Vector2 currentDirection = (Target - currentPosition).normalized;
+
+            // Check if the AssaultBee has passed the target
+            if (Vector2.Dot(InitialDirection, currentDirection) < 0 || Vector2.Distance(currentPosition, Target) < 0.1f)
             {
                 AssaultBee.SetState(new RestoreState(AssaultBee, Data, Player, Source));
             }

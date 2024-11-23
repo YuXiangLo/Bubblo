@@ -29,7 +29,7 @@ public class PlayerMovementFallingState: IPlayerMovementState
         {
             Player.ChangePlayerMovementState(new PlayerMovementJumpingState(Player, PlayerData));
         }
-        else if (Input.GetButtonDown("Jump"))
+        else if (Input.GetKey(KeyCode.W))
         {
             Player.ChangePlayerMovementState(new PlayerMovementFloatingState(Player, PlayerData));
         }
@@ -48,7 +48,7 @@ public class PlayerMovementFallingState: IPlayerMovementState
 
     private void ApplyGravity()
     {
-        var gravityScale = Input.GetButton("Jump") ? PlayerData.LowGravityScale : PlayerData.DefaultGravityScale;
+        var gravityScale = Input.GetKey(KeyCode.W) ? PlayerData.LowGravityScale : PlayerData.DefaultGravityScale;
         Player.Velocity.y += PlayerData.Gravity * gravityScale * Time.deltaTime;
         
         // Limit Falling Speed

@@ -46,7 +46,7 @@ public class PlayerMovementIdleState : IPlayerMovementState
 
     private void DetectJumpMovement()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             Player.Velocity.y = PlayerData.JumpForce;
         }

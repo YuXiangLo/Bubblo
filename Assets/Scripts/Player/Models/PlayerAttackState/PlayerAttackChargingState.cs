@@ -11,7 +11,7 @@ public class PlayerAttackChargingState : IPlayerAttackState
     private readonly bool IsExhaustedAtInit;
     private float HoldTime;
     private bool MaxCharged;
-    private const float MaxHoldTime = 2f;
+    private const float MaxHoldTime = 1f;
     
     /// <summary>
     /// Constructor
@@ -37,11 +37,11 @@ public class PlayerAttackChargingState : IPlayerAttackState
             Player.ChangePlayerAttackState(new PlayerAttackAttackingState(Player, PlayerData));
         }
 
-        if (IsExhaustedAtInit || Input.GetButtonUp("Fire1"))
+        if (IsExhaustedAtInit || Input.GetKeyUp(KeyCode.Space))
         {
             ReleaseBubble();
         }
-        else if (Input.GetButton("Fire1"))
+        else if (Input.GetKey(KeyCode.Space))
         {
             if (!MaxCharged)
             {

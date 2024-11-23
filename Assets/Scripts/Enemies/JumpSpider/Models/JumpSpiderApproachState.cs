@@ -16,7 +16,7 @@ namespace Enemies.JumpSpider
         }
         public void Enter()
         {
-            // Do nothing
+            JumpSpider.Animator.SetInteger("StateType", (int)JumpSpiderStateType.Approach);
         }
 
         public void Exit()
@@ -52,7 +52,7 @@ namespace Enemies.JumpSpider
             Vector2 distanceToPlayer = Player.transform.position - JumpSpider.transform.position;
             if (Mathf.Abs(distanceToPlayer.x) < Data.ToJumpDistance && Mathf.Abs(distanceToPlayer.y) < Data.YDetectRange)
             {
-                JumpSpider.SetState(new JumpSpiderJumpState(JumpSpider, Data, Player));
+                JumpSpider.SetState(new JumpSpiderPrecastState(JumpSpider, Data, Player));
             }
             else if (Mathf.Abs(distanceToPlayer.x) > Data.ToApproachDistance || Mathf.Abs(distanceToPlayer.y) > Data.YDetectRange)
             {

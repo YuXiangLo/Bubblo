@@ -29,11 +29,11 @@ public class PlayerMovementFloatingState : IPlayerMovementState
         {
             Player.ChangePlayerMovementState(new PlayerMovementIdleState(Player, PlayerData));
         } 
-		else if (Input.GetButtonUp("Jump"))
+		else if (Input.GetKeyUp(KeyCode.W))
         {
             Player.ChangePlayerMovementState(new PlayerMovementFallingState(Player, PlayerData));
         }
-        else if (Input.GetButton("Jump"))
+        else if (Input.GetKey(KeyCode.W))
         {
             DetectHorizontalMovement();
             ApplyGravity();
