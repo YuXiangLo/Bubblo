@@ -55,7 +55,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     /// <param name="playerStateType"></param>
     public void SetAnimation(PlayerStateType playerStateType)
     {
-        bool isAttackAnimation = (playerStateType == PlayerStateType.Attack || playerStateType == PlayerStateType.GenerateBubble);
+        bool isAttackAnimation = playerStateType == PlayerStateType.Attack || playerStateType == PlayerStateType.GenerateBubble;
                 
         if (isAttackAnimation || !PlayerAttackState.ShouldShowAnimation)
         {
