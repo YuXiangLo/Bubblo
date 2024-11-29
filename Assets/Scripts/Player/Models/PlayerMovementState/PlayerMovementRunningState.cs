@@ -57,7 +57,7 @@ public class PlayerMovementRunningState : IPlayerMovementState
     {
         var horizontalInput = Input.GetAxisRaw("Horizontal");
         Player.Velocity.x = horizontalInput * PlayerData.MoveSpeed;
-		if (Player.SlopeAngle != -1f) {
+		if (Player.SlopeAngle != -1f && Player.SlopeAngle <= 60f) {
 			Player.Velocity.x *= Mathf.Cos(Player.SlopeAngle * Mathf.Deg2Rad);
 			float slopeSpeedY = Player.Velocity.x * Mathf.Tan(Player.SlopeAngle * Mathf.Deg2Rad) * (Player.CastSide == "Left" ? 1f : -1f);
 			if (slopeSpeedY > 0f)

@@ -94,7 +94,9 @@ public static class PlayerExtensions {
             return result;
 
         Vector2 castOrigin = rigidbody.position;
+#if UNITY_EDITOR
         VisualizeCircleCast(castOrigin, radius, distance);
+#endif
 
         // Perform the CircleCast
         foreach (var hitLayerMask in HitLayerMasks) {
@@ -102,13 +104,8 @@ public static class PlayerExtensions {
 
 			foreach (var hit in hits) {
 				if (hit.collider != null && hit.rigidbody != rigidbody) {
-					if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Platform")) {
-						if (Vector2.Dot(direction, Vector2.up) > 0) {
-							continue;
-						}
-					}
-					result.IsGrounded |= hit.normal.y > 0.95f;
-					result.IsHittingCeiling |= hit.normal.y < 0;
+					result.IsGrounded |= hit.normal.y >= 0.5f; // 0.5 : 0.5sqrt(3) : 1 -> 60°
+					result.IsHittingCeiling |= hit.normal.y < -0.95f;
 					result.SlopeAngle = Vector2.Angle(hit.normal, Vector2.up);
 					result.CastSide = hit.normal.x > 0 ? "Right" : "Left";
 				}
@@ -117,6 +114,7 @@ public static class PlayerExtensions {
         return result;
     }
 
+#if UNITY_EDITOR
     private static void VisualizeCircleCast(Vector2 castOrigin, float radius, float distance) {
         // Visualize the circle using Debug.DrawLine
         const int segments = 30;
@@ -133,5 +131,6 @@ public static class PlayerExtensions {
             Debug.DrawLine(point1, point2, Color.green, 5f);
         }
     }
+#endif
 }
 
