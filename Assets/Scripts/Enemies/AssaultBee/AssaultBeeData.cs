@@ -15,6 +15,7 @@ namespace Enemies.AssaultBee
 
         #region Attack Fields
             public float AttackCD = 2f;
+            public float PrecastSpeedMultiplier = 0.3f;
             public float AttackSpeedMultiplier = 2.5f;
         #endregion
 
