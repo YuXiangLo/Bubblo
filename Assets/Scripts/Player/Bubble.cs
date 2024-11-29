@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class Bubble : MonoBehaviour
@@ -68,18 +69,12 @@ public class Bubble : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
             float damage = Mathf.Lerp(MinDamage, MaxDamage, CurrentSize / MaxSize);
             other.gameObject.GetComponent<IEnemyModifyHealth>().TakeDamage(damage);
         }
 
-        bool shouldDestroy = true;
-        foreach (string tag in IgnoreTags) {
-            if (other.gameObject.CompareTag(tag)) {
-                shouldDestroy = false;
-                break;
-            }
-        }
+        bool shouldDestroy = !IgnoreTags.Any(tag => other.gameObject.CompareTag(tag));
 
         if (shouldDestroy) {
             Destroy(gameObject);
@@ -88,7 +83,7 @@ public class Bubble : MonoBehaviour
             }
         }
 
-        if(other.gameObject.layer == LayerMask.NameToLayer("Player")) {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player")) {
             if (IsRelease) {
                 other.gameObject.GetComponent<Player>().BubbleJump();
                 Destroy(gameObject);
@@ -96,10 +91,8 @@ public class Bubble : MonoBehaviour
         }
     }
 
-    public void StopCharging()
-    {
-        IsCharging = false;
-    }
+    public void StopCharging() => IsCharging = false;
+    public void Remove() => Destroy(gameObject);
 
     public void Release()
     {
@@ -108,19 +101,8 @@ public class Bubble : MonoBehaviour
         Destroy(gameObject, LifeTime);
     }
 
-    public void Remove()
-    {
-        Destroy(gameObject);
-    }
-
-    private void UpdateSize()
-    {
-        transform.localScale = Vector3.one * CurrentSize;
-    }
-    private void UpdateHoldingPosition()
-    {
-        transform.position = Player.transform.position + CalculateBubblePosition();
-    }
+    private void UpdateSize() => transform.localScale = Vector3.one * CurrentSize;
+    private void UpdateHoldingPosition() => transform.position = Player.transform.position + CalculateBubblePosition();
 
     private Vector3 CalculateBubblePosition()
     {
