@@ -44,9 +44,6 @@ public class PerTileColliderControl : MonoBehaviour
                 // Get the top Y-coordinate of the tile
                 float tileTopY = tileWorldPosition.y + Tilemap.cellSize.y;
 
-                Debug.Log("tileTopY: " +tileTopY);
-                Debug.Log("playerY " + playerY);
-
                 // Check if the Player is above the tile
                 if (playerY >= tileTopY)
                 {
