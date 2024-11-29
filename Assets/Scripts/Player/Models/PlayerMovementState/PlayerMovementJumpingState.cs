@@ -16,6 +16,7 @@ public class PlayerMovementJumpingState: IPlayerMovementState
         Player = player;
         PlayerData = playerData;
         HandleAnimation();
+		Debug.Log("Jump State");
     }
 
     public void HandleMovement()

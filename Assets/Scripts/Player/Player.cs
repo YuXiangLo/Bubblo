@@ -8,9 +8,14 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 	// Player Animator
     public Animator Animator;
 
-    // Player Movement
+	// Raycast Information
     public bool IsGrounded = false;
+	public bool IsSlopeMovement = false;
 	public bool IsHittingCeiling = false;
+	public float SlopeAngle = -1f;
+	public string CastSide = "None";
+
+    // Player Movement
     public bool IsFacingRight => transform.localScale.x > 0f;
     public Vector2 Velocity = Vector2.zero;
 
@@ -150,8 +155,13 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
     private void DetectPlayerStatus()
     {
-        IsGrounded = Rigidbody2D.Raycast(Vector2.down, new Vector2(PlayerData.PlayerSize, PlayerData.PlayerSize), PlayerData.TriggerDistance);
-		IsHittingCeiling = Rigidbody2D.Raycast(Vector2.up, new Vector2(PlayerData.PlayerSize, PlayerData.PlayerSize), PlayerData.TriggerDistance);
+        var movementCastInfo = Rigidbody2D.Raycast(Vector2.down, 0.5f * PlayerData.PlayerSize, PlayerData.TriggerDistance);
+		var slopeCastInfo    = Rigidbody2D.Raycast(Vector2.down, PlayerData.PlayerSize, PlayerData.TriggerDistance);
+		IsGrounded = movementCastInfo.IsGrounded;
+		IsHittingCeiling = movementCastInfo.IsHittingCeiling;
+		SlopeAngle = movementCastInfo.SlopeAngle;
+		CastSide   = movementCastInfo.CastSide;
+		IsSlopeMovement    = slopeCastInfo.SlopeAngle > 0.1f;
     }
 
     private void HandleMovement()

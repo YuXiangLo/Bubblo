@@ -17,6 +17,7 @@ public class PlayerMovementFallingState: IPlayerMovementState
         Player = player;
         PlayerData = playerData;
         HandleAnimation();
+		Debug.Log("Fall State");
     }
 
     public void HandleMovement()

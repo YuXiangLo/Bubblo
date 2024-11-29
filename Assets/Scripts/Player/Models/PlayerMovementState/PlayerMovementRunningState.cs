@@ -22,7 +22,7 @@ public class PlayerMovementRunningState : IPlayerMovementState
     
     public void HandleMovement()
     {
-        if (Player.IsGrounded)
+        if (Player.IsGrounded || Player.IsSlopeMovement)
         {
             if (Mathf.Abs(Player.Velocity.x) <= 0.01f) 
             {
@@ -30,8 +30,9 @@ public class PlayerMovementRunningState : IPlayerMovementState
             }
             else 
             {
-                DetectJumpMovement();
                 DetectHorizontalMovement();
+                DetectJumpMovement();
+				ApplyGravity();
             }
         }
         else if (Player.Velocity.y > 0)
@@ -48,7 +49,7 @@ public class PlayerMovementRunningState : IPlayerMovementState
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            Player.Velocity.y = PlayerData.JumpForce;
+            Player.Velocity.y += PlayerData.JumpForce;
         }
     }
 
@@ -56,6 +57,19 @@ public class PlayerMovementRunningState : IPlayerMovementState
     {
         var horizontalInput = Input.GetAxisRaw("Horizontal");
         Player.Velocity.x = horizontalInput * PlayerData.MoveSpeed;
+		if (Player.SlopeAngle != -1f) {
+			Player.Velocity.x *= Mathf.Cos(Player.SlopeAngle * Mathf.Deg2Rad);
+			float slopeSpeedY = Player.Velocity.x * Mathf.Tan(Player.SlopeAngle * Mathf.Deg2Rad) * (Player.CastSide == "Left" ? 1f : -1f);
+			if (slopeSpeedY > 0f)
+				Player.Velocity.y = Mathf.Max(Player.Velocity.y, slopeSpeedY);
+			else if (Player.Velocity.y <= 0f)
+				Player.Velocity.y = slopeSpeedY;
+		}
+    }
+
+    private void ApplyGravity()
+    {
+        Player.Velocity.y += PlayerData.Gravity * PlayerData.DefaultGravityScale * Time.deltaTime;
     }
 
 	public void HandleAnimation()
