@@ -98,20 +98,21 @@ public static class PlayerExtensions {
 
         // Perform the CircleCast
         foreach (var hitLayerMask in HitLayerMasks) {
-            RaycastHit2D hit = Physics2D.CircleCast(castOrigin, radius, direction, distance, hitLayerMask);
+            RaycastHit2D[] hits = Physics2D.CircleCastAll(castOrigin, radius, direction, distance, hitLayerMask);
 
-            if (hit.collider != null && hit.rigidbody != rigidbody) {
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Platform")) {
-                    if (Vector2.Dot(direction, Vector2.up) > 0) {
-                        continue;
-                    }
-                }
-                result.IsGrounded = hit.normal.y > 0;
-				result.IsHittingCeiling = hit.normal.y < 0;
-                result.SlopeAngle = Vector2.Angle(hit.normal, Vector2.up);
-                result.CastSide = hit.normal.x > 0 ? "Right" : "Left";
-                return result;
-            }
+			foreach (var hit in hits) {
+				if (hit.collider != null && hit.rigidbody != rigidbody) {
+					if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Platform")) {
+						if (Vector2.Dot(direction, Vector2.up) > 0) {
+							continue;
+						}
+					}
+					result.IsGrounded |= hit.normal.y > 0.95f;
+					result.IsHittingCeiling |= hit.normal.y < 0;
+					result.SlopeAngle = Vector2.Angle(hit.normal, Vector2.up);
+					result.CastSide = hit.normal.x > 0 ? "Right" : "Left";
+				}
+			}
         }
         return result;
     }
