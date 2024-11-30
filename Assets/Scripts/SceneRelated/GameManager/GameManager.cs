@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     private float CurrentMagicPointTemp;
     [SerializeField] private SceneList SceneList;
     public PlayerHealth PlayerHealth;
+    private MusicManager MusicManager;
 
     void Awake()
     {
@@ -20,11 +21,13 @@ public class GameManager : MonoBehaviour
         } else {
             Destroy(gameObject);
         }
+
+        MusicManager = MusicManager.Instance;
     }
 
     private void Start()
     {
-        SceneManager.LoadScene("Start");
+        LoadScene("Start");
     }
 
     public void StartGame()
@@ -33,17 +36,17 @@ public class GameManager : MonoBehaviour
 
         // Load Scene1 and register callback for when it has loaded
         SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.LoadScene(SceneList.Scene[0]);
+        LoadScene(SceneList.Scene[0]);
     }
 
 	public void GameOver()
 	{
-		SceneManager.LoadScene("Start");
+		LoadScene("Start");
 	}
 
     public void GotoHomePage()
     {
-        SceneManager.LoadScene("Start");
+        LoadScene("Start");
     }
 
     /// <summary>
@@ -55,14 +58,14 @@ public class GameManager : MonoBehaviour
         int index = Array.IndexOf(SceneList.Scene, currentSceneName);
         if (index == SceneList.Scene.Length - 1)
         {
-            SceneManager.LoadScene("Start");
+            LoadScene("Start");
             return;
         }
         else{
             StoreCurrentStates();
             string nextSceneName = SceneList.Scene[index + 1];
             SceneManager.sceneLoaded += OnSceneLoaded;
-            SceneManager.LoadScene(nextSceneName);
+            LoadScene(nextSceneName);
         }
     }
 
@@ -74,15 +77,28 @@ public class GameManager : MonoBehaviour
             // Level exists, store current states and load the specified scene
             StoreCurrentStates();
             SceneManager.sceneLoaded += OnSceneLoaded;
-            SceneManager.LoadScene(levelName);
+            LoadScene(levelName);
         }
         else
         {
             // Level doesn't exist, go back to the "Start" scene
-            SceneManager.LoadScene("Start");
+            LoadScene("Start");
         }
     }
 
+    private void LoadScene(string sceneName)
+    {
+        if (sceneName == "Start")
+        {
+            MusicManager.PlayMainMenuBackgroundMusic();
+        }
+        else
+        {
+            MusicManager.PlayInGameBackgroundMusic();
+        }
+
+        SceneManager.LoadScene(sceneName);
+    }
 
     private void StoreCurrentStates()
     {
