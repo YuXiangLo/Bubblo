@@ -49,7 +49,7 @@ public class PlayerMovementRunningState : IPlayerMovementState
     {
         if (UserInput.Instance.Jump)
         {
-            Player.Velocity.y += PlayerData.JumpForce;
+            Player.Velocity.y = Mathf.Max(Player.Velocity.y, 0f) + PlayerData.JumpForce;
         }
     }
 

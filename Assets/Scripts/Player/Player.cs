@@ -161,7 +161,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 		IsHittingCeiling = movementCastInfo.IsHittingCeiling;
 		SlopeAngle = movementCastInfo.SlopeAngle;
 		CastSide   = movementCastInfo.CastSide;
-		IsSlopeMovement    = slopeCastInfo.SlopeAngle > 0.1f;
+		IsSlopeMovement    = slopeCastInfo.SlopeAngle > 0.1f && slopeCastInfo.SlopeAngle <= 60f;
     }
 
     private void HandleMovement()

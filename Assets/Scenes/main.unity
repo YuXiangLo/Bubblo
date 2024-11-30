@@ -185,7 +185,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 100
-  DeadScene: Start
   TransitionDelay: 1
 --- !u!114 &706924288
 MonoBehaviour:
@@ -205,7 +204,9 @@ MonoBehaviour:
   FloatingRatio: 0.9995
   Gravity: -90
   MaxFallingSpeed: -20
+  MinBlowingSpeed: 20
   JumpForce: 18
+  BubbleJumpForce: 24
   PlayerSize: 1
   TriggerDistance: 0.001
   DefaultGravityScale: 1
@@ -227,6 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Scene:
+  - TileScene
   - Official Scene 1
   - Scene1
   - Scene2
