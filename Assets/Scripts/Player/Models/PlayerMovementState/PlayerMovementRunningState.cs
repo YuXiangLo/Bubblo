@@ -47,7 +47,7 @@ public class PlayerMovementRunningState : IPlayerMovementState
 
     private void DetectJumpMovement()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (UserInput.Instance.Jump)
         {
             Player.Velocity.y += PlayerData.JumpForce;
         }
@@ -55,7 +55,7 @@ public class PlayerMovementRunningState : IPlayerMovementState
 
     private void DetectHorizontalMovement()
     {
-        var horizontalInput = Input.GetAxisRaw("Horizontal");
+        var horizontalInput = UserInput.Instance.Move.x - UserInput.Instance.Move.y;
         Player.Velocity.x = horizontalInput * PlayerData.MoveSpeed;
 		if (Player.SlopeAngle != -1f && Player.SlopeAngle <= 60f) {
 			Player.Velocity.x *= Mathf.Cos(Player.SlopeAngle * Mathf.Deg2Rad);

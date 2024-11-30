@@ -10,15 +10,21 @@ namespace Enemies.AssaultBee
         private Player Player;
 
         public Vector2 Velocity = Vector2.zero;
+        public Animator Animator;
+        public bool IsBackward = false;
 
         private void Awake()
         {
             Health = GetComponent<EnemyHealth>();
             Data = GetComponent<AssaultBeeData>();
             Player = GameObject.FindWithTag("Player").GetComponent<Player>();
+            Animator = GetComponent<Animator>();
+
             Data.LeftPoint = (Vector2)transform.position + Data.LeftPoint;
             Data.RightPoint = (Vector2)transform.position + Data.RightPoint;
+            
             CurrentState = new DefaultState(this, Data, Player);
+            CurrentState.Enter();
         }
 
         public void SetState(IState state)
@@ -52,9 +58,10 @@ namespace Enemies.AssaultBee
         private void HandleFaceDirection()
         {
             bool isMovingLeft = Velocity.x < 0;
+            bool isBackward = Data.IsFacingLeft != isMovingLeft;
             Vector3 localScale = transform.localScale;
             float absScaleX = Mathf.Abs(localScale.x);
-            if (Data.IsFacingLeft != (Velocity.x < 0))
+            if (isBackward != IsBackward)
             {
                 Data.IsFacingLeft = isMovingLeft;
                 transform.localScale = new Vector3(isMovingLeft ? absScaleX : -absScaleX, localScale.y, localScale.z);

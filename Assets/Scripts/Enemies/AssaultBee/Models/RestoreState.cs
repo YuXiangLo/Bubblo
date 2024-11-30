@@ -20,11 +20,14 @@ namespace Enemies.AssaultBee
         public void Enter()
         {
             AssaultBee.Velocity = (Target - (Vector2)AssaultBee.transform.position).normalized * Data.Speed;
+            AssaultBee.Animator.SetInteger("State", (int)StateType.Restore);
+            AssaultBee.IsBackward = true;
         }
 
         public void Exit()
         {
             AssaultBee.Velocity = Vector2.zero;
+            AssaultBee.IsBackward = false;
         }
 
         public void Update()

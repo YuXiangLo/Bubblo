@@ -15,8 +15,7 @@ namespace Enemies.SimpleBee
 
         private void Update()
         {
-            if (Movement.enabled)
-                Movement.HandleMovement();
+            Movement.HandleMovement();
         }
 
         public void Heal(float amount)

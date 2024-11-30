@@ -10,7 +10,6 @@ namespace Enemies.JumpSpider
         private Player Player;
 
         public Animator Animator;
-
         public Vector2 Velocity = Vector2.zero;
 
         private void Awake()
@@ -26,7 +25,6 @@ namespace Enemies.JumpSpider
 
         public void SetState(IState newState)
         {
-            Debug.Log($"SetState from {CurrentState} to {newState}");
             CurrentState.Exit();
             CurrentState = newState;
             CurrentState.Enter();
