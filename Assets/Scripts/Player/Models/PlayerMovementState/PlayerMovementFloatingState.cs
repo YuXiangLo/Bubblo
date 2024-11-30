@@ -29,11 +29,11 @@ public class PlayerMovementFloatingState : IPlayerMovementState
         {
             Player.ChangePlayerMovementState(new PlayerMovementIdleState(Player, PlayerData));
         } 
-		else if (Input.GetKeyUp(KeyCode.W))
+		else if (!UserInput.Instance.IsJumpHeld)
         {
             Player.ChangePlayerMovementState(new PlayerMovementFallingState(Player, PlayerData));
         }
-        else if (Input.GetKey(KeyCode.W))
+        else if (UserInput.Instance.IsJumpHeld)
         {
             DetectHorizontalMovement();
             ApplyGravity();
@@ -43,7 +43,7 @@ public class PlayerMovementFloatingState : IPlayerMovementState
     private void DetectHorizontalMovement()
     {
         HorizontalMoveSpeed *= PlayerData.FloatingRatio;
-        var horizontalInput = Input.GetAxisRaw("Horizontal");
+        var horizontalInput = UserInput.Instance.Move.x - UserInput.Instance.Move.y;
         Player.Velocity.x = horizontalInput * HorizontalMoveSpeed;
     }
 
