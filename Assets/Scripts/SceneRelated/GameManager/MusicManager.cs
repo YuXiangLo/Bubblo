@@ -6,9 +6,12 @@ using UnityEngine;
 public class MusicManager : MonoBehaviour
 {
     public static MusicManager Instance;
+
     public AudioSource MainMenuBackGroundMusic;
     public AudioSource InGameBackGroundMusic;
-    private AudioSource AudioSource;
+    
+
+    private AudioSource BackgroundMusic;
 
     void Awake()
     {
@@ -25,33 +28,33 @@ public class MusicManager : MonoBehaviour
         MainMenuBackGroundMusic.enabled = true;
         InGameBackGroundMusic.enabled = true;
 
-        AudioSource = MainMenuBackGroundMusic;
-        AudioSource.Play();
+        BackgroundMusic = MainMenuBackGroundMusic;
+        BackgroundMusic.Play();
     }
 
     public void PlayMainMenuBackgroundMusic()
     {
-        if (AudioSource != MainMenuBackGroundMusic)
+        if (BackgroundMusic != MainMenuBackGroundMusic)
         {
-            if (AudioSource.isPlaying)
+            if (BackgroundMusic.isPlaying)
             {
-                AudioSource.Stop();
+                BackgroundMusic.Stop();
             }
-            AudioSource = MainMenuBackGroundMusic;
-            AudioSource.Play();
+            BackgroundMusic = MainMenuBackGroundMusic;
+            BackgroundMusic.Play();
         }
     }
 
     public void PlayInGameBackgroundMusic()
     {
-        if (AudioSource != InGameBackGroundMusic)
+        if (BackgroundMusic != InGameBackGroundMusic)
         {
-            if (AudioSource.isPlaying)
+            if (BackgroundMusic.isPlaying)
             {
-                AudioSource.Stop();
+                BackgroundMusic.Stop();
             }
-            AudioSource = InGameBackGroundMusic;
-            AudioSource.Play();
+            BackgroundMusic = InGameBackGroundMusic;
+            BackgroundMusic.Play();
         }
     }
 }
