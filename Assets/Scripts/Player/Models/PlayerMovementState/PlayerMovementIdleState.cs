@@ -48,7 +48,6 @@ public class PlayerMovementIdleState : IPlayerMovementState
     {
         if (UserInput.Instance.Jump)
         {
-            Debug.Log("Jumping");
             Player.Velocity.y = PlayerData.JumpForce;
         }
     }
