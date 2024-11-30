@@ -7,11 +7,15 @@ public class UserInput : MonoBehaviour
 {
     public static UserInput Instance;
 
-    public Vector2 Move {get; private set;}
-    public bool Jump {get; private set;}
-    public bool Fire {get; private set;}
-    public bool Interact {get; private set;}
-    // Start is called before the first frame update
+    // Input values
+    public Vector2 Move { get; private set; }
+    public bool Jump { get; private set; }
+    public bool Fire { get; private set; }
+    public bool Interact { get; private set; }
+
+    // Continuous input (like GetKey)
+    public bool IsJumpHeld => _jumpAction.ReadValue<float>() > 0;
+    public bool IsFireHeld => _fireAction.ReadValue<float>() > 0;
 
     private PlayerInput _playerInput;
 
@@ -19,15 +23,21 @@ public class UserInput : MonoBehaviour
     private InputAction _jumpAction;
     private InputAction _fireAction;
     private InputAction _interactAction;
+
+    private bool _jumpPressedThisFrame;
+    private bool _firePressedThisFrame;
+    private bool _interactPressedThisFrame;
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
 
         _playerInput = GetComponent<PlayerInput>();
@@ -36,15 +46,17 @@ public class UserInput : MonoBehaviour
 
     private void Update()
     {
-        UpdateInput();
-    }
+        // Reset "pressed this frame" flags
+        Jump = _jumpPressedThisFrame;
+        Fire = _firePressedThisFrame;
+        Interact = _interactPressedThisFrame;
 
-    private void UpdateInput()
-    {
+        _jumpPressedThisFrame = false;
+        _firePressedThisFrame = false;
+        _interactPressedThisFrame = false;
+
+        // Update continuous input
         Move = _moveAction.ReadValue<Vector2>();
-        Jump = _jumpAction.triggered;
-        Fire = _fireAction.triggered;
-        Interact = _interactAction.triggered;
     }
 
     private void SetupInputAction()
@@ -53,5 +65,15 @@ public class UserInput : MonoBehaviour
         _jumpAction = _playerInput.actions["Jump"];
         _fireAction = _playerInput.actions["Fire"];
         _interactAction = _playerInput.actions["Interact"];
+
+        // Handle "pressed this frame" logic
+        _jumpAction.performed += ctx => { _jumpPressedThisFrame = true; };
+        _fireAction.performed += ctx => { _firePressedThisFrame = true; };
+        _interactAction.performed += ctx => { _interactPressedThisFrame = true; };
+
+        // Reset "held" flags on key release
+        _jumpAction.canceled += ctx => Jump = false;
+        _fireAction.canceled += ctx => Fire = false;
+        _interactAction.canceled += ctx => Interact = false;
     }
 }

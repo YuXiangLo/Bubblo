@@ -37,11 +37,11 @@ public class PlayerAttackChargingState : IPlayerAttackState
             Player.ChangePlayerAttackState(new PlayerAttackAttackingState(Player, PlayerData));
         }
 
-        if (IsExhaustedAtInit || Input.GetButtonUp("Fire1"))
+        if (IsExhaustedAtInit || !UserInput.Instance.IsFireHeld)
         {
             ReleaseBubble();
         }
-        else if (Input.GetButton("Fire1"))
+        else if (UserInput.Instance.IsFireHeld)
         {
             if (!MaxCharged)
             {

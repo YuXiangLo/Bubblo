@@ -33,13 +33,13 @@ public class PlayerMovementJumpingState: IPlayerMovementState
 
     private void DetectHorizontalMovement()
     {
-        var horizontalInput = Input.GetAxisRaw("Horizontal");
+        var horizontalInput = UserInput.Instance.Move.x - UserInput.Instance.Move.y;
         Player.Velocity.x = horizontalInput * PlayerData.MoveSpeed;
     }
 
     private void ApplyGravity()
     {
-        var gravityScale = Input.GetButton("Jump") ? PlayerData.LowGravityScale : PlayerData.DefaultGravityScale;
+        var gravityScale = UserInput.Instance.IsJumpHeld ? PlayerData.LowGravityScale : PlayerData.DefaultGravityScale;
         Player.Velocity.y += PlayerData.Gravity * gravityScale * Time.deltaTime;
     }
 

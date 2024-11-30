@@ -66,17 +66,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "c382f107-c3fa-4aa1-bdcc-367061adc22a",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "2D Vector",
                     "id": "8f43e857-6847-4233-8daa-77bcb1cb38bb",
                     "path": "2DVector",
@@ -130,17 +119,6 @@
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
-                    "isOptional": true,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "GamePad",
-            "bindingGroup": "GamePad",
-            "devices": [
-                {
-                    "devicePath": "<Gamepad>",
                     "isOptional": true,
                     "isOR": false
                 }

@@ -46,7 +46,7 @@ public class PlayerMovementRunningState : IPlayerMovementState
 
     private void DetectJumpMovement()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (UserInput.Instance.Jump)
         {
             Player.Velocity.y = PlayerData.JumpForce;
         }
@@ -54,7 +54,7 @@ public class PlayerMovementRunningState : IPlayerMovementState
 
     private void DetectHorizontalMovement()
     {
-        var horizontalInput = Input.GetAxisRaw("Horizontal");
+        var horizontalInput = UserInput.Instance.Move.x - UserInput.Instance.Move.y;
         Player.Velocity.x = horizontalInput * PlayerData.MoveSpeed;
     }
 
