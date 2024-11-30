@@ -10,6 +10,6 @@ public class MainMenu : MonoBehaviour
 
     public void PlayButtonPushedSoundEffect()
     {
-        MusicManager.Instance.PlayButtonPushedSoundEffect();
+        MusicManager.Instance.ButtonPushedSoundEffect.Play();
     }
 }

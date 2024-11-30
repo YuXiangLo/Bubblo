@@ -17,6 +17,7 @@ public class PlayerAttackAttackingState : IPlayerAttackState
     {
         Player = player;
         PlayerData = playerData;
+        MusicManager.Instance.ThrowBubbleSoundEffect.Play();
         Player.SetAnimation(PlayerStateType.Attack);
     }
 

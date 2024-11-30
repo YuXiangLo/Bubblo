@@ -8,13 +8,20 @@ public class MusicManager : MonoBehaviour
 {
     public static MusicManager Instance;
     
-    // Background Music
-    public AudioSource MainMenuBackGroundMusic;
-    public AudioSource InGameBackGroundMusic;
+    [Header("BackgroundMusic")]
+    public AudioSource MainMenuBackgroundMusic;
+    public AudioSource InGameBackgroundMusic;
     
-    // Button
+    [Header("Button")]
     public AudioSource ButtonPushedSoundEffect;
 
+    [Header("Player")]
+    public AudioSource ThrowBubbleSoundEffect;
+    public AudioSource CharingBubbleSoundEffect;
+    public AudioSource WalkSoundEffect;
+    public AudioSource JumpSoundEffect;
+    public AudioSource DeadSoundEffect;
+    
     private AudioSource BackgroundMusic;
 
     void Awake()
@@ -29,11 +36,11 @@ public class MusicManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        MainMenuBackGroundMusic.enabled = true;
-        InGameBackGroundMusic.enabled = true;
+        MainMenuBackgroundMusic.enabled = true;
+        InGameBackgroundMusic.enabled = true;
         ButtonPushedSoundEffect.enabled = true;
 
-        BackgroundMusic = MainMenuBackGroundMusic;
+        BackgroundMusic = MainMenuBackgroundMusic;
         BackgroundMusic.Play();
     }
 
@@ -55,13 +62,13 @@ public class MusicManager : MonoBehaviour
 
     public void PlayMainMenuBackgroundMusic()
     {
-        if (BackgroundMusic != MainMenuBackGroundMusic)
+        if (BackgroundMusic != MainMenuBackgroundMusic)
         {
             if (BackgroundMusic.isPlaying)
             {
                 BackgroundMusic.Stop();
             }
-            BackgroundMusic = MainMenuBackGroundMusic;
+            BackgroundMusic = MainMenuBackgroundMusic;
         }
 
         if (!BackgroundMusic.isPlaying)
@@ -72,28 +79,18 @@ public class MusicManager : MonoBehaviour
 
     public void PlayInGameBackgroundMusic()
     {
-        if (BackgroundMusic != InGameBackGroundMusic)
+        if (BackgroundMusic != InGameBackgroundMusic)
         {
             if (BackgroundMusic.isPlaying)
             {
                 BackgroundMusic.Stop();
             }
-            BackgroundMusic = InGameBackGroundMusic;
+            BackgroundMusic = InGameBackgroundMusic;
         }
 
         if (!BackgroundMusic.isPlaying)
         {
             BackgroundMusic.Play();
         }
-    }
-
-    public void PlayButtonPushedSoundEffect()
-    {
-        if (ButtonPushedSoundEffect.isPlaying)
-        {
-            ButtonPushedSoundEffect.Stop();
-        }
-
-        ButtonPushedSoundEffect.Play();
     }
 }
