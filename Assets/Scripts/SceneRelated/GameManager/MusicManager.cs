@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MusicManager : MonoBehaviour
 {
     public static MusicManager Instance;
-
+    
+    // Background Music
     public AudioSource MainMenuBackGroundMusic;
     public AudioSource InGameBackGroundMusic;
     
+    // Button
+    public AudioSource ButtonPushedSoundEffect;
 
     private AudioSource BackgroundMusic;
 
@@ -27,9 +31,26 @@ public class MusicManager : MonoBehaviour
 
         MainMenuBackGroundMusic.enabled = true;
         InGameBackGroundMusic.enabled = true;
+        ButtonPushedSoundEffect.enabled = true;
 
         BackgroundMusic = MainMenuBackGroundMusic;
         BackgroundMusic.Play();
+    }
+
+    public void PauseBackgroundMusic()
+    {
+        if (BackgroundMusic.isPlaying)
+        {
+            BackgroundMusic.Pause();
+        }
+    }
+
+    public void PlayOrResumeBackgroundMusic()
+    {
+        if (!BackgroundMusic.isPlaying)
+        {
+            BackgroundMusic.Play();
+        }
     }
 
     public void PlayMainMenuBackgroundMusic()
@@ -41,6 +62,10 @@ public class MusicManager : MonoBehaviour
                 BackgroundMusic.Stop();
             }
             BackgroundMusic = MainMenuBackGroundMusic;
+        }
+
+        if (!BackgroundMusic.isPlaying)
+        {
             BackgroundMusic.Play();
         }
     }
@@ -54,7 +79,21 @@ public class MusicManager : MonoBehaviour
                 BackgroundMusic.Stop();
             }
             BackgroundMusic = InGameBackGroundMusic;
+        }
+
+        if (!BackgroundMusic.isPlaying)
+        {
             BackgroundMusic.Play();
         }
+    }
+
+    public void PlayButtonPushedSoundEffect()
+    {
+        if (ButtonPushedSoundEffect.isPlaying)
+        {
+            ButtonPushedSoundEffect.Stop();
+        }
+
+        ButtonPushedSoundEffect.Play();
     }
 }

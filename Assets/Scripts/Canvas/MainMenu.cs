@@ -7,4 +7,9 @@ public class MainMenu : MonoBehaviour
         Time.timeScale = 1f;
         GameManager.Instance.StartGame();
     }
+
+    public void PlayButtonPushedSoundEffect()
+    {
+        MusicManager.Instance.PlayButtonPushedSoundEffect();
+    }
 }

@@ -7,10 +7,12 @@ public class TimeController : MonoBehaviour {
 	}
 
 	public void StopTime() {
+		MusicManager.Instance.PauseBackgroundMusic();
 		Time.timeScale = 0f;
 	}
 
 	public void ResumeTime() {
+		MusicManager.Instance.PlayOrResumeBackgroundMusic();
 		Time.timeScale = 1f;
 	}
 }
