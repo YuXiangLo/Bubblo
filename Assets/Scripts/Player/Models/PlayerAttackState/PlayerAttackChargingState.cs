@@ -11,7 +11,7 @@ public class PlayerAttackChargingState : IPlayerAttackState
     private readonly bool IsExhaustedAtInit;
     private float HoldTime;
     private bool MaxCharged;
-    private const float MaxHoldTime = 2f;
+    private const float MaxHoldTime = 1f;
     
     /// <summary>
     /// Constructor

@@ -20,6 +20,9 @@ public class PlayerMovementJumpingState: IPlayerMovementState
 
     public void HandleMovement()
     {
+		if (Player.IsHittingCeiling)
+			Player.Velocity.y = 0f;
+
         if (Player.Velocity.y > 0f)
         {
             DetectHorizontalMovement();
@@ -41,6 +44,7 @@ public class PlayerMovementJumpingState: IPlayerMovementState
     {
         var gravityScale = UserInput.Instance.IsJumpHeld ? PlayerData.LowGravityScale : PlayerData.DefaultGravityScale;
         Player.Velocity.y += PlayerData.Gravity * gravityScale * Time.deltaTime;
+		Player.Velocity.y = Mathf.Min(Player.Velocity.y, PlayerData.MinBlowingSpeed);
     }
 
 	public void HandleAnimation()

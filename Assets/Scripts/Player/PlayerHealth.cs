@@ -6,7 +6,6 @@ public class PlayerHealth : MonoBehaviour
 {
     public float MaxHealth = 100f;
 
-	[SerializeField] private string DeadScene = "Start";
 	[SerializeField] private float TransitionDelay = 1f;
 
     private Player Player;
@@ -49,7 +48,7 @@ public class PlayerHealth : MonoBehaviour
 	{
 		// TODO Add the animation on it, the below code is a placeholder
         yield return new WaitForSecondsRealtime(TransitionDelay);
-        SceneManager.LoadScene(DeadScene);
+		GameManager.Instance.GameOver();
 	}
 
 #if UNITY_EDITOR
