@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 4983091141869878551}
   - component: {fileID: 7105853192328150088}
   - component: {fileID: 316718149377873124}
-  - component: {fileID: 1554920718440097541}
   - component: {fileID: 659515783135043062}
   - component: {fileID: 1214593983406296568}
   - component: {fileID: 3271794848286108123}
+  - component: {fileID: 5466135974237460654}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -138,8 +138,72 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!61 &1554920718440097541
-BoxCollider2D:
+--- !u!114 &659515783135043062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7355135152502087577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0843e973d42eeeb958d6c401fc725aab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 100
+  TransitionDelay: 1
+--- !u!114 &1214593983406296568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7355135152502087577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e2d8551461849349b618b8ecbc1d48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 0}
+  IsGrounded: 0
+  IsSlopeMovement: 0
+  IsHittingCeiling: 0
+  SlopeAngle: -1
+  CastSide: None
+  Velocity: {x: 0, y: 0}
+  CurrentMagicPoint: 0
+  CurrentHealth: 0
+--- !u!114 &3271794848286108123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7355135152502087577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e57ed76cc25489b98e7844a7644a6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveSpeed: 8
+  FloatingXSpeed: 12
+  FloatingYSpeed: -2
+  FloatingRatio: 0.9995
+  Gravity: -90
+  MaxFallingSpeed: -20
+  MinBlowingSpeed: 20
+  JumpForce: 18
+  BubbleJumpForce: 24
+  PlayerSize: 1
+  TriggerDistance: 0.001
+  DefaultGravityScale: 1
+  LowGravityScale: 0.5
+  KnockbackForce: 6
+  KnockbackTangent: 2
+  BubblePrefab: {fileID: 4980627567242347800, guid: 3654957f8f0b1ce4c8724e8373053977, type: 3}
+  MaxMagicPoint: 10
+--- !u!70 &5466135974237460654
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -171,74 +235,5 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
-    newSize: {x: 0.32, y: 0.32}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
   m_Size: {x: 0.32, y: 0.32}
-  m_EdgeRadius: 0
---- !u!114 &659515783135043062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7355135152502087577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0843e973d42eeeb958d6c401fc725aab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHealth: 100
-  DeadScene: Start
-  TransitionDelay: 1
---- !u!114 &1214593983406296568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7355135152502087577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24e2d8551461849349b618b8ecbc1d48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Animator: {fileID: 0}
-  IsGrounded: 0
-  Velocity: {x: 0, y: 0}
-  CurrentMagicPoint: 0
-  CurrentHealth: 0
---- !u!114 &3271794848286108123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7355135152502087577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5e57ed76cc25489b98e7844a7644a6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MoveSpeed: 8
-  FloatingXSpeed: 12
-  FloatingYSpeed: -2
-  FloatingRatio: 0.9995
-  Gravity: -90
-  MaxFallingSpeed: -20
-  JumpForce: 18
-  PlayerSize: 1
-  TriggerDistance: 0.001
-  DefaultGravityScale: 1
-  LowGravityScale: 0.5
-  KnockbackForce: 6
-  KnockbackTangent: 2
-  BubblePrefab: {fileID: 4980627567242347800, guid: 3654957f8f0b1ce4c8724e8373053977, type: 3}
-  MaxMagicPoint: 10
+  m_Direction: 0
