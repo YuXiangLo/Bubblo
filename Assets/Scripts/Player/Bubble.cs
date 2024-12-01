@@ -120,5 +120,10 @@ public class Bubble : MonoBehaviour
         float yOffset = Mathf.Max(0f, bubbleRadius - PlayerSize / 2f + 0.05f);
         return new Vector3(xOffset, yOffset, 0);
     }
+
+    private void OnDestroy()
+    {
+        MusicManager.Instance.BubbleBrokenSoundEffect.Play();
+    }
 }
 

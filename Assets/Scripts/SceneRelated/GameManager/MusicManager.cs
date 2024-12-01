@@ -22,6 +22,9 @@ public class MusicManager : MonoBehaviour
     public AudioSource JumpSoundEffect;
     public AudioSource DeadSoundEffect;
     
+    [Header("Bubble")]
+    public AudioSource BubbleBrokenSoundEffect;
+
     private AudioSource BackgroundMusic;
 
     void Awake()
