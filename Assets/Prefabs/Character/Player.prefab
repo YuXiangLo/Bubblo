@@ -238,6 +238,8 @@ MonoBehaviour:
   PlayerSize: 1
   DefaultGravityScale: 1
   LowGravityScale: 0.5
+  ClimbingSpeed: 3
+  ClimbFallingSpeed: 5
   KnockbackForce: 6
   KnockbackTangent: 2
   BubblePrefab: {fileID: 4980627567242347800, guid: 3654957f8f0b1ce4c8724e8373053977, type: 3}
