@@ -55,7 +55,7 @@ public class PlayerMovementRunningState : IPlayerMovementState
 
     private void DetectHorizontalMovement()
     {
-        var horizontalInput = UserInput.Instance.Move.x - UserInput.Instance.Move.y;
+        var horizontalInput = UserInput.Instance.Move.x;
         Player.Velocity.x = horizontalInput * PlayerData.MoveSpeed;
 		if (Player.SlopeAngle != -1f && Player.SlopeAngle <= 60f) {
 			Player.Velocity.x *= Mathf.Cos(Player.SlopeAngle * Mathf.Deg2Rad);

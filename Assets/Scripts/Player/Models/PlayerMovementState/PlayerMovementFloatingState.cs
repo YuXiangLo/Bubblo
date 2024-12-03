@@ -43,7 +43,7 @@ public class PlayerMovementFloatingState : IPlayerMovementState
     private void DetectHorizontalMovement()
     {
         HorizontalMoveSpeed *= PlayerData.FloatingRatio;
-        var horizontalInput = UserInput.Instance.Move.x - UserInput.Instance.Move.y;
+        var horizontalInput = UserInput.Instance.Move.x;
         Player.Velocity.x = horizontalInput * HorizontalMoveSpeed;
     }
 

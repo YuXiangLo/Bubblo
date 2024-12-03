@@ -43,7 +43,7 @@ public class PlayerMovementFallingState: IPlayerMovementState
 
     private void DetectHorizontalMovement()
     {
-        var horizontalInput = UserInput.Instance.Move.x - UserInput.Instance.Move.y;
+        var horizontalInput = UserInput.Instance.Move.x;
         Player.Velocity.x = horizontalInput * PlayerData.MoveSpeed;
     }
 
