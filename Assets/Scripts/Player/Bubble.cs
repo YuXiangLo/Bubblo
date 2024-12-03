@@ -79,7 +79,7 @@ public class Bubble : MonoBehaviour
         if (shouldDestroy) {
             Destroy(gameObject);
             if (!IsRelease) {
-                Player.BubbleDestroyed();
+                Player.BubbleBurst();
             }
         }
 

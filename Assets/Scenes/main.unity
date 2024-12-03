@@ -132,8 +132,6 @@ GameObject:
   m_Component:
   - component: {fileID: 706924285}
   - component: {fileID: 706924284}
-  - component: {fileID: 706924288}
-  - component: {fileID: 706924287}
   - component: {fileID: 706924289}
   m_Layer: 0
   m_Name: GameManager
@@ -156,7 +154,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsGameOver: 0
   SceneList: {fileID: 706924289}
-  PlayerHealth: {fileID: 706924287}
 --- !u!4 &706924285
 Transform:
   m_ObjectHideFlags: 0
@@ -172,49 +169,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &706924287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 706924283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0843e973d42eeeb958d6c401fc725aab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHealth: 100
-  TransitionDelay: 1
---- !u!114 &706924288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 706924283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5e57ed76cc25489b98e7844a7644a6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MoveSpeed: 8
-  FloatingXSpeed: 12
-  FloatingYSpeed: -2
-  FloatingRatio: 0.9995
-  Gravity: -90
-  MaxFallingSpeed: -20
-  MinBlowingSpeed: 20
-  JumpForce: 18
-  BubbleJumpForce: 24
-  PlayerSize: 1
-  TriggerDistance: 0.001
-  DefaultGravityScale: 1
-  LowGravityScale: 0.5
-  KnockbackForce: 6
-  KnockbackTangent: 2
-  BubblePrefab: {fileID: 0}
-  MaxMagicPoint: 10
 --- !u!114 &706924289
 MonoBehaviour:
   m_ObjectHideFlags: 0

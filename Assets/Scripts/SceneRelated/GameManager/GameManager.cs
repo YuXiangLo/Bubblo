@@ -6,11 +6,9 @@ public class GameManager : MonoBehaviour
 {
     public bool IsGameOver = false;
     public static GameManager Instance;
-    private Player Player;
-    private float CurrentHealthTemp;
-    private float CurrentMagicPointTemp;
+    private IPlayerStatus Player;
+    private PlayerDataStatus StoredPlayerData;
     [SerializeField] private SceneList SceneList;
-    public PlayerHealth PlayerHealth;
 
     void Awake()
     {
@@ -86,8 +84,7 @@ public class GameManager : MonoBehaviour
 
     private void StoreCurrentStates()
     {
-        CurrentHealthTemp = Player.CurrentHealth;
-        CurrentMagicPointTemp = Player.CurrentMagicPoint;
+        StoredPlayerData = Player.GetPlayerStatus();
     }
 
     /// <summary>
@@ -99,19 +96,17 @@ public class GameManager : MonoBehaviour
     {
         if (scene.name == SceneList.Scene[0])
         {
-            Player = GameObject.FindWithTag("Player").GetComponent<Player>();
-            Player.CurrentHealth = PlayerHealth.MaxHealth;
+            Player = GameObject.FindWithTag("Player").GetComponent<IPlayerStatus>();
+            Player.Initialize();
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
         else
         {
-            GameObject playerObj = GameObject.FindWithTag("Player");
-            Player = playerObj.GetComponent<Player>();
+            Player = GameObject.FindWithTag("Player").GetComponent<IPlayerStatus>();
             // Restore health and magic points
             if (Player != null)
             {
-                Player.CurrentHealth = CurrentHealthTemp;
-                Player.CurrentMagicPoint = CurrentMagicPointTemp;
+                Player.SetPlayerStatus(StoredPlayerData);
             }
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
