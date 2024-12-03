@@ -13,13 +13,15 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     #endregion
 
     #region Raycast Information
-    private RayCaster MovementRayCaster;
-    private RayCaster SlopeRayCaster;
-    public bool Grounded => MovementRayCaster.Grounded;
-    public bool HitCeiling => MovementRayCaster.HitCeiling;
-    public float SlopeAngle => MovementRayCaster.SlopeAngle;
-    public CastSide CastSide => MovementRayCaster.CastSide;
-    public bool IsSlopeMovement => SlopeRayCaster.SlopeAngle > 0.1f && SlopeRayCaster.SlopeAngle < 60f;
+    private BodyCaster BodyCaster;
+    private SlopeTransitionCaster SlopeCaster;
+    private LadderCaster LadderCaster;
+    public bool Grounded => BodyCaster.Grounded;
+    public bool HitCeiling => BodyCaster.HitCeiling;
+    public float SlopeAngle => BodyCaster.SlopeAngle;
+    public CastSide CastSide => BodyCaster.CastSide;
+    public bool IsSlopeMovement => SlopeCaster.IsSlopeMovement;
+    public bool IsAbleToClimb => LadderCaster.IsAbleToClimb;
     #endregion
 
     #region Player Movement
@@ -53,12 +55,14 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         Rigidbody2D = GetComponent<Rigidbody2D>();
         Rigidbody2D.freezeRotation = true;
 
-        var casters = GetComponents<RayCaster>();
-        MovementRayCaster = casters[0];
-        MovementRayCaster.Initialize(Rigidbody2D, Vector2.down, 0.5f * PlayerData.PlayerSize);
+        BodyCaster = GetComponent<BodyCaster>();
+        BodyCaster.Initialize(Rigidbody2D, Vector2.down, 0.5f * PlayerData.PlayerSize);
 
-        SlopeRayCaster = casters[1];
-        SlopeRayCaster.Initialize(Rigidbody2D, Vector2.down, PlayerData.PlayerSize);
+        SlopeCaster = GetComponent<SlopeTransitionCaster>();
+        SlopeCaster.Initialize(Rigidbody2D, Vector2.down, PlayerData.PlayerSize);
+
+        LadderCaster = GetComponent<LadderCaster>();
+        LadderCaster.Initialize(Rigidbody2D, Vector2.up, 0.1f * PlayerData.PlayerSize);
 
         MainCamera = Camera.main;
 
