@@ -239,7 +239,7 @@ MonoBehaviour:
   LowGravityScale: 0.5
   KnockbackForce: 6
   KnockbackTangent: 2
-  BubblePrefab: {fileID: 0}
+  BubblePrefab: {fileID: 4980627567242347800, guid: 3654957f8f0b1ce4c8724e8373053977, type: 3}
 --- !u!114 &9114464562292283211
 MonoBehaviour:
   m_ObjectHideFlags: 0

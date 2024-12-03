@@ -20,8 +20,8 @@ public class MovementIdleState : IMovementState
     {
         if (Player.Grounded)
         {
-            DetectJump();
             DetectHorizontalMovement();
+            DetectJump();
         }
         else if (Player.Velocity.y > 0)
         {
@@ -46,7 +46,7 @@ public class MovementIdleState : IMovementState
     private void DetectHorizontalMovement()
     {
         var horizontalInput = UserInput.Instance.Move.x - UserInput.Instance.Move.y;
-        Player.Velocity = new(horizontalInput * Data.MoveSpeed, 0);
+        Player.Velocity = new(horizontalInput * Data.MoveSpeed, Player.Velocity.y);
         if (Mathf.Abs(horizontalInput) > 0.01f)
         {
             Player.ChangeMovementState(new MovementRunningState(Player, Data));

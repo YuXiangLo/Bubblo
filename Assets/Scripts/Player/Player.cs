@@ -51,6 +51,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         Animator = GetComponent<Animator>();
         
         Rigidbody2D = GetComponent<Rigidbody2D>();
+        Rigidbody2D.freezeRotation = true;
 
         var casters = GetComponents<RayCaster>();
         MovementRayCaster = casters[0];
@@ -80,13 +81,13 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
     public void ChangeMovementState(IMovementState newState)
     {
-        Debug.Log($"{System.DateTime.Now:ss.fff}Change Movement State from {MovementState.GetType()} to {newState.GetType()}");
         MovementState = newState;
         MovementState.Enter();
     }
 
     public void ChangeAttackState(IAttackState newState)
     {
+        Debug.Log($"Change Attack State: {newState.GetType().Name}");
         AttackState = newState;
         AttackState.Enter();
     }
