@@ -17,6 +17,7 @@ public class AttackPitchingState : IAttackState
 
     public void Enter()
     {
+        Bubble.Release();
         Player.SetAnimation(AnimationStateType.Pitching);
         Player.StartCoroutine(PitchCoroutine());
     }
@@ -39,7 +40,6 @@ public class AttackPitchingState : IAttackState
 
         // Wait for the remaining time
         yield return new WaitForSeconds(remainingTime);
-        Bubble.Release();
 
         // After the animation is complete, change the player state
         Player.ChangeAttackState(new AttackIdleState(Player, PlayerData));
