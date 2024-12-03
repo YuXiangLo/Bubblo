@@ -27,8 +27,6 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        Debug.Log("Game Started");
-
         // Load Scene1 and register callback for when it has loaded
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.LoadScene(SceneList.Scene[0]);

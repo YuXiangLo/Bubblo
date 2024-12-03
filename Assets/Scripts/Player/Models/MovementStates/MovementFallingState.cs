@@ -13,7 +13,7 @@ public class MovementFallingState : IMovementState
 
     public void Enter()
     {
-        DetectFloat();
+        Player.SetAnimation(AnimationStateType.Falling);
     }
 
     public void Update()

@@ -13,7 +13,7 @@ public class MovementRunningState : IMovementState
 
     public void Enter()
     {
-        DetectHorizontalMovement();
+        Player.SetAnimation(AnimationStateType.Running);
     }
 
     public void Update()

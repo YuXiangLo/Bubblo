@@ -19,6 +19,7 @@ public class MovementKnockbackState : IMovementState
 
     public void Enter()
     {
+        Player.SetAnimation(AnimationStateType.Knockback);
         Player.StartCoroutine(KnockbackCoroutine(KnockbackDirection, ToSleep));
     }
 

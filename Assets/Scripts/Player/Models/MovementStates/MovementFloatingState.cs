@@ -15,6 +15,7 @@ public class MovementFloatingState : IMovementState
     public void Enter()
     {
         Player.Velocity = new(0f, 0f);
+        Player.SetAnimation(AnimationStateType.Floating);
     }
 
     public void Update()

@@ -87,7 +87,6 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
     public void ChangeAttackState(IAttackState newState)
     {
-        Debug.Log($"Change Attack State: {newState.GetType().Name}");
         AttackState = newState;
         AttackState.Enter();
     }
@@ -116,9 +115,13 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         // TODO: Handle Burst logics
     }
 
-    public void SetAnimation(AnimationStateType state)
+    public void SetAnimation(AnimationStateType nextState)
     {
-        Animator.SetInteger("State", (int)state);
+        bool isAttackAnimation = nextState == AnimationStateType.Pitching || nextState == AnimationStateType.Charging;
+        if (isAttackAnimation || !AttackState.LockAnimation)
+        {
+            Animator.SetInteger("State", (int)nextState);
+        }
     }
 
     public void Initialize()

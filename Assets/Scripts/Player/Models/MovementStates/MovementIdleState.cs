@@ -13,6 +13,7 @@ public class MovementIdleState : IMovementState
 
     public void Enter()
     {
+        Player.SetAnimation(AnimationStateType.Idle);
         Player.Velocity = Vector2.zero;
     }
 
@@ -38,7 +39,6 @@ public class MovementIdleState : IMovementState
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Player.Velocity = new(0f, Data.JumpForce);
-            Debug.Log($"Jumping with velocity: {Player.Velocity}");
             Player.ChangeMovementState(new MovementRisingState(Player, Data));
         }
     }
