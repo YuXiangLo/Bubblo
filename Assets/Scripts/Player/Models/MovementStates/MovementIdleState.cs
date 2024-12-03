@@ -19,37 +19,53 @@ public class MovementIdleState : IMovementState
 
     public void Update()
     {
-        if (Player.Grounded)
+        if (Player.Grounded 
+         || DetectHorizontalMovement() || DetectJump() || DetectClimb())
         {
-            DetectHorizontalMovement();
-            DetectJump();
+            return;
         }
-        else if (Player.Velocity.y > 0)
+        
+        if (Player.Velocity.y > 0)
         {
+            // Wind Case
             Player.ChangeMovementState(new MovementRisingState(Player, Data));
         }
-        else
+        else if (Player.Velocity.y < 0)
         {
             Player.ChangeMovementState(new MovementFallingState(Player, Data));
         }
     }
 
-    private void DetectJump()
+    private bool DetectJump()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Player.Velocity = new(0f, Data.JumpForce);
             Player.ChangeMovementState(new MovementRisingState(Player, Data));
+            return true;
         }
+        return false;
     }
 
-    private void DetectHorizontalMovement()
+    private bool DetectHorizontalMovement()
     {
         var horizontalInput = UserInput.Instance.Move.x - UserInput.Instance.Move.y;
         Player.Velocity = new(horizontalInput * Data.MoveSpeed, Player.Velocity.y);
         if (Mathf.Abs(horizontalInput) > 0.01f)
         {
             Player.ChangeMovementState(new MovementRunningState(Player, Data));
+            return true;
         }
+        return false;
+    }
+
+    private bool DetectClimb()
+    {
+        if (Player.IsAbleToClimb && Input.GetKey(KeyCode.W))
+        {
+            Player.ChangeMovementState(new MovementClimbingState(Player, Data));
+            return true;
+        }
+        return false;
     }
 }

@@ -13,6 +13,8 @@ public class PlayerData : MonoBehaviour
     public float PlayerSize = 1f; 
     public float DefaultGravityScale = 1f;
     public float LowGravityScale = 0.5f;
+    public float ClimbingSpeed = 3f;
+    public float ClimbFallingSpeed = 5f;
     public float KnockbackForce = 6f;
     public float KnockbackTangent = 2f;
 

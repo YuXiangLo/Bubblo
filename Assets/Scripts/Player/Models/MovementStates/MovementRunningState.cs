@@ -18,13 +18,13 @@ public class MovementRunningState : IMovementState
 
     public void Update()
     {
-        if (Player.Grounded || Player.IsSlopeMovement)
+        if (Player.Grounded || Player.IsSlopeMovement 
+         || DetectHorizontalMovement() || DetectJump() || DetectClimb())
         {
-            DetectHorizontalMovement();
-            DetectJump();
-            ApplyGravity();
+            return;
         }
-        else if (Player.Velocity.y > 0)
+        ApplyGravity();
+        if (Player.Velocity.y > 0)
         {
             Player.ChangeMovementState(new MovementRisingState(Player, Data));
         }
@@ -34,16 +34,22 @@ public class MovementRunningState : IMovementState
         }
     }
 
-    private void DetectJump()
+    private bool DetectJump()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Player.Velocity = new(Player.Velocity.x, Data.JumpForce);
             Player.ChangeMovementState(new MovementRisingState(Player, Data));
+            return true;
         }
+        return false;
     }
 
-    private void DetectHorizontalMovement()
+    /// <summary>
+    /// Detects horizontal movement and changes the state to idle if there is no input.
+    /// </summary>
+    /// <returns>return <c>true</c> if no horizontal input</returns>
+    private bool DetectHorizontalMovement()
     {
         var horizontalInput = UserInput.Instance.Move.x - UserInput.Instance.Move.y;
         var velocity = Player.Velocity;
@@ -61,7 +67,19 @@ public class MovementRunningState : IMovementState
         if (Mathf.Abs(horizontalInput) <= 0.01f)
         {
             Player.ChangeMovementState(new MovementIdleState(Player, Data));
+            return true;
         }
+        return false;
+    }
+
+    private bool DetectClimb()
+    {
+        if (Player.IsAbleToClimb && Input.GetKey(KeyCode.W))
+        {
+            Player.ChangeMovementState(new MovementClimbingState(Player, Data));
+            return true;
+        }
+        return false;
     }
 
     private void ApplyGravity()

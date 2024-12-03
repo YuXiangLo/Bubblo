@@ -6,8 +6,9 @@ public enum AnimationStateType
     Falling = 3,
     Floating = 4,
     Climbing = 5,
-    Charging = 6,
-    Pitching = 7,
-    Knockback = 8,
-    Die = 9
+    ClimbFalling = 6,
+    Charging = 7,
+    Pitching = 8,
+    Knockback = 9,
+    Die = 10
 }
