@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TileScene.unity
     guid: 8f1b52c10c73d3c99b58c69646250159
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: b1749d011f2c4df469608d3caa44e867
   m_configObjects: {}
