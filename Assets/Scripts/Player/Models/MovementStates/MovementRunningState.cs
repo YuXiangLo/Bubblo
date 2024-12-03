@@ -39,7 +39,6 @@ public class MovementRunningState : IMovementState
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Player.Velocity = new(Player.Velocity.x, Data.JumpForce);
-            Debug.Log($"Jumping with velocity: {Player.Velocity}");
             Player.ChangeMovementState(new MovementRisingState(Player, Data));
         }
     }
