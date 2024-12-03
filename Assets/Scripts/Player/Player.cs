@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModifyHealth, IKnockback, IPlayerStatus
+public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModifyHealth, IKnockback, IPlayerStatus, IPlayerBubble
 {
     private PlayerData PlayerData;
     private Rigidbody2D Rigidbody2D;
@@ -114,6 +114,11 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     public void BubbleBurst()
     {
         // TODO: Handle Burst logics
+    }
+
+    public void SetAnimation(AnimationStateType state)
+    {
+        Animator.SetInteger("State", (int)state);
     }
 
     public void Initialize()

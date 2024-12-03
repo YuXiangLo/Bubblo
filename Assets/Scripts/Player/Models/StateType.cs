@@ -1,11 +1,13 @@
-public enum StateType
+public enum AnimationStateType
 {
     Idle = 0,
     Running = 1,
     Rising = 2,
     Falling = 3,
     Floating = 4,
-    GenerateBubble = 4,
-    ReleaseBubble = 5,
-    KnockBack = 6
+    Climbing = 5,
+    GenerateBubble = 6,
+    ReleaseBubble = 7,
+    KnockBack = 8,
+    Dead = 9
 }
