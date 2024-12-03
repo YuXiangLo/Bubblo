@@ -19,10 +19,12 @@ public class MovementIdleState : IMovementState
 
     public void Update()
     {
-        if (Player.Grounded 
-         || DetectHorizontalMovement() || DetectJump() || DetectClimb())
+        if (Player.Grounded)
         {
-            return;
+            if (DetectHorizontalMovement() || DetectJump() || DetectClimb())
+            {
+                return;
+            }
         }
         
         if (Player.Velocity.y > 0)

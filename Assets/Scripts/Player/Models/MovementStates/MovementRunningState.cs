@@ -18,18 +18,21 @@ public class MovementRunningState : IMovementState
 
     public void Update()
     {
-        if (Player.Grounded || Player.IsSlopeMovement 
-         || DetectHorizontalMovement() || DetectJump() || DetectClimb())
+        if (Player.Grounded || Player.IsSlopeMovement)
         {
-            return;
+            if (DetectHorizontalMovement() || DetectJump() || DetectClimb())
+            {
+                return;
+            }
         }
         ApplyGravity();
         if (Player.Velocity.y > 0)
         {
             Player.ChangeMovementState(new MovementRisingState(Player, Data));
         }
-        else
+        else if (Player.Velocity.y < 0)
         {
+            Debug.Log($"Falling: Player.Velocity.y: {Player.Velocity.y}");
             Player.ChangeMovementState(new MovementFallingState(Player, Data));
         }
     }
@@ -64,6 +67,7 @@ public class MovementRunningState : IMovementState
                 velocity.y = slopeSpeedY;
         }
         Player.Velocity = velocity;
+        Debug.Log($"Player.Velocity: {Player.Velocity}");
         if (Mathf.Abs(horizontalInput) <= 0.01f)
         {
             Player.ChangeMovementState(new MovementIdleState(Player, Data));
