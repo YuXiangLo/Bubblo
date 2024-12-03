@@ -4,10 +4,10 @@ public class ParallaxScrolling : MonoBehaviour
 {
     public Transform cloudLayer;    // Transform of the cloud layer
     public Transform mountainLayer; // Transform of the mountain layer
-    public float cloudMultiplier = 0.2f;    // Speed multiplier for clouds
-    public float mountainMultiplier = 0.5f; // Speed multiplier for mountains
-    public float cloudYOffset = 5f;        // Offset for the cloud layer
-    public float mountainYOffset = -2f;    // Offset for the mountain layer
+    public float cloudMultiplier = 0.1f;    // Speed multiplier for clouds
+    public float mountainMultiplier = 0.3f; // Speed multiplier for mountains
+    public float cloudYOffset = 0f;        // Offset for the cloud layer
+    public float mountainYOffset = 0f;    // Offset for the mountain layer
 
     private Transform player;       // Reference to the player object
     private Transform cameraTransform; // Reference to the camera
