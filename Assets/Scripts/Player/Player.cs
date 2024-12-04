@@ -127,7 +127,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
     public void BubbleBurst()
     {
-        // TODO: Handle Burst logics
+        ChangeAttackState(new AttackIdleState(this, PlayerData));
     }
 
     public void SetAnimation(AnimationStateType nextState)
