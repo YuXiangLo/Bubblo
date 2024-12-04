@@ -76,7 +76,7 @@ public class BodyCaster : MonoBehaviour
             Vector2 point1 = PlayerRb.position + new Vector2(Mathf.Cos(angle1), Mathf.Sin(angle1)) * Radius;
             Vector2 point2 = PlayerRb.position + new Vector2(Mathf.Cos(angle2), Mathf.Sin(angle2)) * Radius;
 
-            Debug.DrawLine(point1, point2, Color.green, 5f);
+            Debug.DrawLine(point1, point2, Color.yellow, 5f);
         }
     }
 }

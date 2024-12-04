@@ -24,15 +24,15 @@ public class MovementRunningState : IMovementState
             {
                 return;
             }
+            ApplyGravity();
         }
-        ApplyGravity();
+        
         if (Player.Velocity.y > 0)
         {
             Player.ChangeMovementState(new MovementRisingState(Player, Data));
         }
         else if (Player.Velocity.y < 0)
         {
-            Debug.Log($"Falling: Player.Velocity.y: {Player.Velocity.y}");
             Player.ChangeMovementState(new MovementFallingState(Player, Data));
         }
     }

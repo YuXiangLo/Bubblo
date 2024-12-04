@@ -85,7 +85,6 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
     public void ChangeMovementState(IMovementState newState)
     {
-        Debug.Log($"{MovementState.GetType().Name} > {newState.GetType().Name}");
         MovementState = newState;
         MovementState.Enter();
     }
@@ -100,7 +99,8 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
     public void Die()
     {
-        // TODO: Handle Die logics
+        AttackState.Knockbacked();
+        ChangeMovementState(new MovementDieState(this, PlayerData));
     }
 
     public void Knockback(Vector2 knockbackDirection, float toSleep)

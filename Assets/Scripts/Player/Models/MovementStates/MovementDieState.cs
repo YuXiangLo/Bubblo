@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MovementDieState : IMovementState
@@ -13,13 +14,21 @@ public class MovementDieState : IMovementState
 
     public void Enter()
     {
-        Debug.Log("Player is dead");
         Player.SetAnimation(AnimationStateType.Die);
         Player.Velocity = Vector2.zero;
+        Player.StartCoroutine(DieCoroutine());
     }
 
     public void Update()
     {
-        
+        // Do nothing
+    }
+
+    private IEnumerator DieCoroutine()
+    {
+        var stateInfo = Player.Animator.GetCurrentAnimatorStateInfo(0);
+        float remainingTime = stateInfo.length * (1f - stateInfo.normalizedTime);
+        yield return new WaitForSeconds(remainingTime);
+        //TODO: Add Game Over Logic
     }
 }

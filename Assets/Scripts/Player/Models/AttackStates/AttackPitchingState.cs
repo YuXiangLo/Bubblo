@@ -35,13 +35,8 @@ public class AttackPitchingState : IAttackState
     private IEnumerator PitchCoroutine()
     {
         var stateInfo = Player.Animator.GetCurrentAnimatorStateInfo(0);
-        // Calculate the remaining time of the animation
         float remainingTime = stateInfo.length * (1f - stateInfo.normalizedTime);
-
-        // Wait for the remaining time
         yield return new WaitForSeconds(remainingTime);
-
-        // After the animation is complete, change the player state
         Player.ChangeAttackState(new AttackIdleState(Player, PlayerData));
     }
 }
