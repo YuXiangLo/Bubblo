@@ -10,6 +10,7 @@ TagManager:
   - Thorn
   - Door
   - Tools
+  - Ladder
   layers:
   - Default
   - TransparentFX
@@ -47,15 +48,30 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 493003619
+    locked: 0
+  - name: Midground
+    uniqueID: 3035674723
+    locked: 0
+  - name: Foreground
+    uniqueID: 4160651069
+    locked: 0
   - name: Platform
     uniqueID: 4163708173
+    locked: 0
+  - name: Decoration
+    uniqueID: 1557502849
+    locked: 0
+  - name: Tools
+    uniqueID: 3815340153
     locked: 0
   - name: Enemy
     uniqueID: 2946522393
     locked: 0
-  - name: Bubble
-    uniqueID: 1546165203
-    locked: 0
   - name: Player
     uniqueID: 1532617547
+    locked: 0
+  - name: Bubble
+    uniqueID: 1546165203
     locked: 0
