@@ -169,7 +169,9 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
             return;
         }
         Vector3 currentScale = transform.localScale;
-        currentScale.x = (Velocity.x > 0f ? 1 : -1) * Mathf.Abs(currentScale.x);
+        var isKnockbacked = MovementState is MovementKnockbackState;
+        var isFacingRight = (Velocity.x > 0f && !isKnockbacked) || (Velocity.x < 0f && isKnockbacked);
+        currentScale.x = (isFacingRight ? 1 : -1) * Mathf.Abs(currentScale.x);
         transform.localScale = currentScale;
     }
 
