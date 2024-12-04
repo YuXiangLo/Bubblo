@@ -13,7 +13,7 @@ public class MovementInitialState : IMovementState
 
     public void Enter()
     {
-        // Do nothing
+        Update();
     }
 
     public void Update()

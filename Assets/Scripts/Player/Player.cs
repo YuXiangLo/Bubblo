@@ -39,6 +39,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
     #region Player Health
     private PlayerHealth Health;
+    private bool IsDead = false;
     public float HealthPercentage => Health.HealthPercentage;
     public void Heal(float amount) => Health.Heal(amount);
     public void TakeDamage(float amount) => Health.TakeDamage(amount);
@@ -85,7 +86,6 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
     public void ChangeMovementState(IMovementState newState)
     {
-        Debug.Log($"Change Movement State: {newState.GetType().Name}");
         MovementState = newState;
         MovementState.Enter();
     }
@@ -100,12 +100,21 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
     public void Die()
     {
+        if (IsDead)
+        {
+            return;
+        }
+        IsDead = true;
         AttackState.Knockbacked();
         ChangeMovementState(new MovementDieState(this, PlayerData));
     }
 
     public void Knockback(Vector2 knockbackDirection, float toSleep)
     {
+        if (IsDead)
+        {
+            return;
+        }
         AttackState.Knockbacked();
         ChangeMovementState(new MovementKnockbackState(this, PlayerData, knockbackDirection, toSleep));
     }

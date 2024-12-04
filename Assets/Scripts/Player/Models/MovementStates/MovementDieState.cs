@@ -10,13 +10,12 @@ public class MovementDieState : IMovementState
     {
         Player = player;
         PlayerData = playerData;
+        Player.SetAnimation(AnimationStateType.Die);
     }
 
     public void Enter()
     {
-        Player.SetAnimation(AnimationStateType.Die);
         Player.Velocity = Vector2.zero;
-        Player.StartCoroutine(DieCoroutine());
     }
 
     public void Update()
@@ -28,6 +27,7 @@ public class MovementDieState : IMovementState
     {
         var stateInfo = Player.Animator.GetCurrentAnimatorStateInfo(0);
         float remainingTime = stateInfo.length * (1f - stateInfo.normalizedTime);
+        Debug.Log($"DieCoroutine: remainingTime: {remainingTime}");
         yield return new WaitForSeconds(remainingTime);
         //TODO: Add Game Over Logic
     }

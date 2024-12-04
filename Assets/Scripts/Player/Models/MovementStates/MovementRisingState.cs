@@ -8,12 +8,13 @@ public class MovementRisingState : IMovementState
     {
         Player = player;
         Data = data;
+        Player.SetAnimation(AnimationStateType.Rising);
     }
     
     public void Enter()
     {
         // Don't set Jump force or Bubble jump force cause it has been set before change state
-        Player.SetAnimation(AnimationStateType.Rising);
+        Update();
     }
 
     public void Update()

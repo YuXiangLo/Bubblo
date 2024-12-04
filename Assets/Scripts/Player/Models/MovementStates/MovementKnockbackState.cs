@@ -15,11 +15,12 @@ public class MovementKnockbackState : IMovementState
         Data = data;
         KnockbackDirection = knockbackDirection;
         ToSleep = toSleep;
+        Player.SetAnimation(AnimationStateType.Knockback);
     }
 
     public void Enter()
     {
-        Player.SetAnimation(AnimationStateType.Knockback);
+        Update();
         Player.StartCoroutine(KnockbackCoroutine(KnockbackDirection, ToSleep));
     }
 

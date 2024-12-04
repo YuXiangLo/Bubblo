@@ -10,12 +10,13 @@ public class MovementFloatingState : IMovementState
     {
         Player = player;
         Data = data;
+        Player.SetAnimation(AnimationStateType.Floating);
     }
 
     public void Enter()
     {
         Player.Velocity = new(0f, 0f);
-        Player.SetAnimation(AnimationStateType.Floating);
+        Update();
     }
 
     public void Update()

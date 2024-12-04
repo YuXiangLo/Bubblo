@@ -31,6 +31,7 @@ public class AttackIdleState : IAttackState
     public void Enter()
     {
         // Do nothing
+        Update();
     }
 
     public void Knockbacked()

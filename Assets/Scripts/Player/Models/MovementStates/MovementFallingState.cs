@@ -9,11 +9,12 @@ public class MovementFallingState : IMovementState
     {
         Player = player;
         Data = data;
+        Player.SetAnimation(AnimationStateType.Falling);
     }
 
     public void Enter()
     {
-        Player.SetAnimation(AnimationStateType.Falling);
+        Update();
     }
 
     public void Update()

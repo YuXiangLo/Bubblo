@@ -9,11 +9,12 @@ public class MovementClimbingState : IMovementState
     {
         Player = player;
         Data = data;
+        Player.SetAnimation(AnimationStateType.Climbing);
     }
     public void Enter()
     {
-        Player.SetAnimation(AnimationStateType.Climbing);
         Player.Velocity = new(0f, Data.ClimbingSpeed);
+        Update();
     }
 
     public void Update()

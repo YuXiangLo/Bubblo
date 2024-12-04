@@ -9,12 +9,13 @@ public class MovementIdleState : IMovementState
     {
         Player = player;
         Data = data;
+        Player.SetAnimation(AnimationStateType.Idle);
     }
 
     public void Enter()
     {
-        Player.SetAnimation(AnimationStateType.Idle);
         Player.Velocity = Vector2.zero;
+        Update();
     }
 
     public void Update()

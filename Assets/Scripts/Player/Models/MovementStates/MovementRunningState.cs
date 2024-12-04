@@ -9,11 +9,12 @@ public class MovementRunningState : IMovementState
     {
         Player = player;
         Data = data;
+        Player.SetAnimation(AnimationStateType.Running);
     }
 
     public void Enter()
     {
-        Player.SetAnimation(AnimationStateType.Running);
+        Update();
     }
 
     public void Update()

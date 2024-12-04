@@ -9,10 +9,11 @@ public class MovementClimbFallingState : IMovementState
     {
         Player = player;
         Data = data;
+        Player.SetAnimation(AnimationStateType.ClimbFalling);
     }
     public void Enter()
     {
-        Player.SetAnimation(AnimationStateType.ClimbFalling);
+        Update();
     }
 
     public void Update()

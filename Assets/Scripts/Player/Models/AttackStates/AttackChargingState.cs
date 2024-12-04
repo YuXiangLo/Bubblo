@@ -20,6 +20,7 @@ public class AttackChargingState : IAttackState
     {
         // Do nothing
         Player.SetAnimation(AnimationStateType.Charging);
+        Update();
     }
 
     public void Knockbacked()
