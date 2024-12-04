@@ -60,8 +60,7 @@ public class Ladder : MonoBehaviour
         if (isClimbing && player != null)
         {
             float vertical = Input.GetAxis("Vertical"); // Get vertical input
-            player.Velocity.y = vertical * climbSpeed; // Modify the player's vertical velocity
-            player.Velocity.x = 0; // Stop horizontal movement
+            player.Velocity = new Vector2(0, vertical * climbSpeed); // Modify the player's velocity
         }
     }
 
