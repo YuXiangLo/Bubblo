@@ -25,6 +25,7 @@ public class MovementIdleState : IMovementState
             {
                 return;
             }
+            return;
         }
         
         if (Player.Velocity.y > 0)
@@ -40,7 +41,7 @@ public class MovementIdleState : IMovementState
 
     private bool DetectJump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (UserInput.Instance.Jump)
         {
             Player.Velocity = new(0f, Data.JumpForce);
             Player.ChangeMovementState(new MovementRisingState(Player, Data));
@@ -51,7 +52,7 @@ public class MovementIdleState : IMovementState
 
     private bool DetectHorizontalMovement()
     {
-        var horizontalInput = UserInput.Instance.Move.x - UserInput.Instance.Move.y;
+        var horizontalInput = UserInput.Instance.Move.x;
         Player.Velocity = new(horizontalInput * Data.MoveSpeed, Player.Velocity.y);
         if (Mathf.Abs(horizontalInput) > 0.01f)
         {
@@ -63,7 +64,7 @@ public class MovementIdleState : IMovementState
 
     private bool DetectClimb()
     {
-        if (Player.IsAbleToClimb && Input.GetKey(KeyCode.W))
+        if (Player.IsAbleToClimb && UserInput.Instance.Move.y > 0.01f)
         {
             Player.ChangeMovementState(new MovementClimbingState(Player, Data));
             return true;

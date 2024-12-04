@@ -22,6 +22,10 @@ public class MovementInitialState : IMovementState
         {
             Player.ChangeMovementState(new MovementIdleState(Player, Data));
         }
+        else if (Player.Velocity.y > 0)
+        {
+            Player.ChangeMovementState(new MovementRisingState(Player, Data));
+        }
         else
         {
             Player.ChangeMovementState(new MovementFallingState(Player, Data));

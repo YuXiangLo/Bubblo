@@ -40,7 +40,7 @@ public class MovementFallingState : IMovementState
     {
         if (Player.Grounded)
         {
-            var horizontalInput = UserInput.Instance.Move.x - UserInput.Instance.Move.y;
+            var horizontalInput = UserInput.Instance.Move.x;
             Player.Velocity = new(horizontalInput * Data.MoveSpeed, 0f);
             if (Mathf.Abs(Player.Velocity.x) <= 0.01f)
             {
@@ -67,7 +67,7 @@ public class MovementFallingState : IMovementState
 
     private void DetectHorizontalMovement()
     {
-        var horizontalInput = UserInput.Instance.Move.x - UserInput.Instance.Move.y;
+        var horizontalInput = UserInput.Instance.Move.x;
         Player.Velocity = new(horizontalInput * Data.MoveSpeed, Player.Velocity.y);
     }
 

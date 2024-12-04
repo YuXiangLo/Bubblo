@@ -25,6 +25,7 @@ public class MovementRunningState : IMovementState
                 return;
             }
             ApplyGravity();
+            return;
         }
         
         if (Player.Velocity.y > 0)
@@ -54,7 +55,7 @@ public class MovementRunningState : IMovementState
     /// <returns>return <c>true</c> if no horizontal input</returns>
     private bool DetectHorizontalMovement()
     {
-        var horizontalInput = UserInput.Instance.Move.x - UserInput.Instance.Move.y;
+        var horizontalInput = UserInput.Instance.Move.x;
         var velocity = Player.Velocity;
         velocity.x = horizontalInput * Data.MoveSpeed;
         if (Player.SlopeAngle != -1f && Player.SlopeAngle <= 60f)
@@ -67,7 +68,6 @@ public class MovementRunningState : IMovementState
                 velocity.y = slopeSpeedY;
         }
         Player.Velocity = velocity;
-        Debug.Log($"Player.Velocity: {Player.Velocity}");
         if (Mathf.Abs(horizontalInput) <= 0.01f)
         {
             Player.ChangeMovementState(new MovementIdleState(Player, Data));
@@ -78,7 +78,7 @@ public class MovementRunningState : IMovementState
 
     private bool DetectClimb()
     {
-        if (Player.IsAbleToClimb && Input.GetKey(KeyCode.W))
+        if (Player.IsAbleToClimb && UserInput.Instance.Move.y >= 0.01f)
         {
             Player.ChangeMovementState(new MovementClimbingState(Player, Data));
             return true;

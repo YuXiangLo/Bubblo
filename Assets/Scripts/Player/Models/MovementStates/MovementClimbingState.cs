@@ -26,7 +26,7 @@ public class MovementClimbingState : IMovementState
 
     private bool DetectClimbFalling()
     {
-        if (!Input.GetKey(KeyCode.W))
+        if (!(UserInput.Instance.Move.y < 0.01f))
         {
             Player.ChangeMovementState(new MovementClimbFallingState(Player, Data));
             return true;

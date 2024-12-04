@@ -20,7 +20,7 @@ public class MovementFloatingState : IMovementState
 
     public void Update()
     {
-        if (DetectGround() || DetectFall())
+        if (DetectGround() || DetectClimb() || DetectFall())
         {
             return;
         }
@@ -38,6 +38,16 @@ public class MovementFloatingState : IMovementState
         return false;
     }
 
+    private bool DetectClimb()
+    {
+        if (Player.IsAbleToClimb && UserInput.Instance.Move.y > 0.01f)
+        {
+            Player.ChangeMovementState(new MovementClimbingState(Player, Data));
+            return true;
+        }
+        return false;
+    }
+
     private bool DetectFall()
     {
         if (!UserInput.Instance.IsJumpHeld)
@@ -50,7 +60,7 @@ public class MovementFloatingState : IMovementState
 
     private void DetectHorizontalMovement()
     {
-        var horizontalInput = UserInput.Instance.Move.x - UserInput.Instance.Move.y;
+        var horizontalInput = UserInput.Instance.Move.x;
         Player.Velocity = new(horizontalInput * Data.MoveSpeed, Player.Velocity.y);
     }
 

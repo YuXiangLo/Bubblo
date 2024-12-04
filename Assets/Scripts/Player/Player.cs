@@ -85,6 +85,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
     public void ChangeMovementState(IMovementState newState)
     {
+        Debug.Log($"Change Movement State: {newState.GetType().Name}");
         MovementState = newState;
         MovementState.Enter();
     }
