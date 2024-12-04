@@ -20,7 +20,7 @@ public class MovementRunningState : IMovementState
     {
         if (Player.Grounded || Player.IsSlopeMovement)
         {
-            if (DetectHorizontalMovement() || DetectJump() || DetectClimb())
+            if (DetectJump() || DetectHorizontalMovement() || DetectClimb())
             {
                 return;
             }
