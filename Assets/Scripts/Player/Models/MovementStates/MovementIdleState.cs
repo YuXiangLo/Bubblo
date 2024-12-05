@@ -34,7 +34,7 @@ public class MovementIdleState : IMovementState
             // Wind Case
             Player.ChangeMovementState(new MovementRisingState(Player, Data));
         }
-        else if (Player.Velocity.y < 0)
+        else
         {
             Player.ChangeMovementState(new MovementFallingState(Player, Data));
         }
