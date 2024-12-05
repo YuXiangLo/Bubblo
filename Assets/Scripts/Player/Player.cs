@@ -1,188 +1,179 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModifyHealth, IKnockback
+public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModifyHealth, IKnockback, IPlayerStatus, IPlayerBubble
 {
-    public IPlayerMovementState PlayerMovementState;
-    public IPlayerAttackState PlayerAttackState;
-    
-	// Player Animator
-    public Animator Animator;
-
-	// Raycast Information
-    public bool IsGrounded = false;
-	public bool IsSlopeMovement = false;
-	public bool IsHittingCeiling = false;
-	public float SlopeAngle = -1f;
-	public string CastSide = "None";
-
-    // Player Movement
-    public bool IsFacingRight => transform.localScale.x > 0f;
-    public Vector2 Velocity = Vector2.zero;
-
-    // PlayerAttack
-    public float CurrentMagicPoint;
-    public float MagicPercentage => CurrentMagicPoint / PlayerData.MaxMagicPoint;
-    
-    // Player Health
-    public float CurrentHealth;
-    public float HealthPercentage => CurrentHealth / PlayerHealth.MaxHealth;
-
     private PlayerData PlayerData;
     private Rigidbody2D Rigidbody2D;
-    private PlayerHealth PlayerHealth;
     private Camera MainCamera;
+    private IMovementState MovementState;
+    private IAttackState AttackState;
 
-    /// <summary>
-    /// Change Player Movement State
-    /// </summary>
-    /// <param name="newPlayerMovementState"></param>
-    public void ChangePlayerMovementState(IPlayerMovementState newPlayerMovementState)
-    {
-        PlayerMovementState = newPlayerMovementState;
-        PlayerMovementState.HandleMovement();
-    }
+    #region Animation
+    public Animator Animator;
+    #endregion
 
-    /// <summary>
-    /// Change Player Attack State
-    /// </summary>
-    /// <param name="newPlayerAttackState"></param>
-    public void ChangePlayerAttackState(IPlayerAttackState newPlayerAttackState)
-    {
-        PlayerAttackState = newPlayerAttackState;
-        if (!PlayerAttackState.ShouldShowAnimation)
-            PlayerMovementState.HandleAnimation();
-        PlayerAttackState.HandleAttack();
-    }
+    #region Raycast Information
+    private BodyCaster BodyCaster;
+    private SlopeTransitionCaster SlopeCaster;
+    private LadderCaster LadderCaster;
+    public bool Grounded => BodyCaster.Grounded;
+    public bool HitCeiling => BodyCaster.HitCeiling;
+    public float SlopeAngle => BodyCaster.SlopeAngle;
+    public CastSide CastSide => BodyCaster.CastSide;
+    public bool IsSlopeMovement => SlopeCaster.IsSlopeMovement;
+    public bool IsAbleToClimb => LadderCaster.IsAbleToClimb;
+    #endregion
 
-    /// <summary>
-    /// Set Player's Animation
-    /// </summary>
-    /// <param name="playerStateType"></param>
-    public void SetAnimation(PlayerStateType playerStateType)
-    {
-        bool isAttackAnimation = (playerStateType == PlayerStateType.Attack || playerStateType == PlayerStateType.GenerateBubble);
-                
-        if (isAttackAnimation || !PlayerAttackState.ShouldShowAnimation)
-        {
-            Animator.SetInteger("PlayerState", (int)playerStateType);
-        }
-    }
+    #region Player Movement
+    public bool IsFacingRight => transform.localScale.x > 0f;
+    public Vector2 Velocity { get; set; } = Vector2.zero;
+    #endregion
 
-    /// <summary>
-    /// Initialize a New Bubble
-    /// </summary>
-    /// <returns>New Bubble</returns>
-    public Bubble InitialBubble()
-    {
-        return Instantiate(PlayerData.BubblePrefab).GetComponent<Bubble>();
-    }
-    
-    /// <summary>
-    /// Heal Player Health
-    /// </summary>
-    /// <param name="amount">Heal Amount</param>
-    public void Heal(float amount) 
-    {
-        PlayerHealth.Heal(amount);
-    }
+    #region Player Magic
+    private PlayerMagic Magic;
+    public float MagicPercentage => Magic.MagicPercentage;
+    public bool IsMagicEmpty => Magic.IsEmpty;
+    public void Consume(float amount) => Magic.Consume(amount);
+    public void Recharge(float amount) => Magic.Recharge(amount);
+    #endregion
 
-    /// <summary>
-    /// Player Takes Damages
-    /// </summary>
-    /// <param name="amount">Damage Amount</param>
-    public void TakeDamage(float amount) 
-    {
-        PlayerHealth.TakeDamage(amount);
-    }
+    #region Player Health
+    private PlayerHealth Health;
+    private bool IsDead = false;
+    public float HealthPercentage => Health.HealthPercentage;
+    public void Heal(float amount) => Health.Heal(amount);
+    public void TakeDamage(float amount) => Health.TakeDamage(amount);
+    #endregion
 
-    public void RestoreMP()
-    {
-        CurrentMagicPoint = PlayerData.MaxMagicPoint;
-    }
-
-    /// <summary>
-    /// Player Touchs a Bubble
-    /// </summary>
-    public void BubbleJump()
-    {
-        Velocity.y = PlayerData.BubbleJumpForce;
-    }
-
-    /// <summary>
-    /// Player Knocked Back
-    /// </summary>
-    /// <param name="knockbackDirection">KnockBack Direction</param>
-    /// <param name="toSleep">To Sleep Time</param>
-    public void Knockback(Vector2 knockbackDirection, float toSleep)
-    {
-        PlayerAttackState.HandleKnockedBack();
-        ChangePlayerMovementState(new PlayerMovementKnockBackState(this, PlayerData, knockbackDirection, toSleep));
-	}
-
-    /// <summary>
-    /// Bubble is Destroyed
-    /// </summary>
-    public void BubbleDestroyed()
-    {
-        ChangePlayerAttackState(new PlayerAttackIdleState(this, PlayerData));
-    }
-
+    #region MonoBehaviour
     private void Awake()
     {
         PlayerData = GetComponent<PlayerData>();
-        PlayerHealth = GetComponent<PlayerHealth>();
+        Health = GetComponent<PlayerHealth>();
+        Magic = GetComponent<PlayerMagic>();
         Animator = GetComponent<Animator>();
+        
         Rigidbody2D = GetComponent<Rigidbody2D>();
-		Rigidbody2D.freezeRotation = true;
-        PlayerMovementState = new PlayerMovementInitialState(this, PlayerData);
-        PlayerAttackState = new PlayerAttackInitialState(this, PlayerData);
+        Rigidbody2D.freezeRotation = true;
+
+        BodyCaster = GetComponent<BodyCaster>();
+        BodyCaster.Initialize(Rigidbody2D, Vector2.down, 0.5f * PlayerData.PlayerSize);
+
+        SlopeCaster = GetComponent<SlopeTransitionCaster>();
+        SlopeCaster.Initialize(Rigidbody2D, Vector2.down, PlayerData.PlayerSize);
+
+        LadderCaster = GetComponent<LadderCaster>();
+        LadderCaster.Initialize(Rigidbody2D, Vector2.up, 0.1f * PlayerData.PlayerSize);
+
         MainCamera = Camera.main;
+
+        MovementState = new MovementInitialState(this, PlayerData);
+        AttackState = new AttackIdleState(this, PlayerData);
     }
 
     private void Update()
     {
-        DetectPlayerStatus();
-        HandleMovement();
-        HandleAttack();
-        DetectFaceSide();
-        RestrictPlayerWithinCamera();
+        MovementState.Update();
+        AttackState.Update();
+        PlayerUpdate();
     }
 
     private void FixedUpdate()
     {
         Rigidbody2D.MovePosition(Rigidbody2D.position + Velocity * Time.fixedDeltaTime);
     }
+    #endregion
 
-    private void DetectPlayerStatus()
+    public void ChangeMovementState(IMovementState newState)
     {
-        var movementCastInfo = Rigidbody2D.Raycast(Vector2.down, 0.5f * PlayerData.PlayerSize, PlayerData.TriggerDistance);
-		var slopeCastInfo    = Rigidbody2D.Raycast(Vector2.down, PlayerData.PlayerSize, PlayerData.TriggerDistance);
-		IsGrounded = movementCastInfo.IsGrounded;
-		IsHittingCeiling = movementCastInfo.IsHittingCeiling;
-		SlopeAngle = movementCastInfo.SlopeAngle;
-		CastSide   = movementCastInfo.CastSide;
-		IsSlopeMovement    = slopeCastInfo.SlopeAngle > 0.1f && slopeCastInfo.SlopeAngle <= 60f;
+        MovementState = newState;
+        MovementState.Enter();
     }
 
-    private void HandleMovement()
+    public void ChangeAttackState(IAttackState newState)
     {
-        PlayerMovementState.HandleMovement();
+        AttackState = newState;
+        AttackState.Enter();
     }
 
-    private void HandleAttack()
+    public Bubble InitializeBubble() => Instantiate(PlayerData.BubblePrefab).GetComponent<Bubble>();
+
+    public void Die()
     {
-        PlayerAttackState.HandleAttack();
+        if (IsDead)
+        {
+            return;
+        }
+        IsDead = true;
+        AttackState.Knockbacked();
+        ChangeMovementState(new MovementDieState(this, PlayerData));
+    }
+
+    public void Knockback(Vector2 knockbackDirection, float toSleep)
+    {
+        if (IsDead)
+        {
+            return;
+        }
+        AttackState.Knockbacked();
+        ChangeMovementState(new MovementKnockbackState(this, PlayerData, knockbackDirection, toSleep));
+    }
+
+    public void BubbleJump()
+    {
+        Velocity = new Vector2(Velocity.x, PlayerData.BubbleJumpForce);
+        ChangeMovementState(new MovementRisingState(this, PlayerData));
+    }
+
+    public void BubbleBurst()
+    {
+        ChangeAttackState(new AttackIdleState(this, PlayerData));
+    }
+
+    public void SetAnimation(AnimationStateType nextState)
+    {
+        bool isAttackAnimation = nextState == AnimationStateType.Pitching || nextState == AnimationStateType.Charging;
+        if (isAttackAnimation || !AttackState.LockAnimation)
+        {
+            Animator.SetInteger("State", (int)nextState);
+        }
+    }
+
+    public void Initialize()
+    {
+        Health.Initialize();
+        Magic.Initialize();
+    }
+
+    public PlayerDataStatus GetPlayerStatus()
+    {
+        return new PlayerDataStatus(Health.HealthPercentage, Magic.MagicPercentage);
+    }
+
+    public void SetPlayerStatus(PlayerDataStatus status)
+    {
+        Health.Initialize(status.Health);
+        Magic.Initialize(status.Magic);
+    }
+
+    private void PlayerUpdate()
+    {
+        DetectFaceSide();
+        RestrictPlayerWithinCamera();
     }
 
     private void DetectFaceSide() 
     {
-        Vector3 currentScale = transform.localScale;
-        if (Velocity.x != 0f)
+        if (Velocity.x == 0f)
         {
-            currentScale.x = (Velocity.x > 0f ? 1 : -1) * Mathf.Abs(currentScale.x);
+            return;
         }
+        Vector3 currentScale = transform.localScale;
+        var isKnockbacked = MovementState is MovementKnockbackState;
+        var isFacingRight = (Velocity.x > 0f && !isKnockbacked) || (Velocity.x < 0f && isKnockbacked);
+        currentScale.x = (isFacingRight ? 1 : -1) * Mathf.Abs(currentScale.x);
         transform.localScale = currentScale;
-	}
+    }
 
     private void RestrictPlayerWithinCamera() 
     {
