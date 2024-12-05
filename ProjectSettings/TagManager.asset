@@ -54,14 +54,17 @@ TagManager:
   - name: Midground
     uniqueID: 3035674723
     locked: 0
+  - name: Decoration
+    uniqueID: 1557502849
+    locked: 0
+  - name: Ladder
+    uniqueID: 3820839879
+    locked: 0
   - name: Foreground
     uniqueID: 4160651069
     locked: 0
   - name: Platform
     uniqueID: 4163708173
-    locked: 0
-  - name: Decoration
-    uniqueID: 1557502849
     locked: 0
   - name: Tools
     uniqueID: 3815340153
