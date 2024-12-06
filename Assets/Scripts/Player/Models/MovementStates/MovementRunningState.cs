@@ -41,7 +41,7 @@ public class MovementRunningState : IMovementState
 
     private bool DetectJump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (UserInput.Instance.Jump)
         {
             Player.Velocity = new(Player.Velocity.x, Data.JumpForce);
             Player.ChangeMovementState(new MovementRisingState(Player, Data));
