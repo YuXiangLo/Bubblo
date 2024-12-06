@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class AttackPitchingState : IAttackState
@@ -7,6 +6,8 @@ public class AttackPitchingState : IAttackState
     private PlayerData PlayerData;
     private Bubble Bubble;
     public bool LockAnimation => true;
+
+    private float PitchTimer = 0f;
 
     public AttackPitchingState(Player player, PlayerData playerData, Bubble bubble)
     {
@@ -19,7 +20,9 @@ public class AttackPitchingState : IAttackState
     {
         Bubble.Release();
         Player.SetAnimation(AnimationStateType.Pitching);
-        Player.StartCoroutine(PitchCoroutine());
+
+        var stateInfo = Player.Animator.GetCurrentAnimatorStateInfo(0);
+        PitchTimer = stateInfo.length * (1f - stateInfo.normalizedTime);
     }
 
     public void Knockbacked()
@@ -29,15 +32,11 @@ public class AttackPitchingState : IAttackState
 
     public void Update()
     {
-        // Do nothing
-    }
-
-    private IEnumerator PitchCoroutine()
-    {
-        var stateInfo = Player.Animator.GetCurrentAnimatorStateInfo(0);
-        float remainingTime = stateInfo.length * (1f - stateInfo.normalizedTime);
-        yield return new WaitForSeconds(remainingTime);
-        Player.ChangeAttackState(new AttackIdleState(Player, PlayerData));
-        Player.SetAnimation(AnimationStateType.Idle);
+        PitchTimer -= Time.deltaTime;
+        if (PitchTimer <= 0)
+        {
+            Player.ChangeAttackState(new AttackIdleState(Player, PlayerData));
+            Player.ChangeMovementState(new MovementInitialState(Player, PlayerData));
+        }
     }
 }

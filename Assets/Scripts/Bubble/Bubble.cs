@@ -120,7 +120,6 @@ public class Bubble : MonoBehaviour
         var charingAddTime = Mathf.Clamp(ChargingTime + Time.deltaTime, 0f, ChargingTimes[(int)SizeType]) - ChargingTime;
         Player.Consume(charingAddTime);
         ChargingTime += charingAddTime;
-        Debug.Log($"ChargingTime: {ChargingTime}, Threshold: {ChargingTimes[(int)SizeType]}");  
         if (ChargingTime == ChargingTimes[(int)SizeType])
         {
             if (SizeType == BubbleSizeType.Medium)
@@ -172,7 +171,6 @@ public class Bubble : MonoBehaviour
     
     private void UpdateCollider()
     {
-        Debug.Log($"UpdateCollider: {Radiuses[(int)SizeType]}");
         Collider.radius = Radiuses[(int)SizeType];
     }
 
