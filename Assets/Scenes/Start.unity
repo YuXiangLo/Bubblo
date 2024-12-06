@@ -282,7 +282,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1183735506
+--- !u!1001 &1083827728
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -372,11 +372,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1292490635000937789, guid: 507cbf7aede844e5c92925c2ee524f85, type: 3}
       propertyPath: m_Name
-      value: Canvas
+      value: Menu
       objectReference: {fileID: 0}
-    - target: {fileID: 7241680266216826910, guid: 507cbf7aede844e5c92925c2ee524f85, type: 3}
-      propertyPath: m_Colors.m_HighlightedColor.a
-      value: 0.78431374
+    - target: {fileID: 4183151149968724598, guid: 507cbf7aede844e5c92925c2ee524f85, type: 3}
+      propertyPath: m_text
+      value: W
+      objectReference: {fileID: 0}
+    - target: {fileID: 6772131836958983514, guid: 507cbf7aede844e5c92925c2ee524f85, type: 3}
+      propertyPath: m_text
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -389,4 +393,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 396053018}
   - {fileID: 998476801}
-  - {fileID: 1183735506}
+  - {fileID: 1083827728}
