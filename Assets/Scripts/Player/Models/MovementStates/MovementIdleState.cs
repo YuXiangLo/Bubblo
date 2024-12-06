@@ -42,7 +42,7 @@ public class MovementIdleState : IMovementState
 
     private bool DetectJump()
     {
-        if (UserInput.Instance.Jump)
+        if (UserInput.Instance.JumpKeyDown)
         {
             Player.Velocity = new(0f, Data.JumpForce);
             Player.ChangeMovementState(new MovementRisingState(Player, Data));
@@ -53,7 +53,7 @@ public class MovementIdleState : IMovementState
 
     private bool DetectHorizontalMovement()
     {
-        var horizontalInput = UserInput.Instance.Move.x;
+        var horizontalInput = UserInput.Instance.HorizontalInput;
         Player.Velocity = new(horizontalInput * Data.MoveSpeed, Player.Velocity.y);
         if (Mathf.Abs(horizontalInput) > 0.01f)
         {

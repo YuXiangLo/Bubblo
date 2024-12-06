@@ -41,7 +41,7 @@ public class MovementRunningState : IMovementState
 
     private bool DetectJump()
     {
-        if (UserInput.Instance.Jump)
+        if (UserInput.Instance.JumpKeyDown)
         {
             Player.Velocity = new(Player.Velocity.x, Data.JumpForce);
             Player.ChangeMovementState(new MovementRisingState(Player, Data));
@@ -56,7 +56,7 @@ public class MovementRunningState : IMovementState
     /// <returns>return <c>true</c> if no horizontal input</returns>
     private bool DetectHorizontalMovement()
     {
-        var horizontalInput = UserInput.Instance.Move.x;
+        var horizontalInput = UserInput.Instance.HorizontalInput;
         var velocity = Player.Velocity;
         velocity.x = horizontalInput * Data.MoveSpeed;
         if (Player.SlopeAngle != -1f && Player.SlopeAngle <= 60f)

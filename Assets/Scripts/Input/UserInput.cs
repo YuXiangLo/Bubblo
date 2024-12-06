@@ -8,7 +8,6 @@ public class UserInput : MonoBehaviour
     public static UserInput Instance;
 
     // Input values
-    public Vector2 Move { get; private set; }
     public bool Jump { get; private set; }
     public bool Fire { get; private set; }
     public bool Interact { get; private set; }
@@ -16,6 +15,7 @@ public class UserInput : MonoBehaviour
     public bool Left { get; private set; }
     public bool Up { get; private set; }
     public bool Down { get; private set; }
+    
 
     // Continuous input (like GetKey)
     public bool IsJumpHeld => _jumpAction.ReadValue<float>() > 0;
@@ -25,7 +25,7 @@ public class UserInput : MonoBehaviour
     public bool IsLeftHeld => _leftAction.ReadValue<float>() > 0;
     public bool IsUpHeld => _upAction.ReadValue<float>() > 0;
     public bool IsDownHeld => _downAction.ReadValue<float>() > 0;
-
+    public int HorizontalInput => (IsRightHeld) ? (IsLeftHeld)? 0 : 1 : (IsLeftHeld)? -1 : 0;
     public bool JumpKeyUp => IsJumpHeld == false;
     public bool FireKeyUp => IsFireHeld == false;
     public bool InteractKeyUp => IsInteractHeld == false;

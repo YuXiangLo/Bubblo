@@ -14,7 +14,7 @@ public class AttackIdleState : IAttackState
 
     public void Update()
     {
-        if (UserInput.Instance.Fire)
+        if (UserInput.Instance.FireKeyDown)
         {
             if (Player.IsMagicEmpty)
             {
