@@ -13,7 +13,6 @@ public class MovementClimbFallingState : IMovementState
     }
     public void Enter()
     {
-        Debug.Log("ClimbFalling");
         Player.Velocity = new(0f, -Data.ClimbFallingSpeed);
         Update();
     }
