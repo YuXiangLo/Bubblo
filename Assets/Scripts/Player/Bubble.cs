@@ -34,7 +34,7 @@ public class Bubble : MonoBehaviour
     private float CurrentSize => Mathf.Lerp(MinSize, MaxSize, ChargingTime / MAX_CHARGING_TIME);
     private float ReleaseSpeed => Mathf.Lerp(MaxSpeed, MinSpeed, ChargingTime / MAX_CHARGING_TIME);
     private Rigidbody2D Rb;
-    private string[] IgnoreTags = new string[] { "Player", "Bubble", "Door", "Tools" };
+    private string[] IgnoreTags = new string[] { "Player", "Bubble", "Door", "Tools", "Ladder" };
 
     private void Awake()
     {
