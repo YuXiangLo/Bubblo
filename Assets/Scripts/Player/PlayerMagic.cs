@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerMagic : MonoBehaviour
 {
     [SerializeField] private float MaxMagic = 10f;
-    private float CurrentMagic;
+    public float CurrentMagic;
     public float MagicPercentage => CurrentMagic / MaxMagic;
     public bool IsEmpty => CurrentMagic == 0f;
 

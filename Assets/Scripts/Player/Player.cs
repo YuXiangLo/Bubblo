@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+
 
 public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModifyHealth, IKnockback, IPlayerStatus, IPlayerBubble
 {
@@ -39,7 +41,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
     #region Player Health
     private PlayerHealth Health;
-    private bool IsDead = false;
+    public bool IsDead = false;
     public float HealthPercentage => Health.HealthPercentage;
     public void Heal(float amount) => Health.Heal(amount);
     public void TakeDamage(float amount) => Health.TakeDamage(amount);
@@ -107,6 +109,13 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         IsDead = true;
         AttackState.Knockbacked();
         ChangeMovementState(new MovementDieState(this, PlayerData));
+        StartCoroutine(DieCoroutine());   
+    }
+
+    private IEnumerator DieCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+        GameManager.Instance.LoadSpecificLevel("Start", false);
     }
 
     public void Knockback(Vector2 knockbackDirection, float toSleep)
@@ -148,7 +157,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
     public PlayerDataStatus GetPlayerStatus()
     {
-        return new PlayerDataStatus(Health.HealthPercentage, Magic.MagicPercentage);
+        return new PlayerDataStatus(Health.CurrentHealth, Magic.CurrentMagic);
     }
 
     public void SetPlayerStatus(PlayerDataStatus status)

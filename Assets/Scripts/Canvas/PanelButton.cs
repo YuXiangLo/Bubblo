@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TimeController : MonoBehaviour {
 	public void GotoHomePage() {
-		GameManager.Instance.GotoHomePage();
+		GameManager.Instance.LoadSpecificLevel("Start", false);
 	}
 
 	public void StopTime() {
