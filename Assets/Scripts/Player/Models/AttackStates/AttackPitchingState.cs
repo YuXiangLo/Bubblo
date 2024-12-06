@@ -22,9 +22,7 @@ public class AttackPitchingState : IAttackState
         Bubble.Release();
         SoundManager.PlaySound(SoundType.Player, (int)PlayerSoundType.ThrowBubble);
         Player.SetAnimation(AnimationStateType.Pitching);
-
-        var stateInfo = Player.Animator.GetCurrentAnimatorStateInfo(0);
-        PitchTimer = stateInfo.length * (1f - stateInfo.normalizedTime);
+        PitchTimer = PlayerData.PitchClip.length;
     }
 
     public void Knockbacked()

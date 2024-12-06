@@ -4,15 +4,14 @@ public class MovementDieState : IMovementState
 {
     private Player Player;
     private PlayerData PlayerData;
-    private float RemainingTime;
+    private float DieTimer;
 
     public MovementDieState(Player player, PlayerData playerData)
     {
         Player = player;
         PlayerData = playerData;
         Player.SetAnimation(AnimationStateType.Die);
-        var stateInfo = Player.Animator.GetCurrentAnimatorStateInfo(0);
-        RemainingTime = stateInfo.length * (1f - stateInfo.normalizedTime);
+        DieTimer = PlayerData.DieClip.length;
     }
 
     public void Enter()
@@ -22,8 +21,8 @@ public class MovementDieState : IMovementState
 
     public void Update()
     {
-        RemainingTime -= Time.deltaTime;
-        if (RemainingTime <= 0)
+        DieTimer -= Time.deltaTime;
+        if (DieTimer <= 0)
         {
             GameManager.Instance.GameOver();
         }

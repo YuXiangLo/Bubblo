@@ -20,4 +20,8 @@ public class PlayerData : MonoBehaviour
 
     // Player Attack
     public GameObject BubblePrefab;
+    
+    // Animation Clips
+    public AnimationClip PitchClip;
+    public AnimationClip DieClip;
 }
