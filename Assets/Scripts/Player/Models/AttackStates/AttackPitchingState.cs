@@ -38,5 +38,6 @@ public class AttackPitchingState : IAttackState
         float remainingTime = stateInfo.length * (1f - stateInfo.normalizedTime);
         yield return new WaitForSeconds(remainingTime);
         Player.ChangeAttackState(new AttackIdleState(Player, PlayerData));
+        Player.SetAnimation(AnimationStateType.Idle);
     }
 }

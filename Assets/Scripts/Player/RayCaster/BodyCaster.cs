@@ -10,7 +10,7 @@ public class BodyCaster : MonoBehaviour
     private Rigidbody2D PlayerRb;
     private Vector2 Direction;
     private float Radius;
-    private const float DISTANCE = 0.001f;
+    public const float DISTANCE = 0.01f;
 
     public void Initialize(Rigidbody2D player, Vector2 direction, float radius)
     {

@@ -33,7 +33,7 @@ public class MovementRunningState : IMovementState
         {
             Player.ChangeMovementState(new MovementRisingState(Player, Data));
         }
-        else if (Player.Velocity.y < 0)
+        else
         {
             Player.ChangeMovementState(new MovementFallingState(Player, Data));
         }
