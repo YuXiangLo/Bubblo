@@ -68,13 +68,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void LoadSpecificLevel(string levelName)
+    public void LoadSpecificLevel(string levelName, bool isCalledByLevelSelect)
     {
         // Check if the level exists in the SceneList array
         if (Array.Exists(SceneList.Scene, scene => scene == levelName))
         {
             // Level exists, store current states and load the specified scene
-            StoreCurrentStates();
+            if (isCalledByLevelSelect)
+                StoredPlayerData = new PlayerDataStatus(100, 10); // NOTE Yu Xiang: Forgive me for the magic number, this is Player.MaxHealth and MaxMagic
+            else
+                StoreCurrentStates();
             SceneManager.sceneLoaded += OnSceneLoaded;
             SoundManager.ChangeBackgroundMusic(BackgroundMusicType.InGame);
             SceneManager.LoadScene(levelName);
@@ -90,7 +93,10 @@ public class GameManager : MonoBehaviour
 
     private void StoreCurrentStates()
     {
-        StoredPlayerData = Player.GetPlayerStatus();
+        if (Player != null)
+            StoredPlayerData = Player.GetPlayerStatus();
+        else
+            StoredPlayerData = new PlayerDataStatus(100, 10); // NOTE Yu Xiang: Forgive me for the magic number, this is Player.MaxHealth and MaxMagic
     }
 
     /// <summary>
@@ -100,21 +106,12 @@ public class GameManager : MonoBehaviour
     /// <param name="mode"></param>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == SceneList.Scene[0])
+        Player = GameObject.FindWithTag("Player").GetComponent<IPlayerStatus>();
+        // Restore health and magic points
+        if (Player != null)
         {
-            Player = GameObject.FindWithTag("Player").GetComponent<IPlayerStatus>();
-            Player.Initialize();
-            SceneManager.sceneLoaded -= OnSceneLoaded;
+            Player.SetPlayerStatus(StoredPlayerData);
         }
-        else
-        {
-            Player = GameObject.FindWithTag("Player").GetComponent<IPlayerStatus>();
-            // Restore health and magic points
-            if (Player != null)
-            {
-                Player.SetPlayerStatus(StoredPlayerData);
-            }
-            SceneManager.sceneLoaded -= OnSceneLoaded;
-        }
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

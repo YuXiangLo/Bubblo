@@ -35,10 +35,8 @@ public class AttackPitchingState : IAttackState
 
     private IEnumerator PitchCoroutine()
     {
-        var stateInfo = Player.Animator.GetCurrentAnimatorStateInfo(0);
-        float remainingTime = stateInfo.length * (1f - stateInfo.normalizedTime);
-        yield return new WaitForSeconds(remainingTime);
+        yield return new WaitForSeconds(0.2f);
         Player.ChangeAttackState(new AttackIdleState(Player, PlayerData));
-        Player.SetAnimation(AnimationStateType.Idle);
+        Player.ChangeMovementState(new MovementInitialState(Player, PlayerData));
     }
 }
