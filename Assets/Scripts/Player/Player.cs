@@ -63,7 +63,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         SlopeCaster.Initialize(Rigidbody2D, Vector2.down, PlayerData.PlayerSize);
 
         LadderCaster = GetComponent<LadderCaster>();
-        LadderCaster.Initialize(Rigidbody2D, Vector2.up, 0.1f * PlayerData.PlayerSize);
+        LadderCaster.Initialize(Rigidbody2D, Vector2.up, 0.1f * PlayerData.PlayerSize, PlayerData.PlayerSize);
 
         MainCamera = Camera.main;
 
@@ -128,6 +128,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     public void BubbleBurst()
     {
         ChangeAttackState(new AttackIdleState(this, PlayerData));
+		ChangeMovementState(new MovementInitialState(this, PlayerData));
     }
 
     public void SetAnimation(AnimationStateType nextState)

@@ -19,7 +19,7 @@ public class MovementFallingState : IMovementState
 
     public void Update()
     {
-        if (DetectGround() || DetectRise() || DetectFloat())
+        if (DetectClimb() || DetectGround() || DetectRise() || DetectFloat())
         {
             return;
         }
@@ -27,9 +27,19 @@ public class MovementFallingState : IMovementState
         ApplyGravity();
     }
 
+    private bool DetectClimb()
+    {
+        if (Player.IsAbleToClimb && Input.GetKeyDown(KeyCode.W))
+        {
+            Player.ChangeMovementState(new MovementClimbingState(Player, Data));
+            return true;
+        }
+        return false;
+    }
+
     private bool DetectFloat()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (UserInput.Instance.IsJumpHeld)
         {
             Player.ChangeMovementState(new MovementFloatingState(Player, Data));
             return true;

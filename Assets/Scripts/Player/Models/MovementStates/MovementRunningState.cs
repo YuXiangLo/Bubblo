@@ -41,7 +41,7 @@ public class MovementRunningState : IMovementState
 
     private bool DetectJump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (UserInput.Instance.Jump)
         {
             Player.Velocity = new(Player.Velocity.x, Data.JumpForce);
             Player.ChangeMovementState(new MovementRisingState(Player, Data));
@@ -79,7 +79,7 @@ public class MovementRunningState : IMovementState
 
     private bool DetectClimb()
     {
-        if (Player.IsAbleToClimb && UserInput.Instance.Move.y >= 0.01f)
+        if (Player.IsAbleToClimb && Input.GetKeyDown(KeyCode.W))
         {
             Player.ChangeMovementState(new MovementClimbingState(Player, Data));
             return true;

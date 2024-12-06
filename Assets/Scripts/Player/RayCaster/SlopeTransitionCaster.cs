@@ -23,8 +23,7 @@ public class SlopeTransitionCaster : MonoBehaviour
         LayerMask[] HitLayerMasks =
         {
             LayerMask.GetMask("Ground"),
-            LayerMask.GetMask("Platform"),
-            LayerMask.GetMask("Enemy")
+			LayerMask.GetMask("Enemy")
         };
 
         if (PlayerRb.isKinematic)
