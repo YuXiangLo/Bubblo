@@ -60,18 +60,23 @@ public class SoundManager : MonoBehaviour
     
     /// <summary>
     /// Play the sound effect
-    /// SoundType is the type of the sound (e.g. Player, Enemy)
-    /// ListNumber should be sent by corresponding enum type. (e.g. (int)PlayerSoundType.Jump)
+    /// soundType is the type of the sound (e.g. Player, Enemy)
+    /// listNumber should be sent by corresponding enum type. (e.g. (int)PlayerSoundType.Jump)
+    /// you can set volume from 1 (100%) to 0 (0%), 1 on default.
     /// </summary>
     /// <param name="soundType">sound type</param>
-    /// <param name="ListNumber">sound source enum number</param>
-    public static void PlaySound(SoundType soundType, int ListNumber)
+    /// <param name="listNumber">sound source enum number</param>
+    /// <param name="volume">volume(0~1)</param>
+    public static void PlaySound(SoundType soundType, int listNumber, float volume = 1)
     {
-        Instance
-            .SoundSource
-            .SoundLists[(int)soundType]
-            .Sounds[ListNumber]
-            .AudioSource.Play();
+        AudioSource sound = Instance
+                                .SoundSource
+                                .SoundLists[(int)soundType]
+                                .Sounds[listNumber]
+                                .AudioSource;
+        
+        sound.volume = volume;
+        sound.Play();
     }
 
     private void ActiveAllAudioSources()
