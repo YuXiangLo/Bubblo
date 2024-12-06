@@ -13,20 +13,23 @@ public class MovementClimbFallingState : IMovementState
     }
     public void Enter()
     {
+        Debug.Log("ClimbFalling");
+        Player.Velocity = new(0f, -Data.ClimbFallingSpeed);
         Update();
     }
 
     public void Update()
     {
-        if (DetectLeave() || DetectClimb())
+        if (DetectGround() || DetectLeave() || DetectClimb())
         {
             return;
         }
+        DetectHorizontalMovement();
     }
 
     private bool DetectClimb()
     {
-        if (UserInput.Instance.Move.y > 0.01f)
+        if (Input.GetKeyDown(KeyCode.W))
         {
             Player.ChangeMovementState(new MovementClimbingState(Player, Data));
             return true;
@@ -42,5 +45,21 @@ public class MovementClimbFallingState : IMovementState
             return true;
         }
         return false;
+    }
+
+    private bool DetectGround()
+    {
+        if (Player.Grounded)
+        {
+            Player.ChangeMovementState(new MovementIdleState(Player, Data));
+            return true;
+        }
+        return false;
+    }
+
+    private void DetectHorizontalMovement()
+    {
+        var horizontalInput = UserInput.Instance.Move.x;
+        Player.Velocity = new(horizontalInput * Data.MoveSpeed, Player.Velocity.y);
     }
 }

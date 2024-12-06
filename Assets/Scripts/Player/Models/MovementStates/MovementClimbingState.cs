@@ -23,11 +23,12 @@ public class MovementClimbingState : IMovementState
         {
             return;
         }
+        DetectHorizontalMovement();
     }
 
     private bool DetectClimbFalling()
     {
-        if (!(UserInput.Instance.Move.y < 0.01f))
+        if (Input.GetKey(KeyCode.W) is false)
         {
             Player.ChangeMovementState(new MovementClimbFallingState(Player, Data));
             return true;
@@ -43,5 +44,11 @@ public class MovementClimbingState : IMovementState
             return true;
         }
         return false;
+    }
+
+    private void DetectHorizontalMovement()
+    {
+        var horizontalInput = UserInput.Instance.Move.x;
+        Player.Velocity = new(horizontalInput * Data.MoveSpeed, Player.Velocity.y);
     }
 }

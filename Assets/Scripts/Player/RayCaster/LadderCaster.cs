@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UIElements;
 
 public class LadderCaster : MonoBehaviour
 {
@@ -7,17 +8,17 @@ public class LadderCaster : MonoBehaviour
 
     private Rigidbody2D PlayerRb;
     private Vector2 Direction;
-    private float Radius;
+    private Vector2 BoxSize;
     private const float DISTANCE = 0.001f;
     private LayerMask LadderLayerMask;
 
-    public void Initialize(Rigidbody2D player, Vector2 direction, float radius)
+    public void Initialize(Rigidbody2D player, Vector2 direction, float width, float height)
     {
         PlayerRb = player;
         Direction = direction;
-        Radius = radius;
+        BoxSize = new Vector2(width, height);
         //TODO: Add the ladder layer mask
-        LadderLayerMask = LayerMask.GetMask("Ladder");
+        LadderLayerMask = LayerMask.GetMask("Default");
     }
 
     private void Update()
@@ -28,31 +29,34 @@ public class LadderCaster : MonoBehaviour
             return;
         }
         
-        IsAbleToClimb = Physics2D.CircleCastAll(PlayerRb.position, Radius, Direction, DISTANCE, LadderLayerMask)
-                            .Any(hit => hit.collider != null && hit.rigidbody != PlayerRb);
+        IsAbleToClimb = Physics2D.BoxCastAll(PlayerRb.position, BoxSize, 0f, Direction, DISTANCE, LadderLayerMask)
+                            .Any(hit => hit.collider != null && hit.rigidbody != PlayerRb && hit.collider.CompareTag("Ladder"));
 
         #if UNITY_EDITOR
-            VisualizeCircleCast();
+            VisualizeBoxCast();
         #endif
     }
 
 
-    private void VisualizeCircleCast()
+    private void VisualizeBoxCast()
     {
-        // Visualize the circle using Debug.DrawLine
-        const int segments = 30;
-        float angleStep = 360f / segments;
-
-        // Draw the circle at the origin
-        for (int i = 0; i < segments; i++)
+        // Visualize the box using Debug.DrawLine
+        Vector2 origin = PlayerRb.position;
+        
+        // Calculate the four corners of the box
+        Vector2 halfSize = BoxSize / 2;
+        Vector2[] corners = new Vector2[4]
         {
-            float angle1 = Mathf.Deg2Rad * (i * angleStep);
-            float angle2 = Mathf.Deg2Rad * ((i + 1) * angleStep);
+            new Vector2(-halfSize.x, -halfSize.y) + origin,
+            new Vector2(halfSize.x, -halfSize.y) + origin,
+            new Vector2(halfSize.x, halfSize.y) + origin,
+            new Vector2(-halfSize.x, halfSize.y) + origin
+        };
 
-            Vector2 point1 = PlayerRb.position + new Vector2(Mathf.Cos(angle1), Mathf.Sin(angle1)) * Radius;
-            Vector2 point2 = PlayerRb.position + new Vector2(Mathf.Cos(angle2), Mathf.Sin(angle2)) * Radius;
-
-            Debug.DrawLine(point1, point2, Color.red, 5f);
-        }
+        // Draw the box edges
+        Debug.DrawLine(corners[0], corners[1], Color.green, 0.1f);
+        Debug.DrawLine(corners[1], corners[2], Color.green, 0.1f);
+        Debug.DrawLine(corners[2], corners[3], Color.green, 0.1f);
+        Debug.DrawLine(corners[3], corners[0], Color.green, 0.1f);
     }
 }
