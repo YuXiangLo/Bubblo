@@ -18,6 +18,7 @@ public class AttackPitchingState : IAttackState
 
     public void Enter()
     {
+        Bubble.UpdateHoldingPosition();
         Bubble.Release();
         SoundManager.PlaySound(SoundType.Player, (int)PlayerSoundType.ThrowBubble);
         Player.SetAnimation(AnimationStateType.Pitching);

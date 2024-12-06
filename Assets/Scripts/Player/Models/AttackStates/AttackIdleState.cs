@@ -16,15 +16,7 @@ public class AttackIdleState : IAttackState
     {
         if (UserInput.Instance.FireKeyDown)
         {
-            if (Player.IsMagicEmpty)
-            {
-                // Current Magic Point > 0
-                Player.ChangeAttackState(new AttackPitchingState(Player, PlayerData, Player.InitializeBubble()));
-            }
-            else
-            {
-                Player.ChangeAttackState(new AttackChargingState(Player, PlayerData, Player.InitializeBubble()));
-            }
+            Player.ChangeAttackState(new AttackChargingState(Player, PlayerData, Player.InitializeBubble()));
         }
     }
 
