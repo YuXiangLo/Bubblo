@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,7 +8,7 @@ public class Bubble : MonoBehaviour
     [SerializeField] private float[] Damages = new float[] { 10f, 20f, 60f };
     [SerializeField] private float[] Speeds = new float[] { 11f, 9.5f, 8f};
     [SerializeField] private float[] ChargingTimes = new float[] { 0.5f, 1.5f, 1.5f };
-    [SerializeField] private float DiscountRatio = 0.2f;
+    [SerializeField] private float DiscountRatio = 0.4f;
     [SerializeField] private float LifeTime = 2f;
     [SerializeField] private float PlayerSize = 3f;
 
@@ -22,6 +21,7 @@ public class Bubble : MonoBehaviour
     private BubbleStateType StateType = BubbleStateType.Charge;
     private float ChargingTime = 0f;
     private Vector2 ReleasedVelocity = Vector2.zero;
+    private float BurstTimer;
 
     private readonly string[] IgnoreTags = new string[] { "Player", "Bubble", "Door", "Tools", "Ladder" };
 
@@ -57,6 +57,14 @@ public class Bubble : MonoBehaviour
             UpdateReleasedVelocity();
             DetectLifeTime();
         }
+        else if (StateType is BubbleStateType.Burst)
+        {
+            BurstTimer -= Time.deltaTime;
+            if (BurstTimer <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -80,7 +88,7 @@ public class Bubble : MonoBehaviour
             Burst();
         }
 
-        if(isIgnoredTag is false)
+        if (isIgnoredTag is false)
         {
             Burst();
             if (StateType != BubbleStateType.Release)
@@ -160,7 +168,8 @@ public class Bubble : MonoBehaviour
         StateType = BubbleStateType.Burst;
         Collider.enabled = false;
         UpdateAnimation();
-        StartCoroutine(BurstCoroutine());
+        var stateInfo = Animator.GetCurrentAnimatorStateInfo(0);
+        BurstTimer = stateInfo.length * (1f - stateInfo.normalizedTime);
     }
 
     private void UpdateAnimation()
@@ -172,18 +181,5 @@ public class Bubble : MonoBehaviour
     private void UpdateCollider()
     {
         Collider.radius = Radiuses[(int)SizeType];
-    }
-
-    private IEnumerator BurstCoroutine()
-    {
-        var stateInfo = Player.Animator.GetCurrentAnimatorStateInfo(0);
-        float remainingTime = stateInfo.length * (1f - stateInfo.normalizedTime);
-        yield return new WaitForSeconds(remainingTime);
-        Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
-        SoundManager.PlaySound(SoundType.Bubble, (int)BubbleSoundType.Broken);
     }
 }
