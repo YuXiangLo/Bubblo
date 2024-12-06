@@ -41,7 +41,7 @@ public class MovementFloatingState : IMovementState
 
     private bool DetectClimb()
     {
-        if (Player.IsAbleToClimb && Input.GetKeyDown(KeyCode.W))
+        if (Player.IsAbleToClimb && UserInput.Instance.UpKeyDown)
         {
             Player.ChangeMovementState(new MovementClimbingState(Player, Data));
             return true;
@@ -51,7 +51,7 @@ public class MovementFloatingState : IMovementState
 
     private bool DetectFall()
     {
-        if (!UserInput.Instance.IsJumpHeld)
+        if (UserInput.Instance.JumpKeyUp)
         {
             Player.ChangeMovementState(new MovementFallingState(Player, Data));
             return true;
@@ -61,7 +61,7 @@ public class MovementFloatingState : IMovementState
 
     private void DetectHorizontalMovement()
     {
-        var horizontalInput = UserInput.Instance.Move.x;
+        var horizontalInput = UserInput.Instance.HorizontalInput;
         Player.Velocity = new(horizontalInput * Data.MoveSpeed, Player.Velocity.y);
     }
 

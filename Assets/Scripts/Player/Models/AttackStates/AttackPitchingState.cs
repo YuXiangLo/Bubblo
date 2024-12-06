@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class AttackPitchingState : IAttackState
@@ -7,6 +6,8 @@ public class AttackPitchingState : IAttackState
     private PlayerData PlayerData;
     private Bubble Bubble;
     public bool LockAnimation => true;
+
+    private float PitchTimer = 0f;
 
     public AttackPitchingState(Player player, PlayerData playerData, Bubble bubble)
     {
@@ -17,10 +18,11 @@ public class AttackPitchingState : IAttackState
 
     public void Enter()
     {
+        Bubble.UpdateHoldingPosition();
         Bubble.Release();
         SoundManager.PlaySound(SoundType.Player, (int)PlayerSoundType.ThrowBubble);
         Player.SetAnimation(AnimationStateType.Pitching);
-        Player.StartCoroutine(PitchCoroutine());
+        PitchTimer = PlayerData.PitchClip.length;
     }
 
     public void Knockbacked()
@@ -30,13 +32,11 @@ public class AttackPitchingState : IAttackState
 
     public void Update()
     {
-        // Do nothing
-    }
-
-    private IEnumerator PitchCoroutine()
-    {
-        yield return new WaitForSeconds(0.2f);
-        Player.ChangeAttackState(new AttackIdleState(Player, PlayerData));
-        Player.ChangeMovementState(new MovementInitialState(Player, PlayerData));
+        PitchTimer -= Time.deltaTime;
+        if (PitchTimer <= 0)
+        {
+            Player.ChangeAttackState(new AttackIdleState(Player, PlayerData));
+            Player.ChangeMovementState(new MovementInitialState(Player, PlayerData));
+        }
     }
 }

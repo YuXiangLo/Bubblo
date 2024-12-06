@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -7,11 +6,12 @@ public class Bubble : MonoBehaviour
 {
     [SerializeField] private float[] Radiuses = new float[] { 0.04f, 0.08f, 0.16f };
     [SerializeField] private float[] Damages = new float[] { 10f, 20f, 60f };
-    [SerializeField] private float[] Speeds = new float[] { 11f, 9.5f, 8f};
+    [SerializeField] private float[] Speeds = new float[] { 11f, 11f, 11f};
     [SerializeField] private float[] ChargingTimes = new float[] { 0.5f, 1.5f, 1.5f };
-    [SerializeField] private float DiscountRatio = 0.2f;
+    [SerializeField] private float[] DiscountRatios = new float[] { 1f, 0.5f, 0.05f };
+    [SerializeField] private AnimationClip[] BurstAnimations = new AnimationClip[3];
     [SerializeField] private float LifeTime = 2f;
-    [SerializeField] private float PlayerSize = 3f;
+    [SerializeField] private float CenterOffset = 3f;
 
     private Player Player;
     private Animator Animator;
@@ -22,6 +22,8 @@ public class Bubble : MonoBehaviour
     private BubbleStateType StateType = BubbleStateType.Charge;
     private float ChargingTime = 0f;
     private Vector2 ReleasedVelocity = Vector2.zero;
+    private float BurstTimer;
+    private bool PassPlayer = false;
 
     private readonly string[] IgnoreTags = new string[] { "Player", "Bubble", "Door", "Tools", "Ladder" };
 
@@ -30,6 +32,7 @@ public class Bubble : MonoBehaviour
         Player = FindObjectOfType<Player>();
         Animator = GetComponent<Animator>();
         Collider = GetComponent<CircleCollider2D>();
+        Collider.radius = Radiuses[(int)SizeType];
         UpdateHoldingPosition();
     }
 
@@ -53,9 +56,22 @@ public class Bubble : MonoBehaviour
         }
         else if (StateType is BubbleStateType.Release)
         {
+            if (PassPlayer is false)
+            {
+                return;
+            }
+
             // if Burst state, constant velocity
             UpdateReleasedVelocity();
             DetectLifeTime();
+        }
+        else if (StateType is BubbleStateType.Burst)
+        {
+            BurstTimer -= Time.deltaTime;
+            if (BurstTimer <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -74,19 +90,27 @@ public class Bubble : MonoBehaviour
             Burst();
         }
 
-        if (isPlayer && StateType is BubbleStateType.Release)
+        if (isPlayer && StateType is BubbleStateType.Release && SizeType != BubbleSizeType.Small)
         {
             Player.BubbleJump();
             Burst();
         }
 
-        if(isIgnoredTag is false)
+        if (isIgnoredTag is false)
         {
             Burst();
             if (StateType != BubbleStateType.Release)
             {
                 Player.BubbleBurst();
             }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject == Player.gameObject)
+        {
+            PassPlayer = true;
         }
     }
 
@@ -105,13 +129,13 @@ public class Bubble : MonoBehaviour
         ReleasedVelocity = new Vector2(Speeds[(int)SizeType] * (PlayerFacingRight ? 1 : -1), 0);
     }
 
-    private void UpdateHoldingPosition() => transform.position = Player.transform.position + CalculateBubblePosition();
+    public void UpdateHoldingPosition() => transform.position = Player.transform.position + CalculateBubblePosition();
 
     private Vector3 CalculateBubblePosition()
     {
         float bubbleRadius = Radiuses[(int)SizeType];
-        float xOffset = (PlayerSize / 2f + bubbleRadius) * (Player.IsFacingRight ? 1 : -1);
-        float yOffset = Mathf.Max(0f, bubbleRadius - PlayerSize / 2f + 0.05f);
+        float xOffset = (CenterOffset / 2f + bubbleRadius) * (Player.IsFacingRight ? -1 : 1);
+        float yOffset = Mathf.Max(0f, bubbleRadius - CenterOffset / 2f + 0.05f);
         return new Vector3(xOffset, yOffset, 0);
     }
 
@@ -140,10 +164,7 @@ public class Bubble : MonoBehaviour
 
     private void UpdateReleasedVelocity()
     {
-        if (SizeType == BubbleSizeType.Large)
-        {
-            ReleasedVelocity *= Mathf.Pow(DiscountRatio, Time.deltaTime);
-        }
+        ReleasedVelocity *= Mathf.Pow(DiscountRatios[(int)SizeType], Time.deltaTime);
     }
 
     private void DetectLifeTime()
@@ -160,7 +181,7 @@ public class Bubble : MonoBehaviour
         StateType = BubbleStateType.Burst;
         Collider.enabled = false;
         UpdateAnimation();
-        StartCoroutine(BurstCoroutine());
+        BurstTimer = BurstAnimations[(int)SizeType].length;
     }
 
     private void UpdateAnimation()
@@ -169,21 +190,5 @@ public class Bubble : MonoBehaviour
         Animator.SetInteger("StateType", (int)StateType);
     }
     
-    private void UpdateCollider()
-    {
-        Collider.radius = Radiuses[(int)SizeType];
-    }
-
-    private IEnumerator BurstCoroutine()
-    {
-        var stateInfo = Player.Animator.GetCurrentAnimatorStateInfo(0);
-        float remainingTime = stateInfo.length * (1f - stateInfo.normalizedTime);
-        yield return new WaitForSeconds(remainingTime);
-        Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
-        SoundManager.PlaySound(SoundType.Bubble, (int)BubbleSoundType.Broken);
-    }
+    private void UpdateCollider() => Collider.radius = Radiuses[(int)SizeType];
 }

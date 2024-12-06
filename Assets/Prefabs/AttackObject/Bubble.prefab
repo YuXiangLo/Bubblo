@@ -164,13 +164,20 @@ MonoBehaviour:
   - 20
   - 60
   Speeds:
-  - 11
-  - 9.5
-  - 8
+  - 16
+  - 10
+  - 16
   ChargingTimes:
   - 0.5
   - 1.5
   - 1.5
-  DiscountRatio: 0.4
+  DiscountRatios:
+  - 1
+  - 0.5
+  - 0.05
+  BurstAnimations:
+  - {fileID: 7400000, guid: ca7da06ffd11ca64990f0ff75482eb5a, type: 2}
+  - {fileID: 7400000, guid: 993a9b6320ee73c4b870bf91b6e357ea, type: 2}
+  - {fileID: 7400000, guid: e4aacca9a724c9e4c93e508d4acaeeb7, type: 2}
   LifeTime: 2
-  PlayerSize: 6
+  CenterOffset: 1.5

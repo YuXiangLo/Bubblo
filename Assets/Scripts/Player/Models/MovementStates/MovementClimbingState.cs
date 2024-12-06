@@ -28,7 +28,7 @@ public class MovementClimbingState : IMovementState
 
     private bool DetectClimbFalling()
     {
-        if (Input.GetKey(KeyCode.W) is false)
+        if (UserInput.Instance.IsUpHeld is false)
         {
             Player.ChangeMovementState(new MovementClimbFallingState(Player, Data));
             return true;
@@ -48,7 +48,7 @@ public class MovementClimbingState : IMovementState
 
     private void DetectHorizontalMovement()
     {
-        var horizontalInput = UserInput.Instance.Move.x;
+        var horizontalInput = UserInput.Instance.HorizontalInput;
         Player.Velocity = new(horizontalInput * Data.MoveSpeed, Player.Velocity.y);
     }
 }

@@ -19,7 +19,11 @@ public class AttackChargingState : IAttackState
     {
         // Do nothing
         Player.SetAnimation(AnimationStateType.Charging);
-        Update();
+        if (Player.IsMagicEmpty)
+        {
+            Bubble.StopCharging();
+            ReleaseBubble();
+        }
     }
 
     public void Knockbacked()
