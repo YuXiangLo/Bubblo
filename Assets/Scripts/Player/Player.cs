@@ -73,7 +73,6 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
     private void Update()
     {
-        Debug.Log($"Player IsAbleToClimb: {IsAbleToClimb}");
         MovementState.Update();
         AttackState.Update();
         PlayerUpdate();
