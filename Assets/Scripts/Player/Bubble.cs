@@ -111,5 +111,10 @@ public class Bubble : MonoBehaviour
         float yOffset = Mathf.Max(0f, bubbleRadius - PLAYER_SIZE / 2f + 0.05f);
         return new Vector3(xOffset, yOffset, 0);
     }
+
+    private void OnDestroy()
+    {
+        SoundManager.PlaySound(SoundType.Bubble, (int)BubbleSoundType.Broken);
+    }
 }
 

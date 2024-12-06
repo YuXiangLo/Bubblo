@@ -401,7 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5094db8ec91d446528099717752293c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SoundSource: {fileID: 11400000, guid: 2bcfb8c01ae8c4b2389c4a4d24917347, type: 2}
+  SoundSourceObject: {fileID: 11400000, guid: 2bcfb8c01ae8c4b2389c4a4d24917347, type: 2}
   CurrentBackgroundMusicType: 0
 --- !u!4 &1326530597
 Transform:

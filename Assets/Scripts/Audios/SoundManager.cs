@@ -36,23 +36,25 @@ public class SoundManager : MonoBehaviour
     /// Change the backgroundMusic
     /// </summary>
     /// <param name="backgroundMusicType">background music type</param>
-    public void ChangeBackgroundMusic(BackgroundMusicType backgroundMusicType)
+    public static void ChangeBackgroundMusic(BackgroundMusicType backgroundMusicType)
     {
-        if (CurrentBackgroundMusicType != backgroundMusicType)
+        if (Instance.CurrentBackgroundMusicType != backgroundMusicType)
         {
-            SoundSource
-                .SoundLists[(int)SoundType.BackgroundMusic]
-                .Sounds[(int)CurrentBackgroundMusicType]
+            var soundList = Instance
+                                .SoundSource
+                                .SoundLists[(int)SoundType.BackgroundMusic];
+            
+            soundList
+                .Sounds[(int)Instance.CurrentBackgroundMusicType]
                 .AudioSource
                 .Stop();
             
-            SoundSource
-                .SoundLists[(int)SoundType.BackgroundMusic]
+            soundList
                 .Sounds[(int)backgroundMusicType]
                 .AudioSource
                 .Play();
             
-            CurrentBackgroundMusicType = backgroundMusicType;
+            Instance.CurrentBackgroundMusicType = backgroundMusicType;
         }
     }
     
@@ -63,13 +65,13 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     /// <param name="soundType">sound type</param>
     /// <param name="ListNumber">sound source enum number</param>
-    public void PlaySound(SoundType soundType, int ListNumber)
+    public static void PlaySound(SoundType soundType, int ListNumber)
     {
-        SoundSource
-        .SoundLists[(int)soundType]
-        .Sounds[ListNumber]
-        .AudioSource
-        .Play();
+        Instance
+            .SoundSource
+            .SoundLists[(int)soundType]
+            .Sounds[ListNumber]
+            .AudioSource.Play();
     }
 
     private void ActiveAllAudioSources()
@@ -79,7 +81,6 @@ public class SoundManager : MonoBehaviour
         {
             for (int j = 0; j < SoundSource.SoundLists[i].Sounds.Length; j++)
             {
-                Debug.Log($"activate_outside{i}_{j}");
                 if (SoundSource.SoundLists[i].Sounds[j].AudioSource != null)
                 {
                     AudioSource audioInstance = SoundSource.SoundLists[i].Sounds[j].AudioSource;
@@ -87,7 +88,6 @@ public class SoundManager : MonoBehaviour
                     SoundSource.SoundLists[i].Sounds[j].AudioSource = instantiateInstance;
                     DontDestroyOnLoad(instantiateInstance);
                     SoundSource.SoundLists[i].Sounds[j].AudioSource.gameObject.SetActive(true);
-                    Debug.Log($"activate{i}_{j}");
                 }
             }
         }

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19ead6e78a1de41d8a06d9367c7c8883, type: 3}
-  m_Name: SoundSourceObject.asset 17-36-01-747
+  m_Name: SoundSourceObject
   m_EditorClassIdentifier: 
   SoundLists:
   - Name: BackgroundMusic
@@ -24,12 +24,12 @@ MonoBehaviour:
     Volume: 1
     Sounds:
     - Name: Pressed
-      AudioSource: {fileID: 0}
+      AudioSource: {fileID: 9081954706057575923, guid: 73b27b2778f3240aba1c2bb30bc7148a, type: 3}
   - Name: Player
     Volume: 1
     Sounds:
     - Name: ThrowBubble
-      AudioSource: {fileID: 0}
+      AudioSource: {fileID: 7559886081479944781, guid: 8a6048a78a25a455e9107c0de125b2b3, type: 3}
     - Name: ChargingBubble
       AudioSource: {fileID: 0}
     - Name: WalkOnSoil
@@ -48,7 +48,7 @@ MonoBehaviour:
     Volume: 1
     Sounds:
     - Name: Broken
-      AudioSource: {fileID: 0}
+      AudioSource: {fileID: 1590439014150663906, guid: 298f8a63cdbe8425a9afb94440128cd5, type: 3}
   - Name: Enemy
     Volume: 1
     Sounds:
