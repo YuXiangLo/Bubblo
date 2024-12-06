@@ -6,7 +6,6 @@ public class AttackChargingState : IAttackState
     private Bubble Bubble;
     public bool LockAnimation => true;
 
-    private float HoldTime = 0f;
     private bool StopCharge = false;
 
     public AttackChargingState(Player player, PlayerData playerData, Bubble bubble)
@@ -46,15 +45,12 @@ public class AttackChargingState : IAttackState
 
     private void ChargeBubble()
     {
-        if (Player.IsMagicEmpty || HoldTime >= 3 * PlayerData.CHARGE_INTERVAL)
+        if (Player.IsMagicEmpty)
         {
             StopCharge = true;
             Bubble.StopCharging();
             return;
         }
-
-        HoldTime += Time.deltaTime;
-        Player.Consume(Time.deltaTime);
     }
 
     private void ReleaseBubble()

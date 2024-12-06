@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class Bubble : MonoBehaviour
 {
-    [SerializeField] private float[] Radiuses = new float[] { 1f, 1f, 1f };
+    [SerializeField] private float[] Radiuses = new float[] { 0.04f, 0.08f, 0.16f };
     [SerializeField] private float[] Damages = new float[] { 10f, 20f, 60f };
     [SerializeField] private float[] Speeds = new float[] { 11f, 9.5f, 8f};
     [SerializeField] private float[] ChargingTimes = new float[] { 0.5f, 1.5f, 1.5f };
-    [SerializeField] private float DiscountRatio = 0.98f;
+    [SerializeField] private float DiscountRatio = 0.2f;
     [SerializeField] private float LifeTime = 2f;
-    [SerializeField] private float PlayerSize = 1f;
+    [SerializeField] private float PlayerSize = 3f;
 
     private Player Player;
     private Animator Animator;
-    private Collider2D Collider;
+    private CircleCollider2D Collider;
     private bool PlayerFacingRight => Player.IsFacingRight;
 
     private BubbleSizeType SizeType = BubbleSizeType.Small;
@@ -29,7 +29,7 @@ public class Bubble : MonoBehaviour
     {
         Player = FindObjectOfType<Player>();
         Animator = GetComponent<Animator>();
-        Collider = GetComponent<Collider2D>();
+        Collider = GetComponent<CircleCollider2D>();
         UpdateHoldingPosition();
     }
 
@@ -117,17 +117,23 @@ public class Bubble : MonoBehaviour
 
     private void Charge()
     {
-        ChargingTime = Mathf.Clamp(ChargingTime + Time.deltaTime, 0f, ChargingTimes[(int)SizeType]);
+        var charingAddTime = Mathf.Clamp(ChargingTime + Time.deltaTime, 0f, ChargingTimes[(int)SizeType]) - ChargingTime;
+        Player.Consume(charingAddTime);
+        ChargingTime += charingAddTime;
         Debug.Log($"ChargingTime: {ChargingTime}, Threshold: {ChargingTimes[(int)SizeType]}");  
         if (ChargingTime == ChargingTimes[(int)SizeType])
         {
-            if (SizeType == BubbleSizeType.Large)
+            if (SizeType == BubbleSizeType.Medium)
             {
+                SizeType = BubbleSizeType.Large;
                 StateType = BubbleStateType.Hold;
+                UpdateCollider();
+                UpdateAnimation();
             }
-            else
+            else if (SizeType == BubbleSizeType.Small)
             {
-                SizeType++;
+                SizeType = BubbleSizeType.Medium;
+                UpdateCollider();
                 UpdateAnimation();
             }
         }
@@ -160,9 +166,14 @@ public class Bubble : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        Debug.Log($"SizeType: {SizeType}, StateType: {StateType}");
         Animator.SetInteger("SizeType", (int)SizeType);
         Animator.SetInteger("StateType", (int)StateType);
+    }
+    
+    private void UpdateCollider()
+    {
+        Debug.Log($"UpdateCollider: {Radiuses[(int)SizeType]}");
+        Collider.radius = Radiuses[(int)SizeType];
     }
 
     private IEnumerator BurstCoroutine()
