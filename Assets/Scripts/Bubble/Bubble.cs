@@ -9,6 +9,7 @@ public class Bubble : MonoBehaviour
     [SerializeField] private float[] Speeds = new float[] { 11f, 11f, 11f};
     [SerializeField] private float[] ChargingTimes = new float[] { 0.5f, 1.5f, 1.5f };
     [SerializeField] private float[] DiscountRatios = new float[] { 1f, 0.5f, 0.05f };
+    [SerializeField] private AnimationClip[] BurstAnimations = new AnimationClip[3];
     [SerializeField] private float LifeTime = 2f;
     [SerializeField] private float CenterOffset = 3f;
 
@@ -180,8 +181,7 @@ public class Bubble : MonoBehaviour
         StateType = BubbleStateType.Burst;
         Collider.enabled = false;
         UpdateAnimation();
-        var stateInfo = Animator.GetCurrentAnimatorStateInfo(0);
-        BurstTimer = stateInfo.length * (1f - stateInfo.normalizedTime);
+        BurstTimer = BurstAnimations[(int)SizeType].length;
     }
 
     private void UpdateAnimation()
