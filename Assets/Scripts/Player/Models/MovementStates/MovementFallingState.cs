@@ -29,7 +29,7 @@ public class MovementFallingState : IMovementState
 
     private bool DetectFloat()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (UserInput.Instance.IsJumpHeld)
         {
             Player.ChangeMovementState(new MovementFloatingState(Player, Data));
             return true;

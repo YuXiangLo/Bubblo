@@ -42,7 +42,7 @@ public class MovementRisingState : IMovementState
 
     private void ApplyGravity()
     {
-        var gravityScale = Input.GetKey(KeyCode.Space) ? Data.LowGravityScale : Data.DefaultGravityScale;
+        var gravityScale = UserInput.Instance.IsJumpHeld ? Data.LowGravityScale : Data.DefaultGravityScale;
         var velocity = Player.Velocity;
         velocity.y += Data.Gravity * gravityScale * Time.deltaTime;
         velocity.y = Mathf.Min(velocity.y, Data.MinBlowingSpeed);
