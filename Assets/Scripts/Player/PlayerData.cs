@@ -20,5 +20,4 @@ public class PlayerData : MonoBehaviour
 
     // Player Attack
     public GameObject BubblePrefab;
-    public const float CHARGE_INTERVAL = 0.4f;
 }

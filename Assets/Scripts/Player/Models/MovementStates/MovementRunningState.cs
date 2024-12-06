@@ -79,7 +79,7 @@ public class MovementRunningState : IMovementState
 
     private bool DetectClimb()
     {
-        if (Player.IsAbleToClimb && UserInput.Instance.Move.y >= 0.01f)
+        if (Player.IsAbleToClimb && Input.GetKeyDown(KeyCode.W))
         {
             Player.ChangeMovementState(new MovementClimbingState(Player, Data));
             return true;
