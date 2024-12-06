@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19ead6e78a1de41d8a06d9367c7c8883, type: 3}
+  m_Name: SoundSourceObject
+  m_EditorClassIdentifier: 
+  SoundLists:
+  - Name: BackgroundMusic
+    Volume: 1
+    Sounds:
+    - Name: MainMenu
+      AudioSource: {fileID: 7153814018178019125, guid: b8a72f86127fc4c339c4d2ec656a618a, type: 3}
+    - Name: InGame
+      AudioSource: {fileID: 4886430411071175074, guid: 1cfbe160d0bfe4ceb8a70b239f9d3727, type: 3}
+  - Name: Button
+    Volume: 1
+    Sounds:
+    - Name: Pressed
+      AudioSource: {fileID: 9081954706057575923, guid: 73b27b2778f3240aba1c2bb30bc7148a, type: 3}
+  - Name: Player
+    Volume: 1
+    Sounds:
+    - Name: ThrowBubble
+      AudioSource: {fileID: 7559886081479944781, guid: 8a6048a78a25a455e9107c0de125b2b3, type: 3}
+    - Name: ChargingBubble
+      AudioSource: {fileID: 0}
+    - Name: WalkOnSoil
+      AudioSource: {fileID: 0}
+    - Name: WalkOnGrass
+      AudioSource: {fileID: 0}
+    - Name: Jump
+      AudioSource: {fileID: 0}
+    - Name: Landing
+      AudioSource: {fileID: 0}
+    - Name: Attacked
+      AudioSource: {fileID: 0}
+    - Name: Dead
+      AudioSource: {fileID: 0}
+  - Name: Bubble
+    Volume: 1
+    Sounds:
+    - Name: Broken
+      AudioSource: {fileID: 1590439014150663906, guid: 298f8a63cdbe8425a9afb94440128cd5, type: 3}
+  - Name: Enemy
+    Volume: 1
+    Sounds:
+    - Name: AttackSprint
+      AudioSource: {fileID: 0}
+    - Name: AttackJump
+      AudioSource: {fileID: 0}

@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        SoundManager.ChangeBackgroundMusic(BackgroundMusicType.MainMenu);
         SceneManager.LoadScene("Start");
     }
 
@@ -29,16 +30,19 @@ public class GameManager : MonoBehaviour
     {
         // Load Scene1 and register callback for when it has loaded
         SceneManager.sceneLoaded += OnSceneLoaded;
+        SoundManager.ChangeBackgroundMusic(BackgroundMusicType.InGame);
         SceneManager.LoadScene(SceneList.Scene[0]);
     }
 
 	public void GameOver()
 	{
+        SoundManager.ChangeBackgroundMusic(BackgroundMusicType.MainMenu);
 		SceneManager.LoadScene("Start");
 	}
 
     public void GotoHomePage()
     {
+        SoundManager.ChangeBackgroundMusic(BackgroundMusicType.MainMenu);
         SceneManager.LoadScene("Start");
     }
 
@@ -51,6 +55,7 @@ public class GameManager : MonoBehaviour
         int index = Array.IndexOf(SceneList.Scene, currentSceneName);
         if (index == SceneList.Scene.Length - 1)
         {
+            SoundManager.ChangeBackgroundMusic(BackgroundMusicType.MainMenu);
             SceneManager.LoadScene("Start");
             return;
         }
@@ -58,6 +63,7 @@ public class GameManager : MonoBehaviour
             StoreCurrentStates();
             string nextSceneName = SceneList.Scene[index + 1];
             SceneManager.sceneLoaded += OnSceneLoaded;
+            SoundManager.ChangeBackgroundMusic(BackgroundMusicType.InGame);
             SceneManager.LoadScene(nextSceneName);
         }
     }
@@ -70,11 +76,13 @@ public class GameManager : MonoBehaviour
             // Level exists, store current states and load the specified scene
             StoreCurrentStates();
             SceneManager.sceneLoaded += OnSceneLoaded;
+            SoundManager.ChangeBackgroundMusic(BackgroundMusicType.InGame);
             SceneManager.LoadScene(levelName);
         }
         else
         {
             // Level doesn't exist, go back to the "Start" scene
+            SoundManager.ChangeBackgroundMusic(BackgroundMusicType.MainMenu);
             SceneManager.LoadScene("Start");
         }
     }
