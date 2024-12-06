@@ -29,7 +29,7 @@ public class MovementFallingState : IMovementState
 
     private bool DetectClimb()
     {
-        if (Player.IsAbleToClimb && Input.GetKeyDown(KeyCode.W))
+        if (Player.IsAbleToClimb && UserInput.Instance.UpKeyDown)
         {
             Player.ChangeMovementState(new MovementClimbingState(Player, Data));
             return true;
@@ -51,7 +51,7 @@ public class MovementFallingState : IMovementState
     {
         if (Player.Grounded)
         {
-            var horizontalInput = UserInput.Instance.Move.x;
+            var horizontalInput = UserInput.Instance.HorizontalInput;
             Player.Velocity = new(horizontalInput * Data.MoveSpeed, 0f);
             if (Mathf.Abs(Player.Velocity.x) <= 0.01f)
             {
@@ -78,7 +78,7 @@ public class MovementFallingState : IMovementState
 
     private void DetectHorizontalMovement()
     {
-        var horizontalInput = UserInput.Instance.Move.x;
+        var horizontalInput = UserInput.Instance.HorizontalInput;
         Player.Velocity = new(horizontalInput * Data.MoveSpeed, Player.Velocity.y);
     }
 
