@@ -12,13 +12,13 @@ public class Bubble : MonoBehaviour
     #region BubbleSpeedLifeTime
     [SerializeField] private float MinSpeed = 8f;
     [SerializeField] private float MaxSpeed = 11f;
+    [SerializeField] private float DiscountRatio = 0.98f; // 0.98f for macbook unity, 0.97f for linux unity
     [SerializeField] private float LifeTime = 2f;
     #endregion
 
     #region BubbleDamage
     [SerializeField] private float MinDamage = 3f;
     [SerializeField] private float MaxDamage = 30f;
-    [SerializeField] private float DiscountRatio = 0.98f; // 0.98f for macbook unity, 0.97f for linux unity
     #endregion
 
     // Private const or readonly
