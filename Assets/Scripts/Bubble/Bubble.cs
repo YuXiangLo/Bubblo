@@ -181,4 +181,9 @@ public class Bubble : MonoBehaviour
         yield return new WaitForSeconds(remainingTime);
         Destroy(gameObject);
     }
+
+    private void OnDestroy()
+    {
+        SoundManager.PlaySound(SoundType.Bubble, (int)BubbleSoundType.Broken);
+    }
 }
