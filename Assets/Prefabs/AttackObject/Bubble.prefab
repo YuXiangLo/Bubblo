@@ -171,6 +171,6 @@ MonoBehaviour:
   - 0.5
   - 1.5
   - 1.5
-  DiscountRatio: 0.2
+  DiscountRatio: 0.4
   LifeTime: 2
   PlayerSize: 6
