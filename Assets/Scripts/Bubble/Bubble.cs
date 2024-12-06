@@ -3,9 +3,9 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class NewBubble : MonoBehaviour
+public class Bubble : MonoBehaviour
 {
-    [SerializeField] private float[] Radiuses = new float[] { 1f, 1.2f, 1.8f };
+    [SerializeField] private float[] Radiuses = new float[] { 1f, 1f, 1f };
     [SerializeField] private float[] Damages = new float[] { 10f, 20f, 60f };
     [SerializeField] private float[] Speeds = new float[] { 11f, 9.5f, 8f};
     [SerializeField] private float[] ChargingTimes = new float[] { 0.5f, 1.5f, 1.5f };
@@ -118,7 +118,7 @@ public class NewBubble : MonoBehaviour
     private void Charge()
     {
         ChargingTime = Mathf.Clamp(ChargingTime + Time.deltaTime, 0f, ChargingTimes[(int)SizeType]);
-
+        Debug.Log($"ChargingTime: {ChargingTime}, Threshold: {ChargingTimes[(int)SizeType]}");  
         if (ChargingTime == ChargingTimes[(int)SizeType])
         {
             if (SizeType == BubbleSizeType.Large)
@@ -150,8 +150,9 @@ public class NewBubble : MonoBehaviour
         }
     }
     
-    private void Burst()
+    public void Burst()
     {
+        StateType = BubbleStateType.Burst;
         Collider.enabled = false;
         UpdateAnimation();
         StartCoroutine(BurstCoroutine());
@@ -159,6 +160,7 @@ public class NewBubble : MonoBehaviour
 
     private void UpdateAnimation()
     {
+        Debug.Log($"SizeType: {SizeType}, StateType: {StateType}");
         Animator.SetInteger("SizeType", (int)SizeType);
         Animator.SetInteger("StateType", (int)StateType);
     }

@@ -25,7 +25,7 @@ public class AttackChargingState : IAttackState
 
     public void Knockbacked()
     {
-        Bubble.Remove();
+        Bubble.Burst();
         Player.ChangeAttackState(new AttackIdleState(Player, PlayerData));
     }
 
