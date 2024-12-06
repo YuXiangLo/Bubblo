@@ -23,7 +23,7 @@ public class Bubble : MonoBehaviour
     private float ChargingTime = 0f;
     private Vector2 ReleasedVelocity = Vector2.zero;
 
-    private readonly string[] IgnoreTags = new string[] { "Player", "Bubble", "Door", "Tools" };
+    private readonly string[] IgnoreTags = new string[] { "Player", "Bubble", "Door", "Tools", "Ladder" };
 
     private void Awake()
     {
