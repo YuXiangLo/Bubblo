@@ -79,6 +79,25 @@ public class SoundManager : MonoBehaviour
         sound.Play();
     }
 
+    /// <summary>
+    /// Stop the sound effect
+    /// </summary>
+    /// <param name="soundType">sound type</param>
+    /// <param name="listNumber">sound source enum number</param>
+    public static void StopSound(SoundType soundType, int listNumber)
+    {
+        AudioSource sound = Instance
+                                .SoundSource
+                                .SoundLists[(int)soundType]
+                                .Sounds[listNumber]
+                                .AudioSource;
+        
+        if (sound.isPlaying)
+        {
+            sound.Stop();
+        }
+    }
+
     private void ActiveAllAudioSources()
     {
         SoundSource = Instantiate(SoundSourceObject);

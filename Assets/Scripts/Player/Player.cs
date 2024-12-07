@@ -109,13 +109,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         IsDead = true;
         AttackState.Knockbacked();
         ChangeMovementState(new MovementDieState(this, PlayerData));
-        StartCoroutine(DieCoroutine());   
-    }
-
-    private IEnumerator DieCoroutine()
-    {
-        yield return new WaitForSeconds(2f);
-        GameManager.Instance.LoadSpecificLevel("Start", false);
+        ChangeAttackState(new AttackIdleState(this, PlayerData));
     }
 
     public void Knockback(Vector2 knockbackDirection, float toSleep)
@@ -130,7 +124,8 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
     public void BubbleJump()
     {
-        Velocity = new Vector2(Velocity.x, PlayerData.BubbleJumpForce);
+        float VelocityY = Mathf.Max(PlayerData.BubbleJumpForce, Velocity.y + PlayerData.BubbleJumpForce);
+        Velocity = new Vector2(Velocity.x, VelocityY);
         ChangeMovementState(new MovementRisingState(this, PlayerData));
     }
 

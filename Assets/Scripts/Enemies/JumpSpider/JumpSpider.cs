@@ -53,6 +53,7 @@ namespace Enemies.JumpSpider
 
         private void HandleFaceDirection()
         {
+            if (Velocity.x == 0) return;
             bool isMovingLeft = Velocity.x < 0;
             Vector3 localScale = transform.localScale;
             float absScaleX = Mathf.Abs(localScale.x);

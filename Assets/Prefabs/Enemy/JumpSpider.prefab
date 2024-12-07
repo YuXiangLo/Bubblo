@@ -31,8 +31,8 @@ Transform:
   m_GameObject: {fileID: 3382082551727471215}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: -3.5, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3776367761993650823}
@@ -76,8 +76,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1348444903
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 62515c074b6d92443b870a41d8a59c55, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -103,15 +103,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsFacingLeft: 1
-  LeftPoint: {x: -2, y: 0}
-  RightPoint: {x: 2, y: 0}
-  Speed: 1
-  JumpForce: 12
-  Gravity: 40
+  LeftPoint: {x: -3, y: 0}
+  RightPoint: {x: 3, y: 0}
+  Speed: 2
+  JumpForce: 15
+  Gravity: 35
   FallingMultiplier: 2
-  ToApproachDistance: 3
-  ToJumpDistance: 2
-  YDetectRange: 1
+  ToApproachDistance: 8
+  ToJumpDistance: 5
+  YDetectRange: 2
+  PrecastAnimation: {fileID: 7400000, guid: 62d9c1969c123104798e96c08b786577, type: 2}
 --- !u!114 &2847698835874447098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 118bd3ccb19af434bb06611bc394a67c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Animator: {fileID: 0}
+  Animator: {fileID: 9036580682177606943}
   Velocity: {x: 0, y: 0}
 --- !u!60 &9170379086902747118
 PolygonCollider2D:
