@@ -401,7 +401,6 @@ GameObject:
   - component: {fileID: 1450474758530244558}
   - component: {fileID: 8954699551398654993}
   - component: {fileID: 6607451506152875380}
-  - component: {fileID: 4724319406496879783}
   - component: {fileID: 8489507712589375106}
   m_Layer: 0
   m_Name: MagicTools
@@ -584,42 +583,6 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!19719996 &4724319406496879783
-TilemapCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3993941956794776012}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_MaximumTileChangeCount: 1000
-  m_ExtrusionFactor: 0
-  m_UseDelaunayMesh: 0
 --- !u!114 &8489507712589375106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -632,11 +595,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 900f50d9da3db49d9869751465a82723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 8954699551398654993}
-  player: {fileID: 0}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 2048
 --- !u!1 &4724536268113841853
 GameObject:
   m_ObjectHideFlags: 0
@@ -1499,7 +1457,6 @@ GameObject:
   - component: {fileID: 2960959987152164110}
   - component: {fileID: 5849183162595190197}
   - component: {fileID: 729587412635289165}
-  - component: {fileID: 5831958914131936030}
   - component: {fileID: 3978077458276883354}
   m_Layer: 0
   m_Name: HealthTools
@@ -1682,42 +1639,6 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!19719996 &5831958914131936030
-TilemapCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7747264918111856005}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_MaximumTileChangeCount: 1000
-  m_ExtrusionFactor: 0
-  m_UseDelaunayMesh: 0
 --- !u!114 &3978077458276883354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1730,11 +1651,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 900f50d9da3db49d9869751465a82723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 5849183162595190197}
-  player: {fileID: 0}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 2048
 --- !u!1 &7943225336002917679
 GameObject:
   m_ObjectHideFlags: 0
