@@ -340,7 +340,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1088264313881357385, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
       propertyPath: JumpForce
-      value: 24
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1088264313881357385, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
       propertyPath: MoveSpeed
@@ -349,6 +349,10 @@ PrefabInstance:
     - target: {fileID: 1088264313881357385, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
       propertyPath: PlayerSize
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1088264313881357385, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
+      propertyPath: MinBlowingSpeed
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1554920718440097541, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
       propertyPath: m_Enabled
