@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class UserInput : MonoBehaviour
 {
     public static UserInput Instance;
+    private bool _isPaused = false;
 
     // Input values
     public bool Jump { get; private set; }
@@ -25,7 +26,11 @@ public class UserInput : MonoBehaviour
     public bool IsLeftHeld => _leftAction.ReadValue<float>() > 0;
     public bool IsUpHeld => _upAction.ReadValue<float>() > 0;
     public bool IsDownHeld => _downAction.ReadValue<float>() > 0;
+
+
     public int HorizontalInput => (IsRightHeld) ? (IsLeftHeld)? 0 : 1 : (IsLeftHeld)? -1 : 0;
+
+    // Get Key Up
     public bool JumpKeyUp => IsJumpHeld == false;
     public bool FireKeyUp => IsFireHeld == false;
     public bool InteractKeyUp => IsInteractHeld == false;
@@ -78,6 +83,16 @@ public class UserInput : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale == 0 && !_isPaused)
+        {
+            _isPaused = true;
+            Disable();
+        }
+        else if (Time.timeScale != 0 && _isPaused)
+        {
+            _isPaused = false;
+            Enable();
+        }
         // Reset "pressed this frame" flags
         Jump = _jumpPressedThisFrame;
         Fire = _firePressedThisFrame;
@@ -123,5 +138,27 @@ public class UserInput : MonoBehaviour
         _leftAction.canceled += ctx => Left = false;
         _upAction.canceled += ctx => Up = false;
         _downAction.canceled += ctx => Down = false;
+    }
+
+    private void Disable()
+    {
+        _jumpAction.Disable();
+        _fireAction.Disable();
+        _interactAction.Disable();
+        _rightAction.Disable();
+        _leftAction.Disable();
+        _upAction.Disable();
+        _downAction.Disable();
+    }
+
+    private void Enable()
+    {
+        _jumpAction.Enable();
+        _fireAction.Enable();
+        _interactAction.Enable();
+        _rightAction.Enable();
+        _leftAction.Enable();
+        _upAction.Enable();
+        _downAction.Enable();
     }
 }
