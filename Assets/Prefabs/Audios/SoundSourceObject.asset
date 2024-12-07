@@ -37,7 +37,7 @@ MonoBehaviour:
     - Name: WalkOnGrass
       AudioSource: {fileID: 6742826357384150962, guid: f7439d26c5d364e928fc05e9c3f39f45, type: 3}
     - Name: Jump
-      AudioSource: {fileID: 0}
+      AudioSource: {fileID: 121990064764435061, guid: ebde6d18e8a9a4eddbeed0246c63c4dd, type: 3}
     - Name: Landing
       AudioSource: {fileID: 1496870545672943086, guid: d4234b76f36c94f86b256981077318d5, type: 3}
     - Name: Attacked
