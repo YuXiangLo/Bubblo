@@ -178,6 +178,7 @@ public class Bubble : MonoBehaviour
     
     public void Burst()
     {
+        SoundManager.PlaySound(SoundType.Bubble, (int)BubbleSoundType.Broken);
         StateType = BubbleStateType.Burst;
         Collider.enabled = false;
         UpdateAnimation();

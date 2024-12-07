@@ -109,13 +109,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         IsDead = true;
         AttackState.Knockbacked();
         ChangeMovementState(new MovementDieState(this, PlayerData));
-        StartCoroutine(DieCoroutine());   
-    }
-
-    private IEnumerator DieCoroutine()
-    {
-        yield return new WaitForSeconds(2f);
-        GameManager.Instance.LoadSpecificLevel("Start", false);
+        ChangeAttackState(new AttackIdleState(this, PlayerData));
     }
 
     public void Knockback(Vector2 knockbackDirection, float toSleep)
