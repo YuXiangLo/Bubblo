@@ -12,6 +12,7 @@ public class Bubble : MonoBehaviour
     [SerializeField] private AnimationClip[] BurstAnimations = new AnimationClip[3];
     [SerializeField] private float LifeTime = 2f;
     [SerializeField] private float CenterOffset = 3f;
+    [SerializeField] private string[] IgnoreTags = new string[] { "Player", "Bubble", "Door", "Tools", "Ladder" };
 
     private Player Player;
     private Animator Animator;
@@ -25,7 +26,6 @@ public class Bubble : MonoBehaviour
     private float BurstTimer;
     private bool PassPlayer = false;
 
-    private readonly string[] IgnoreTags = new string[] { "Player", "Bubble", "Door", "Tools", "Ladder" };
 
     private void Awake()
     {
@@ -81,6 +81,7 @@ public class Bubble : MonoBehaviour
         bool isEnemy = otherLayer == LayerMask.NameToLayer("Enemy");
         bool isPlayer = otherLayer == LayerMask.NameToLayer("Player");
         bool isIgnoredTag = IgnoreTags.Contains(other.tag);
+        Debug.Log($"OnTriggerEnter2D: {other.tag}");
 
         if (isEnemy)
         {
@@ -135,7 +136,7 @@ public class Bubble : MonoBehaviour
     {
         float bubbleRadius = Radiuses[(int)SizeType];
         float xOffset = (CenterOffset / 2f + bubbleRadius) * (Player.IsFacingRight ? -1 : 1);
-        float yOffset = Mathf.Max(0f, bubbleRadius - CenterOffset / 2f + 0.05f);
+        float yOffset = Mathf.Max(0f, bubbleRadius - CenterOffset / 2f + 0.65f);
         return new Vector3(xOffset, yOffset, 0);
     }
 
