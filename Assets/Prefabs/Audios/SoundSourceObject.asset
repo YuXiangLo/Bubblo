@@ -43,7 +43,7 @@ MonoBehaviour:
     - Name: Attacked
       AudioSource: {fileID: 3196502721274274281, guid: f83078c2d01ff49d6b0256d4054688a3, type: 3}
     - Name: Dead
-      AudioSource: {fileID: 0}
+      AudioSource: {fileID: 3196502721274274281, guid: f83078c2d01ff49d6b0256d4054688a3, type: 3}
   - Name: Bubble
     Volume: 1
     Sounds:
