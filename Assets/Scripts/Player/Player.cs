@@ -124,7 +124,8 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
     public void BubbleJump()
     {
-        Velocity = new Vector2(Velocity.x, PlayerData.BubbleJumpForce);
+        float VelocityY = Mathf.Max(PlayerData.BubbleJumpForce, Velocity.y + PlayerData.BubbleJumpForce);
+        Velocity = new Vector2(Velocity.x, VelocityY);
         ChangeMovementState(new MovementRisingState(this, PlayerData));
     }
 
