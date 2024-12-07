@@ -17,6 +17,7 @@ namespace Enemies.JumpSpider
         public void Enter()
         {
             JumpSpider.Animator.SetInteger("StateType", (int)JumpSpiderStateType.Approach);
+            DirectionInitialize();
         }
 
         public void Exit()
@@ -58,6 +59,20 @@ namespace Enemies.JumpSpider
             {
                 JumpSpider.SetState(new JumpSpiderDefaultState(JumpSpider, Data, Player));
             }
+        }
+
+        public void DirectionInitialize()
+        {
+            var scale = JumpSpider.transform.localScale;
+            if (Player.transform.position.x < JumpSpider.transform.position.x)
+            {
+                scale.x = Mathf.Abs(scale.x);
+            }
+            else
+            {
+                scale.x = -Mathf.Abs(scale.x);
+            }
+            JumpSpider.transform.localScale = scale;
         }
     }
 }
