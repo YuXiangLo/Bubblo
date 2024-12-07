@@ -29,21 +29,21 @@ MonoBehaviour:
     Volume: 1
     Sounds:
     - Name: ThrowBubble
-      AudioSource: {fileID: 7559886081479944781, guid: 8a6048a78a25a455e9107c0de125b2b3, type: 3}
+      AudioSource: {fileID: 2665427741038153379, guid: cefd5f9cd976544ad9f7a2204997b18b, type: 3}
     - Name: ChargingBubble
-      AudioSource: {fileID: 0}
+      AudioSource: {fileID: 4566340025178878158, guid: 60923e29aaf2347f197fdb6416cc9e03, type: 3}
     - Name: WalkOnSoil
-      AudioSource: {fileID: 0}
+      AudioSource: {fileID: 6476831315870999276, guid: 55a1c898a240144878ed6067e61ec38a, type: 3}
     - Name: WalkOnGrass
-      AudioSource: {fileID: 0}
+      AudioSource: {fileID: 6742826357384150962, guid: f7439d26c5d364e928fc05e9c3f39f45, type: 3}
     - Name: Jump
-      AudioSource: {fileID: 0}
+      AudioSource: {fileID: 121990064764435061, guid: ebde6d18e8a9a4eddbeed0246c63c4dd, type: 3}
     - Name: Landing
-      AudioSource: {fileID: 0}
+      AudioSource: {fileID: 1496870545672943086, guid: d4234b76f36c94f86b256981077318d5, type: 3}
     - Name: Attacked
-      AudioSource: {fileID: 0}
+      AudioSource: {fileID: 3196502721274274281, guid: f83078c2d01ff49d6b0256d4054688a3, type: 3}
     - Name: Dead
-      AudioSource: {fileID: 0}
+      AudioSource: {fileID: 3196502721274274281, guid: f83078c2d01ff49d6b0256d4054688a3, type: 3}
   - Name: Bubble
     Volume: 1
     Sounds:

@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 0}
+  IsDead: 0
 --- !u!70 &5466135974237460654
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -182,6 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxMagic: 10
+  CurrentMagic: 0
 --- !u!114 &4432073781786761642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,6 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 100
+  CurrentHealth: 0
 --- !u!114 &1088264313881357385
 MonoBehaviour:
   m_ObjectHideFlags: 0
