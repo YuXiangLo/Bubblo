@@ -47,7 +47,7 @@ namespace Enemies.AssaultBee
             Vector2 distanceToPlayer = Player.transform.position - AssaultBee.transform.position;
             if (distanceToPlayer.magnitude < Data.DetectionDistance)
             {  
-                AssaultBee.SetState(new PrecastSate(AssaultBee, Data, Player));
+                AssaultBee.SetState(new PrecastState(AssaultBee, Data, Player));
             }
         }
 

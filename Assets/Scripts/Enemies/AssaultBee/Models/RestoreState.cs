@@ -39,7 +39,15 @@ namespace Enemies.AssaultBee
         {
             if (Vector2.Distance((Vector2)AssaultBee.transform.position, Target) < 0.1f)
             {
-                AssaultBee.SetState(new DefaultState(AssaultBee, Data, Player));
+                Vector2 distanceToPlayer = Player.transform.position - AssaultBee.transform.position;
+                if (distanceToPlayer.magnitude < Data.DetectionDistance)
+                {  
+                    AssaultBee.SetState(new PrecastState(AssaultBee, Data, Player));
+                }
+                else
+                {
+                    AssaultBee.SetState(new DefaultState(AssaultBee, Data, Player));
+                }
             }
         }
     }

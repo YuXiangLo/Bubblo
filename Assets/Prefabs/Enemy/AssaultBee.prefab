@@ -125,6 +125,7 @@ MonoBehaviour:
   PrecastSpeedMultiplier: 0.3
   AttackSpeedMultiplier: 4
   DetectionDistance: 7
+  PrecastAnimation: {fileID: 7400000, guid: 62d9c1969c123104798e96c08b786577, type: 2}
 --- !u!61 &5964275737330677919
 BoxCollider2D:
   m_ObjectHideFlags: 0
