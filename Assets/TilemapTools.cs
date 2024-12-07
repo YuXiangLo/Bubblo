@@ -75,7 +75,6 @@ public class TilePickupManager : MonoBehaviour
         if (collectedTile != null)
         {
             tilemap.SetTile(tilePosition, null); // Remove tile from Tilemap
-            Debug.Log($"Collected tile at {tilePosition}");
 
             // Add the tile to player's inventory (optional)
             AddToInventory(collectedTile);
@@ -85,6 +84,5 @@ public class TilePickupManager : MonoBehaviour
     private void AddToInventory(TileBase tile)
     {
         // Example: Add the tile to an inventory system (customize as needed)
-        Debug.Log($"Added {tile.name} to inventory.");
     }
 }
