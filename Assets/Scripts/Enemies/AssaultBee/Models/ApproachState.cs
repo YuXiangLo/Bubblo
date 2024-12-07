@@ -11,12 +11,12 @@ namespace Enemies.AssaultBee
         private Vector2 Source;
         private Vector2 InitialDirection;
 
-        public ApproachState(AssaultBee assaultBee, AssaultBeeData data, Player player, Vector2 source)
+        public ApproachState(AssaultBee assaultBee, AssaultBeeData data, Player player, Vector2 source, Vector2 target)
         {
             AssaultBee = assaultBee;
             Data = data;
             Player = player;
-            Target = Player.transform.position;
+            Target = target;
             Source = source;
             InitialDirection = (Target - Source).normalized;
         }

@@ -10,7 +10,8 @@ namespace Enemies.AssaultBee
 
         private float PrecastTimer;
         private Vector2 Source;
-        private Vector2 Direction;
+        private Vector2 MovingDirection;
+        private Vector2 AttackTarget;
 
         public PrecastState(AssaultBee assaultBee, AssaultBeeData data, Player player)
         {
@@ -25,8 +26,9 @@ namespace Enemies.AssaultBee
             PrecastTimer = Data.PrecastAnimation.length;
             AssaultBee.Animator.SetInteger("State", (int)StateType.Precast);
             Source = AssaultBee.transform.position;
-            Direction = -((Vector2)Player.transform.position - Source).normalized;
-            AssaultBee.Velocity = Direction * Data.PrecastSpeedMultiplier * Data.Speed;
+            MovingDirection = -((Vector2)Player.transform.position - Source).normalized;
+            AttackTarget = Player.transform.position;
+            AssaultBee.Velocity = MovingDirection * Data.PrecastSpeedMultiplier * Data.Speed;
         }
 
         public void Exit()
@@ -40,7 +42,7 @@ namespace Enemies.AssaultBee
 
             if (PrecastTimer <= 0)
             {
-                AssaultBee.SetState(new ApproachState(AssaultBee, Data, Player, Source));
+                AssaultBee.SetState(new ApproachState(AssaultBee, Data, Player, Source, AttackTarget));
             }
         }
     }
