@@ -46,7 +46,7 @@ namespace Enemies.JumpSpider
             {
                 JumpSpider.Velocity.y = 0;
                 JumpSpider.transform.position = new Vector2(JumpSpider.transform.position.x, OriginalYPosition);
-                JumpSpider.SetState(new JumpSpiderApproachState(JumpSpider, Data, Player));
+                JumpSpider.SetState(new JumpSpiderDefaultState(JumpSpider, Data, Player));
             }
         }
     }

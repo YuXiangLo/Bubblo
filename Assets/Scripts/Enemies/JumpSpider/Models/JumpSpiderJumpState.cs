@@ -8,12 +8,14 @@ namespace Enemies.JumpSpider
         private JumpSpiderData Data;
         private Player Player;
         private float OriginalYPosition;
+        private Vector2 JumpVelocity;
 
-        public JumpSpiderJumpState(JumpSpider jumpSpider, JumpSpiderData data, Player player)
+        public JumpSpiderJumpState(JumpSpider jumpSpider, JumpSpiderData data, Player player, Vector2 jumpVelocity)
         {
             JumpSpider = jumpSpider;
             Data = data;
             Player = player;
+            JumpVelocity = jumpVelocity;
         }
 
         public void Enter()
@@ -41,14 +43,6 @@ namespace Enemies.JumpSpider
             
             // Decide if the boarder or the player is jump target
             float xTarget = Player.transform.position.x;
-            if (JumpSpider.transform.position.x < Data.LeftPoint.x + 0.1f && xDistanceToPlayer < 0)
-            {
-                xTarget = Data.LeftPoint.x;
-            }
-            else if (JumpSpider.transform.position.x > Data.RightPoint.x - 0.1f && xDistanceToPlayer > 0)
-            {
-                xTarget = Data.RightPoint.x;
-            }
             
             float xDistance = xTarget - JumpSpider.transform.position.x;
             float timeToPeakAndFall = CalculateTimeToPeakAndFall();

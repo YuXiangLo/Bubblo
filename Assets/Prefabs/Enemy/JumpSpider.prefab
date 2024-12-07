@@ -103,15 +103,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsFacingLeft: 1
-  LeftPoint: {x: -2, y: 0}
-  RightPoint: {x: 2, y: 0}
-  Speed: 1
-  JumpForce: 12
+  LeftPoint: {x: -10, y: 0}
+  RightPoint: {x: 10, y: 0}
+  Speed: 2
+  JumpForce: 15
   Gravity: 40
   FallingMultiplier: 2
-  ToApproachDistance: 3
-  ToJumpDistance: 2
-  YDetectRange: 1
+  ToApproachDistance: 8
+  ToJumpDistance: 5
+  YDetectRange: 2
 --- !u!114 &2847698835874447098
 MonoBehaviour:
   m_ObjectHideFlags: 0

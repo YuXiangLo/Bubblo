@@ -37,8 +37,11 @@ namespace Enemies.JumpSpider
 
         private void DistanceDetection()
         {
-            Vector2 distanceToPlayer = Player.transform.position - JumpSpider.transform.position;
-            if (Mathf.Abs(distanceToPlayer.x) < Data.ToApproachDistance && Mathf.Abs(distanceToPlayer.y) < Data.YDetectRange)
+            float distanceX = Mathf.Abs(Player.transform.position.x - JumpSpider.transform.position.x);
+            float distanceY = Mathf.Abs(Player.transform.position.y - JumpSpider.transform.position.y);
+            bool inApproachRange = distanceX < Data.ToApproachDistance && distanceY < Data.ToApproachDistance;
+            bool PlayerInMovementRange = Player.transform.position.x > Data.LeftPoint.x && Player.transform.position.x < Data.RightPoint.x;
+            if (inApproachRange && PlayerInMovementRange)
             {
                 JumpSpider.SetState(new JumpSpiderApproachState(JumpSpider, Data, Player));
             }
