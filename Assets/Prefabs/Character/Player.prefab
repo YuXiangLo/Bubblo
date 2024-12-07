@@ -210,14 +210,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87b029e149ee4d54c8e05392955bb1c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 6
+  MoveSpeed: 8
   MaxFloatingYSpeed: -2
   Gravity: -90
   MaxFallingSpeed: -20
-  MinBlowingSpeed: 20
-  JumpForce: 18
-  BubbleJumpForce: 24
-  PlayerSize: 1
+  MinBlowingSpeed: 30
+  JumpForce: 20
+  BubbleJumpForce: 20
+  PlayerSize: 2
   DefaultGravityScale: 1
   LowGravityScale: 0.5
   ClimbingSpeed: 3
