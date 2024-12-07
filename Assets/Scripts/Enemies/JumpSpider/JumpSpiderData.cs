@@ -24,5 +24,7 @@ namespace Enemies.JumpSpider
             public float ToJumpDistance = 2f;
             public float YDetectRange = 1f;
         #endregion
+
+            public AnimationClip PrecastAnimation;
     }
 }

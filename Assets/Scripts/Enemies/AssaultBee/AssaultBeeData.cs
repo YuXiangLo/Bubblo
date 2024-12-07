@@ -22,5 +22,7 @@ namespace Enemies.AssaultBee
         #region Detection Fields
             public float DetectionDistance = 7f;
         #endregion
+
+            public AnimationClip PrecastAnimation;
     }
 }
