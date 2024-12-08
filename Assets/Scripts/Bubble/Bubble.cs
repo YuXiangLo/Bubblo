@@ -53,6 +53,10 @@ public class Bubble : MonoBehaviour
         if (StateType is BubbleStateType.Charge)
         {
             Charge();
+            if (UserInput.Instance.IsFireHeld is false)
+            {
+                Release();
+            }
         }
         else if (StateType is BubbleStateType.Release)
         {
@@ -124,6 +128,10 @@ public class Bubble : MonoBehaviour
 
     public void Release()
     {
+        if (StateType is BubbleStateType.Release)
+        {
+            return;
+        }
         StopCharging();
         StateType = BubbleStateType.Release;
         ReleasedVelocity = new Vector2(Speeds[(int)SizeType] * (PlayerFacingRight ? 1 : -1), 0);
