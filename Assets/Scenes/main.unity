@@ -324,8 +324,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SoundSourceObject: {fileID: 11400000, guid: 2bcfb8c01ae8c4b2389c4a4d24917347, type: 2}
-  CurrentBackgroundMusicType: 0
-  Volume: 1
   IsMuted: 0
 --- !u!4 &1326530597
 Transform:
@@ -342,6 +340,79 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &247149601117051754
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 572083318987345650, guid: 394f649fd067b4485bb34886c6bb01b0, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 1a8906158011b00a9a1c413601d3c998, type: 3}
+    - target: {fileID: 1147104382162462969, guid: 394f649fd067b4485bb34886c6bb01b0, type: 3}
+      propertyPath: m_Name
+      value: DialogueManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660679946920952061, guid: 394f649fd067b4485bb34886c6bb01b0, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 1a8906158011b00a9a1c413601d3c998, type: 3}
+    - target: {fileID: 5828068956199983595, guid: 394f649fd067b4485bb34886c6bb01b0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5828068956199983595, guid: 394f649fd067b4485bb34886c6bb01b0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5828068956199983595, guid: 394f649fd067b4485bb34886c6bb01b0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5828068956199983595, guid: 394f649fd067b4485bb34886c6bb01b0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5828068956199983595, guid: 394f649fd067b4485bb34886c6bb01b0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5828068956199983595, guid: 394f649fd067b4485bb34886c6bb01b0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5828068956199983595, guid: 394f649fd067b4485bb34886c6bb01b0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5828068956199983595, guid: 394f649fd067b4485bb34886c6bb01b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5828068956199983595, guid: 394f649fd067b4485bb34886c6bb01b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5828068956199983595, guid: 394f649fd067b4485bb34886c6bb01b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6157796218834457088, guid: 394f649fd067b4485bb34886c6bb01b0, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 1a8906158011b00a9a1c413601d3c998, type: 3}
+    - target: {fileID: 7672020761478673043, guid: 394f649fd067b4485bb34886c6bb01b0, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 1a8906158011b00a9a1c413601d3c998, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 394f649fd067b4485bb34886c6bb01b0, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -349,3 +420,4 @@ SceneRoots:
   - {fileID: 706924285}
   - {fileID: 947467889}
   - {fileID: 1326530597}
+  - {fileID: 247149601117051754}
