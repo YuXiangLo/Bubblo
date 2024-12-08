@@ -232,7 +232,7 @@ MonoBehaviour:
   CelebrateClip: {fileID: 7400000, guid: 46d8145a6cb1a0d4aba30802fa9c8ae6, type: 2}
   AchieveFloatClip: {fileID: 7400000, guid: 55ec521360fc5dd409ed4051c5884ec2, type: 2}
   EnterLevelClip: {fileID: 7400000, guid: 87f165a41274ab34d9128891ed8c15bd, type: 2}
-  AchieveOffset: {x: 0.8, y: -0.8}
+  AchieveOffset: {x: 0.8, y: 1}
   AchieveJumpForce: 10
   AchieveGravity: -10
   AchieveLeavingForce: {x: 10, y: 10}
