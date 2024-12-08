@@ -18,6 +18,7 @@ public class MovementKnockbackState : IMovementState
         Data = data;
         KnockbackDirection = knockbackDirection;
         SleepTimer = toSleep;
+        SoundManager.PlaySound(SoundType.Player, (int)PlayerSoundType.Attacked);
         Player.SetAnimation(AnimationStateType.Knockback);
     }
 
