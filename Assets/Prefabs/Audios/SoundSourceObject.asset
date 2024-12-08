@@ -40,10 +40,12 @@ MonoBehaviour:
       AudioSource: {fileID: 121990064764435061, guid: ebde6d18e8a9a4eddbeed0246c63c4dd, type: 3}
     - Name: Landing
       AudioSource: {fileID: 1496870545672943086, guid: d4234b76f36c94f86b256981077318d5, type: 3}
+    - Name: Climbing
+      AudioSource: {fileID: 8158839471308762994, guid: 7a0df83c8c9c943a2ae7057759b7acd3, type: 3}
     - Name: Attacked
       AudioSource: {fileID: 3196502721274274281, guid: f83078c2d01ff49d6b0256d4054688a3, type: 3}
     - Name: Dead
-      AudioSource: {fileID: 3196502721274274281, guid: f83078c2d01ff49d6b0256d4054688a3, type: 3}
+      AudioSource: {fileID: 4932807651228742670, guid: c1056a370bf474a209cdc5c9a542d2bd, type: 3}
   - Name: Bubble
     Volume: 1
     Sounds:
@@ -53,6 +55,6 @@ MonoBehaviour:
     Volume: 1
     Sounds:
     - Name: AttackSprint
-      AudioSource: {fileID: 0}
+      AudioSource: {fileID: 6799974160198446889, guid: b77531e82de2c4511b21b28cddc62780, type: 3}
     - Name: AttackJump
-      AudioSource: {fileID: 0}
+      AudioSource: {fileID: 7252486279994833359, guid: 40cd33c0f52e140929acf87ef2034185, type: 3}

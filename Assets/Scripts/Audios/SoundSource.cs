@@ -32,8 +32,9 @@ public enum PlayerSoundType
     WalkOnGrass,
     Jump,
     Landing,
+    Climbing,
     Attacked,
-    Dead
+    Dead,
 }
 
 public enum BubbleSoundType
