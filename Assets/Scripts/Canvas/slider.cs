@@ -4,6 +4,10 @@ using UnityEngine.UI;
 public class SliderValueProvider : MonoBehaviour
 {
     private Slider slider;
+    private bool isMuted;
+    [SerializeField]private Sprite mute;
+    [SerializeField]private Sprite unmute;
+    public Button button;
 
     void Awake()
     {
@@ -23,12 +27,31 @@ public class SliderValueProvider : MonoBehaviour
         slider.onValueChanged.AddListener(OnSliderValueChanged);
     }
 
-    private void OnSliderValueChanged(float value)
+    public void Mute()
     {
-        // Notify SoundManager of the new volume
+        isMuted = !isMuted;
+
+        // Update SoundManager volume immediately
         if (SoundManager.Instance != null)
         {
-            SoundManager.Instance.Volume = value;
+            if (isMuted)
+            {
+                SoundManager.Instance.Volume = 0; // Set volume to 0 when muted
+            }
+            else
+            {
+                SoundManager.Instance.Volume = slider.value; // Restore volume to slider value
+            }
+        }
+        button.image.sprite = isMuted ? mute : unmute;
+    }
+
+    private void OnSliderValueChanged(float value)
+    {
+        // Notify SoundManager of the new volume, considering mute state
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.Volume = isMuted ? 0 : value;
         }
     }
 
