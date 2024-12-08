@@ -12,5 +12,6 @@ public enum AnimationStateType
     Knockback = 9,
     Die = 10,
     Celebrate = 11,
-    AchieveFloat = 12
+    AchieveFloat = 12,
+    EnterLevel = 13
 }
