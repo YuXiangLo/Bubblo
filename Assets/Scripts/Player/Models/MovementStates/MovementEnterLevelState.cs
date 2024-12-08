@@ -15,7 +15,6 @@ public class MovementEnterLevelState : IMovementState
         EnterLevelTimer = PlayerData.EnterLevelClip.length;
         Player.SetAnimation(AnimationStateType.EnterLevel);
         Player.Velocity = PlayerData.EnterLevelForce;
-        Debug.Log($"Enter Level Velocity: {Player.Velocity}");
     }
 
     public void Enter()
@@ -27,7 +26,6 @@ public class MovementEnterLevelState : IMovementState
         EnterLevelTimer -= Time.deltaTime;
         ApplyEnterLevelGravity();
         DiscountVelocity();
-        Debug.Log($"Position: {Player.transform.position}, Velocity: {Player.Velocity}");
         if (EnterLevelTimer <= 0)
         {
             Player.ChangeMovementState(new MovementInitialState(Player, PlayerData));
