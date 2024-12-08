@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class InteractCaster : MonoBehaviour
 {
-    public Action? Interaction = null;
+    public Action Interaction = null;
 
     private Rigidbody2D PlayerRb;
     private Vector2 Direction;
@@ -21,7 +21,7 @@ public class InteractCaster : MonoBehaviour
     {
         LayerMask hitLayerMask = LayerMask.GetMask("Interactable");
 
-        Action? interaction = null;
+        Action interaction = null;
 
         if (PlayerRb.isKinematic)
         {
