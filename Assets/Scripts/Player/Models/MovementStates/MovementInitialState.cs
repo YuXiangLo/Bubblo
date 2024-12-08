@@ -5,6 +5,9 @@ public class MovementInitialState : IMovementState
     private readonly Player Player;
     private readonly PlayerData Data;
 
+    public bool AttackEnabled => false;
+
+
     public MovementInitialState(Player player, PlayerData data)
     {
         Player = player;

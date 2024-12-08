@@ -5,6 +5,8 @@ public class MovementClimbingState : IMovementState
     private Player Player;
     private PlayerData Data;
 
+    public bool AttackEnabled => false;
+    
     public MovementClimbingState(Player player, PlayerData data)
     {
         Player = player;

@@ -9,4 +9,6 @@ public class LevelData : MonoBehaviour
     public float MaxInspectXAxisPosition = 38f;
     public float MinInspectYAxisPosition = 0f;
     public float StopFollowingXAxisYOffset = -60f;
+
+    public int RescueeCount = 0;
 }
