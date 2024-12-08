@@ -9,6 +9,9 @@ public class MovementKnockbackState : IMovementState
     private readonly Vector2 KnockbackDirection;
     private float SleepTimer;
 
+    public bool AttackEnabled => false;
+
+
     public MovementKnockbackState(Player player, PlayerData data, Vector2 knockbackDirection, float toSleep)
     {
         Player = player;

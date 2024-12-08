@@ -10,5 +10,7 @@ public enum AnimationStateType
     Charging = 7,
     Pitching = 8,
     Knockback = 9,
-    Die = 10
+    Die = 10,
+    Celebrate = 11,
+    AchieveFloat = 12
 }

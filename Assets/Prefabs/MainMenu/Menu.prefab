@@ -1949,7 +1949,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SPACE
+  m_text: U
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f9b2a8a9979bc0c1e98b46cab846fe41, type: 2}
   m_sharedMaterial: {fileID: -4492142950036218350, guid: f9b2a8a9979bc0c1e98b46cab846fe41, type: 2}
@@ -7751,7 +7751,6 @@ GameObject:
   - component: {fileID: 4624464797384034266}
   - component: {fileID: 4424723697080993221}
   - component: {fileID: 5400848913793602795}
-  - component: {fileID: 7163626086587274365}
   m_Layer: 0
   m_Name: Menu
   m_TagString: Untagged
@@ -7768,7 +7767,7 @@ RectTransform:
   m_GameObject: {fileID: 7682422252668688171}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7107752172685610148}
@@ -7785,7 +7784,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &4624464797384034266
 Canvas:
   m_ObjectHideFlags: 0
@@ -7849,19 +7848,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7163626086587274365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7682422252668688171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b6c2da2db9374dada6761b5e35121c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actions: {fileID: -944628639613478452, guid: 2887ba840d55ccb4b90ea4940dee28d5, type: 3}
 --- !u!1 &7701940424986992722
 GameObject:
   m_ObjectHideFlags: 0
