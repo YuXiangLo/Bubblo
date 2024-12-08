@@ -9,10 +9,10 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance;
 
     [SerializeField] private SoundSource SoundSourceObject;
-    [SerializeField] private BackgroundMusicType CurrentBackgroundMusicType;
+    private static BackgroundMusicType CurrentBackgroundMusicType;
 
     private SoundSource SoundSource;
-    public float Volume = 1;
+    private static float SystemVolumeRatio = 0.5f;
     public bool IsMuted = false;
 
     private void Awake()
@@ -34,6 +34,19 @@ public class SoundManager : MonoBehaviour
             .Play();
     }
 
+    public static float GetSystemVolumeRatio() => SystemVolumeRatio;
+
+    public static void SetSystemVolumeRatio(float volumeRatio)
+    {
+        SystemVolumeRatio = volumeRatio;
+        Instance   
+            .SoundSource
+            .SoundLists[(int)SoundType.BackgroundMusic]
+            .Sounds[(int)CurrentBackgroundMusicType]
+            .AudioSource
+            .volume = SystemVolumeRatio;
+    } 
+
     public void Mute()
     {
         IsMuted = !IsMuted;
@@ -45,23 +58,25 @@ public class SoundManager : MonoBehaviour
     /// <param name="backgroundMusicType">background music type</param>
     public static void ChangeBackgroundMusic(BackgroundMusicType backgroundMusicType)
     {
-        if (Instance.CurrentBackgroundMusicType != backgroundMusicType)
+        if (CurrentBackgroundMusicType != backgroundMusicType)
         {
             var soundList = Instance
                                 .SoundSource
                                 .SoundLists[(int)SoundType.BackgroundMusic];
             
             soundList
-                .Sounds[(int)Instance.CurrentBackgroundMusicType]
+                .Sounds[(int)CurrentBackgroundMusicType]
                 .AudioSource
                 .Stop();
             
-            soundList
-                .Sounds[(int)backgroundMusicType]
-                .AudioSource
-                .Play();
+            var newBackgroundMusic = soundList
+                                        .Sounds[(int)backgroundMusicType]
+                                        .AudioSource;
+
+            newBackgroundMusic.volume = SystemVolumeRatio;
+            newBackgroundMusic.Play();
             
-            Instance.CurrentBackgroundMusicType = backgroundMusicType;
+            CurrentBackgroundMusicType = backgroundMusicType;
         }
     }
     
@@ -82,8 +97,11 @@ public class SoundManager : MonoBehaviour
                                 .Sounds[listNumber]
                                 .AudioSource;
         
-        sound.volume = volume;
-        sound.Play();
+        sound.volume = SystemVolumeRatio * volume;
+        if (!sound.isPlaying)
+        {
+            sound.Play();
+        }
     }
 
     /// <summary>

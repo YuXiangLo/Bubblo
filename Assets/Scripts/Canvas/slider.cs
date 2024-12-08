@@ -20,7 +20,7 @@ public class SliderValueProvider : MonoBehaviour
         // Initialize the slider value from SoundManager
         if (SoundManager.Instance != null)
         {
-            slider.value = SoundManager.Instance.Volume;
+            slider.value = SoundManager.GetSystemVolumeRatio();
         }
 
         // Add listener to update SoundManager when slider value changes
@@ -36,11 +36,11 @@ public class SliderValueProvider : MonoBehaviour
         {
             if (isMuted)
             {
-                SoundManager.Instance.Volume = 0; // Set volume to 0 when muted
+                SoundManager.SetSystemVolumeRatio(0f); // Set volume to 0 when muted
             }
             else
             {
-                SoundManager.Instance.Volume = slider.value; // Restore volume to slider value
+                SoundManager.SetSystemVolumeRatio(slider.value); // Restore volume to slider value
             }
         }
         button.image.sprite = isMuted ? mute : unmute;
@@ -51,7 +51,7 @@ public class SliderValueProvider : MonoBehaviour
         // Notify SoundManager of the new volume, considering mute state
         if (SoundManager.Instance != null)
         {
-            SoundManager.Instance.Volume = isMuted ? 0 : value;
+            SoundManager.SetSystemVolumeRatio(isMuted ? 0f : value);
         }
     }
 
