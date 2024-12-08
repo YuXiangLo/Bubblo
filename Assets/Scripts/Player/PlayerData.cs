@@ -24,4 +24,6 @@ public class PlayerData : MonoBehaviour
     // Animation Clips
     public AnimationClip PitchClip;
     public AnimationClip DieClip;
+    public AnimationClip CelebrateClip;
+    public AnimationClip AchieveFloatClip;
 }

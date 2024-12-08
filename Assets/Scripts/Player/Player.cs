@@ -135,6 +135,18 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 		ChangeMovementState(new MovementInitialState(this, PlayerData));
     }
 
+    public void BubbleRescue()
+    {
+        ChangeAttackState(new AttackIdleState(this, PlayerData));
+        ChangeMovementState(new MovementRescueState(this, PlayerData));
+    }
+
+    public void BubbleAchieve()
+    {
+        ChangeAttackState(new AttackIdleState(this, PlayerData));
+        ChangeMovementState(new MovementAchieveState(this, PlayerData));
+    }
+
     public void SetAnimation(AnimationStateType nextState)
     {
         bool isAttackAnimation = nextState == AnimationStateType.Pitching || nextState == AnimationStateType.Charging;
@@ -163,6 +175,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
     private void PlayerUpdate()
     {
+        // Add test code here
         DetectFaceSide();
         RestrictPlayerWithinCamera();
     }
