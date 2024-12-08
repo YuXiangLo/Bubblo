@@ -57,6 +57,9 @@ TagManager:
   - name: Decoration
     uniqueID: 1557502849
     locked: 0
+  - name: Rescuee
+    uniqueID: 713038547
+    locked: 0
   - name: Ladder
     uniqueID: 3820839879
     locked: 0
