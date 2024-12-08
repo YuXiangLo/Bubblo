@@ -9,6 +9,7 @@ public class AttackPitchingState : IAttackState
 
     private float PitchTimer = 0f;
 
+    private bool exit = false;
     public AttackPitchingState(Player player, PlayerData playerData, Bubble bubble)
     {
         Player = player;
@@ -32,9 +33,14 @@ public class AttackPitchingState : IAttackState
 
     public void Update()
     {
+        if (exit)
+        {
+            return;
+        }
         PitchTimer -= Time.deltaTime;
         if (PitchTimer <= 0)
         {
+            exit = true;
             Player.ChangeAttackState(new AttackIdleState(Player, PlayerData));
             Player.ChangeMovementState(new MovementInitialState(Player, PlayerData));
         }
