@@ -13,6 +13,7 @@ public class EndFlag : MonoBehaviour, IInteract
 
     private void InteractAction()
     {
+        // TODO: Add End Level condition
         Player.EndLevel();
         Destroy(gameObject);
     }

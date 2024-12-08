@@ -231,10 +231,15 @@ MonoBehaviour:
   DieClip: {fileID: 7400000, guid: 0c255933dd3b4134bb79850f7f8ca772, type: 2}
   CelebrateClip: {fileID: 7400000, guid: 46d8145a6cb1a0d4aba30802fa9c8ae6, type: 2}
   AchieveFloatClip: {fileID: 7400000, guid: 55ec521360fc5dd409ed4051c5884ec2, type: 2}
-  AchieveOffset: {x: 0.8, y: -0.8}
+  EnterLevelClip: {fileID: 7400000, guid: 87f165a41274ab34d9128891ed8c15bd, type: 2}
+  AchieveOffset: {x: 0.8, y: 1}
   AchieveJumpForce: 10
   AchieveGravity: -10
   AchieveLeavingForce: {x: 10, y: 10}
+  EnterLevelOffset: {x: 0, y: 0}
+  EnterLevelGravity: -10
+  EnterLevelForce: {x: 20, y: -10}
+  EnterLevelDiscountRatio: 0.1
 --- !u!114 &2313143812182808278
 MonoBehaviour:
   m_ObjectHideFlags: 0
