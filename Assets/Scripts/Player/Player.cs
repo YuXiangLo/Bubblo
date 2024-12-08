@@ -94,8 +94,8 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         MainCamera = Camera.main;
         CameraFollow = MainCamera.GetComponent<CameraFollow>();
 
-        MovementState = new MovementInitialState(this, PlayerData);
         AttackState = new AttackIdleState(this, PlayerData);
+        MovementState = new MovementEnterLevelState(this, PlayerData);
     }
 
     private void Update()
@@ -175,7 +175,11 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     public void SetAnimation(AnimationStateType nextState)
     {
         bool isAttackAnimation = nextState == AnimationStateType.Pitching || nextState == AnimationStateType.Charging;
-        if (isAttackAnimation || !AttackState.LockAnimation)
+        if (isAttackAnimation)
+        {
+            Animator.SetInteger("State", (int)nextState);
+        }
+        else if (AttackState == null || !AttackState.LockAnimation)
         {
             Animator.SetInteger("State", (int)nextState);
         }
