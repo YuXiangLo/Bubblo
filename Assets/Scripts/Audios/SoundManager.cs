@@ -12,6 +12,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private BackgroundMusicType CurrentBackgroundMusicType;
 
     private SoundSource SoundSource;
+    public float Volume = 1;
 
     private void Awake()
     {
