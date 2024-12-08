@@ -13,6 +13,7 @@ public class SoundManager : MonoBehaviour
 
     private SoundSource SoundSource;
     public float Volume = 1;
+    public bool IsMuted = false;
 
     private void Awake()
     {
@@ -31,6 +32,11 @@ public class SoundManager : MonoBehaviour
             .Sounds[(int)CurrentBackgroundMusicType]
             .AudioSource
             .Play();
+    }
+
+    public void Mute()
+    {
+        IsMuted = !IsMuted;
     }
 
     /// <summary>
