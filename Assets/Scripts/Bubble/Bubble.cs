@@ -81,7 +81,6 @@ public class Bubble : MonoBehaviour
         bool isEnemy = otherLayer == LayerMask.NameToLayer("Enemy");
         bool isPlayer = otherLayer == LayerMask.NameToLayer("Player");
         bool isIgnoredTag = IgnoreTags.Contains(other.tag);
-        Debug.Log($"OnTriggerEnter2D: {other.tag}");
 
         if (isEnemy)
         {
