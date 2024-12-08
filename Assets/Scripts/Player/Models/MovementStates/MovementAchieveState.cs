@@ -24,37 +24,52 @@ public class MovementAchieveState : IMovementState
     public void Enter()
     {
         // TODO: Can add jump force here
-        Player.Velocity = new Vector2(Player.Velocity.x, PlayerData.JumpForce);
+        Player.Velocity = new Vector2(Player.Velocity.x, PlayerData.AchieveJumpForce);
     }
 
     public void Update()
     {
-        DiscountVelocityX();
         if (!CompletedCelebration)
         {
+            DiscountVelocityX();
             ApplyGravity();
             CelebrateTimer -= Time.deltaTime;
             if (CelebrateTimer <= 0)
             {
+                Player.CameraEndLevel = true;
                 CompletedCelebration = true;
-                // Player.SetAnimation(AnimationStateType.AchieveFloat);
-                // TODO: Add physics here
+                Player.SetAnimation(AnimationStateType.AchieveFloat);
+                Player.transform.position += (Vector3)PlayerData.AchieveOffset;
             }
         }
         else
         {
+            ApplyLeavingForce();
             AchieveTimer -= Time.deltaTime;
             if (AchieveTimer <= 0)
             {
-                // TODO: Scene transition here
+                //TODO: Add scene transition here
             }
         }
     }
 
     private void ApplyGravity()
     {
-        Player.Velocity = new Vector2(Player.Velocity.x, Mathf.Max(Player.Velocity.y + PlayerData.Gravity * Time.deltaTime * PlayerData.LowGravityScale, PlayerData.MaxFallingSpeed));
+        Player.Velocity = new Vector2(Player.Velocity.x, Mathf.Max(Player.Velocity.y + PlayerData.AchieveGravity * Time.deltaTime, PlayerData.MaxFallingSpeed));
     }
+
+    private void ApplyLeavingForce()
+    {
+        float velocityX = Player.Velocity.x + PlayerData.AchieveLeavingForce.x * Time.deltaTime;
+
+        float velocityY = Mathf.Max(
+            Player.Velocity.y + PlayerData.AchieveLeavingForce.y * Time.deltaTime,
+            PlayerData.MaxFallingSpeed
+        );
+
+        Player.Velocity = new Vector2(velocityX, velocityY);
+    }
+
 
     private void DiscountVelocityX()
     {

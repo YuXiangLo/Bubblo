@@ -27,4 +27,18 @@ public class PlayerData : MonoBehaviour
     public AnimationClip DieClip;
     public AnimationClip CelebrateClip;
     public AnimationClip AchieveFloatClip;
+
+    public AnimationClip EnterLevelClip;
+
+    // Achieve physics
+    public Vector2 AchieveOffset = new Vector2(0f, 0f);
+    public float AchieveJumpForce = 24f;
+    public float AchieveGravity = -90f;
+    public Vector2 AchieveLeavingForce = new Vector2(0f, 0f);
+
+    // Enter Level physics
+    public Vector2 EnterLevelOffset = new Vector2(0f, 0f);
+    public float EnterLevelGravity = -10f;
+    public Vector2 EnterLevelForce = new Vector2(0f, 0f);
+    public float EnterLevelDiscountRatio = 0.1f;
 }
