@@ -1,8 +1,9 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 
-public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModifyHealth, IKnockback, IPlayerStatus, IPlayerBubble
+public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModifyHealth, IKnockback, IPlayerBubble, IRescuedCount
 {
     private PlayerData PlayerData;
     private Rigidbody2D Rigidbody2D;
@@ -19,12 +20,14 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     private BodyCaster BodyCaster;
     private SlopeTransitionCaster SlopeCaster;
     private LadderCaster LadderCaster;
+    private InteractCaster InteractCaster;
     public bool Grounded => BodyCaster.Grounded;
     public bool HitCeiling => BodyCaster.HitCeiling;
     public float SlopeAngle => BodyCaster.SlopeAngle;
     public CastSide CastSide => BodyCaster.CastSide;
     public bool IsSlopeMovement => SlopeCaster.IsSlopeMovement;
     public bool IsAbleToClimb => LadderCaster.IsAbleToClimb;
+    public Action? Interaction => InteractCaster.Interaction;
     #endregion
 
     #region Player Movement
@@ -48,16 +51,25 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     public void TakeDamage(float amount) => Health.TakeDamage(amount);
     #endregion
 
+    #region Rescue
+    public int RescuedCount { get; set; }
+    #endregion
+
     #region MonoBehaviour
     private void Awake()
     {
         PlayerData = GetComponent<PlayerData>();
         Health = GetComponent<PlayerHealth>();
         Magic = GetComponent<PlayerMagic>();
+
+        Initialize();
+        
         Animator = GetComponent<Animator>();
         
         Rigidbody2D = GetComponent<Rigidbody2D>();
         Rigidbody2D.freezeRotation = true;
+
+        Initialize();
 
         BodyCaster = GetComponent<BodyCaster>();
         BodyCaster.Initialize(Rigidbody2D, Vector2.down, 0.5f * PlayerData.PlayerSize);
@@ -67,6 +79,9 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
         LadderCaster = GetComponent<LadderCaster>();
         LadderCaster.Initialize(Rigidbody2D, Vector2.up, 0.1f * PlayerData.PlayerSize, PlayerData.PlayerSize);
+
+        InteractCaster = GetComponent<InteractCaster>();
+        InteractCaster.Initialize(Rigidbody2D, Vector2.down, 0.5f * PlayerData.PlayerSize);
 
         MainCamera = Camera.main;
 
@@ -136,13 +151,13 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 		ChangeMovementState(new MovementInitialState(this, PlayerData));
     }
 
-    public void BubbleRescue()
+    public void Rescue()
     {
         ChangeAttackState(new AttackIdleState(this, PlayerData));
         ChangeMovementState(new MovementRescueState(this, PlayerData));
     }
 
-    public void BubbleAchieve()
+    public void Achieve()
     {
         ChangeAttackState(new AttackIdleState(this, PlayerData));
         ChangeMovementState(new MovementAchieveState(this, PlayerData));
@@ -157,21 +172,11 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         }
     }
 
-    public void Initialize()
+    private void Initialize()
     {
         Health.Initialize();
         Magic.Initialize();
-    }
-
-    public PlayerDataStatus GetPlayerStatus()
-    {
-        return new PlayerDataStatus(Health.CurrentHealth, Magic.CurrentMagic);
-    }
-
-    public void SetPlayerStatus(PlayerDataStatus status)
-    {
-        Health.Initialize(status.Health);
-        Magic.Initialize(status.Magic);
+        RescuedCount = 0;
     }
 
     private void PlayerUpdate()
@@ -191,6 +196,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 #endif
         DetectFaceSide();
         RestrictPlayerWithinCamera();
+        DetectInteraction();
     }
 
     private void DetectFaceSide() 
@@ -215,5 +221,17 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         Vector2 playerPosition = transform.position;
         playerPosition.x = Mathf.Clamp(playerPosition.x, cameraLeftEdge + PlayerData.PlayerSize / 2, cameraRightEdge - PlayerData.PlayerSize / 2);
         transform.position = playerPosition;
+    }
+
+    private void DetectInteraction()
+    {
+        if (UserInput.Instance.InteractKeyDown)
+        {
+            if (Interaction != null)
+            {
+                Interaction.Invoke();
+                RescuedCount++;
+            }
+        }
     }
 }

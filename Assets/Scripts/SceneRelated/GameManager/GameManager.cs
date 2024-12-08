@@ -6,8 +6,6 @@ public class GameManager : MonoBehaviour
 {
     public bool IsGameOver = false;
     public static GameManager Instance;
-    private IPlayerStatus Player;
-    private PlayerDataStatus StoredPlayerData;
     [SerializeField] private SceneList SceneList;
 
     void Awake()
@@ -60,7 +58,6 @@ public class GameManager : MonoBehaviour
             return;
         }
         else{
-            StoreCurrentStates();
             string nextSceneName = SceneList.Scene[index + 1];
             SceneManager.sceneLoaded += OnSceneLoaded;
             SoundManager.ChangeBackgroundMusic(BackgroundMusicType.InGame);
@@ -74,10 +71,6 @@ public class GameManager : MonoBehaviour
         if (Array.Exists(SceneList.Scene, scene => scene == levelName))
         {
             // Level exists, store current states and load the specified scene
-            if (isCalledByLevelSelect)
-                StoredPlayerData = new PlayerDataStatus(100, 10); // NOTE Yu Xiang: Forgive me for the magic number, this is Player.MaxHealth and MaxMagic
-            else
-                StoreCurrentStates();
             SceneManager.sceneLoaded += OnSceneLoaded;
             SoundManager.ChangeBackgroundMusic(BackgroundMusicType.InGame);
             SceneManager.LoadScene(levelName);
@@ -90,15 +83,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-    private void StoreCurrentStates()
-    {
-        if (Player != null)
-            StoredPlayerData = Player.GetPlayerStatus();
-        else
-            StoredPlayerData = new PlayerDataStatus(100, 10); // NOTE Yu Xiang: Forgive me for the magic number, this is Player.MaxHealth and MaxMagic
-    }
-
     /// <summary>
     /// Callback for when a scene has loaded    
     /// </summary>
@@ -106,12 +90,6 @@ public class GameManager : MonoBehaviour
     /// <param name="mode"></param>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Player = GameObject.FindWithTag("Player").GetComponent<IPlayerStatus>();
-        // Restore health and magic points
-        if (Player != null)
-        {
-            Player.SetPlayerStatus(StoredPlayerData);
-        }
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }
