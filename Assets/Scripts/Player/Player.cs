@@ -9,6 +9,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     private Camera MainCamera;
     private IMovementState MovementState;
     private IAttackState AttackState;
+    public bool AttackEnabled => MovementState.AttackEnabled;
 
     #region Animation
     public Animator Animator;

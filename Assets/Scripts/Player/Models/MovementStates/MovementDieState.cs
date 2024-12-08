@@ -6,6 +6,8 @@ public class MovementDieState : IMovementState
     private PlayerData PlayerData;
     private float DieTimer;
 
+    public bool AttackEnabled => false;
+
     public MovementDieState(Player player, PlayerData playerData)
     {
         Player = player;
@@ -14,6 +16,7 @@ public class MovementDieState : IMovementState
         Player.SetAnimation(AnimationStateType.Die);
         DieTimer = PlayerData.DieClip.length;
     }
+
 
     public void Enter()
     {

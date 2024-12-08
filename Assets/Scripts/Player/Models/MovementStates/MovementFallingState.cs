@@ -5,6 +5,8 @@ public class MovementFallingState : IMovementState
     private readonly Player Player;
     private readonly PlayerData Data;
 
+    public bool AttackEnabled => true;
+
     public MovementFallingState(Player player, PlayerData data)
     {
         Player = player;

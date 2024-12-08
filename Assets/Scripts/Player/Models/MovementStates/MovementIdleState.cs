@@ -5,6 +5,8 @@ public class MovementIdleState : IMovementState
     private readonly Player Player;
     private readonly PlayerData Data;
 
+    public bool AttackEnabled => true;
+
     public MovementIdleState(Player player, PlayerData data)
     {
         Player = player;

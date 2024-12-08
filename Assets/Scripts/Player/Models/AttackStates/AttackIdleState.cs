@@ -14,7 +14,10 @@ public class AttackIdleState : IAttackState
 
     public void Update()
     {
-        if (Player.IsDead) return;
+        if (Player.AttackEnabled is false)
+        {
+            return;
+        }
         if (UserInput.Instance.FireKeyDown)
         {
             Player.ChangeAttackState(new AttackChargingState(Player, PlayerData, Player.InitializeBubble()));

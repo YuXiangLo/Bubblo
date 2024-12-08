@@ -7,6 +7,8 @@ public class MovementRescueState : IMovementState
 
     private float RescueTimer;
 
+    public bool AttackEnabled => false;
+
     public MovementRescueState(Player player, PlayerData playerData)
     {
         Player = player;

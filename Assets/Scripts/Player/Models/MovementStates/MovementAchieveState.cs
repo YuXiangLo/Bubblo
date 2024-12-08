@@ -9,6 +9,8 @@ public class MovementAchieveState : IMovementState
     private float CelebrateTimer;
     private float AchieveTimer;
 
+    public bool AttackEnabled => false;
+    
     public MovementAchieveState(Player player, PlayerData playerData)
     {
         Player = player;
