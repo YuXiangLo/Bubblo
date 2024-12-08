@@ -98,10 +98,7 @@ public class SoundManager : MonoBehaviour
                                 .AudioSource;
         
         sound.volume = SystemVolumeRatio * volume;
-        if (!sound.isPlaying)
-        {
-            sound.Play();
-        }
+        sound.Play();
     }
 
     /// <summary>

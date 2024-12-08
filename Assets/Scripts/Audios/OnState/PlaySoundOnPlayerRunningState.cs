@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlaySoundOnRunningState : StateMachineBehaviour
+public class PlaySoundOnPlayerRunningState : StateMachineBehaviour
 {
     private int previousLoopCount = -1;
 
