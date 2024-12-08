@@ -12,7 +12,6 @@ public class MovementDieState : IMovementState
     {
         Player = player;
         PlayerData = playerData;
-        SoundManager.PlaySound(SoundType.Player, (int)PlayerSoundType.Dead);
         Player.SetAnimation(AnimationStateType.Die);
         DieTimer = PlayerData.DieClip.length;
     }
