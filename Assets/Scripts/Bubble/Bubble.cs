@@ -89,7 +89,7 @@ public class Bubble : MonoBehaviour
         if (isEnemy)
         {
             float damage = Damages[(int)SizeType];
-            IModifyHealth healthModifier = other.GetComponent<IModifyHealth>();
+            IEnemyModifyHealth healthModifier = other.GetComponent<IEnemyModifyHealth>();
             healthModifier?.TakeDamage(damage);
             Burst();
         }

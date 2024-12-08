@@ -7,10 +7,19 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 {
     private PlayerData PlayerData;
     private Rigidbody2D Rigidbody2D;
-    private Camera MainCamera;
     private IMovementState MovementState;
     private IAttackState AttackState;
     public bool AttackEnabled => MovementState.AttackEnabled;
+
+    #region Camera
+    private Camera MainCamera;
+    private CameraFollow CameraFollow;
+    public bool CameraEndLevel
+    {
+        get => CameraFollow.EndLevel;
+        set => CameraFollow.EndLevel = value;
+    }
+    #endregion
 
     #region Animation
     public Animator Animator;
@@ -27,7 +36,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     public CastSide CastSide => BodyCaster.CastSide;
     public bool IsSlopeMovement => SlopeCaster.IsSlopeMovement;
     public bool IsAbleToClimb => LadderCaster.IsAbleToClimb;
-    public Action? Interaction => InteractCaster.Interaction;
+    public Action Interaction => InteractCaster.Interaction;
     #endregion
 
     #region Player Movement
@@ -70,8 +79,6 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         Rigidbody2D = GetComponent<Rigidbody2D>();
         Rigidbody2D.freezeRotation = true;
 
-        Initialize();
-
         BodyCaster = GetComponent<BodyCaster>();
         BodyCaster.Initialize(Rigidbody2D, Vector2.down, 0.5f * PlayerData.PlayerSize);
 
@@ -85,9 +92,10 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         InteractCaster.Initialize(Rigidbody2D, Vector2.down, 0.5f * PlayerData.PlayerSize);
 
         MainCamera = Camera.main;
+        CameraFollow = MainCamera.GetComponent<CameraFollow>();
 
-        MovementState = new MovementInitialState(this, PlayerData);
         AttackState = new AttackIdleState(this, PlayerData);
+        MovementState = new MovementEnterLevelState(this, PlayerData);
     }
 
     private void Update()
@@ -158,7 +166,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         ChangeMovementState(new MovementRescueState(this, PlayerData));
     }
 
-    public void Achieve()
+    public void EndLevel()
     {
         ChangeAttackState(new AttackIdleState(this, PlayerData));
         ChangeMovementState(new MovementAchieveState(this, PlayerData));
@@ -167,7 +175,11 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     public void SetAnimation(AnimationStateType nextState)
     {
         bool isAttackAnimation = nextState == AnimationStateType.Pitching || nextState == AnimationStateType.Charging;
-        if (isAttackAnimation || !AttackState.LockAnimation)
+        if (isAttackAnimation)
+        {
+            Animator.SetInteger("State", (int)nextState);
+        }
+        else if (AttackState == null || !AttackState.LockAnimation)
         {
             Animator.SetInteger("State", (int)nextState);
         }
