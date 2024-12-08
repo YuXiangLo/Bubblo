@@ -41,6 +41,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     public bool IsMagicEmpty => Magic.IsEmpty;
     public void Consume(float amount) => Magic.Consume(amount);
     public void Recharge(float amount) => Magic.Recharge(amount);
+    public Bubble HoldingBubble { get; set; }
     #endregion
 
     #region Player Health

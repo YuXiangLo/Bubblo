@@ -7,6 +7,7 @@ public class AttackChargingState : IAttackState
     public bool LockAnimation => true;
 
     private bool StopCharge = false;
+    private bool exit = false;
 
     public AttackChargingState(Player player, PlayerData playerData, Bubble bubble)
     {
@@ -34,6 +35,10 @@ public class AttackChargingState : IAttackState
 
     public void Update()
     {
+        if (exit)
+        {
+            return;
+        }
         if (UserInput.Instance.IsFireHeld)
         {
             if (!StopCharge)
@@ -59,6 +64,7 @@ public class AttackChargingState : IAttackState
 
     private void ReleaseBubble()
     {
+        exit = true;
         Player.ChangeAttackState(new AttackPitchingState(Player, PlayerData, Bubble));
     }
 }
