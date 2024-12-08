@@ -175,7 +175,19 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
     private void PlayerUpdate()
     {
+#if UNITY_EDITOR
         // Add test code here
+        if (Input.GetKeyDown(KeyCode.Slash))
+        {
+            Debug.Log("Rescue test");
+            ChangeMovementState(new MovementRescueState(this, PlayerData));
+        }
+        if (Input.GetKeyDown(KeyCode.Period))
+        {
+            Debug.Log("Achieve test");
+            ChangeMovementState(new MovementAchieveState(this, PlayerData));
+        }
+#endif
         DetectFaceSide();
         RestrictPlayerWithinCamera();
     }

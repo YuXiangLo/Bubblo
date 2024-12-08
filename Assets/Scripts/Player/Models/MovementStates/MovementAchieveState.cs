@@ -16,23 +16,26 @@ public class MovementAchieveState : IMovementState
 
         CelebrateTimer = PlayerData.CelebrateClip.length;
         AchieveTimer = PlayerData.AchieveFloatClip.length;
+        Player.SetAnimation(AnimationStateType.Celebrate);
     }
 
     public void Enter()
     {
-        Player.SetAnimation(AnimationStateType.Celebrate);
         // TODO: Can add jump force here
+        Player.Velocity = new Vector2(Player.Velocity.x, PlayerData.JumpForce);
     }
 
     public void Update()
     {
+        DiscountVelocityX();
         if (!CompletedCelebration)
         {
+            ApplyGravity();
             CelebrateTimer -= Time.deltaTime;
             if (CelebrateTimer <= 0)
             {
                 CompletedCelebration = true;
-                Player.SetAnimation(AnimationStateType.AchieveFloat);
+                // Player.SetAnimation(AnimationStateType.AchieveFloat);
                 // TODO: Add physics here
             }
         }
@@ -41,8 +44,19 @@ public class MovementAchieveState : IMovementState
             AchieveTimer -= Time.deltaTime;
             if (AchieveTimer <= 0)
             {
-                Player.ChangeMovementState(new MovementInitialState(Player, PlayerData));
+                // TODO: Scene transition here
             }
         }
+    }
+
+    private void ApplyGravity()
+    {
+        Player.Velocity = new Vector2(Player.Velocity.x, Mathf.Max(Player.Velocity.y + PlayerData.Gravity * Time.deltaTime * PlayerData.LowGravityScale, PlayerData.MaxFallingSpeed));
+    }
+
+    private void DiscountVelocityX()
+    {
+        var discountRatio = Mathf.Pow(PlayerData.AchieveDiscountRatio, Time.deltaTime);
+        Player.Velocity = new Vector2(Player.Velocity.x * discountRatio, Player.Velocity.y);
     }
 }

@@ -17,6 +17,7 @@ public class PlayerData : MonoBehaviour
     public float ClimbFallingSpeed = 5f;
     public float KnockbackForce = 6f;
     public float KnockbackTangent = 2f;
+    public float AchieveDiscountRatio = 0.1f;
 
     // Player Attack
     public GameObject BubblePrefab;
