@@ -1529,7 +1529,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 39baa2e85b59f0442b8eacbe8b084b9a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1af0a97599a55f2d6a22b75ec128003c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2157,7 +2157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mute: {fileID: 21300000, guid: a5d7fd2deb43b73469548b39eb5d2385, type: 3}
-  unmute: {fileID: 21300000, guid: 39baa2e85b59f0442b8eacbe8b084b9a, type: 3}
+  unmute: {fileID: 21300000, guid: 1af0a97599a55f2d6a22b75ec128003c, type: 3}
   button: {fileID: 6338380376899367412}
 --- !u!222 &3219230661051069196
 CanvasRenderer:
