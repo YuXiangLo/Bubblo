@@ -19,6 +19,12 @@ public class VideoPlayback : MonoBehaviour
         videoPlayer.loopPointReached += OnVideoFinished;
     }
 
+    void Update() {
+        if (Input.anyKeyDown) {
+            GameManager.Instance.SceneLevelup();
+        }
+    }
+
     // Callback method for when the video finishes playing
     private void OnVideoFinished(VideoPlayer source)
     {

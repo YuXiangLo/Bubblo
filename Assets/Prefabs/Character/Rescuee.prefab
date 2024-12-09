@@ -251,5 +251,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Dialogue:
-    name: 
-    sentences: []
+    name: Ted
+    sentences:
+    - You Li Yu zuo shi !!!
