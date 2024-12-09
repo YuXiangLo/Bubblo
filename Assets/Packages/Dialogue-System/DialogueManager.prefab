@@ -97,6 +97,10 @@ PrefabInstance:
       value: DialogueManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1758179043066372044, guid: b10a47de7f1524bb9a9588fbc45d89e6, type: 3}
+      propertyPath: m_Text
+      value: NPC Name Placeholder
+      objectReference: {fileID: 0}
+    - target: {fileID: 1758179043066372044, guid: b10a47de7f1524bb9a9588fbc45d89e6, type: 3}
       propertyPath: m_FontData.m_Font
       value: 
       objectReference: {fileID: 12800000, guid: 1a8906158011b00a9a1c413601d3c998, type: 3}

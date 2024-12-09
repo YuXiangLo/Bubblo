@@ -65,6 +65,10 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     public int RescuedCount { get; set; }
     #endregion
 
+	#region IsGameOver
+	private bool IsGameOver = false;
+	#endregion
+
     #region MonoBehaviour
     private void Awake()
     {
@@ -170,6 +174,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     {
         ChangeAttackState(new AttackIdleState(this, PlayerData));
         ChangeMovementState(new MovementAchieveState(this, PlayerData));
+		IsGameOver = true;
     }
 
     public void SetAnimation(AnimationStateType nextState)
@@ -208,7 +213,8 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         }
 #endif
         DetectFaceSide();
-        RestrictPlayerWithinCamera();
+		if (!IsGameOver)
+			RestrictPlayerWithinCamera();
         DetectInteraction();
     }
 
