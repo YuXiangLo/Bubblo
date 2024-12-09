@@ -757,6 +757,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rescuee
       objectReference: {fileID: 0}
+    - target: {fileID: 6813470599594169987, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
+      propertyPath: Dialogue.name
+      value: Ted
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813470599594169987, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
+      propertyPath: Dialogue.sentences.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813470599594169987, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
+      propertyPath: Dialogue.sentences.Array.data[0]
+      value: You came! I knew you would.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813470599594169987, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
+      propertyPath: Dialogue.sentences.Array.data[1]
+      value: Now go get'em tiger!
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
