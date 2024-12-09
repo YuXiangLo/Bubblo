@@ -75,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1546165203
-  m_SortingLayer: 10
+  m_SortingLayer: 11
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1d2a86facf4b38f4da93707b3e02eaf2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -167,7 +167,7 @@ MonoBehaviour:
   Speeds:
   - 16
   - 10
-  - 16
+  - 12
   ChargingTimes:
   - 0.5
   - 1.5
@@ -175,13 +175,19 @@ MonoBehaviour:
   DiscountRatios:
   - 1
   - 0.5
-  - 0.05
+  - 0.025
   BurstAnimations:
   - {fileID: 7400000, guid: ca7da06ffd11ca64990f0ff75482eb5a, type: 2}
   - {fileID: 7400000, guid: 993a9b6320ee73c4b870bf91b6e357ea, type: 2}
   - {fileID: 7400000, guid: e4aacca9a724c9e4c93e508d4acaeeb7, type: 2}
   LifeTime: 2
   CenterOffset: 1.5
+  IgnoreTags:
+  - Player
+  - Bubble
+  - Door
+  - Tools
+  - Ladder
 --- !u!50 &5114009818935382628
 Rigidbody2D:
   serializedVersion: 4
