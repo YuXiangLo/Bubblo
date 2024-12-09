@@ -1,37 +1,35 @@
 using UnityEngine;
 using UnityEngine.Video;
 
-public class VideoSceneTransition : MonoBehaviour
+public class VideoPlayback : MonoBehaviour
 {
-    private VideoPlayer videoPlayer;
+    public VideoPlayer videoPlayer;
+    public string VideoFilename;
 
     void Start()
     {
-        // Try to get the VideoPlayer component attached to this GameObject
-        videoPlayer = GetComponent<VideoPlayer>();
-
-        if (videoPlayer != null)
-        {
-            // Subscribe to the loopPointReached event
-            videoPlayer.loopPointReached += OnVideoFinished;
-        }
-        else
-        {
-            Debug.LogError("VideoSceneTransition requires a VideoPlayer component!");
-        }
+        // Set the video file URL
+        videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, VideoFilename);
+        
+        // Prepare and play the video
+        videoPlayer.Prepare();
+        videoPlayer.Play();
+        
+        // Subscribe to the loopPointReached event
+        videoPlayer.loopPointReached += OnVideoFinished;
     }
 
-    private void OnVideoFinished(VideoPlayer vp)
+    // Callback method for when the video finishes playing
+    private void OnVideoFinished(VideoPlayer source)
     {
-        // Call LevelUp when the video finishes playing
         GameManager.Instance.SceneLevelup();
     }
 
-    private void OnDestroy()
+    void OnDestroy()
     {
+        // Unsubscribe from the event when the object is destroyed
         if (videoPlayer != null)
         {
-            // Clean up event subscription to avoid memory leaks
             videoPlayer.loopPointReached -= OnVideoFinished;
         }
     }
