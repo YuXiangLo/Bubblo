@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6813470599594169987}
   m_Layer: 7
   m_Name: Rescuee
-  m_TagString: Untagged
+  m_TagString: Rescuee
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

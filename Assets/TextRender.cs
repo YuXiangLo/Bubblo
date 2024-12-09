@@ -15,13 +15,9 @@ public class DisplayCounts : MonoBehaviour
             rescuedCount = player.GetComponent<IRescuedCount>().RescuedCount;
         }
 
-        // Safely retrieve the LevelData's RescueeCount
-        LevelData levelData = FindObjectOfType<LevelData>();
-        int rescueeCount = 0; // Default value in case LevelData is not found
-        if (levelData != null)
-        {
-            rescueeCount = levelData.RescueeCount;
-        }
+        // Dynamically count GameObjects with the tag "Rescuee"
+        GameObject[] rescuees = GameObject.FindGameObjectsWithTag("Rescuee");
+        int rescueeCount = rescuees.Length; // Number of GameObjects with the "Rescuee" tag
 
         // Update the TextMeshProUGUI component
         displayText.text = $": {rescuedCount}\n: {rescueeCount}";

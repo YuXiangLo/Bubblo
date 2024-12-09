@@ -10,7 +10,7 @@ public class Bubble : MonoBehaviour
     [SerializeField] private float[] ChargingTimes = new float[] { 0.5f, 1.5f, 1.5f };
     [SerializeField] private float[] DiscountRatios = new float[] { 1f, 0.5f, 0.05f };
     [SerializeField] private AnimationClip[] BurstAnimations = new AnimationClip[3];
-    [SerializeField] private float LifeTime = 2f;
+    [SerializeField] private float[] LifeTime = new float[] {2f, 2f, 3.2f};
     [SerializeField] private float CenterOffset = 3f;
     [SerializeField] private string[] IgnoreTags = new string[] { "Player", "Bubble", "Door", "Tools", "Ladder" };
 
@@ -177,8 +177,8 @@ public class Bubble : MonoBehaviour
 
     private void DetectLifeTime()
     {
-        LifeTime -= Time.fixedDeltaTime;
-        if (LifeTime <= 0)
+        LifeTime[(int)SizeType] -= Time.fixedDeltaTime;
+        if (LifeTime[(int)SizeType] <= 0)
         {
             Burst();
         }
