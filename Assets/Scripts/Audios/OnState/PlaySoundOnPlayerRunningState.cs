@@ -19,7 +19,7 @@ public class PlaySoundOnPlayerRunningState : StateMachineBehaviour
         if (currentLoopCount > previousLoopCount)
         {
             previousLoopCount = currentLoopCount; // Update loop tracker
-            SoundManager.PlaySound(SoundType.Player, (int)PlayerSoundType.WalkOnSoil);
+            SoundManager.PlaySound(SoundType.Player, (int)PlayerSoundType.WalkOnSoil, 0.5f);
         }
     }
 }
