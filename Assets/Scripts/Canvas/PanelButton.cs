@@ -7,7 +7,7 @@ public class TimeController : MonoBehaviour {
 	}
 	
 	public void GotoHomePage() {
-		GameManager.Instance.LoadSpecificLevel("Start", false);
+		GameManager.Instance.LoadSpecificLevel("Start");
 	}
 
 	public void StopTime() {

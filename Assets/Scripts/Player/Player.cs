@@ -55,7 +55,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
     #region Player Health
     private PlayerHealth Health;
-    public bool IsDead = false;
+    private bool IsDead = false;
     public float HealthPercentage => Health.HealthPercentage;
     public void Heal(float amount) => Health.Heal(amount);
     public void TakeDamage(float amount) => Health.TakeDamage(amount);
