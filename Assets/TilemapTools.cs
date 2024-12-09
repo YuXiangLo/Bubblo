@@ -80,8 +80,16 @@ public class TilePickupManager : MonoBehaviour
             tilemap.SetTile(tilePosition, null); // Remove tile from Tilemap
 
             Player player = FindObjectOfType<Player>();
-            if (RefillType == "HP") player.Heal(HealAmount);
-            if (RefillType == "MP") player.Recharge(HealAmount);
+            if (RefillType == "HP") 
+            {
+                SoundManager.PlaySound(SoundType.Player, (int)PlayerSoundType.GainObject);
+                player.Heal(HealAmount);
+            }
+            if (RefillType == "MP") 
+            {
+                SoundManager.PlaySound(SoundType.Player, (int)PlayerSoundType.GainObject);
+                player.Recharge(HealAmount);
+            }
 
             // Add the tile to player's inventory (optional)
             AddToInventory(collectedTile);
