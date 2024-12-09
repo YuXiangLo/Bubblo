@@ -2,6 +2,10 @@
 using UnityEngine;
 
 public class TimeController : MonoBehaviour {
+	public void NextLevel() {
+		GameManager.Instance.SceneLevelup();
+	}
+	
 	public void GotoHomePage() {
 		GameManager.Instance.LoadSpecificLevel("Start", false);
 	}
