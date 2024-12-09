@@ -132,7 +132,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
     public void Die()
     {
-        if (IsDead)
+        if (IsDead || IsGameOver)
         {
             return;
         }
@@ -176,6 +176,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     {
         ChangeAttackState(new AttackIdleState(this, PlayerData));
         ChangeMovementState(new MovementAchieveState(this, PlayerData));
+		GetComponent<Collider2D>().enabled = false;
 		IsGameOver = true;
     }
 

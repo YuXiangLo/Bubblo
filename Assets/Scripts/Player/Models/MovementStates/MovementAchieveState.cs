@@ -48,7 +48,6 @@ public class MovementAchieveState : IMovementState
             AchieveTimer -= Time.deltaTime;
             if (AchieveTimer <= 0)
             {
-                //TODO: Add scene transition here
 				Player.GameOverPanel.SetActive(true);
             }
         }
