@@ -27,7 +27,7 @@ public class MovementDieState : IMovementState
         DieTimer -= Time.deltaTime;
         if (DieTimer <= 0)
         {
-            GameManager.Instance.GameOver();
+			GameManager.Instance.LoadSpecificLevel(GameManager.Instance.CurrentLevel);
         }
     }
 }

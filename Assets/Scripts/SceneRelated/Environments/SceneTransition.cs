@@ -66,7 +66,7 @@ public class SceneTransition : MonoBehaviour
         if (nextLevel == "")
             GameManager.Instance.SceneLevelup();
         else
-            GameManager.Instance.LoadSpecificLevel(nextLevel, false);
+            GameManager.Instance.LoadSpecificLevel(nextLevel);
 	}
 
     private void OnTriggerEnter2D(Collider2D other)

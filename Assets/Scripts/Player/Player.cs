@@ -55,7 +55,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
     #region Player Health
     private PlayerHealth Health;
-    public bool IsDead = false;
+    private bool IsDead = false;
     public float HealthPercentage => Health.HealthPercentage;
     public void Heal(float amount) => Health.Heal(amount);
     public void TakeDamage(float amount) => Health.TakeDamage(amount);
@@ -91,7 +91,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
         SlopeCaster.Initialize(Rigidbody2D, Vector2.down, PlayerData.PlayerSize);
 
         LadderCaster = GetComponent<LadderCaster>();
-        LadderCaster.Initialize(Rigidbody2D, Vector2.up, 0.1f * PlayerData.PlayerSize, PlayerData.PlayerSize);
+        LadderCaster.Initialize(Rigidbody2D, Vector2.up, 0.1f * PlayerData.PlayerSize, 0.9f * PlayerData.PlayerSize);
 
         InteractCaster = GetComponent<InteractCaster>();
         InteractCaster.Initialize(Rigidbody2D, Vector2.down, 0.5f * PlayerData.PlayerSize);
