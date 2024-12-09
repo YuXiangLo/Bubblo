@@ -801,6 +801,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8652897729079047408, guid: 7e5f3805e4db87546b2dd1eaf8efcada, type: 3}
+      propertyPath: enemyRenderer
+      value: 
+      objectReference: {fileID: 1787239417}
     - target: {fileID: 8870990994026689457, guid: 7e5f3805e4db87546b2dd1eaf8efcada, type: 3}
       propertyPath: m_Name
       value: SimpleUnicorn
@@ -813,6 +817,11 @@ PrefabInstance:
 --- !u!4 &1787239416 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3917010694890677901, guid: 7e5f3805e4db87546b2dd1eaf8efcada, type: 3}
+  m_PrefabInstance: {fileID: 1787239415}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1787239417 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5356965781769034517, guid: 7e5f3805e4db87546b2dd1eaf8efcada, type: 3}
   m_PrefabInstance: {fileID: 1787239415}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1980130433
