@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class DialogueTrigger : MonoBehaviour {
+public class DialogueTrigger : MonoBehaviour, IInteract {
 
 	public Dialogue dialogue;
+	public Action Interact => InteractAction;
 
-	public void TriggerDialogue ()
+	public void InteractAction ()
 	{
+		Debug.Log("This fuction works!");
 		DialogueManager.Instance.StartDialogue(dialogue);
 	}
 
