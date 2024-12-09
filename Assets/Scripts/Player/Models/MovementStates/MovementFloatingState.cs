@@ -5,7 +5,7 @@ public class MovementFloatingState : IMovementState
     private readonly Player Player;
     private readonly PlayerData Data;
 
-    public bool AttackEnabled => true;
+    public bool AttackEnabled => false;
 
     public MovementFloatingState(Player player, PlayerData data)
     {

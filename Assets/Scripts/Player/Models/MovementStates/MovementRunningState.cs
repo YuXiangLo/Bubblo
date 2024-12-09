@@ -5,8 +5,7 @@ public class MovementRunningState : IMovementState
     private Player Player;
     private PlayerData Data;
 
-    public bool AttackEnabled => false;
-
+    public bool AttackEnabled => true;
 
     public MovementRunningState(Player player, PlayerData data)
     {
