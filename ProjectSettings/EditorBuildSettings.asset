@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Start.unity
     guid: b2130a378b9364b2da4bb8eae0c5863c
   - enabled: 1
+    path: Assets/Scenes/VideoBegin.unity
+    guid: f5dad6579bf124c79a36b656fbb0025b
+  - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: b1749d011f2c4df469608d3caa44e867
   - enabled: 1
