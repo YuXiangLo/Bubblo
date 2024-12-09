@@ -7,6 +7,9 @@ public class TilePickupManager : MonoBehaviour
 
     private GameObject player; // Reference to the Player GameObject
 
+    [SerializeField] private string RefillType="HP";
+    [SerializeField] private float HealAmount = 20f;
+
     private void Start()
     {
         // Automatically find the player GameObject by its layer
@@ -75,6 +78,10 @@ public class TilePickupManager : MonoBehaviour
         if (collectedTile != null)
         {
             tilemap.SetTile(tilePosition, null); // Remove tile from Tilemap
+
+            Player player = FindObjectOfType<Player>();
+            if (RefillType == "HP") player.Heal(HealAmount);
+            if (RefillType == "MP") player.Recharge(HealAmount);
 
             // Add the tile to player's inventory (optional)
             AddToInventory(collectedTile);
