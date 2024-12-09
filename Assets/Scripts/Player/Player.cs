@@ -168,6 +168,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
     {
         ChangeAttackState(new AttackIdleState(this, PlayerData));
         ChangeMovementState(new MovementRescueState(this, PlayerData));
+		RescuedCount++;
     }
 
     public void EndLevel()
@@ -249,7 +250,6 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
             if (Interaction != null)
             {
                 Interaction.Invoke();
-                RescuedCount++;
             }
         }
     }

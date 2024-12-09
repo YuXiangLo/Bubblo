@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8861576963782914142
+--- !u!1 &2184984801794743879
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7874526135647163375}
-  - component: {fileID: 1060688279414473111}
-  - component: {fileID: 2089720982989397581}
-  - component: {fileID: 9189348882875611511}
+  - component: {fileID: 1835409749015614854}
+  - component: {fileID: 3460005433563439293}
+  - component: {fileID: 8693988404599704467}
+  - component: {fileID: 4239020536024200408}
   m_Layer: 7
-  m_Name: EndingInteractable
-  m_TagString: Finish
+  m_Name: Bulletin
+  m_TagString: Tools
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7874526135647163375
+--- !u!4 &1835409749015614854
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8861576963782914142}
+  m_GameObject: {fileID: 2184984801794743879}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.37, y: -7.92, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1060688279414473111
+--- !u!212 &3460005433563439293
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8861576963782914142}
+  m_GameObject: {fileID: 2184984801794743879}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: -479627143
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d71e3a92c4070724684836059c4aceed, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bf2f481c5aecf4ec7827bbf577e37e5f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,30 +86,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2089720982989397581
+--- !u!114 &8693988404599704467
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8861576963782914142}
+  m_GameObject: {fileID: 2184984801794743879}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a103801649fc8d2448b96c47a8dc5579, type: 3}
+  m_Script: {fileID: 11500000, guid: 00ddd33eae28b5148a72170d47ccd942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dialogue:
-    name: 'Hint:'
+  dialogue:
+    name: NPC Name Placeholder
     sentences:
-    - Oops! It looks like you missed saving our Bubblo friend.
-    - Go rescue them and then return here!
---- !u!61 &9189348882875611511
+    - Hello
+    - You Li Yi likes sleeping!!!
+--- !u!61 &4239020536024200408
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8861576963782914142}
+  m_GameObject: {fileID: 2184984801794743879}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -139,12 +139,12 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.625, y: 0.625}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.625, y: 0.625}
+  m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0

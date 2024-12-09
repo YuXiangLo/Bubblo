@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class EndFlag : MonoBehaviour, IInteract
 {
+    public Dialogue Dialogue;
     private Player Player;
     public Action Interact => InteractAction;
 
@@ -13,8 +14,11 @@ public class EndFlag : MonoBehaviour, IInteract
 
     private void InteractAction()
     {
-        // TODO: Add End Level condition
-        Player.EndLevel();
-        Destroy(gameObject);
+        if (Player.GetComponent<IRescuedCount>().RescuedCount == GameObject.FindGameObjectsWithTag("Rescuee").Length) {
+            Player.EndLevel();
+            Destroy(gameObject);
+        } else {
+            DialogueManager.Instance.StartDialogue(Dialogue);
+        }
     }
 }

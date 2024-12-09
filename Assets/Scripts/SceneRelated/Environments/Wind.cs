@@ -11,16 +11,8 @@ public class Wind : MonoBehaviour
         {
             // Get the PlayerData component from the Player
             PlayerData playerData = collision.gameObject.GetComponent<PlayerData>();
-            if (playerData != null)
-            {
-                // Invert the gravity by multiplying by -1
-                playerData.Gravity *= BlowForceRatio;
-                Debug.Log("Gravity inverted! New gravity: " + playerData.Gravity);
-            }
-            else
-            {
-                Debug.LogError("PlayerData component not found on the Player object.");
-            }
+			// Invert the gravity by multiplying by -1
+			playerData.Gravity *= BlowForceRatio;
         }
     }
 
@@ -30,16 +22,8 @@ public class Wind : MonoBehaviour
         {
             // Get the PlayerData component from the Player
             PlayerData playerData = collision.gameObject.GetComponent<PlayerData>();
-            if (playerData != null)
-            {
-                // Revert the gravity by multiplying by -1 again
-                playerData.Gravity /= BlowForceRatio;
-                Debug.Log("Gravity reverted! New gravity: " + playerData.Gravity);
-            }
-            else
-            {
-                Debug.LogError("PlayerData component not found on the Player object.");
-            }
-        }
-    }
+			// Revert the gravity by multiplying by -1 again
+			playerData.Gravity /= BlowForceRatio;
+		}
+	}
 }

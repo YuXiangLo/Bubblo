@@ -8,7 +8,6 @@ public class DialogueTrigger : MonoBehaviour, IInteract {
 
 	public void InteractAction ()
 	{
-		Debug.Log("This fuction works!");
 		DialogueManager.Instance.StartDialogue(dialogue);
 	}
 
