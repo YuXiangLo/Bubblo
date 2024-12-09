@@ -267,63 +267,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce8e4df6ec96bc94a96f51fa8e403cd0, type: 3}
---- !u!1001 &344102391
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5962277930946830640, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 77.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 5962277930946830640, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.41
-      objectReference: {fileID: 0}
-    - target: {fileID: 5962277930946830640, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5962277930946830640, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5962277930946830640, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5962277930946830640, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5962277930946830640, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5962277930946830640, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5962277930946830640, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5962277930946830640, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6058664647558496800, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
-      propertyPath: m_Name
-      value: Rescuee (1)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
 --- !u!1001 &554080173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4165,6 +4108,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1391112731956014491, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5962277930946830640, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 73
@@ -4208,6 +4155,23 @@ PrefabInstance:
     - target: {fileID: 6058664647558496800, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
       propertyPath: m_Name
       value: Rescuee
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813470599594169987, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
+      propertyPath: Dialogue.name
+      value: Ted
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813470599594169987, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
+      propertyPath: Dialogue.sentences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813470599594169987, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
+      propertyPath: Dialogue.sentences.Array.data[0]
+      value: "You\u2019ve saved more than just me; you\u2019ve given all of us hope.
+        I won\u2019t forget this."
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813470599594169987, guid: 708c425b307355f40bf069fb3ba9c0fa, type: 3}
+      propertyPath: Dialogue.sentences.Array.data[1]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4662,7 +4626,6 @@ SceneRoots:
   - {fileID: 4364885646164506638}
   - {fileID: 2130980806}
   - {fileID: 1654962224}
-  - {fileID: 344102391}
   - {fileID: 313465545}
   - {fileID: 1203042344}
   - {fileID: 1916695594}
