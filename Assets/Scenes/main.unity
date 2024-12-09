@@ -182,11 +182,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Scene:
+  - VideoBegin
   - Level1
   - Level2
   - Level3
   - Level4
   - Level5
+  - VideoEnd
 --- !u!1 &947467886
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,10 +252,6 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 04df1ae5-446a-487d-8c1b-a7881014816e
     m_ActionName: InGame/Fire[/Keyboard/f]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: cb125c2d-fc04-4497-b9f4-420d80a6a865
-    m_ActionName: InGame/Move[/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 061ca4f9-49c4-481d-9b6c-07465281a5c3

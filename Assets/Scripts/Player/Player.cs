@@ -67,6 +67,7 @@ public class Player : MonoBehaviour, IHealthPercentage, IMagicPercentage, IModif
 
 	#region IsGameOver
 	private bool IsGameOver = false;
+	public GameObject GameOverPanel;
 	#endregion
 
     #region MonoBehaviour

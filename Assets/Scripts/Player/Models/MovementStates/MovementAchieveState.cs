@@ -49,6 +49,7 @@ public class MovementAchieveState : IMovementState
             if (AchieveTimer <= 0)
             {
                 //TODO: Add scene transition here
+				Player.GameOverPanel.SetActive(true);
             }
         }
     }

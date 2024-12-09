@@ -336,6 +336,10 @@ PrefabInstance:
       propertyPath: MinBlowingSpeed
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 1214593983406296568, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
+      propertyPath: GameOverPanel
+      value: 
+      objectReference: {fileID: 1475103430}
     - target: {fileID: 1554920718440097541, guid: f0c07222a3b254e5b98a6934114ffd86, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -634,6 +638,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2569007e6f7c83d599b70ec50841f0f5, type: 3}
+--- !u!1 &1475103430 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7350900220458047420, guid: 2569007e6f7c83d599b70ec50841f0f5, type: 3}
+  m_PrefabInstance: {fileID: 1475103429}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1641718497
 PrefabInstance:
   m_ObjectHideFlags: 0
