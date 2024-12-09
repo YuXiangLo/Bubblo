@@ -11,6 +11,8 @@ TagManager:
   - Door
   - Tools
   - Ladder
+  - Rescuee
+  - GameOverPanel
   layers:
   - Default
   - TransparentFX
