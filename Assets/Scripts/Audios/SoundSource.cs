@@ -35,6 +35,8 @@ public enum PlayerSoundType
     Climbing,
     Attacked,
     Dead,
+    SaveBubblo,
+    GainObject
 }
 
 public enum BubbleSoundType
