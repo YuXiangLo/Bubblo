@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6088279661154414328}
   - component: {fileID: 5808098544615734008}
   - component: {fileID: 4025844523739409326}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Balloons
-  m_TagString: Untagged
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,8 +121,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Dialogue:
-    name: 
-    sentences: []
+    name: 'Hint:'
+    sentences:
+    - Oops! It looks like you missed saving our Bubblo friend.
+    - Go rescue them and then return here!
 --- !u!61 &4025844523739409326
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -152,7 +154,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.5}
