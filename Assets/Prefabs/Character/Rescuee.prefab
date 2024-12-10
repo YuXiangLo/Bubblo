@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5757071314084604809}
   m_Layer: 0
   m_Name: Chat
-  m_TagString: Untagged
+  m_TagString: Rescuee
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

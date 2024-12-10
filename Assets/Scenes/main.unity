@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsGameOver: 0
+  CurrentLevel: 
   SceneList: {fileID: 706924289}
 --- !u!4 &706924285
 Transform:
@@ -186,7 +187,6 @@ MonoBehaviour:
   - Level1
   - Level2
   - Level3
-  - Level4
   - Level5
   - VideoEnd
 --- !u!1 &947467886
