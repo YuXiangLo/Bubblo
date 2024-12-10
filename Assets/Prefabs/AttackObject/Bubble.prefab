@@ -191,6 +191,7 @@ MonoBehaviour:
   - Door
   - Tools
   - Ladder
+  - Rescuee
 --- !u!50 &5114009818935382628
 Rigidbody2D:
   serializedVersion: 4
