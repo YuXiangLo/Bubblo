@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bubble : MonoBehaviour
 {
-    [SerializeField] private float[] Radiuses = new float[] { 0.04f, 0.08f, 0.16f };
+    [SerializeField] private float[] Radiuses = new float[] { 0.25f, 0.5f, 1f };
     [SerializeField] private float[] Damages = new float[] { 10f, 20f, 60f };
     [SerializeField] private float[] Speeds = new float[] { 11f, 11f, 11f};
     [SerializeField] private float[] ChargingTimes = new float[] { 0.5f, 1.5f, 1.5f };
@@ -12,7 +12,7 @@ public class Bubble : MonoBehaviour
     [SerializeField] private AnimationClip[] BurstAnimations = new AnimationClip[3];
     [SerializeField] private float[] LifeTime = new float[] {2f, 2f, 3.2f};
     [SerializeField] private float CenterOffset = 3f;
-    [SerializeField] private string[] IgnoreTags = new string[] { "Player", "Bubble", "Door", "Tools", "Ladder" };
+    [SerializeField] private string[] IgnoreTags = new string[] { "Player", "Bubble", "Door", "Tools", "Ladder", "Rescuee"};
 
     private Player Player;
     private Animator Animator;

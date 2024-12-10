@@ -7,8 +7,8 @@ namespace Enemies
     {
         [SerializeField] private float maxHealth = 100f;
         [SerializeField] private float health;
-        [SerializeField] private float transparencyValue = 0.7f;
-        [SerializeField] private float blipDuration = 0.1f; // Duration of the transparency effect
+        [SerializeField] private float transparencyValue = 0.6f;
+        [SerializeField] private float blipDuration = 0.2f; // Duration of the transparency effect
         private SpriteRenderer spriteRenderer; // Reference to the SpriteRenderer
         private Color originalColor; // Store the original color including alpha
 
