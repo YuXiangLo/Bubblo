@@ -37,6 +37,11 @@ public class DialogueManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    void Update() {
+        if(Input.GetKeyDown(KeyCode.Return))
+            DisplayNextSentence();
+    }
+
     private void ValidateComponents()
     {
         if (nameText == null)
