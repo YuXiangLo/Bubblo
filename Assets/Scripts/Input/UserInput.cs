@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class UserInput : MonoBehaviour
 {
     public static UserInput Instance;
-    private bool _isPaused = false;
 
     // Input values
     public bool Jump { get; private set; }
@@ -83,14 +82,12 @@ public class UserInput : MonoBehaviour
 
     private void Update()
     {
-        if (Time.timeScale == 0 && !_isPaused)
+        if (Time.timeScale == 0 || DialogueManager.Instance.IsOpen)
         {
-            _isPaused = true;
             Disable();
         }
-        else if (Time.timeScale != 0 && _isPaused)
+        else if (Time.timeScale != 0 && !DialogueManager.Instance.IsOpen)
         {
-            _isPaused = false;
             Enable();
         }
         // Reset "pressed this frame" flags

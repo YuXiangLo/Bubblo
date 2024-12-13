@@ -12,6 +12,7 @@ public class DialogueManager : MonoBehaviour
     public Text nameText;
     public Text dialogueText;
     public Animator animator;
+    public bool IsOpen = false;
 
     private Queue<string> sentences;
 
@@ -38,8 +39,10 @@ public class DialogueManager : MonoBehaviour
     }
 
     void Update() {
-        if(Input.GetKeyDown(KeyCode.Return))
-            DisplayNextSentence();
+        if(IsOpen) {
+            if (Input.anyKeyDown)
+                DisplayNextSentence();
+        }
     }
 
     private void ValidateComponents()
@@ -99,8 +102,13 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(Dialogue dialogue)
     {
         if (!ValidateDialogue(dialogue)) return;
+        
+        if (IsOpen) {
+            return;
+        }
 
         animator.SetBool("IsOpen", true);
+        IsOpen = true;
 
         nameText.text = dialogue.name;
         sentences.Clear();
@@ -168,6 +176,7 @@ public class DialogueManager : MonoBehaviour
     private void EndDialogue()
     {
         animator.SetBool("IsOpen", false);
+        IsOpen = false;
     }
 
     private void OnDestroy()
