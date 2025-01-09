@@ -17,7 +17,7 @@ In **Bubblo**, you guide our bubble-like hero through thrilling levels, each pac
 
 ## 🛠️ **Developed by**
 
-Bubblo is brought to life by six dedicated students from **National Taiwan University**, combining their love for retro gaming with fresh, modern gameplay mechanics. 
+Bubblo is brought to life by five dedicated students from **National Taiwan University**, combining their love for retro gaming with fresh, modern gameplay mechanics. 
 
 ---
 
