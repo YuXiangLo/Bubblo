@@ -48,6 +48,13 @@ MonoBehaviour:
   nameText: {fileID: 1269909475431700335}
   dialogueText: {fileID: 3356029194995169276}
   animator: {fileID: 2417234889206586928}
+  IsOpen: 0
+  typeDelay: 0.02
+  continuePromptText: {fileID: 0}
+  continuePromptName: ContinuePrompt
+  continuePrompt: PRESS ANY KEY TO CONTINUE
+  blinkInterval: 0.8
+  blinkMinAlpha: 0.3
 --- !u!1001 &718835923726600355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -95,6 +102,10 @@ PrefabInstance:
     - target: {fileID: 1004547083196697336, guid: b10a47de7f1524bb9a9588fbc45d89e6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: DialogueManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1004547083196697336, guid: b10a47de7f1524bb9a9588fbc45d89e6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1758179043066372044, guid: b10a47de7f1524bb9a9588fbc45d89e6, type: 3}
       propertyPath: m_Text
@@ -158,19 +169,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4280760552611266239, guid: b10a47de7f1524bb9a9588fbc45d89e6, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 150
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4280760552611266239, guid: b10a47de7f1524bb9a9588fbc45d89e6, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 60
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 4280760552611266239, guid: b10a47de7f1524bb9a9588fbc45d89e6, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -152.36
+      value: -170
       objectReference: {fileID: 0}
     - target: {fileID: 4280760552611266239, guid: b10a47de7f1524bb9a9588fbc45d89e6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 110
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4364259419848764834, guid: b10a47de7f1524bb9a9588fbc45d89e6, type: 3}
       propertyPath: m_FontData.m_Font
@@ -182,7 +193,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4364259419848764834, guid: b10a47de7f1524bb9a9588fbc45d89e6, type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 30
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364259419848764834, guid: b10a47de7f1524bb9a9588fbc45d89e6, type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364259419848764834, guid: b10a47de7f1524bb9a9588fbc45d89e6, type: 3}
+      propertyPath: m_Text
+      value: PRESS ANY KEY TO CONTINUE
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364259419848764834, guid: b10a47de7f1524bb9a9588fbc45d89e6, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7250080000162540762, guid: b10a47de7f1524bb9a9588fbc45d89e6, type: 3}
       propertyPath: m_Name
@@ -227,6 +250,10 @@ PrefabInstance:
     - target: {fileID: 7548682507979943162, guid: b10a47de7f1524bb9a9588fbc45d89e6, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -96.2119
+      objectReference: {fileID: 0}
+    - target: {fileID: 7560825762307044527, guid: b10a47de7f1524bb9a9588fbc45d89e6, type: 3}
+      propertyPath: m_Name
+      value: ContinuePrompt
       objectReference: {fileID: 0}
     - target: {fileID: 7603716442850290889, guid: b10a47de7f1524bb9a9588fbc45d89e6, type: 3}
       propertyPath: m_ReferenceResolution.x
